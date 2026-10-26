@@ -1,0 +1,25 @@
+{
+  "name": "@fk-furniture-interior/api",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "check-types": "tsc -b"
+  },
+  "dependencies": {
+    "@fk-furniture-interior/auth": "workspace:*",
+    "@fk-furniture-interior/db": "workspace:*",
+    "@orpc/client": "catalog:",
+    "@orpc/openapi": "catalog:",
+    "@orpc/server": "catalog:",
+    "@orpc/zod": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@fk-furniture-interior/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

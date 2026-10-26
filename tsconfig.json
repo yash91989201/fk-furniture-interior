@@ -1,0 +1,3 @@
+{
+  "extends": "@fk-furniture-interior/config/tsconfig.base.json"
+}
