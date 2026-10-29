@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T00:00:00+05:30",
+  "title": "FK Editorial design foundations",
+  "extensions": {
+    "rules": [
+      "Shared globals.css is the executable token source of truth.",
+      "Sera preset b8Al5ydee8 is the starting point; brand overrides are maintained locally.",
+      "Preserve the approved nine-section Editorial homepage when implementing it.",
+      "Prefer sentence-case controls and EB Garamond headings."
+    ]
+  }
+}
