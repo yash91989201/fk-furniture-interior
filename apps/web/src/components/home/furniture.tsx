@@ -1,7 +1,10 @@
 import "@/styles/furniture.css";
-import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
+import {
+	Button,
+	buttonVariants,
+} from "@fk-furniture-interior/ui/components/button";
 import { useLenis } from "lenis/react";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Pause, Play } from "lucide-react";
 import {
 	type MouseEvent,
 	useCallback,
@@ -18,6 +21,8 @@ const HEADING_WORDS = /\S+\s*/g;
 const SNAP_THRESHOLD = 0.25;
 const SNAP_OVERSHOOT = 0.04;
 const SNAP_DURATION = 0.9;
+
+const AUTOPLAY_MS = 5000;
 
 type CategoryId = (typeof furnitureCategories)[number]["id"];
 interface FurnitureReveal {
@@ -100,6 +105,7 @@ export function Furniture({
 	const reduced = usePrefersReducedMotion();
 	const lenis = useLenis();
 	const sectionRef = useRef<HTMLElement>(null);
+	const navRef = useRef<HTMLElement>(null);
 	const detailRef = useRef<HTMLDivElement>(null);
 	const sequence = useRef(0);
 	const [openId, setOpenId] = useState<CategoryId>(furnitureCategories[0].id);
@@ -107,6 +113,7 @@ export function Furniture({
 		furnitureCategories[0].id
 	);
 	const [reveal, setReveal] = useState<FurnitureReveal | null>(null);
+	const [autoplayPaused, setAutoplayPaused] = useState(false);
 	const openCategory =
 		furnitureCategories.find((category) => category.id === openId) ??
 		furnitureCategories[0];
@@ -117,13 +124,8 @@ export function Furniture({
 		setBackgroundId(id);
 		setReveal(null);
 	}, []);
-	const handleCategoryClick = useCallback(
-		(event: MouseEvent<HTMLButtonElement>) => {
-			const { id } =
-				furnitureCategories[Number(event.currentTarget.dataset.index)];
-			if (id === openId) {
-				return;
-			}
+	const selectedCategory = useCallback(
+		(id: CategoryId, origin: HTMLElement) => {
 			setOpenId(id);
 			const section = sectionRef.current;
 			if (reduced || !section) {
@@ -131,7 +133,7 @@ export function Furniture({
 				return;
 			}
 			const bounds = section.getBoundingClientRect();
-			const item = event.currentTarget.getBoundingClientRect();
+			const item = origin.getBoundingClientRect();
 			const x = item.left + item.width / 2 - bounds.left;
 			const y = item.top + item.height / 2 - bounds.top;
 			sequence.current += 1;
@@ -146,8 +148,62 @@ export function Furniture({
 				sequence: sequence.current,
 			});
 		},
-		[openId, reduced, completeReveal]
+		[reduced, completeReveal]
 	);
+	const handleCategoryClick = useCallback(
+		(event: MouseEvent<HTMLButtonElement>) => {
+			const { id } =
+				furnitureCategories[Number(event.currentTarget.dataset.index)];
+			if (id === openId) {
+				return;
+			}
+			selectedCategory(id, event.currentTarget);
+		},
+		[openId, selectedCategory]
+	);
+	const toggleAutoplay = useCallback(() => {
+		setAutoplayPaused((paused) => !paused);
+	}, []);
+	// Autoplay: advances the catalogue like a carousel while the panel is on
+	// screen; the timer restarts on every pick, manual or automatic.
+	useEffect(() => {
+		if (reduced || autoplayPaused) {
+			return;
+		}
+		const section = sectionRef.current;
+		const nav = navRef.current;
+		if (!(section && nav && "IntersectionObserver" in window)) {
+			return;
+		}
+		let visible = false;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				visible = entries.some((entry) => entry.isIntersecting);
+			},
+			{ threshold: 0.4 }
+		);
+		observer.observe(section);
+		const timer = window.setInterval(() => {
+			if (!visible || document.visibilityState === "hidden") {
+				return;
+			}
+			const index = furnitureCategories.findIndex(
+				(category) => category.id === openId
+			);
+			const nextIndex = (index + 1) % furnitureCategories.length;
+			const next = furnitureCategories[nextIndex];
+			const button = nav.querySelector<HTMLElement>(
+				`[data-index="${nextIndex}"]`
+			);
+			if (button) {
+				selectedCategory(next.id, button);
+			}
+		}, AUTOPLAY_MS);
+		return () => {
+			observer.disconnect();
+			clearInterval(timer);
+		};
+	}, [openId, reduced, autoplayPaused, selectedCategory]);
 	useEffect(() => {
 		if (reduced) {
 			completeReveal(openId);
@@ -296,20 +352,42 @@ export function Furniture({
 				</p>
 			</header>
 			<div className="fv-catalogue">
-				<nav aria-label="Furniture categories" className="fv-index">
-					{furnitureCategories.map((category, index) => (
-						<button
-							aria-pressed={openId === category.id}
-							data-index={String(index)}
-							key={category.id}
-							onClick={handleCategoryClick}
+				<div className="fv-rail">
+					{!reduced && (
+						<Button
+							aria-label={autoplayPaused ? "Play slideshow" : "Pause slideshow"}
+							className="fv-toggle"
+							onClick={toggleAutoplay}
+							size="icon-sm"
 							type="button"
+							variant="outline"
 						>
-							<span>{category.title}</span>
-							<ChevronRight aria-hidden="true" size={18} />
-						</button>
-					))}
-				</nav>
+							{autoplayPaused ? (
+								<Play aria-hidden="true" />
+							) : (
+								<Pause aria-hidden="true" />
+							)}
+						</Button>
+					)}
+					<nav
+						aria-label="Furniture categories"
+						className="fv-index"
+						ref={navRef}
+					>
+						{furnitureCategories.map((category, index) => (
+							<button
+								aria-pressed={openId === category.id}
+								data-index={String(index)}
+								key={category.id}
+								onClick={handleCategoryClick}
+								type="button"
+							>
+								<span>{category.title}</span>
+								<ChevronRight aria-hidden="true" size={18} />
+							</button>
+						))}
+					</nav>
+				</div>
 				<div
 					className="fv-detail"
 					data-category={openCategory.id}

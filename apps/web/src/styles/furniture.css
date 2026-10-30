@@ -88,6 +88,26 @@
 		transform: translateX(3px);
 	}
 }
+.fv-rail {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+/* Pause control for the autoplaying catalogue (WCAG 2.2.2). */
+.fv-toggle {
+	align-self: flex-end;
+	color: var(--secondary-foreground);
+	background: transparent;
+	border-color: color-mix(
+		in oklch,
+		var(--secondary-foreground) 38%,
+		transparent
+	);
+}
+.fv-toggle:hover {
+	color: var(--secondary-foreground);
+	background: color-mix(in oklch, var(--secondary-foreground) 12%, transparent);
+}
 .fv :is(button, a):focus-visible {
 	outline: 2px solid currentColor;
 	outline-offset: 5px;
