@@ -1,0 +1,17 @@
+Temporary homepage photographs extracted from:
+
+  /home/yash/Downloads/Fk Furniture and Interior - Company Profile.pdf
+
+These are brochure images supplied with the company profile. They are not a licensed stock library, and they are not a substitute for a confirmed, rights-cleared project archive.
+
+  lobby.webp          profile interior, used on the hero and hospitality preview
+  lounge.webp         profile interior, used for residential / lounge contexts
+  dining.webp         profile interior, used for dining and banquet contexts
+  guest-room.webp     profile interior, used for guest-room / craft finish contexts
+  guest-bath.webp     profile interior, reserved for guest-room related crops
+  meeting.webp        profile interior, used for executive and meeting furniture
+  corridor.webp       profile interior, used for woodwork / circulation
+  workplace.webp      profile interior, used for commercial preview
+  office-building.webp profile exterior, used in About
+
+Do not treat captions as independent proof of a named client unless PRODUCT.md already records that relationship.

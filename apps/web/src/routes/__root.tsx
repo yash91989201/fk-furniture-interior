@@ -6,6 +6,7 @@ import {
 	HeadContent,
 	Outlet,
 	Scripts,
+	useRouterState,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
@@ -16,6 +17,7 @@ import type { orpc } from "@/utils/orpc";
 import Header from "../components/header";
 
 import appCss from "../index.css?url";
+import ImpeccableLiveRoot from '../impeccable/ImpeccableLiveRoot';
 export interface RouterAppContext {
 	orpc: typeof orpc;
 	queryClient: QueryClient;
@@ -36,7 +38,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "My App",
+				title: "FK Furniture & Interior",
 			},
 		],
 		links: [
@@ -51,20 +53,32 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 });
 
 function RootDocument() {
+	const pathname = useRouterState({
+		select: (state) => state.location.pathname,
+	});
+	const isHome = pathname === "/";
+
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				<div className="grid h-svh grid-rows-[auto_1fr]">
-					<Header />
+				{isHome ? (
 					<Outlet />
-				</div>
+				) : (
+					<div className="grid h-svh grid-rows-[auto_1fr]">
+						<Header />
+						<Outlet />
+					</div>
+				)}
 				<Toaster richColors />
 				<TanStackRouterDevtools position="bottom-left" />
 				<ReactQueryDevtools buttonPosition="bottom-right" position="bottom" />
-				<Scripts />
+				{/* impeccable-live-tanstack-start */}
+        <ImpeccableLiveRoot />
+        {/* impeccable-live-tanstack-end */}
+        <Scripts />
 			</body>
 		</html>
 	);

@@ -30,6 +30,7 @@
     "better-auth": "catalog:",
     "evlog": "^2.33.1",
     "lucide-react": "^1.56.0",
+    "motion": "^14.7.1",
     "next-themes": "catalog:",
     "nitro": "3.0.260903-beta",
     "react": "^19.3.0",
