@@ -4,7 +4,6 @@ import {
 	Field,
 	FieldDescription,
 	FieldGroup,
-	FieldLabel,
 } from "@fk-furniture-interior/ui/components/field";
 import { Input } from "@fk-furniture-interior/ui/components/input";
 import {
@@ -29,9 +28,7 @@ export function Enquiry({
 }) {
 	const [feedback, setFeedback] = useState("");
 	const [contactNote, setContactNote] = useState("");
-	const [requirement, setRequirement] = useState(
-		presetRequirement || enquiryOptions[0]
-	);
+	const [requirement, setRequirement] = useState(presetRequirement || "");
 	const [message, setMessage] = useState(
 		presetCategory
 			? `I would like to discuss ${presetCategory.toLowerCase()}.`
@@ -40,7 +37,12 @@ export function Enquiry({
 
 	function onSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		setFeedback("Preview only — no enquiry has been sent or stored.");
+		const subject = requirement.trim();
+		setFeedback(
+			subject
+				? `Brief received: ${subject.toLowerCase()}. Nothing has been sent or stored.`
+				: "Brief received. Nothing has been sent or stored."
+		);
 	}
 
 	function handleWhatsApp() {
@@ -61,9 +63,11 @@ export function Enquiry({
 
 	return (
 		<section className="home-section home-enquiry" id="fk-enquiry">
-			<h2 className="home-enquiry-title">Your space. Our next conversation.</h2>
 			<div className="home-enquiry-grid">
-				<div>
+				<div className="home-enquiry-invite">
+					<h2 className="home-enquiry-title">
+						Your space. Our next conversation.
+					</h2>
 					<h3>Let’s discuss your project.</h3>
 					<p>Tell us about your space, your ideas and the support you need.</p>
 					<div className="home-actions">
@@ -84,77 +88,73 @@ export function Enquiry({
 					</p>
 					<p aria-live="polite">{contactNote}</p>
 				</div>
-				<form onSubmit={onSubmit}>
+				<form className="home-enquiry-form" onSubmit={onSubmit}>
 					<FieldGroup className="home-form-grid !grid gap-4">
 						<Field>
-							<FieldLabel htmlFor="enquiry-name">Your name</FieldLabel>
 							<Input
+								aria-label="Your name"
 								autoComplete="name"
 								id="enquiry-name"
 								name="name"
-								placeholder="Name"
+								placeholder="Your name"
 								required
-								surface="box"
+								surface="line"
 							/>
 						</Field>
 						<Field>
-							<FieldLabel htmlFor="enquiry-email">Email</FieldLabel>
 							<Input
+								aria-label="Email address"
 								autoComplete="email"
 								id="enquiry-email"
 								name="email"
-								placeholder="Email"
+								placeholder="Email address"
 								required
-								surface="box"
+								surface="line"
 								type="email"
 							/>
 						</Field>
 						<Field>
-							<FieldLabel htmlFor="enquiry-phone">Phone</FieldLabel>
 							<Input
+								aria-label="Phone number (optional)"
 								autoComplete="tel"
 								id="enquiry-phone"
 								name="phone"
-								placeholder="Phone number"
-								surface="box"
+								placeholder="Phone number (optional)"
+								surface="line"
 								type="tel"
 							/>
 						</Field>
 						<Field>
-							<FieldLabel htmlFor="enquiry-company">
-								Company / hotel (optional)
-							</FieldLabel>
 							<Input
+								aria-label="Company or hotel (optional)"
 								autoComplete="organization"
 								id="enquiry-company"
 								name="company"
-								placeholder="Company name"
-								surface="box"
+								placeholder="Company or hotel (optional)"
+								surface="line"
 							/>
 						</Field>
 						<Field>
-							<FieldLabel htmlFor="enquiry-city">City</FieldLabel>
 							<Input
+								aria-label="Project city"
 								autoComplete="address-level2"
 								id="enquiry-city"
 								name="city"
-								placeholder="Project city"
-								surface="box"
+								placeholder="City of the project"
+								surface="line"
 							/>
 						</Field>
 						<Field>
-							<FieldLabel htmlFor="enquiry-requirement">
-								I need help with
-							</FieldLabel>
 							<Select
 								onValueChange={handleRequirementChange}
 								value={requirement}
 							>
 								<SelectTrigger
-									className="h-10 w-full border border-input bg-card px-3"
+									aria-label="I need help with"
+									className="w-full"
 									id="enquiry-requirement"
 								>
-									<SelectValue />
+									<SelectValue placeholder="I need help with" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
@@ -168,15 +168,13 @@ export function Enquiry({
 							</Select>
 						</Field>
 						<Field className="home-full">
-							<FieldLabel htmlFor="enquiry-message">
-								About your project
-							</FieldLabel>
 							<Textarea
+								aria-label="About your project"
 								id="enquiry-message"
 								name="message"
 								onChange={handleMessageChange}
-								placeholder="Space, approximate scope and requirements"
-								surface="box"
+								placeholder="The space, the scope, and what you need"
+								surface="line"
 								value={message}
 							/>
 							<FieldDescription>
@@ -185,14 +183,15 @@ export function Enquiry({
 						</Field>
 					</FieldGroup>
 					<p className="home-muted">[Privacy notice and policy link]</p>
-					<Button
-						className="home-enquiry-button"
-						type="submit"
-						variant="secondary"
-					>
-						Send enquiry · preview
+					<Button className="home-enquiry-button" type="submit">
+						{feedback ? "Revise the brief" : "Send enquiry · preview"}
 					</Button>
-					<p aria-live="polite">{feedback}</p>
+					<p
+						aria-live="polite"
+						className={feedback ? "home-enquiry-note" : undefined}
+					>
+						{feedback}
+					</p>
 				</form>
 			</div>
 		</section>
