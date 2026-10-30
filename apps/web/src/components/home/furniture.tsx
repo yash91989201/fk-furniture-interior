@@ -1,11 +1,10 @@
-/** biome-ignore-all lint/performance/noJsxPropsBind: accordion handlers close over open state */
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: summary is the details control */
+import "@/styles/furniture.css";
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 import { useLenis } from "lenis/react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import {
-	type KeyboardEvent,
 	type MouseEvent,
-	type SyntheticEvent,
+	useCallback,
 	useEffect,
 	useRef,
 	useState,
@@ -18,6 +17,79 @@ const SNAP_THRESHOLD = 0.25;
 const SNAP_OVERSHOOT = 0.04;
 const SNAP_DURATION = 0.9;
 
+type CategoryId = (typeof furnitureCategories)[number]["id"];
+interface FurnitureReveal {
+	id: CategoryId;
+	radius: number;
+	sequence: number;
+	x: number;
+	y: number;
+}
+
+function FurnitureBackgroundReveal({
+	reveal,
+	onComplete,
+}: {
+	reveal: FurnitureReveal;
+	onComplete: (id: CategoryId) => void;
+}) {
+	const imageRef = useRef<HTMLImageElement>(null);
+	const category =
+		furnitureCategories.find((item) => item.id === reveal.id) ??
+		furnitureCategories[0];
+	useEffect(() => {
+		const image = imageRef.current;
+		if (!image) {
+			return;
+		}
+		let cancelled = false;
+		let animation: Animation | undefined;
+		async function revealImage() {
+			try {
+				await image?.decode();
+			} catch {
+				return;
+			}
+			if (cancelled || !image) {
+				return;
+			}
+			const origin = `${reveal.x}px ${reveal.y}px`;
+			animation = image.animate(
+				[
+					{ clipPath: `circle(0px at ${origin})`, opacity: 0 },
+					{ clipPath: `circle(${reveal.radius}px at ${origin})`, opacity: 1 },
+				],
+				{
+					delay: 120,
+					duration: 1100,
+					easing: "cubic-bezier(.22,.61,.36,1)",
+					fill: "both",
+				}
+			);
+			animation.onfinish = () => {
+				if (!cancelled) {
+					onComplete(reveal.id);
+				}
+			};
+		}
+		revealImage();
+		return () => {
+			cancelled = true;
+			animation?.cancel();
+		};
+	}, [reveal, onComplete]);
+	return (
+		<img
+			alt=""
+			className="fv-background-reveal"
+			height={1333}
+			ref={imageRef}
+			src={category.image.src}
+			width={2000}
+		/>
+	);
+}
+
 export function Furniture({
 	onEnquire,
 }: {
@@ -25,17 +97,61 @@ export function Furniture({
 }) {
 	const reduced = usePrefersReducedMotion();
 	const lenis = useLenis();
-	const [openId, setOpenId] = useState<
-		(typeof furnitureCategories)[number]["id"]
-	>(furnitureCategories[0].id);
-	const photoRef = useRef<HTMLImageElement>(null);
 	const sectionRef = useRef<HTMLElement>(null);
+	const sequence = useRef(0);
+	const [openId, setOpenId] = useState<CategoryId>(furnitureCategories[0].id);
+	const [backgroundId, setBackgroundId] = useState<CategoryId>(
+		furnitureCategories[0].id
+	);
+	const [reveal, setReveal] = useState<FurnitureReveal | null>(null);
 	const openCategory =
 		furnitureCategories.find((category) => category.id === openId) ??
 		furnitureCategories[0];
-
-	// Entry snap: pulls the panel flush whenever scrolling settles while the
-	// panel is entering the viewport. Once past the entry band, exits are free.
+	const backgroundCategory =
+		furnitureCategories.find((category) => category.id === backgroundId) ??
+		furnitureCategories[0];
+	const completeReveal = useCallback((id: CategoryId) => {
+		setBackgroundId(id);
+		setReveal(null);
+	}, []);
+	const handleCategoryClick = useCallback(
+		(event: MouseEvent<HTMLButtonElement>) => {
+			const { id } =
+				furnitureCategories[Number(event.currentTarget.dataset.index)];
+			if (id === openId) {
+				return;
+			}
+			setOpenId(id);
+			const section = sectionRef.current;
+			if (reduced || !section) {
+				completeReveal(id);
+				return;
+			}
+			const bounds = section.getBoundingClientRect();
+			const item = event.currentTarget.getBoundingClientRect();
+			const x = item.left + item.width / 2 - bounds.left;
+			const y = item.top + item.height / 2 - bounds.top;
+			sequence.current += 1;
+			setReveal({
+				id,
+				x,
+				y,
+				radius: Math.hypot(
+					Math.max(x, bounds.width - x),
+					Math.max(y, bounds.height - y)
+				),
+				sequence: sequence.current,
+			});
+		},
+		[openId, reduced, completeReveal]
+	);
+	useEffect(() => {
+		if (reduced) {
+			completeReveal(openId);
+		}
+	}, [reduced, openId, completeReveal]);
+	// Entry snap: pulls the panel flush when scrolling settles while it is
+	// mostly visible. Once past the entry band, exits stay free.
 	useEffect(() => {
 		if (reduced) {
 			return;
@@ -105,143 +221,77 @@ export function Furniture({
 			clearTimeout(unlock);
 		};
 	}, [lenis, reduced]);
-
-	function openAt(index: number) {
-		const next = furnitureCategories[index];
-		setOpenId(next.id);
-		const photo = photoRef.current;
-		if (!(photo && reduced)) {
-			const catalogue = photo?.closest(".home-furniture-catalogue");
-			if (catalogue && photo) {
-				const region = catalogue.getBoundingClientRect();
-				const summaries = catalogue.querySelectorAll("summary");
-				const entry = summaries[index]?.getBoundingClientRect();
-				if (entry) {
-					const left = Math.max(0, entry.left - region.left);
-					const right = Math.max(0, region.right - entry.right);
-					photo.animate(
-						[
-							{
-								clipPath: `inset(0 ${right}px 0 ${left}px)`,
-								filter: "grayscale(1) blur(6px)",
-								transform: "scale(1.025)",
-							},
-							{
-								clipPath: "inset(0 0 0 0)",
-								filter: "grayscale(1) blur(0px)",
-								transform: "scale(1)",
-							},
-						],
-						{ duration: 800, easing: "cubic-bezier(.16,1,.3,1)" }
-					);
-				}
-			}
-		}
-	}
-
-	function handleToggle(event: SyntheticEvent<HTMLDetailsElement>) {
-		if (event.currentTarget.open) {
-			openAt(Number(event.currentTarget.dataset.index));
-		}
-	}
-
-	function handleSummaryClick(event: MouseEvent<HTMLElement>) {
-		if (event.currentTarget.dataset.id === openId) {
-			event.preventDefault();
-		}
-	}
-
-	function handleSummaryKeyDown(event: KeyboardEvent<HTMLElement>) {
-		if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
-			return;
-		}
-		event.preventDefault();
-		const index = Number(event.currentTarget.dataset.index);
-		const next =
-			(index + (event.key === "ArrowRight" ? 1 : 4)) %
-			furnitureCategories.length;
-		openAt(next);
-		const summaries = event.currentTarget
-			.closest(".home-furniture-catalogue")
-			?.querySelectorAll("summary");
-		summaries?.[next]?.focus({ preventScroll: true });
-	}
-
-	function handleEnquireClick(event: MouseEvent<HTMLElement>) {
-		const index = Number(event.currentTarget.dataset.index);
-		const category = furnitureCategories[index];
-		onEnquire(category.title, category.requirement);
-	}
-
+	const handleEnquireClick = useCallback(
+		(event: MouseEvent<HTMLAnchorElement>) => {
+			const category =
+				furnitureCategories[Number(event.currentTarget.dataset.index)];
+			onEnquire(category.title, category.requirement);
+		},
+		[onEnquire]
+	);
 	return (
-		<section
-			className="home-section home-furniture"
-			data-hide-nav
-			id="fk-capabilities"
-			ref={sectionRef}
-		>
-			<div className="home-furniture-catalogue">
-				<div aria-hidden="true" className="home-furniture-scene">
-					<img
-						alt=""
-						className="home-furniture-photo"
-						decoding="async"
-						height={1333}
-						key={openCategory.image.src}
-						ref={photoRef}
-						src={openCategory.image.src}
-						width={2000}
+		<section className="fv" data-hide-nav id="fk-capabilities" ref={sectionRef}>
+			<div aria-hidden="true" className="fv-backdrop">
+				<img
+					alt=""
+					height={1333}
+					src={backgroundCategory.image.src}
+					width={2000}
+				/>
+				{reveal !== null && (
+					<FurnitureBackgroundReveal
+						key={reveal.sequence}
+						onComplete={completeReveal}
+						reveal={reveal}
 					/>
-				</div>
-				<div className="home-furniture-intro">
-					<h2>
-						Made for
-						<br />
-						your space.
-					</h2>
-					<p>
-						Furniture and architectural woodwork, considered as part of the
-						whole interior.
-					</p>
-				</div>
-				<div className="home-furniture-tabs">
+				)}
+			</div>
+			<header className="fv-intro">
+				<h2>
+					Made for
+					<br />
+					<em>your space.</em>
+				</h2>
+				<p>
+					Furniture and architectural woodwork, considered as part of the whole
+					interior.
+				</p>
+			</header>
+			<div className="fv-catalogue">
+				<nav aria-label="Furniture categories" className="fv-index">
 					{furnitureCategories.map((category, index) => (
-						<details
+						<button
+							aria-pressed={openId === category.id}
 							data-index={String(index)}
 							key={category.id}
-							onToggle={handleToggle}
-							open={openId === category.id}
+							onClick={handleCategoryClick}
+							type="button"
 						>
-							<summary
-								data-id={category.id}
-								data-index={String(index)}
-								onClick={handleSummaryClick}
-								onKeyDown={handleSummaryKeyDown}
-							>
-								{category.title}
-							</summary>
-							<div className="home-furniture-content">
-								<h3>{category.heading}</h3>
-								<ul>
-									{category.items.map((item) => (
-										<li key={item}>{item}</li>
-									))}
-								</ul>
-								{/* biome-ignore lint/a11y/useValidAnchor: This link presets the enquiry before it navigates. */}
-								<a
-									className={buttonVariants({ variant: "default" })}
-									data-index={String(index)}
-									href="#fk-enquiry"
-									onClick={handleEnquireClick}
-								>
-									{category.cta}
-								</a>
-								<p className="home-muted">
-									[Materials, dimensions and finishes to be confirmed.]
-								</p>
-							</div>
-						</details>
+							<span>{category.title}</span>
+							<ChevronRight aria-hidden="true" size={18} />
+						</button>
 					))}
+				</nav>
+				<div className="fv-detail" key={openCategory.id}>
+					<h3>{openCategory.heading}</h3>
+					<ul>
+						{openCategory.items.map((item) => (
+							<li key={item}>{item}</li>
+						))}
+					</ul>
+					{/* biome-ignore lint/a11y/useValidAnchor: This link presets the enquiry before it navigates. */}
+					<a
+						className={buttonVariants({ variant: "default" })}
+						data-index={String(furnitureCategories.indexOf(openCategory))}
+						href="#fk-enquiry"
+						onClick={handleEnquireClick}
+					>
+						{openCategory.cta}
+						<ArrowUpRight aria-hidden="true" size={16} />
+					</a>
+					<p className="fv-note">
+						[Materials, dimensions and finishes to be confirmed.]
+					</p>
 				</div>
 			</div>
 		</section>

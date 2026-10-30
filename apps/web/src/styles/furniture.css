@@ -1,0 +1,207 @@
+.fv {
+	position: relative;
+	min-height: max(43rem, 100svh);
+	padding: clamp(2rem, 4svh, 5rem) var(--home-gutter);
+	overflow: hidden;
+	color: var(--secondary-foreground);
+	background: var(--secondary);
+	isolation: isolate;
+}
+.fv * {
+	min-width: 0;
+}
+.fv-intro {
+	display: flex;
+	gap: 2rem;
+	align-items: end;
+	justify-content: space-between;
+	margin-bottom: clamp(2rem, 5svh, 5rem);
+}
+.fv-intro h2 {
+	max-width: 12ch;
+	margin: 0;
+	font-size: clamp(3rem, 6svh + 1vw, 5.5rem);
+	line-height: 0.98;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+.fv-intro em {
+	font-weight: inherit;
+}
+.fv-intro p {
+	max-width: 30ch;
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.6;
+}
+.fv-catalogue {
+	display: grid;
+	grid-template-columns: minmax(16rem, 0.9fr) minmax(18rem, 1fr);
+	gap: clamp(2.5rem, 6vw, 6rem);
+	align-items: start;
+	max-width: 68rem;
+}
+.fv-index {
+	display: flex;
+	flex-direction: column;
+}
+.fv-index button {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 3.5rem;
+	padding: 1rem 0;
+	font-size: 1rem;
+	text-align: left;
+	cursor: pointer;
+	border-bottom: 1px solid color-mix(in oklch, currentColor 25%, transparent);
+	transition: color 180ms;
+}
+.fv-index button[aria-pressed="true"] {
+	font-weight: 600;
+	color: var(--primary);
+}
+.fv-index button svg {
+	flex-shrink: 0;
+	opacity: 0;
+	transition:
+		opacity 180ms,
+		transform 180ms;
+}
+.fv-index button[aria-pressed="true"] svg,
+.fv-index button:hover svg {
+	opacity: 1;
+	transform: translateX(3px);
+}
+.fv :is(button, a):focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 5px;
+}
+.fv-detail {
+	padding-top: 0.75rem;
+	animation: furniture-detail-reveal 240ms var(--home-ease);
+}
+.fv-detail h3 {
+	max-width: 22ch;
+	margin: 0 0 1.5rem;
+	font-size: clamp(2rem, 3vw, 3rem);
+	line-height: 1.08;
+	text-wrap: balance;
+}
+.fv-detail ul {
+	padding: 0;
+	margin: 0 0 2rem;
+	list-style: none;
+}
+.fv-detail li {
+	padding: 0.4rem 0;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+.fv-detail a {
+	gap: 1rem;
+	height: auto;
+	min-height: 2.75rem;
+	padding-block: 0.75rem;
+	text-align: left;
+	white-space: normal;
+}
+.fv-detail .fv-note {
+	max-width: 40ch;
+	margin: 1rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	opacity: 0.85;
+}
+.fv-backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: var(--secondary);
+}
+.fv-backdrop img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.fv-backdrop .fv-background-reveal {
+	clip-path: circle(0);
+}
+.fv-backdrop::before,
+.fv-backdrop::after {
+	position: absolute;
+	inset: 0;
+	content: "";
+}
+.fv-backdrop::before {
+	z-index: 1;
+	background: linear-gradient(
+		135deg,
+		color-mix(in oklch, var(--secondary-foreground) 64%, transparent),
+		color-mix(in oklch, var(--background) 30%, transparent) 65%,
+		color-mix(in oklch, var(--secondary-foreground) 44%, transparent)
+	);
+	backdrop-filter: blur(16px) saturate(150%);
+	mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 58%);
+}
+.fv-backdrop::after {
+	z-index: 2;
+	background: linear-gradient(
+		90deg,
+		color-mix(in oklch, var(--secondary) 70%, transparent),
+		color-mix(in oklch, var(--secondary) 72%, transparent) 52%,
+		color-mix(in oklch, var(--secondary) 40%, transparent)
+	);
+}
+@keyframes furniture-detail-reveal {
+	from {
+		opacity: 0.5;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@media (max-width: 48rem) {
+	.fv {
+		min-height: 0;
+		padding: 2.5rem 1.25rem 3rem;
+	}
+	.fv-intro {
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: start;
+		margin-bottom: 2rem;
+	}
+	.fv-intro h2 {
+		font-size: clamp(3rem, 10vw, 4rem);
+	}
+	.fv-catalogue {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+	.fv-detail {
+		min-height: 21rem;
+		padding-top: 0;
+	}
+	.fv-detail h3 {
+		font-size: 2.25rem;
+	}
+	.fv-backdrop::before {
+		mask-image: linear-gradient(90deg, #000, transparent 95%);
+	}
+	.fv-backdrop::after {
+		background: color-mix(in oklch, var(--secondary) 84%, transparent);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.fv * {
+		transition: none;
+		animation: none;
+	}
+}
