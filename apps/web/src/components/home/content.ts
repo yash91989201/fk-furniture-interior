@@ -159,8 +159,8 @@ export const processSteps = [
 		description:
 			"Your space, your routines, your ambitions. We begin by understanding what the project needs to achieve.",
 		deliverable: "Together, we establish the brief and project scope.",
-		label: "Space plan · Drawing placeholder",
-		alt: "Schematic space plan, placeholder for consultation drawings",
+		label: "Space plan",
+		alt: "Illustrative architectural floor plan with door swings, furniture layouts, and dimension lines",
 		nav: "1 / Consult",
 	},
 	{
@@ -168,8 +168,8 @@ export const processSteps = [
 		description:
 			"Layouts, materials and finishes take shape together. We review the details and agree on the direction before work begins.",
 		deliverable: "The result: approved designs, finishes and samples.",
-		label: "Material palette · Sample placeholders",
-		alt: "Four material samples in marigold, ice silver, mauve, and cool gray, representing design and finish selection",
+		label: "Material palette",
+		alt: "Illustrative finish study with linear timber grain, diagonal stone hatching, and a marigold sample",
 		nav: "2 / Design",
 	},
 	{
@@ -177,8 +177,8 @@ export const processSteps = [
 		description:
 			"Furniture is manufactured and site work is coordinated. Approved details guide the making, assembly and finishing.",
 		deliverable: "The result: components and interiors ready for installation.",
-		label: "Component assembly · Factory imagery placeholder",
-		alt: "Separated geometric furniture components representing manufacturing and assembly",
+		label: "Component assembly",
+		alt: "Illustrative furniture elevation showing a tabletop, two legs, and a rail assembling into a table",
 		nav: "3 / Make",
 	},
 	{
@@ -186,8 +186,8 @@ export const processSteps = [
 		description:
 			"Furniture is fitted, details are checked and the finished space is handed over. The brief becomes a place to live or work.",
 		deliverable: "The result: installation, final inspection and handover.",
-		label: "Completed space · Project photograph placeholder",
-		alt: "Assembled geometric structure representing completed installation and handover",
+		label: "Completed space",
+		alt: "Illustrative furnished floor plan with seating, a rug, fitted furniture, and a final inspection mark",
 		nav: "4 / Handover",
 	},
 ] as const;

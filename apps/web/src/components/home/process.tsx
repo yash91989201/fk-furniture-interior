@@ -12,6 +12,7 @@ import {
 import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { processSteps } from "./content";
+import { ProcessDrawing } from "./process-drawing";
 import { usePrefersReducedMotion } from "./use-media";
 
 const STEP_COUNT = processSteps.length;
@@ -162,12 +163,7 @@ export function Process() {
 								data-scene={String(active)}
 								role="img"
 							>
-								<div aria-hidden="true" className="home-scene-drawing">
-									<span className="piece-a" />
-									<span className="piece-b" />
-									<span className="piece-c" />
-									<span className="piece-d" />
-								</div>
+								<ProcessDrawing active={active} reduced={reduced} />
 								<div className="home-scene-label">{step.label}</div>
 							</div>
 							<motion.div
