@@ -13,6 +13,8 @@ import {
 import { furnitureCategories } from "./content";
 import { usePrefersReducedMotion } from "./use-media";
 
+const HEADING_WORDS = /\S+\s*/g;
+
 const SNAP_THRESHOLD = 0.25;
 const SNAP_OVERSHOOT = 0.04;
 const SNAP_DURATION = 0.9;
@@ -98,6 +100,7 @@ export function Furniture({
 	const reduced = usePrefersReducedMotion();
 	const lenis = useLenis();
 	const sectionRef = useRef<HTMLElement>(null);
+	const detailRef = useRef<HTMLDivElement>(null);
 	const sequence = useRef(0);
 	const [openId, setOpenId] = useState<CategoryId>(furnitureCategories[0].id);
 	const [backgroundId, setBackgroundId] = useState<CategoryId>(
@@ -150,6 +153,41 @@ export function Furniture({
 			completeReveal(openId);
 		}
 	}, [reduced, openId, completeReveal]);
+	useEffect(() => {
+		const detail = detailRef.current;
+		if (!detail || detail.dataset.category !== openId) {
+			return;
+		}
+		const compact = window.matchMedia("(max-width: 48rem)");
+		let observer: IntersectionObserver | undefined;
+		const startFlow = () => {
+			detail.dataset.flowReady = "true";
+			observer?.disconnect();
+		};
+		const observe = () => {
+			observer?.disconnect();
+			if (reduced || !compact.matches || !("IntersectionObserver" in window)) {
+				startFlow();
+				return;
+			}
+			detail.dataset.flowReady = "false";
+			observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						startFlow();
+					}
+				},
+				{ threshold: 0.15 }
+			);
+			observer.observe(detail);
+		};
+		observe();
+		compact.addEventListener("change", observe);
+		return () => {
+			observer?.disconnect();
+			compact.removeEventListener("change", observe);
+		};
+	}, [openId, reduced]);
 	// Entry snap: pulls the panel flush when scrolling settles while it is
 	// mostly visible. Once past the entry band, exits stay free.
 	useEffect(() => {
@@ -272,8 +310,31 @@ export function Furniture({
 						</button>
 					))}
 				</nav>
-				<div className="fv-detail" key={openCategory.id}>
-					<h3>{openCategory.heading}</h3>
+				<div
+					className="fv-detail"
+					data-category={openCategory.id}
+					key={openCategory.id}
+					ref={detailRef}
+				>
+					<h3>
+						<span className="sr-only">{openCategory.heading}</span>
+						<span aria-hidden="true">
+							{Array.from(
+								openCategory.heading.matchAll(HEADING_WORDS),
+								(word) => (
+									<span
+										className="fv-heading-word"
+										key={word.index}
+										style={{
+											animationDelay: `calc(${word.index} * var(--fv-word-step, 16ms))`,
+										}}
+									>
+										{word[0].trimEnd()}
+									</span>
+								)
+							)}
+						</span>
+					</h3>
 					<ul>
 						{openCategory.items.map((item) => (
 							<li key={item}>{item}</li>

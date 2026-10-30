@@ -1,7 +1,11 @@
 .fv {
+	--fv-columns: minmax(16rem, 0.9fr) minmax(18rem, 1fr);
+	--fv-rail-gap: clamp(2.5rem, 6vw, 6rem);
 	position: relative;
 	min-height: max(43rem, 100svh);
-	padding: clamp(2rem, 4svh, 5rem) var(--home-gutter);
+	padding: clamp(2rem, 4svh, 5rem)
+		max(var(--home-gutter), env(safe-area-inset-right)) clamp(2rem, 4svh, 5rem)
+		max(var(--home-gutter), env(safe-area-inset-left));
 	overflow: hidden;
 	color: var(--secondary-foreground);
 	background: var(--secondary);
@@ -11,19 +15,21 @@
 	min-width: 0;
 }
 .fv-intro {
-	display: flex;
-	gap: 2rem;
+	display: grid;
+	grid-template-columns: var(--fv-columns);
+	gap: var(--fv-rail-gap);
 	align-items: end;
-	justify-content: space-between;
+	max-width: 68rem;
 	margin-bottom: clamp(2rem, 5svh, 5rem);
 }
 .fv-intro h2 {
 	max-width: 12ch;
 	margin: 0;
-	font-size: clamp(3rem, 6svh + 1vw, 5.5rem);
+	font-size: clamp(3rem, 2.5vw + 4svh, 5.5rem);
 	line-height: 0.98;
 	letter-spacing: -0.025em;
 	text-wrap: balance;
+	overflow-wrap: break-word;
 }
 .fv-intro em {
 	font-weight: inherit;
@@ -32,12 +38,15 @@
 	max-width: 30ch;
 	margin: 0;
 	font-size: 1rem;
+	font-weight: 450;
 	line-height: 1.6;
+	letter-spacing: 0.01em;
+	text-wrap: pretty;
 }
 .fv-catalogue {
 	display: grid;
-	grid-template-columns: minmax(16rem, 0.9fr) minmax(18rem, 1fr);
-	gap: clamp(2.5rem, 6vw, 6rem);
+	grid-template-columns: var(--fv-columns);
+	gap: var(--fv-rail-gap);
 	align-items: start;
 	max-width: 68rem;
 }
@@ -69,10 +78,15 @@
 		opacity 180ms,
 		transform 180ms;
 }
-.fv-index button[aria-pressed="true"] svg,
-.fv-index button:hover svg {
+.fv-index button[aria-pressed="true"] svg {
 	opacity: 1;
 	transform: translateX(3px);
+}
+@media (hover: hover) and (pointer: fine) {
+	.fv-index button:hover svg {
+		opacity: 1;
+		transform: translateX(3px);
+	}
 }
 .fv :is(button, a):focus-visible {
 	outline: 2px solid currentColor;
@@ -80,14 +94,15 @@
 }
 .fv-detail {
 	padding-top: 0.75rem;
-	animation: furniture-detail-reveal 240ms var(--home-ease);
 }
 .fv-detail h3 {
 	max-width: 22ch;
 	margin: 0 0 1.5rem;
-	font-size: clamp(2rem, 3vw, 3rem);
+	font-size: clamp(1.875rem, 1rem + 2.4vw, 3.25rem);
 	line-height: 1.08;
+	letter-spacing: -0.015em;
 	text-wrap: balance;
+	overflow-wrap: break-word;
 }
 .fv-detail ul {
 	padding: 0;
@@ -98,6 +113,8 @@
 	padding: 0.4rem 0;
 	font-size: 1rem;
 	line-height: 1.5;
+	letter-spacing: 0.01em;
+	text-wrap: pretty;
 }
 .fv-detail a {
 	gap: 1rem;
@@ -110,9 +127,11 @@
 .fv-detail .fv-note {
 	max-width: 40ch;
 	margin: 1rem 0 0;
-	font-size: 0.8125rem;
-	line-height: 1.5;
-	opacity: 0.85;
+	font-size: 0.875rem;
+	line-height: 1.55;
+	color: color-mix(in oklch, var(--secondary-foreground) 82%, transparent);
+	letter-spacing: 0.01em;
+	text-wrap: pretty;
 }
 .fv-backdrop {
 	position: absolute;
@@ -157,10 +176,47 @@
 		color-mix(in oklch, var(--secondary) 40%, transparent)
 	);
 }
+.fv-heading-word {
+	display: inline-block;
+	margin-inline-end: 0.22em;
+	animation: furniture-word-reveal 480ms var(--home-ease) both;
+}
+.fv-detail li,
+.fv-detail > a,
+.fv-detail .fv-note {
+	animation: furniture-detail-reveal 560ms var(--home-ease) both;
+}
+.fv-detail li:nth-child(1) {
+	animation-delay: 220ms;
+}
+.fv-detail li:nth-child(2) {
+	animation-delay: 300ms;
+}
+.fv-detail li:nth-child(3) {
+	animation-delay: 380ms;
+}
+.fv-detail > a {
+	animation-delay: 460ms;
+}
+.fv-detail .fv-note {
+	animation-delay: 540ms;
+}
+@keyframes furniture-word-reveal {
+	from {
+		opacity: 0;
+		transform: translateY(0.18em);
+		filter: blur(3px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0);
+	}
+}
 @keyframes furniture-detail-reveal {
 	from {
-		opacity: 0.5;
-		transform: translateY(8px);
+		opacity: 0;
+		transform: translateY(12px);
 	}
 	to {
 		opacity: 1;
@@ -170,33 +226,99 @@
 @media (max-width: 48rem) {
 	.fv {
 		min-height: 0;
-		padding: 2.5rem 1.25rem 3rem;
+		padding: 2.5rem max(1.25rem, env(safe-area-inset-right)) 3rem
+			max(1.25rem, env(safe-area-inset-left));
 	}
 	.fv-intro {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 		gap: 1.5rem;
 		align-items: start;
 		margin-bottom: 2rem;
-	}
-	.fv-intro h2 {
-		font-size: clamp(3rem, 10vw, 4rem);
 	}
 	.fv-catalogue {
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
 	}
 	.fv-detail {
-		min-height: 21rem;
+		--fv-word-step: 9ms;
+		min-height: 25rem;
 		padding-top: 0;
 	}
 	.fv-detail h3 {
-		font-size: 2.25rem;
+		min-height: 3.24em;
 	}
 	.fv-backdrop::before {
 		mask-image: linear-gradient(90deg, #000, transparent 95%);
 	}
 	.fv-backdrop::after {
 		background: color-mix(in oklch, var(--secondary) 84%, transparent);
+	}
+}
+/* Short windows and landscape phones: the panel fills what it can and never
+   forces the 43rem floor past the viewport. */
+@media (min-width: 48.01rem) and (max-height: 43rem) {
+	.fv {
+		min-height: 100svh;
+		padding-block: 1.5rem;
+	}
+	.fv-intro {
+		margin-bottom: 1.5rem;
+	}
+	.fv-index button {
+		min-height: 2.75rem;
+		padding-block: 0.6rem;
+	}
+	.fv-detail {
+		padding-top: 0.25rem;
+	}
+	.fv-detail h3 {
+		margin-bottom: 1rem;
+	}
+	.fv-detail ul {
+		margin-bottom: 1.25rem;
+	}
+	.fv-detail .fv-note {
+		margin-top: 0.75rem;
+	}
+}
+@media (max-width: 48rem) and (prefers-reduced-motion: no-preference) {
+	.fv-heading-word {
+		animation-name: furniture-mobile-reveal;
+		animation-duration: 360ms;
+	}
+	.fv-detail li,
+	.fv-detail > a,
+	.fv-detail .fv-note {
+		animation-name: furniture-mobile-reveal;
+		animation-duration: 400ms;
+	}
+	.fv-detail li:nth-child(1) {
+		animation-delay: 160ms;
+	}
+	.fv-detail li:nth-child(2) {
+		animation-delay: 220ms;
+	}
+	.fv-detail li:nth-child(3) {
+		animation-delay: 280ms;
+	}
+	.fv-detail > a {
+		animation-delay: 340ms;
+	}
+	.fv-detail .fv-note {
+		animation-delay: 400ms;
+	}
+	.fv-detail[data-flow-ready="false"] :is(.fv-heading-word, li, a, .fv-note) {
+		animation-play-state: paused;
+	}
+}
+@keyframes furniture-mobile-reveal {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 @media (prefers-reduced-motion: reduce) {
