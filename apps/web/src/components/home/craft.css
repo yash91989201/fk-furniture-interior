@@ -1,0 +1,411 @@
+.craft-section {
+	--craft-display: clamp(2.75rem, 1.6rem + 3.2vw, 4.5rem);
+	--craft-sub: clamp(1.5rem, 1.15rem + 0.8vw, 1.75rem);
+	--craft-part: clamp(1.15rem, 1.02rem + 0.5vw, 1.4rem);
+	--craft-body: clamp(1rem, 0.94rem + 0.22vw, 1.0625rem);
+	--craft-meta: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+	padding: clamp(3.5rem, 7vw, 6rem) var(--home-gutter);
+	color: #3a0f34;
+	scroll-margin-top: 5rem;
+	background: #dde3e8;
+}
+.craft-section > h2 {
+	max-width: 15ch;
+	font: 500 var(--craft-display) / 1 var(--font-heading);
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+.craft-introduction {
+	max-width: 35rem;
+	margin-top: 1.5rem;
+	font-size: var(--craft-body);
+	line-height: 1.65;
+	text-wrap: pretty;
+}
+.craft-preview-target {
+	min-width: 0;
+	margin-top: 3.5rem;
+}
+.craft-study-heading {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 2rem;
+	align-items: baseline;
+	justify-content: space-between;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #3a0f3433;
+}
+.craft-study-heading h3 {
+	font: 500 var(--craft-sub) / 1.1 var(--font-heading);
+	text-wrap: balance;
+}
+.craft-study-heading > span,
+.craft-interaction-hint,
+.craft-assembly-state,
+.craft-canvas-note {
+	font-size: var(--craft-meta);
+	line-height: 1.6;
+	color: #684762;
+}
+.craft-study-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) clamp(15rem, 21vw, 18rem);
+	gap: clamp(1.5rem, 3vw, 3rem);
+	align-items: center;
+}
+.craft-canvas {
+	min-width: 0;
+}
+.craft-drawing {
+	display: block;
+	width: 100%;
+	max-width: 56.25rem;
+	height: auto;
+	margin-block: 0.75rem 0;
+	margin-inline: auto;
+	overflow: visible;
+	color: #3a0f34;
+}
+.craft-drawing text {
+	font-family: var(--font-sans);
+}
+.craft-drawing-label {
+	font-family: var(--font-sans);
+	font-size: 13px;
+	fill: #3a0f34;
+	stroke: none;
+}
+.craft-drafting {
+	opacity: 0.35;
+	stroke-width: 1;
+}
+.craft-leader {
+	stroke-width: 1.2;
+}
+.craft-part {
+	cursor: pointer;
+	outline: none;
+	transform-box: fill-box;
+	transform-origin: center;
+	-webkit-tap-highlight-color: transparent;
+}
+.craft-part-drift {
+	animation: craft-part-drift 10s linear infinite;
+	animation-play-state: paused;
+}
+.craft-study[data-in-view="true"] .craft-part-drift {
+	animation-play-state: running;
+	will-change: transform;
+}
+@keyframes craft-part-drift {
+	0% {
+		transform: translate(0px, 0px);
+	}
+	3.125% {
+		transform: translate(0.9755px, -0.1345px);
+	}
+	6.25% {
+		transform: translate(1.9134px, -0.5328px);
+	}
+	9.375% {
+		transform: translate(2.7779px, -1.1797px);
+	}
+	12.5% {
+		transform: translate(3.5355px, -2.0503px);
+	}
+	15.625% {
+		transform: translate(4.1573px, -3.111px);
+	}
+	18.75% {
+		transform: translate(4.6194px, -4.3212px);
+	}
+	21.875% {
+		transform: translate(4.9039px, -5.6344px);
+	}
+	25% {
+		transform: translate(5px, -7px);
+	}
+	28.125% {
+		transform: translate(4.9039px, -8.3656px);
+	}
+	31.25% {
+		transform: translate(4.6194px, -9.6788px);
+	}
+	34.375% {
+		transform: translate(4.1573px, -10.889px);
+	}
+	37.5% {
+		transform: translate(3.5355px, -11.9497px);
+	}
+	40.625% {
+		transform: translate(2.7779px, -12.8203px);
+	}
+	43.75% {
+		transform: translate(1.9134px, -13.4672px);
+	}
+	46.875% {
+		transform: translate(0.9755px, -13.8655px);
+	}
+	50% {
+		transform: translate(0px, -14px);
+	}
+	53.125% {
+		transform: translate(-0.9755px, -13.8655px);
+	}
+	56.25% {
+		transform: translate(-1.9134px, -13.4672px);
+	}
+	59.375% {
+		transform: translate(-2.7779px, -12.8203px);
+	}
+	62.5% {
+		transform: translate(-3.5355px, -11.9497px);
+	}
+	65.625% {
+		transform: translate(-4.1573px, -10.889px);
+	}
+	68.75% {
+		transform: translate(-4.6194px, -9.6788px);
+	}
+	71.875% {
+		transform: translate(-4.9039px, -8.3656px);
+	}
+	75% {
+		transform: translate(-5px, -7px);
+	}
+	78.125% {
+		transform: translate(-4.9039px, -5.6344px);
+	}
+	81.25% {
+		transform: translate(-4.6194px, -4.3212px);
+	}
+	84.375% {
+		transform: translate(-4.1573px, -3.111px);
+	}
+	87.5% {
+		transform: translate(-3.5355px, -2.0503px);
+	}
+	90.625% {
+		transform: translate(-2.7779px, -1.1797px);
+	}
+	93.75% {
+		transform: translate(-1.9134px, -0.5328px);
+	}
+	96.875% {
+		transform: translate(-0.9755px, -0.1345px);
+	}
+	100% {
+		transform: translate(-0px, 0px);
+	}
+}
+.craft-part-ambient {
+	transform-origin: center;
+	transform-box: fill-box;
+	transition: filter 200ms ease-out;
+}
+.craft-part-ambient[data-active="true"] {
+	filter: contrast(1.15) saturate(1.2);
+}
+.craft-part[data-muted="true"] .craft-part-ambient {
+	filter: grayscale(0.75);
+}
+.home-page .craft-part:focus-visible {
+	outline: 2px solid #3a0f34;
+	outline-offset: 7px;
+}
+.craft-canvas-note {
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+.craft-interaction-hint {
+	margin-bottom: 1.5rem;
+}
+.craft-interaction-hint span {
+	display: block;
+}
+.craft-part-list {
+	display: grid;
+	gap: 0.5rem;
+	min-width: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+.craft-part-button {
+	padding: 0.875rem;
+	margin-inline: -0.875rem;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	transition: background-color 180ms ease-out;
+}
+.craft-part-button[data-active="true"] {
+	background: #3a0f340a;
+}
+.craft-part-label {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	font: 500 var(--craft-part) / 1.1 var(--font-heading);
+}
+.craft-part-label i {
+	flex-shrink: 0;
+	width: 0.5rem;
+	height: 0.5rem;
+}
+.craft-part-label svg {
+	margin-left: auto;
+	opacity: 0;
+	transition: opacity 180ms ease-out;
+}
+.craft-part-button[data-active="true"] .craft-part-label svg,
+.craft-part-button:focus-visible .craft-part-label svg {
+	opacity: 1;
+}
+.craft-part-body {
+	display: block;
+	margin: 0.65rem 0 0 1.25rem;
+	font-size: var(--craft-body);
+	line-height: 1.6;
+	text-wrap: pretty;
+}
+.craft-study-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.5rem;
+	align-items: center;
+	padding-block: 0.75rem;
+	border-top: 1px solid #3a0f3433;
+}
+.craft-study-toolbar button {
+	display: inline-flex;
+	gap: 0.65rem;
+	align-items: center;
+	min-height: 2.75rem;
+	font-size: var(--craft-meta);
+	cursor: pointer;
+	transition: background-color 180ms ease-out;
+}
+.craft-assembly-toggle {
+	padding: 0.65rem 1rem;
+	color: #dde3e8;
+	background: #3a0f34;
+}
+.craft-assembly-toggle:hover {
+	background: #54224d;
+}
+.craft-reset {
+	padding: 0.5rem 0.25rem;
+	margin-left: auto;
+	text-decoration: underline;
+	text-underline-offset: 0.3em;
+}
+.craft-section-footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 2rem;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 2rem;
+}
+.craft-section-footer ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	padding: 0;
+	font-size: var(--craft-meta);
+	list-style: none;
+}
+.craft-section-footer a {
+	display: inline-flex;
+	gap: 1.5rem;
+	align-items: center;
+	min-height: 2.75rem;
+	font-size: var(--craft-body);
+	font-weight: 500;
+	border-bottom: 1px solid currentColor;
+}
+.craft-drawing-annotation {
+	pointer-events: none;
+}
+@media (hover: none) {
+	.craft-interaction-hint .craft-hint-look {
+		display: none;
+	}
+}
+@media (max-width: 1100px) {
+	.craft-study-layout {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+	.craft-inspector {
+		padding-bottom: 1.5rem;
+	}
+	.craft-part-list {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.25rem;
+	}
+	.craft-part-button {
+		padding: 0.5rem;
+		margin: 0;
+	}
+	.craft-part-label {
+		gap: 0.5rem;
+	}
+	.craft-part-body {
+		margin-left: 0;
+	}
+}
+@media (max-width: 640px) {
+	.craft-part-list {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+	.craft-part-button {
+		padding: 0.75rem;
+	}
+	.craft-part-button + .craft-part-button {
+		border-top: 1px solid #3a0f341a;
+	}
+	.craft-part-body {
+		margin-left: 1rem;
+	}
+}
+@media (max-width: 800px) {
+	.craft-study-interior .craft-canvas {
+		/* Fluid crop avoids a scale jump between phone and tablet widths. */
+		--craft-drawing-width: clamp(100%, calc(16.5vw + 36.75rem), 135%);
+		overflow: clip;
+	}
+	.craft-drawing-interior {
+		width: var(--craft-drawing-width);
+		max-width: none;
+		margin-inline: calc(50% - var(--craft-drawing-width) / 2);
+	}
+	.craft-drawing-annotation {
+		display: none;
+	}
+}
+@media (max-width: 480px) {
+	.craft-study-heading > span,
+	.craft-assembly-state {
+		display: none;
+	}
+	.craft-canvas-note {
+		max-width: 26ch;
+		margin-inline: auto;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.craft-study .craft-part-drift {
+		animation: none;
+		will-change: auto;
+	}
+	.craft-section *,
+	.craft-section *::before,
+	.craft-section *::after {
+		transition: none;
+	}
+}
