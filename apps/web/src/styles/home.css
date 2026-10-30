@@ -1019,10 +1019,11 @@ html:has(.home-page) {
 .home-client-slot.is-active {
 	z-index: 1;
 	width: min(26rem, 46vw);
-	height: auto;
+	height: 19rem;
 }
 
 .home-client-card {
+	position: relative;
 	display: flex;
 	flex: none;
 	flex-direction: column;
@@ -1030,6 +1031,7 @@ html:has(.home-page) {
 	width: 100%;
 	height: 100%;
 	padding: 0.7rem 0.75rem;
+	overflow: hidden;
 	color: var(--foreground);
 	text-align: left;
 	background: color-mix(in oklch, var(--card) 92%, transparent);
@@ -1047,24 +1049,32 @@ html:has(.home-page) {
 
 .home-client-card.is-active {
 	z-index: 1;
-	width: 100%;
-	height: auto;
-	min-height: 100%;
-	padding: 1.35rem 1.4rem 1.1rem;
 	color: var(--secondary-foreground);
 	background: var(--secondary);
 	border-color: transparent;
 }
 
-.home-client-open {
+.home-client-active-body {
+	position: absolute;
+	inset: 0;
 	display: flex;
-	flex: 1;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+	height: 100%;
+	padding: 1.35rem 1.4rem 4.5rem;
+	overflow: hidden;
+}
+.home-client-open {
+	position: absolute;
+	inset: 0;
+	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	align-items: flex-start;
 	width: 100%;
-	min-width: 0;
-	padding: 0;
+	height: 100%;
+	padding: 0.7rem 0.75rem;
 	overflow: hidden;
 	color: inherit;
 	text-align: left;
@@ -1090,6 +1100,11 @@ html:has(.home-page) {
 	height: 0.9rem;
 }
 
+.home-client-anchored-controls .home-client-step svg {
+	width: 18px;
+	height: 18px;
+}
+
 .home-client-id {
 	display: flex;
 	flex-direction: column;
@@ -1106,6 +1121,7 @@ html:has(.home-page) {
 }
 
 .home-client-quote {
+	min-height: 4.8em;
 	margin: 0;
 	font-family: var(--font-heading);
 	font-size: clamp(1.5rem, 2.15vw, 1.85rem);
@@ -1186,12 +1202,17 @@ html:has(.home-page) {
 	justify-self: end;
 }
 
-.home-client-card.is-active .home-client-step svg {
-	width: 18px;
-	height: 18px;
+.home-client-anchored-controls {
+	position: absolute;
+	bottom: 0.35rem;
+	left: calc(8.25rem + 0.85rem);
+	z-index: 5;
+	width: min(26rem, 46vw);
+	padding: 0 1.4rem 1.1rem;
+	pointer-events: auto;
 }
 
-.home-client-card.is-active .home-client-step {
+.home-client-anchored-controls .home-client-step {
 	color: var(--secondary-foreground);
 	background: transparent;
 	border-color: color-mix(
@@ -1201,12 +1222,12 @@ html:has(.home-page) {
 	);
 }
 
-.home-client-card.is-active .home-client-step:hover {
+.home-client-anchored-controls .home-client-step:hover {
 	color: var(--secondary-foreground);
 	background: color-mix(in oklch, var(--secondary-foreground) 12%, transparent);
 }
 
-.home-client-card.is-active :focus-visible {
+.home-client-anchored-controls :focus-visible {
 	outline-color: var(--secondary-foreground);
 }
 
@@ -1235,6 +1256,10 @@ html:has(.home-page) {
 	content: "";
 	background: color-mix(in oklch, var(--secondary-foreground) 42%, transparent);
 	border-radius: 50%;
+	transition:
+		width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 0.3s ease,
+		border-radius 0.3s ease;
 }
 
 .home-client-dots button[aria-current="true"]::before {
@@ -1662,7 +1687,22 @@ html:has(.home-page) {
 		order: -1;
 		width: 100%;
 		max-width: none;
-		height: auto;
+		height: 14.25rem;
+	}
+
+	.home-client-active-body {
+		padding: 1.15rem 1.15rem 3.5rem;
+	}
+
+	.home-client-person {
+		margin-top: 0.65rem;
+	}
+
+	.home-client-anchored-controls {
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 0 1.15rem 0.85rem;
 	}
 }
 
