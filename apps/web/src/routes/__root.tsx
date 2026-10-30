@@ -13,7 +13,6 @@ import { evlogErrorHandler } from "evlog/nitro/v3";
 import type { orpc } from "@/utils/orpc";
 
 import Header from "../components/header";
-import ImpeccableLiveRoot from "../impeccable/ImpeccableLiveRoot";
 import appCss from "../index.css?url";
 export interface RouterAppContext {
 	orpc: typeof orpc;
@@ -70,9 +69,6 @@ function RootDocument() {
 					</div>
 				)}
 				<Toaster richColors />
-				{/* impeccable-live-tanstack-start */}
-				<ImpeccableLiveRoot />
-				{/* impeccable-live-tanstack-end */}
 				<Scripts />
 			</body>
 		</html>

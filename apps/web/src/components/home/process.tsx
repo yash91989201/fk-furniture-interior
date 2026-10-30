@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/performance/noJsxPropsBind: process controls close over active step */
 import { Button } from "@fk-furniture-interior/ui/components/button";
+import { useLenis } from "lenis/react";
 import { ChevronsRight } from "lucide-react";
 import {
 	MotionConfig,
@@ -47,6 +48,7 @@ function StepFill({
 }
 
 export function Process() {
+	const lenis = useLenis();
 	const reduced = usePrefersReducedMotion();
 	const [active, setActive] = useState(0);
 	const runwayRef = useRef<HTMLDivElement>(null);
@@ -113,10 +115,12 @@ export function Process() {
 		if (runway && stage && !reduced) {
 			const top = runway.getBoundingClientRect().top + window.scrollY;
 			const travel = Math.max(1, runway.offsetHeight - stage.offsetHeight);
-			window.scrollTo({
-				behavior: "instant",
-				top: top + (travel * (next + 0.15)) / STEP_COUNT,
-			});
+			const target = top + (travel * (next + 0.15)) / STEP_COUNT;
+			if (lenis) {
+				lenis.scrollTo(target, { immediate: true });
+			} else {
+				window.scrollTo({ behavior: "instant", top: target });
+			}
 		} else {
 			rawProgress.set((next + 1) / STEP_COUNT);
 		}

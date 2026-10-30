@@ -8,28 +8,57 @@ const links = [
 	{ href: "#fk-enquiry", label: "Contact" },
 ] as const;
 
+// Hide only after sustained scrolling; show again once scrolling settles.
+const SCROLL_HIDE_DELAY_MS = 150;
+const SCROLL_ACTIVE_MS = 40;
+const SCROLL_IDLE_MS = 260;
+
 export function SiteNav() {
 	const [compact, setCompact] = useState(false);
-	const [hidden, setHidden] = useState(false);
+	const [covered, setCovered] = useState(false);
+	const [scrolling, setScrolling] = useState(false);
+	const hidden = covered || scrolling;
 
 	useEffect(() => {
 		// Any .home-page [data-hide-nav] section hides this bar while it covers the top of the viewport.
 		const targets = document.querySelectorAll(".home-page [data-hide-nav]");
 		let frame = 0;
+		let hide = 0;
+		let idle = 0;
+		let lastEventAt = 0;
 		const update = () => {
 			frame = 0;
 			setCompact(window.scrollY > 64);
-			let nextHidden = false;
+			let nextCovered = false;
 			for (const target of targets) {
 				const { top, bottom } = target.getBoundingClientRect();
 				if (top <= 0 && bottom > 0) {
-					nextHidden = true;
+					nextCovered = true;
 					break;
 				}
 			}
-			setHidden((current) => (current === nextHidden ? current : nextHidden));
+			setCovered((current) =>
+				current === nextCovered ? current : nextCovered
+			);
 		};
 		const onScroll = () => {
+			lastEventAt = performance.now();
+			// Hide only once scrolling has actually lasted a moment, and only while
+			// events keep arriving, so a single flick never flashes the bar away.
+			if (!hide) {
+				hide = window.setTimeout(() => {
+					hide = 0;
+					if (performance.now() - lastEventAt < SCROLL_ACTIVE_MS) {
+						setScrolling(true);
+					}
+				}, SCROLL_HIDE_DELAY_MS);
+			}
+			clearTimeout(idle);
+			idle = window.setTimeout(() => {
+				clearTimeout(hide);
+				hide = 0;
+				setScrolling(false);
+			}, SCROLL_IDLE_MS);
 			if (!frame) {
 				frame = requestAnimationFrame(update);
 			}
@@ -38,6 +67,8 @@ export function SiteNav() {
 		window.addEventListener("scroll", onScroll, { passive: true });
 		return () => {
 			window.removeEventListener("scroll", onScroll);
+			clearTimeout(hide);
+			clearTimeout(idle);
 			if (frame) {
 				cancelAnimationFrame(frame);
 			}
