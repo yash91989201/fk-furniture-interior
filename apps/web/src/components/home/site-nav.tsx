@@ -20,7 +20,8 @@ export function SiteNav() {
 	const hidden = covered || scrolling;
 
 	useEffect(() => {
-		// Any .home-page [data-hide-nav] section hides this bar while it covers the top of the viewport.
+		// Any .home-page [data-hide-nav] section hides this bar while it covers the
+		// top edge or most of the viewport.
 		const targets = document.querySelectorAll(".home-page [data-hide-nav]");
 		let frame = 0;
 		let hide = 0;
@@ -30,9 +31,13 @@ export function SiteNav() {
 			frame = 0;
 			setCompact(window.scrollY > 64);
 			let nextCovered = false;
+			const viewport = window.innerHeight;
 			for (const target of targets) {
 				const { top, bottom } = target.getBoundingClientRect();
-				if (top <= 0 && bottom > 0) {
+				const visible = Math.min(bottom, viewport) - Math.max(top, 0);
+				// Subpixel scroll positions can leave a section at a fraction above
+				// zero; treat that as covering the top so the bar never overlaps it.
+				if ((top <= 2 && bottom > 0) || visible > viewport * 0.5) {
 					nextCovered = true;
 					break;
 				}

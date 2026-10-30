@@ -574,33 +574,46 @@ html.lenis:has(.home-page) {
 	object-fit: cover;
 }
 
+.home-furniture {
+	padding: 0;
+}
+
 .home-furniture-intro {
 	display: flex;
-	gap: 2rem;
+	flex-wrap: wrap;
+	gap: 1rem clamp(1.5rem, 4vw, 3rem);
 	align-items: end;
-	justify-content: space-between;
-	margin-bottom: 2rem;
+	justify-content: flex-start;
+	padding: clamp(1.5rem, 3.5svh, 2.75rem) var(--home-gutter);
 }
 
 .home-furniture-intro h2 {
 	max-width: 10ch;
 	margin: 0;
-	font-size: clamp(2.6rem, 6vw, 4.6rem);
+	font-size: clamp(2.4rem, 7.5svh, 4rem);
+	line-height: 1.02;
 }
 
 .home-furniture-intro p {
-	width: min(30ch, 35%);
-	margin: 0;
+	width: min(30ch, 40%);
+	margin: 0 0 0.2em;
 }
 
 .home-furniture-catalogue {
 	position: relative;
 	display: flex;
-	min-height: 36rem;
+	flex-direction: column;
+	min-height: max(40rem, 100svh);
 	overflow: hidden;
 	color: var(--secondary-foreground);
 	background: var(--home-warm-aubergine);
 	isolation: isolate;
+}
+
+.home-furniture-tabs {
+	display: flex;
+	flex: 1;
+	min-height: 0;
 }
 
 .home-furniture-scene,
@@ -633,7 +646,7 @@ html.lenis:has(.home-page) {
 	filter: grayscale(1);
 }
 
-.home-furniture-catalogue > details {
+.home-furniture-tabs > details {
 	flex: 0 0 3.5rem;
 	min-width: 0;
 	border-right: 1px solid
@@ -643,7 +656,7 @@ html.lenis:has(.home-page) {
 		flex-basis 0.65s var(--home-ease);
 }
 
-.home-furniture-catalogue > details[open] {
+.home-furniture-tabs > details[open] {
 	flex: 1 1 0;
 }
 
@@ -698,9 +711,41 @@ html.lenis:has(.home-page) {
 	margin: 0 0 1rem;
 }
 
+.home-furniture .home-muted {
+	color: color-mix(in oklch, var(--secondary-foreground) 78%, transparent);
+}
+
 .home-furniture-content ul {
-	padding-left: 1.1rem;
+	padding-left: 0;
 	margin: 0 0 1.4rem;
+	list-style: none;
+}
+
+/* Desktop and tablet: the photo panel owns the viewport; intro sits inside it. */
+@media (min-width: 48.01rem) {
+	.home-furniture-catalogue {
+		height: max(40rem, 100svh);
+	}
+
+	.home-furniture-tabs > details {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.home-furniture-tabs summary {
+		flex: 1;
+		height: auto;
+		min-height: 0;
+	}
+
+	.home-furniture-tabs details[open] > summary {
+		flex: none;
+	}
+
+	.home-furniture-content {
+		padding-bottom: clamp(1rem, 2.5svh, 1.8rem);
+		overflow-y: auto;
+	}
 }
 
 .home-craft-heading {
@@ -1946,14 +1991,12 @@ html.lenis:has(.home-page) {
 		clip-path: inset(18vh 8vw);
 	}
 
-	.home-furniture-catalogue {
+	.home-furniture-tabs {
 		display: block;
-		height: auto;
-		min-height: 0;
 	}
 
-	.home-furniture-catalogue > details,
-	.home-furniture-catalogue > details[open] {
+	.home-furniture-tabs > details,
+	.home-furniture-tabs > details[open] {
 		flex: none;
 		border-right: 0;
 		border-bottom: 1px solid
