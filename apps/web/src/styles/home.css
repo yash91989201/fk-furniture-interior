@@ -2346,19 +2346,49 @@ html.lenis:has(.home-page) {
 	grid-row: span 2;
 	align-self: start;
 }
-.home-projects-mosaic .home-mosaic-mosaic img,
-.home-projects-mosaic .home-mosaic-mosaic button:first-child img {
+.home-projects-mosaic .home-mosaic-media {
+	display: block;
 	width: 100%;
-	height: auto;
 	aspect-ratio: 3 / 2;
+	overflow: hidden;
+}
+.home-projects-mosaic .home-mosaic-media img {
+	display: block;
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
 	object-position: center;
+	transform: scale(1);
+	transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (
+		pointer: fine
+	) {
+	.home-projects-mosaic
+		.home-mosaic-mosaic
+		button:hover
+		.home-mosaic-media
+		img {
+		transform: scale(1.08);
+	}
+}
+@media (prefers-reduced-motion: no-preference) {
+	.home-projects-mosaic
+		.home-mosaic-mosaic
+		button:focus-visible
+		.home-mosaic-media
+		img {
+		transform: scale(1.08);
+	}
 }
 @media (min-width: 45rem) {
-	.home-projects-mosaic .home-mosaic-mosaic img {
+	.home-projects-mosaic .home-mosaic-media {
 		max-height: min(26vh, 18rem);
 	}
-	.home-projects-mosaic .home-mosaic-mosaic button:first-child img {
+	.home-projects-mosaic
+		.home-mosaic-mosaic
+		button:first-child
+		.home-mosaic-media {
 		max-height: min(52vh, 32rem);
 	}
 }
@@ -2392,13 +2422,10 @@ html.lenis:has(.home-page) {
 		grid-template-rows: auto;
 		grid-row: auto;
 	}
-	.home-projects-mosaic .home-mosaic-mosaic img,
-	.home-projects-mosaic .home-mosaic-mosaic button:first-child img {
-		width: 100%;
+	.home-projects-mosaic .home-mosaic-media {
 		height: 11rem;
 		min-height: 0;
 		aspect-ratio: auto;
-		object-fit: cover;
 	}
 	.home-projects-mosaic .home-mosaic-caption {
 		grid-template-columns: 1fr;
@@ -2422,11 +2449,14 @@ html.lenis:has(.home-page) {
 		grid-template-rows: minmax(0, 1fr) auto;
 		grid-row: span 2;
 	}
-	.home-projects-mosaic .home-mosaic-mosaic img {
+	.home-projects-mosaic .home-mosaic-media {
 		height: auto;
 		aspect-ratio: 16 / 9;
 	}
-	.home-projects-mosaic .home-mosaic-mosaic button:first-child img {
+	.home-projects-mosaic
+		.home-mosaic-mosaic
+		button:first-child
+		.home-mosaic-media {
 		height: 100%;
 		min-height: 0;
 		aspect-ratio: auto;

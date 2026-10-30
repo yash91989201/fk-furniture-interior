@@ -34,13 +34,15 @@ export function Projects() {
 						onClick={handleProjectClick}
 						type="button"
 					>
-						<img
-							alt=""
-							height={400}
-							loading="lazy"
-							src={item.image.src}
-							width={600}
-						/>
+						<span className="home-mosaic-media">
+							<img
+								alt=""
+								height={400}
+								loading="lazy"
+								src={item.image.src}
+								width={600}
+							/>
+						</span>
 						<span>
 							<strong className="home-mosaic-name">{item.name}</strong>
 							<small className="home-mosaic-label">
