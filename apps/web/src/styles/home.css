@@ -11,7 +11,6 @@ html.lenis:has(.home-page) {
 	--home-gutter: clamp(1.25rem, 5vw, 5rem);
 	--home-nav-height: 7.5rem;
 	--home-nav-compact: 3.75rem;
-	--home-warm-paper: color-mix(in oklab, var(--card) 80%, var(--primary));
 	--home-warm-aubergine: color-mix(
 		in oklab,
 		var(--secondary) 92%,
@@ -527,8 +526,8 @@ html.lenis:has(.home-page) {
 }
 
 .home-services {
-	--home-service-rule: color-mix(in oklab, var(--foreground) 24%, transparent);
-	background: var(--home-warm-paper);
+	--home-service-rule: color-mix(in oklab, var(--foreground) 16%, transparent);
+	background: var(--background);
 }
 
 .home-services h2 {
@@ -538,14 +537,14 @@ html.lenis:has(.home-page) {
 .home-service-row {
 	display: grid;
 	grid-template-columns: 1.1fr 1fr 0.85fr;
-	gap: 1.75rem;
+	gap: clamp(1.5rem, 3vw, 3rem);
 	align-items: center;
-	padding: 1.6rem 0;
+	padding: clamp(1.5rem, 3vw, 2.5rem) 0;
 	border-top: 1px solid var(--home-service-rule);
 }
 
 .home-service-row:first-child {
-	border-top: 2px solid var(--primary);
+	border-top-color: color-mix(in oklab, var(--foreground) 32%, transparent);
 }
 
 .home-service-row:last-child {
@@ -558,12 +557,14 @@ html.lenis:has(.home-page) {
 	font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2rem);
 	line-height: 1.15;
 	letter-spacing: -0.02em;
+	text-wrap: balance;
 }
 
 .home-service-row p {
 	max-width: 42ch;
 	margin: 0;
 	line-height: 1.65;
+	color: var(--muted-foreground);
 	text-wrap: pretty;
 }
 
@@ -1756,12 +1757,15 @@ html.lenis:has(.home-page) {
 		align-items: start;
 	}
 
-	.home-furniture-intro,
+	.home-service-row img {
+		aspect-ratio: 16 / 9;
+		margin-top: 0.5rem;
+	}
+
 	.home-trust {
 		display: block;
 	}
 
-	.home-furniture-intro p,
 	.home-trust > div + div {
 		width: auto;
 		margin-top: 1.25rem;
