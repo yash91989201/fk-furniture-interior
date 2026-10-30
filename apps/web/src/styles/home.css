@@ -11,6 +11,12 @@ html.lenis:has(.home-page) {
 	--home-gutter: clamp(1.25rem, 5vw, 5rem);
 	--home-nav-height: 7.5rem;
 	--home-nav-compact: 3.75rem;
+	--home-warm-paper: color-mix(in oklab, var(--card) 80%, var(--primary));
+	--home-warm-aubergine: color-mix(
+		in oklab,
+		var(--secondary) 92%,
+		var(--primary)
+	);
 	font-family: var(--font-sans);
 	color: var(--foreground);
 	background: var(--background);
@@ -118,7 +124,12 @@ html.lenis:has(.home-page) {
 }
 
 .home-section {
-	padding: clamp(3rem, 7vw, 5.5rem) var(--home-gutter);
+	padding-block: clamp(3rem, 7vw, 5.5rem);
+	padding-inline: max(
+		var(--home-gutter),
+		env(safe-area-inset-left),
+		env(safe-area-inset-right)
+	);
 	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
 }
 
@@ -516,7 +527,12 @@ html.lenis:has(.home-page) {
 }
 
 .home-services {
-	background: color-mix(in oklch, var(--muted) 70%, var(--background));
+	--home-service-rule: color-mix(in oklab, var(--foreground) 24%, transparent);
+	background: var(--home-warm-paper);
+}
+
+.home-services h2 {
+	font-size: clamp(2rem, 1.4rem + 1.8vw, 2.9rem);
 }
 
 .home-service-row {
@@ -525,29 +541,36 @@ html.lenis:has(.home-page) {
 	gap: 1.75rem;
 	align-items: center;
 	padding: 1.6rem 0;
-	border-top: 1px solid var(--border);
+	border-top: 1px solid var(--home-service-rule);
+}
+
+.home-service-row:first-child {
+	border-top: 2px solid var(--primary);
 }
 
 .home-service-row:last-child {
-	border-bottom: 1px solid var(--border);
+	border-bottom: 1px solid var(--home-service-rule);
 }
 
 .home-service-row h3 {
 	max-width: none;
 	margin: 0;
-	font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+	font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2rem);
+	line-height: 1.15;
+	letter-spacing: -0.02em;
 }
 
 .home-service-row p {
 	max-width: 42ch;
 	margin: 0;
+	line-height: 1.65;
+	text-wrap: pretty;
 }
 
 .home-service-row img,
 .home-service-row .home-placeholder {
 	width: 100%;
-	height: 8.5rem;
-	min-height: 8.5rem;
+	aspect-ratio: 5 / 2;
 	object-fit: cover;
 }
 
@@ -576,7 +599,7 @@ html.lenis:has(.home-page) {
 	min-height: 36rem;
 	overflow: hidden;
 	color: var(--secondary-foreground);
-	background: var(--secondary);
+	background: var(--home-warm-aubergine);
 	isolation: isolate;
 }
 
@@ -597,9 +620,9 @@ html.lenis:has(.home-page) {
 	content: "";
 	background: linear-gradient(
 		90deg,
-		color-mix(in oklch, var(--secondary) 86%, transparent),
-		color-mix(in oklch, var(--secondary) 48%, transparent) 65%,
-		color-mix(in oklch, var(--secondary) 42%, transparent)
+		color-mix(in oklch, var(--home-warm-aubergine) 86%, transparent),
+		color-mix(in oklch, var(--home-warm-aubergine) 48%, transparent) 65%,
+		color-mix(in oklch, var(--home-warm-aubergine) 42%, transparent)
 	);
 }
 
@@ -639,6 +662,11 @@ html.lenis:has(.home-page) {
 	list-style: none;
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
+	transition: color 0.2s ease;
+}
+
+.home-furniture-catalogue summary:is(:hover, :focus-visible) {
+	color: var(--primary);
 }
 
 .home-furniture-catalogue summary::-webkit-details-marker {
@@ -2372,7 +2400,9 @@ html.lenis:has(.home-page) {
 .home-projects-mosaic .home-mosaic-copy p {
 	max-width: 65ch;
 	margin: 0;
-	line-height: 1.6;
+	font-size: 1rem;
+	line-height: 1.65;
+	text-wrap: pretty;
 }
 .home-projects-mosaic .home-mosaic-copy .home-mosaic-placeholder {
 	font-size: 0.8125rem;
@@ -2409,36 +2439,39 @@ html.lenis:has(.home-page) {
 	background: transparent;
 	border: 0;
 }
-.home-projects-mosaic .home-mosaic-kind {
+.home-projects-mosaic .home-mosaic-name {
 	display: block;
-	font: 500 1.125rem / 1.25 var(--font-heading);
+	font: 500 1.1875rem / 1.28 var(--font-heading);
 	color: var(--muted-foreground);
+	text-wrap: pretty;
+	overflow-wrap: break-word;
 }
-.home-projects-mosaic nav button:focus-visible .home-mosaic-kind,
-.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-kind {
+.home-projects-mosaic nav button:focus-visible .home-mosaic-name,
+.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-name {
 	color: var(--foreground);
 }
 @media (hover: hover) and (pointer: fine) {
-	.home-projects-mosaic nav button:hover .home-mosaic-kind {
+	.home-projects-mosaic nav button:hover .home-mosaic-name {
 		color: var(--foreground);
 	}
 }
 @media (hover: none) {
-	.home-projects-mosaic nav button:active .home-mosaic-kind {
+	.home-projects-mosaic nav button:active .home-mosaic-name {
 		color: var(--foreground);
 	}
 }
-.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-kind {
+.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-name {
 	text-decoration: underline;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.28rem;
 }
 .home-projects-mosaic .home-mosaic-label {
 	display: block;
-	margin-top: 0.35rem;
+	margin-top: 0.375rem;
 	font-size: 0.8125rem;
-	line-height: 1.5;
+	line-height: 1.55;
 	color: var(--muted-foreground);
+	text-wrap: pretty;
 	overflow-wrap: break-word;
 }
 .home-projects-mosaic .home-mosaic-head,
@@ -2492,6 +2525,9 @@ html.lenis:has(.home-page) {
 @media (max-width: 44rem) {
 	.home-projects-mosaic {
 		padding-block: 2.75rem;
+	}
+	.home-projects-mosaic .home-mosaic-name {
+		font-size: 1.375rem;
 	}
 	.home-projects-mosaic .home-mosaic-label,
 	.home-projects-mosaic .home-mosaic-meta,
@@ -2560,7 +2596,7 @@ html.lenis:has(.home-page) {
 }
 .home-about.about-quiet {
 	color: var(--secondary-foreground);
-	background: var(--secondary);
+	background: var(--home-warm-aubergine);
 }
 .home-about-backdrop {
 	position: absolute;
@@ -2576,7 +2612,7 @@ html.lenis:has(.home-page) {
 	z-index: -1;
 	pointer-events: none;
 	content: "";
-	background: color-mix(in oklch, var(--secondary) 88%, transparent);
+	background: color-mix(in oklch, var(--home-warm-aubergine) 88%, transparent);
 	backdrop-filter: blur(8px);
 	mask-image: radial-gradient(
 		ellipse farthest-corner at center,

@@ -42,9 +42,9 @@ export function Projects() {
 							width={600}
 						/>
 						<span>
-							<strong className="home-mosaic-kind">{item.type}</strong>
+							<strong className="home-mosaic-name">{item.name}</strong>
 							<small className="home-mosaic-label">
-								{item.name} · {item.location}
+								{item.location} · {item.type}
 							</small>
 						</span>
 					</button>

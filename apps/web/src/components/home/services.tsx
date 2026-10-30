@@ -18,6 +18,7 @@ export function Services() {
 							alt={service.image.alt}
 							decoding="async"
 							height={1333}
+							loading="lazy"
 							src={service.image.src}
 							width={2000}
 						/>
