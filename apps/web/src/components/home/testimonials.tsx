@@ -1,9 +1,10 @@
-/** biome-ignore-all lint/performance/noJsxPropsBind: testimonial controls close over playback state */
 import { Button } from "@fk-furniture-interior/ui/components/button";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
+import { animate, MotionConfig, motion } from "motion/react";
 import {
-	type FocusEvent,
 	type MouseEvent,
-	useEffect,
+	useCallback,
+	useLayoutEffect,
 	useRef,
 	useState,
 } from "react";
@@ -11,139 +12,161 @@ import {
 import { testimonials } from "./content";
 import { usePrefersReducedMotion } from "./use-media";
 
-const INITIAL_ORDER = [3, 0, 1, 2];
+const COUNT = testimonials.length;
+
+const CARD_SPRING = {
+	bounce: 0.15,
+	type: "spring",
+	visualDuration: 0.4,
+} as const;
+
+interface DepartingCard {
+	company: string;
+	dir: 1 | -1;
+	height: number;
+	id: number;
+	left: number;
+	name: string;
+	stamp: number;
+	top: number;
+	width: number;
+}
+
+function ClientFace() {
+	return (
+		<span aria-hidden="true" className="home-client-avatar">
+			<User />
+		</span>
+	);
+}
+
+function ClientId({ name, company }: { name: string; company: string }) {
+	return (
+		<span className="home-client-id">
+			<span className="home-client-name">{name}</span>
+			<span className="home-client-company">{company}</span>
+		</span>
+	);
+}
+
+function clientOrder(active: number): number[] {
+	return Array.from(
+		{ length: COUNT },
+		(_, slot) => (active + slot - 1 + COUNT) % COUNT
+	);
+}
+
+function shortestDelta(next: number, current: number): number {
+	let delta = next - current;
+	if (delta > COUNT / 2) {
+		delta -= COUNT;
+	}
+	if (delta < -COUNT / 2) {
+		delta += COUNT;
+	}
+	return delta;
+}
+
+function bumpWrappedStamps(
+	stamps: number[],
+	oldOrder: number[],
+	nextOrder: number[],
+	forward: boolean
+): void {
+	for (const id of nextOrder) {
+		const oldIndex = oldOrder.indexOf(id);
+		const newIndex = nextOrder.indexOf(id);
+		const wrapped = forward ? newIndex > oldIndex : newIndex < oldIndex;
+		if (wrapped) {
+			stamps[id] += 1;
+		}
+	}
+}
+
+function departingCard(
+	track: HTMLElement,
+	leavingId: number,
+	forward: boolean,
+	stamp: number
+): DepartingCard | null {
+	const leavingCard = track.querySelector<HTMLElement>(
+		`[data-client-id="${leavingId}"]`
+	);
+	if (!leavingCard) {
+		return null;
+	}
+	const cardBox = leavingCard.getBoundingClientRect();
+	const trackBox = track.getBoundingClientRect();
+	const item = testimonials[leavingId];
+	return {
+		company: item.company,
+		dir: forward ? 1 : -1,
+		height: cardBox.height,
+		id: leavingId,
+		left: cardBox.left - trackBox.left + track.scrollLeft,
+		name: item.name,
+		stamp,
+		top: cardBox.top - trackBox.top,
+		width: cardBox.width,
+	};
+}
 
 export function Testimonials() {
 	const reduced = usePrefersReducedMotion();
 	const [active, setActive] = useState(0);
-	const [order, setOrder] = useState(INITIAL_ORDER);
-	const [playing, setPlaying] = useState(false);
-	const [visible, setVisible] = useState(false);
-	const [pageVisible, setPageVisible] = useState(true);
-	const [interactionPaused, setInteractionPaused] = useState(false);
+	const [settled, setSettled] = useState(0);
 	const stageRef = useRef<HTMLElement>(null);
-	const trackRef = useRef<HTMLDivElement>(null);
+	const trackRef = useRef<HTMLElement>(null);
 	const rippleRef = useRef<HTMLImageElement>(null);
-	const ringRef = useRef<HTMLDivElement>(null);
+	const [departing, setDeparting] = useState<DepartingCard | null>(null);
+	const [direction, setDirection] = useState<1 | -1>(1);
+	const [arrival, setArrival] = useState<number | null>(null);
 	const activeRef = useRef(0);
-	const visibleRef = useRef<boolean>(false);
-	const pageVisibleRef = useRef<boolean>(true);
-	const interactionPausedRef = useRef<boolean>(false);
 	const reducedRef = useRef(reduced);
-	const selectRef = useRef<(index: number) => void>(() => undefined);
+	reducedRef.current = reduced;
+	const orderRef = useRef(clientOrder(0));
+	const stampRef = useRef(testimonials.map(() => 0));
+	const rippleStopRef = useRef<(() => void) | null>(null);
 
 	activeRef.current = active;
-	reducedRef.current = reduced;
-
 	const client = testimonials[active];
+	const base = testimonials[settled];
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const stage = stageRef.current;
-		if (!stage) {
+		const ripple = rippleRef.current;
+		if (!(stage && ripple)) {
 			return;
 		}
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const isVisible = Boolean(entries[0]?.isIntersecting);
-				visibleRef.current = isVisible;
-				setVisible(isVisible);
-			},
-			{ threshold: 0.3 }
+		if (reduced || settled === active) {
+			ripple.style.opacity = "0";
+			ripple.style.filter = "none";
+			ripple.style.willChange = "auto";
+			if (reduced && settled !== active) {
+				setSettled(active);
+			}
+			return;
+		}
+		const card = stage.querySelector<HTMLElement>(
+			`[data-client-id="${active}"]`
 		);
-		const updateVisibility = () => {
-			const isVisible = !document.hidden;
-			pageVisibleRef.current = isVisible;
-			setPageVisible(isVisible);
-		};
-		updateVisibility();
-		observer.observe(stage);
-		document.addEventListener("visibilitychange", updateVisibility);
-		return () => {
-			observer.disconnect();
-			document.removeEventListener("visibilitychange", updateVisibility);
-		};
-	}, []);
-
-	useEffect(() => {
-		if (
-			!(playing && visible && pageVisible && !interactionPaused && !reduced)
-		) {
+		if (!card) {
 			return;
 		}
-		const timer = window.setTimeout(() => {
-			if (
-				visibleRef.current &&
-				pageVisibleRef.current &&
-				!interactionPausedRef.current &&
-				!reducedRef.current &&
-				!document.hidden
-			) {
-				selectRef.current((activeRef.current + 1) % 4);
-			}
-		}, 7000);
-		return () => window.clearTimeout(timer);
-	}, [playing, active, reduced, visible, pageVisible, interactionPaused]);
-
-	function select(index: number) {
-		const next = (index + 4) % 4;
-		if (next === activeRef.current) {
-			return;
-		}
-		const cards =
-			trackRef.current?.querySelectorAll<HTMLElement>(".home-client-card");
-		const before = new Map<string, DOMRect>();
-		if (cards && !reducedRef.current) {
-			for (const card of cards) {
-				before.set(card.dataset.clientId ?? "", card.getBoundingClientRect());
-			}
-		}
-		activeRef.current = next;
-		setActive(next);
-		setOrder([(next + 3) % 4, next, (next + 1) % 4, (next + 2) % 4]);
-
-		requestAnimationFrame(() => {
-			if (reducedRef.current) {
-				return;
-			}
-			const track = trackRef.current;
-			const stage = stageRef.current;
-			const ripple = rippleRef.current;
-			const ring = ringRef.current;
-			if (!(track && stage && ripple && ring)) {
-				return;
-			}
-			const nextCards =
-				track.querySelectorAll<HTMLElement>(".home-client-card");
-			for (const card of nextCards) {
-				const id = card.dataset.clientId ?? "";
-				const old = before.get(id);
-				if (!old) {
-					continue;
-				}
-				const now = card.getBoundingClientRect();
-				const current = Number(id) === next;
-				card.animate(
-					[
-						{
-							transform: `translate(${old.left - now.left}px,${old.top - now.top}px) scale(${old.width / now.width},${old.height / now.height})`,
-						},
-						{
-							transform: current ? "scale(1.045)" : "scale(1)",
-							offset: 0.82,
-						},
-						{ transform: "scale(1)" },
-					],
-					{ duration: 650, easing: "cubic-bezier(.16,1,.3,1)" }
-				);
-			}
-			window.setTimeout(() => {
-				const activeCard = track.children[1]?.getBoundingClientRect();
-				if (!activeCard) {
+		let stopped = false;
+		let controls: { stop: () => void } | null = null;
+		// Measure after Motion applies its layout invert, so the ripple
+		// starts on the card that is becoming active.
+		const frame = requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				if (stopped) {
 					return;
 				}
 				const bounds = stage.getBoundingClientRect();
-				const x = activeCard.left + activeCard.width / 2 - bounds.left;
-				const y = activeCard.top + activeCard.height / 2 - bounds.top;
+				const box = card.getBoundingClientRect();
+				const x = box.left + box.width / 2 - bounds.left;
+				const y = box.top + box.height / 2 - bounds.top;
+				const start = Math.min(box.width, box.height) / 2;
 				const radius =
 					Math.max(
 						Math.hypot(x, y),
@@ -151,171 +174,279 @@ export function Testimonials() {
 						Math.hypot(x, bounds.height - y),
 						Math.hypot(bounds.width - x, bounds.height - y)
 					) + 8;
+				const from = `circle(${start}px at ${x}px ${y}px)`;
+				const to = `circle(${radius}px at ${x}px ${y}px)`;
 				ripple.style.opacity = "1";
-				const reveal = ripple.animate(
-					[
-						{
-							clipPath: `circle(0px at ${x}px ${y}px)`,
-							filter: "blur(7px)",
-						},
-						{
-							clipPath: `circle(${radius}px at ${x}px ${y}px)`,
-							filter: "blur(0px)",
-						},
-					],
+				ripple.style.clipPath = from;
+				ripple.style.willChange = "clip-path, filter";
+				rippleStopRef.current?.();
+				controls = animate(
+					ripple,
+					{ clipPath: [from, to], filter: ["blur(14px)", "blur(0px)"] },
 					{
-						duration: 1100,
-						easing: "cubic-bezier(.16,1,.3,1)",
-						fill: "both",
+						duration: 0.9,
+						ease: [0.16, 1, 0.36, 1],
+						onComplete: () => {
+							ripple.style.willChange = "auto";
+							if (activeRef.current !== active) {
+								return;
+							}
+							setSettled(active);
+						},
 					}
 				);
-				ring.style.left = `${x - 40}px`;
-				ring.style.top = `${y - 40}px`;
-				ring.animate(
-					[
-						{ transform: "scale(.1)", opacity: 0.7 },
-						{ transform: `scale(${radius / 40})`, opacity: 0 },
-					],
-					{ duration: 1150, easing: "cubic-bezier(.16,1,.3,1)" }
-				);
-				reveal.onfinish = () => {
-					ripple.style.opacity = "0";
-				};
-			}, 400);
+				rippleStopRef.current = () => controls?.stop();
+			});
 		});
-	}
-	selectRef.current = select;
+		return () => {
+			stopped = true;
+			cancelAnimationFrame(frame);
+			controls?.stop();
+		};
+	}, [active, reduced, settled]);
 
-	function handleBlurCapture() {
-		interactionPausedRef.current = false;
-		setInteractionPaused(false);
-	}
+	useLayoutEffect(() => {
+		const track = trackRef.current;
+		const card = track?.querySelector<HTMLElement>(
+			`[data-client-id="${active}"]`
+		);
+		if (!(track && card)) {
+			return;
+		}
+		const align = () => {
+			const left = card.offsetLeft;
+			const right = left + card.offsetWidth;
+			const visible =
+				left >= track.scrollLeft &&
+				right <= track.scrollLeft + track.clientWidth + 1;
+			if (visible) {
+				return;
+			}
+			track.scrollLeft = Math.max(0, left - 12);
+		};
+		align();
+		const frame = requestAnimationFrame(align);
+		return () => cancelAnimationFrame(frame);
+	}, [active]);
 
-	function handleFocusCapture(event: FocusEvent<HTMLElement>) {
-		const paused =
-			event.target instanceof HTMLElement &&
-			event.target.id !== "fk-client-play";
-		interactionPausedRef.current = paused;
-		setInteractionPaused(paused);
-	}
+	const clearDeparting = useCallback(() => {
+		setDeparting(null);
+	}, []);
 
-	function handlePointerEnter() {
-		interactionPausedRef.current = true;
-		setInteractionPaused(true);
-	}
+	const select = useCallback((index: number) => {
+		const next = ((index % COUNT) + COUNT) % COUNT;
+		if (next === activeRef.current) {
+			return;
+		}
+		const nextOrder = clientOrder(next);
+		const forward = shortestDelta(next, activeRef.current) > 0;
+		const oldOrder = orderRef.current;
+		const leavingId = forward ? oldOrder[0] : oldOrder.at(-1);
+		if (leavingId === undefined) {
+			return;
+		}
+		bumpWrappedStamps(stampRef.current, oldOrder, nextOrder, forward);
+		const track = trackRef.current;
+		const dir = forward ? 1 : -1;
+		setDirection(dir);
+		if (reducedRef.current) {
+			setArrival(null);
+		} else {
+			setArrival(leavingId);
+			if (track) {
+				const card = departingCard(
+					track,
+					leavingId,
+					forward,
+					stampRef.current[leavingId]
+				);
+				if (card) {
+					setDeparting(card);
+				}
+			}
+		}
+		orderRef.current = nextOrder;
+		activeRef.current = next;
+		setActive(next);
+	}, []);
 
-	function handlePointerLeave() {
-		interactionPausedRef.current = false;
-		setInteractionPaused(false);
-	}
+	const showPrevious = useCallback(() => {
+		select(activeRef.current - 1);
+	}, [select]);
 
-	function handleClientClick(event: MouseEvent<HTMLButtonElement>) {
-		select(Number(event.currentTarget.dataset.clientId));
-	}
+	const showNext = useCallback(() => {
+		select(activeRef.current + 1);
+	}, [select]);
 
-	function handlePrevious() {
-		select(active - 1);
-	}
-
-	function handleNext() {
-		select(active + 1);
-	}
-
-	function handlePlayToggle() {
-		setPlaying((value) => !value);
-	}
-
-	let playLabel = "Play sequence";
-	if (reduced) {
-		playLabel = "Reduced motion";
-	} else if (playing) {
-		playLabel = "Pause sequence";
-	}
+	const showClient = useCallback(
+		(event: MouseEvent<HTMLButtonElement>) => {
+			const index = event.currentTarget.dataset.clientIndex;
+			if (index) {
+				select(Number(index));
+			}
+		},
+		[select]
+	);
 
 	return (
-		<section
-			className="home-section home-testimonials"
-			id="fk-proof"
-			onBlurCapture={handleBlurCapture}
-			onFocusCapture={handleFocusCapture}
-			ref={stageRef}
-		>
-			<img
-				alt=""
-				aria-hidden="true"
-				className="home-testimonial-photo"
-				height={1333}
-				src={client.photo.src}
-				width={2000}
-			/>
-			<img
-				alt=""
-				aria-hidden="true"
-				className="home-testimonial-photo home-testimonial-ripple"
-				height={1333}
-				ref={rippleRef}
-				src={client.photo.src}
-				width={2000}
-			/>
-			<div aria-hidden="true" className="home-testimonial-wash" />
-			<div aria-hidden="true" className="home-ripple-ring" ref={ringRef} />
-			<div className="home-testimonial-header">
-				<h2>Through our clients’ eyes.</h2>
-				<span className="home-hero-caption">{client.label}</span>
-			</div>
-			<blockquote>{client.quote}</blockquote>
-			<p className="home-muted">
-				[{client.name}] · [{client.project}]
-			</p>
-			<nav
-				aria-label="Choose a client"
-				className="home-client-track"
-				onPointerEnter={handlePointerEnter}
-				onPointerLeave={handlePointerLeave}
-				ref={trackRef}
+		<MotionConfig reducedMotion="user">
+			<section
+				className="home-section home-testimonials"
+				id="fk-proof"
+				ref={stageRef}
 			>
-				{order.map((id) => {
-					const item = testimonials[id];
-					return (
-						<button
-							aria-label={`Show ${item.name} testimonial`}
-							aria-pressed={id === active}
-							className="home-client-card"
-							data-client-id={String(id)}
-							key={item.id}
-							onClick={handleClientClick}
-							type="button"
-						>
-							<span className="home-client-avatar">[Photo]</span>
-							<span>{item.name}</span>
-						</button>
-					);
-				})}
-			</nav>
-			<div className="home-testimonial-controls">
-				<span className="home-muted">Client {active + 1} / 4</span>
-				<div className="home-actions">
-					<Button onClick={handlePrevious} size="sm" variant="outline">
-						Previous
-					</Button>
-					<Button onClick={handleNext} size="sm" variant="outline">
-						Next client
-					</Button>
-					<Button
-						aria-pressed={playing}
-						disabled={reduced}
-						id="fk-client-play"
-						onClick={handlePlayToggle}
-						size="sm"
-						variant="secondary"
-					>
-						{playLabel}
-					</Button>
+				<div aria-hidden="true" className="home-testimonial-media">
+					<img
+						alt=""
+						className="home-testimonial-photo"
+						height={1333}
+						src={base.photo.src}
+						width={2000}
+					/>
+					<img
+						alt=""
+						className="home-testimonial-photo home-testimonial-ripple"
+						height={1333}
+						ref={rippleRef}
+						src={client.photo.src}
+						width={2000}
+					/>
+					<div className="home-testimonial-wash" />
 				</div>
-			</div>
-			<span aria-live="polite" className="sr-only">
-				{client.name}, {client.project}. Testimonial placeholder.
-			</span>
-		</section>
+				<div className="home-testimonial-header">
+					<h2>Through our clients’ eyes.</h2>
+					<p className="home-testimonial-lede">
+						Sample notes from furnished rooms, standing in for approved client
+						words.
+					</p>
+				</div>
+				<nav
+					aria-label="Client notes"
+					className="home-client-track"
+					ref={trackRef}
+				>
+					{clientOrder(active).map((id) => {
+						const item = testimonials[id];
+						const isActive = id === active;
+						const stamp = stampRef.current[id];
+						const entering = arrival === id;
+						return (
+							<motion.div
+								className={
+									isActive ? "home-client-slot is-active" : "home-client-slot"
+								}
+								key={`${id}-${stamp}`}
+								layout
+								transition={CARD_SPRING}
+							>
+								<motion.article
+									animate={{ opacity: 1, x: 0 }}
+									className={
+										isActive ? "home-client-card is-active" : "home-client-card"
+									}
+									data-client-id={id}
+									initial={
+										entering
+											? { opacity: 0, x: direction > 0 ? 72 : -72 }
+											: false
+									}
+									transition={CARD_SPRING}
+								>
+									{isActive ? (
+										<blockquote className="home-client-quote">
+											“{item.quote}”
+										</blockquote>
+									) : (
+										<button
+											className="home-client-open"
+											data-client-index={id}
+											onClick={showClient}
+											type="button"
+										>
+											<ClientFace />
+											<ClientId company={item.company} name={item.name} />
+										</button>
+									)}
+									{isActive ? (
+										<>
+											<div className="home-client-person">
+												<ClientFace />
+												<ClientId company={item.company} name={item.name} />
+											</div>
+											<div className="home-client-controls">
+												<Button
+													aria-label="Previous client"
+													className="home-client-step"
+													onClick={showPrevious}
+													size="icon-sm"
+													type="button"
+													variant="outline"
+												>
+													<ChevronLeft aria-hidden="true" />
+												</Button>
+												<div className="home-client-dots">
+													{testimonials.map((dot, index) => (
+														<button
+															aria-current={
+																index === active ? "true" : undefined
+															}
+															aria-label={`${dot.name}, ${dot.company}`}
+															data-client-index={index}
+															key={dot.id}
+															onClick={showClient}
+															type="button"
+														/>
+													))}
+												</div>
+												<Button
+													aria-label="Next client"
+													className="home-client-step"
+													onClick={showNext}
+													size="icon-sm"
+													type="button"
+													variant="outline"
+												>
+													<ChevronRight aria-hidden="true" />
+												</Button>
+											</div>
+										</>
+									) : null}
+								</motion.article>
+							</motion.div>
+						);
+					})}
+					{departing ? (
+						<motion.article
+							animate={{
+								opacity: 0,
+								x:
+									departing.dir > 0
+										? -(departing.width + 16)
+										: departing.width + 16,
+							}}
+							aria-hidden="true"
+							className="home-client-card home-client-ghost"
+							initial={{ opacity: 1, x: 0 }}
+							key={`${departing.id}-exit-${departing.stamp}`}
+							onAnimationComplete={clearDeparting}
+							style={{
+								height: departing.height,
+								left: departing.left,
+								minHeight: departing.height,
+								top: departing.top,
+								width: departing.width,
+							}}
+							transition={CARD_SPRING}
+						>
+							<ClientFace />
+							<ClientId company={departing.company} name={departing.name} />
+						</motion.article>
+					) : null}
+				</nav>
+				<span aria-live="polite" className="sr-only">
+					{client.name}, {client.company}. {client.quote}
+				</span>
+			</section>
+		</MotionConfig>
 	);
 }

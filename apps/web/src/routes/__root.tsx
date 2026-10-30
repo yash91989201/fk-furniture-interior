@@ -1,6 +1,5 @@
 import { Toaster } from "@fk-furniture-interior/ui/components/sonner";
 import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
 	createRootRouteWithContext,
 	HeadContent,
@@ -8,16 +7,14 @@ import {
 	Scripts,
 	useRouterState,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
 import { evlogErrorHandler } from "evlog/nitro/v3";
 
 import type { orpc } from "@/utils/orpc";
 
 import Header from "../components/header";
-
+import ImpeccableLiveRoot from "../impeccable/ImpeccableLiveRoot";
 import appCss from "../index.css?url";
-import ImpeccableLiveRoot from '../impeccable/ImpeccableLiveRoot';
 export interface RouterAppContext {
 	orpc: typeof orpc;
 	queryClient: QueryClient;
@@ -73,12 +70,10 @@ function RootDocument() {
 					</div>
 				)}
 				<Toaster richColors />
-				<TanStackRouterDevtools position="bottom-left" />
-				<ReactQueryDevtools buttonPosition="bottom-right" position="bottom" />
 				{/* impeccable-live-tanstack-start */}
-        <ImpeccableLiveRoot />
-        {/* impeccable-live-tanstack-end */}
-        <Scripts />
+				<ImpeccableLiveRoot />
+				{/* impeccable-live-tanstack-end */}
+				<Scripts />
 			</body>
 		</html>
 	);

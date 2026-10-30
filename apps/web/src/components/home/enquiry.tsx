@@ -61,17 +61,17 @@ export function Enquiry({
 
 	return (
 		<section className="home-section home-enquiry" id="fk-enquiry">
-			<h2 className="home-enquiry-title">
-				Your space.
-				<br />
-				Our next conversation.
-			</h2>
+			<h2 className="home-enquiry-title">Your space. Our next conversation.</h2>
 			<div className="home-enquiry-grid">
 				<div>
 					<h3>Let’s discuss your project.</h3>
 					<p>Tell us about your space, your ideas and the support you need.</p>
 					<div className="home-actions">
-						<Button onClick={handleWhatsApp} variant="outline">
+						<Button
+							className="home-enquiry-button"
+							onClick={handleWhatsApp}
+							variant="outline"
+						>
 							WhatsApp the team
 						</Button>
 					</div>
@@ -185,7 +185,11 @@ export function Enquiry({
 						</Field>
 					</FieldGroup>
 					<p className="home-muted">[Privacy notice and policy link]</p>
-					<Button type="submit" variant="secondary">
+					<Button
+						className="home-enquiry-button"
+						type="submit"
+						variant="secondary"
+					>
 						Send enquiry · preview
 					</Button>
 					<p aria-live="polite">{feedback}</p>

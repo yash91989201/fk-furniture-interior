@@ -195,35 +195,35 @@ export const processSteps = [
 export const testimonials = [
 	{
 		id: 0,
-		quote: "[Approved testimonial for the hospitality project.]",
-		name: "Client A",
-		project: "Hospitality project",
+		quote:
+			"The guest room reads as one piece. Timber, stone, and the bed were drawn together, then built that way.",
+		name: "Meera Anand",
+		company: "Harbour House Hotels",
 		photo: photos.lobby,
-		label: "[Project A photograph placeholder]",
 	},
 	{
 		id: 1,
-		quote: "[Approved testimonial for the residential project.]",
-		name: "Client B",
-		project: "Residential project",
+		quote:
+			"We sent a rough plan of the lounge. What returned fitted the room, including the corners we had drawn poorly.",
+		name: "Rohan Varghese",
+		company: "Northlight Residences",
 		photo: photos.lounge,
-		label: "[Project B photograph placeholder]",
 	},
 	{
 		id: 2,
-		quote: "[Approved testimonial for the commercial project.]",
-		name: "Client C",
-		project: "Commercial project",
+		quote:
+			"The meeting room had to work a full day and still feel calm. The joinery does both, quietly.",
+		name: "Leela Krishnan",
+		company: "Atelier North",
 		photo: photos.workplace,
-		label: "[Project C photograph placeholder]",
 	},
 	{
 		id: 3,
-		quote: "[Approved testimonial for the bespoke furniture project.]",
-		name: "Client D",
-		project: "Bespoke furniture project",
+		quote:
+			"This table was made for the dining room, not fitted into it. The edge, the base, and the light agree.",
+		name: "Kabir Seth",
+		company: "Linea Studio",
 		photo: photos.dining,
-		label: "[Project D photograph placeholder]",
 	},
 ] as const;
 
