@@ -10,12 +10,24 @@ const links = [
 
 export function SiteNav() {
 	const [compact, setCompact] = useState(false);
+	const [hidden, setHidden] = useState(false);
 
 	useEffect(() => {
+		// Any .home-page [data-hide-nav] section hides this bar while it covers the top of the viewport.
+		const targets = document.querySelectorAll(".home-page [data-hide-nav]");
 		let frame = 0;
 		const update = () => {
 			frame = 0;
 			setCompact(window.scrollY > 64);
+			let nextHidden = false;
+			for (const target of targets) {
+				const { top, bottom } = target.getBoundingClientRect();
+				if (top <= 0 && bottom > 0) {
+					nextHidden = true;
+					break;
+				}
+			}
+			setHidden((current) => (current === nextHidden ? current : nextHidden));
 		};
 		const onScroll = () => {
 			if (!frame) {
@@ -34,7 +46,10 @@ export function SiteNav() {
 
 	return (
 		<div className="home-nav-slot">
-			<header className={compact ? "home-nav is-compact" : "home-nav"}>
+			<header
+				className={`home-nav${compact ? " is-compact" : ""}${hidden ? " is-hidden" : ""}`}
+				inert={hidden}
+			>
 				<a className="home-brand" href="#fk-hero">
 					FK / Logo placeholder
 				</a>

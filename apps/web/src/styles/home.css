@@ -51,7 +51,13 @@ html:has(.home-page) {
 		background-color 0.35s var(--home-ease),
 		border-color 0.35s var(--home-ease),
 		backdrop-filter 0.35s var(--home-ease),
-		box-shadow 0.35s var(--home-ease);
+		box-shadow 0.35s var(--home-ease),
+		transform 0.35s var(--home-ease);
+}
+
+.home-nav.is-hidden {
+	pointer-events: none;
+	transform: translateY(calc(-100% - 1.25rem));
 }
 
 .home-nav.is-compact {
@@ -648,9 +654,14 @@ html:has(.home-page) {
 }
 
 .home-process {
+	--proc-meta: 0.875rem;
+	--proc-body: 1rem;
+	--proc-section: clamp(1.25rem, 1.15rem + 1vw, 1.875rem);
+	--proc-display: clamp(1.875rem, 1.4rem + 2.2vw, 3.5rem);
 	padding: 0;
-	color: var(--secondary-foreground);
-	background: var(--secondary);
+	font-size: var(--proc-body);
+	color: var(--foreground);
+	background: var(--background);
 }
 
 .home-process.dark {
@@ -663,12 +674,12 @@ html:has(.home-page) {
 
 .home-story-stage {
 	position: sticky;
-	top: var(--home-nav-compact);
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
 	justify-content: space-between;
-	min-height: max(37.5rem, calc(100svh - var(--home-nav-compact)));
+	min-height: 100svh;
 	padding: 1.75rem var(--home-gutter) 1.5rem;
 }
 
@@ -684,8 +695,35 @@ html:has(.home-page) {
 .home-story-header h2 {
 	max-width: none;
 	margin: 0;
-	font-size: clamp(1.8rem, 3vw, 2.3rem);
+	font-size: var(--proc-section);
+	font-weight: 500;
+	line-height: 1.12;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
 	color: inherit;
+}
+
+.home-process .home-kicker-link,
+.home-process .home-muted {
+	font-size: var(--proc-meta);
+	font-weight: 450;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+}
+
+.home-process .home-muted {
+	font-variant-numeric: tabular-nums;
+}
+
+.home-story-skip {
+	display: inline-flex;
+	align-items: center;
+}
+
+.home-story-skip-icon {
+	display: none;
+	width: 1.25rem;
+	height: 1.25rem;
 }
 
 .home-story-body {
@@ -699,26 +737,24 @@ html:has(.home-page) {
 	position: relative;
 	height: 20.5rem;
 	overflow: hidden;
-	background: color-mix(in oklch, var(--secondary) 70%, black);
+	background: var(--card);
 }
 
 .home-scene-drawing {
 	position: absolute;
 	inset: 2rem 2rem 3.8rem;
-	border: 1px solid
-		color-mix(in oklch, var(--secondary-foreground) 55%, transparent);
+	border: 1px solid var(--border);
 	transition:
-		inset 0.65s var(--home-ease),
-		transform 0.65s var(--home-ease),
-		background 0.65s;
+		inset 0.8s cubic-bezier(0.22, 1.25, 0.36, 1),
+		transform 0.8s cubic-bezier(0.22, 1.25, 0.36, 1),
+		background 0.8s cubic-bezier(0.22, 1.25, 0.36, 1);
 }
 
 .home-scene .home-scene-drawing span {
 	position: absolute;
-	background: color-mix(in oklch, var(--secondary) 55%, white);
-	border: 1px solid
-		color-mix(in oklch, var(--secondary-foreground) 55%, transparent);
-	transition: all 0.65s var(--home-ease);
+	background: color-mix(in oklch, var(--foreground) 82%, var(--card));
+	border: 1px solid color-mix(in oklch, var(--foreground) 35%, var(--border));
+	transition: all 0.8s cubic-bezier(0.22, 1.25, 0.36, 1);
 }
 
 .home-scene[data-scene="0"] .piece-a {
@@ -758,35 +794,23 @@ html:has(.home-page) {
 }
 .home-scene[data-scene="1"] .piece-a {
 	left: 0;
-	background: color-mix(
-		in oklch,
-		var(--secondary-foreground) 78%,
-		var(--secondary)
-	);
+	background: var(--primary);
+	border-color: var(--primary);
 }
 .home-scene[data-scene="1"] .piece-b {
 	left: 25%;
-	background: color-mix(
-		in oklch,
-		var(--secondary-foreground) 56%,
-		var(--secondary)
-	);
+	background: var(--foreground);
+	border-color: var(--foreground);
 }
 .home-scene[data-scene="1"] .piece-c {
 	left: 50%;
-	background: color-mix(
-		in oklch,
-		var(--secondary-foreground) 38%,
-		var(--secondary)
-	);
+	background: var(--chart-1);
+	border-color: var(--chart-1);
 }
 .home-scene[data-scene="1"] .piece-d {
 	left: 75%;
-	background: color-mix(
-		in oklch,
-		var(--secondary-foreground) 24%,
-		var(--secondary)
-	);
+	background: var(--chart-5);
+	border-color: var(--chart-5);
 }
 
 .home-scene[data-scene="2"] .home-scene-drawing {
@@ -819,7 +843,7 @@ html:has(.home-page) {
 
 .home-scene[data-scene="3"] .home-scene-drawing {
 	inset: 1.5rem 1.5rem 3.8rem;
-	background: color-mix(in oklch, var(--secondary) 60%, white);
+	background: color-mix(in oklch, var(--primary) 18%, var(--card));
 }
 .home-scene[data-scene="3"] .piece-a {
 	top: 10%;
@@ -851,29 +875,49 @@ html:has(.home-page) {
 	right: 1.25rem;
 	bottom: 1rem;
 	left: 1.25rem;
-	font-size: 0.75rem;
-	color: color-mix(in oklch, var(--secondary-foreground) 78%, transparent);
+	font-size: var(--proc-meta);
+	font-weight: 450;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	color: var(--muted-foreground);
+}
+
+.home-story-copy {
+	padding-bottom: 0.75rem;
 }
 
 .home-story-copy h3 {
-	max-width: 14ch;
-	margin: 0.4rem 0 1rem;
-	font-size: clamp(2rem, 5vw, 3.5rem);
+	max-width: 16ch;
+	margin: 0.75rem 0 0.65rem;
+	font-size: var(--proc-display);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
 	color: inherit;
 }
 
 .home-story-copy p {
-	max-width: 46ch;
+	max-width: 65ch;
 	margin: 0 0 1rem;
-	color: color-mix(in oklch, var(--secondary-foreground) 82%, transparent);
+	font-size: var(--proc-body);
+	font-weight: 450;
+	line-height: 1.55;
+	letter-spacing: 0.01em;
+	text-wrap: pretty;
+	color: var(--muted-foreground);
 }
 
-.home-deliverable {
+.home-story-copy p.home-deliverable {
 	padding-top: 1rem;
-	font-size: 0.8rem;
-	color: var(--secondary-foreground);
-	border-top: 1px solid
-		color-mix(in oklch, var(--secondary-foreground) 28%, transparent);
+	margin-bottom: 0;
+	font-size: var(--proc-body);
+	font-weight: 500;
+	line-height: 1.45;
+	letter-spacing: 0.005em;
+	text-wrap: pretty;
+	color: var(--foreground);
+	border-top: 1px solid var(--primary);
 }
 
 .home-story-nav {
@@ -883,25 +927,69 @@ html:has(.home-page) {
 }
 
 .home-story-nav button {
+	position: relative;
 	min-height: 3.75rem;
 	padding: 0.85rem 0;
-	color: color-mix(in oklch, var(--secondary-foreground) 70%, transparent);
-	text-align: left;
+	font-family: var(--font-sans);
+	font-size: var(--proc-meta);
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.35;
+	letter-spacing: 0.01em;
+	color: var(--muted-foreground);
+	text-align: center;
+	text-wrap: balance;
 	cursor: pointer;
 	background: transparent;
 	border: 0;
-	border-top: 2px solid
-		color-mix(in oklch, var(--secondary-foreground) 30%, transparent);
+	transition: color 0.35s var(--home-ease);
+}
+
+.home-story-nav-track {
+	position: absolute;
+	top: 0.45rem;
+	right: 0;
+	left: 0;
+	height: 2px;
+	overflow: hidden;
+	background: var(--border);
+}
+
+.home-story-nav-fill {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: var(--primary);
+}
+
+.home-story-nav-label {
+	display: inline-block;
+	max-width: 100%;
+	text-align: center;
+	transform-origin: center center;
+}
+
+.home-story-nav button:hover {
+	color: var(--foreground);
 }
 
 .home-story-nav button[aria-current="step"] {
-	color: var(--secondary-foreground);
-	border-color: var(--secondary-foreground);
+	color: var(--foreground);
 }
 
 .home-story-buttons {
 	display: flex;
 	gap: 0.5rem;
+	margin-left: auto;
+}
+
+.home-story-buttons button {
+	flex: 1 1 7.5rem;
+	min-width: 7.5rem;
+	font-size: var(--proc-meta);
+	font-weight: 500;
+	line-height: 1.2;
+	text-wrap: balance;
 }
 
 .home-testimonials {
@@ -1523,6 +1611,65 @@ html:has(.home-page) {
 
 	.home-form-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.home-story-stage {
+		gap: 0.75rem;
+	}
+
+	.home-scene {
+		height: calc(20.5rem * 0.95);
+	}
+
+	.home-story-nav {
+		grid-template-columns: 1fr;
+	}
+
+	.home-story-nav button:not([aria-current="step"]) {
+		display: none;
+	}
+
+	.home-story-nav-label {
+		text-wrap: nowrap;
+	}
+
+	.home-story-controls p,
+	.home-story-buttons {
+		display: none;
+	}
+
+	.home-process .home-story-skip {
+		justify-content: center;
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+		text-decoration: none;
+	}
+
+	.home-story-skip-icon {
+		display: block;
+	}
+
+	.home-story-skip-label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+}
+
+@media (max-width: 48rem) and (max-height: 40rem) {
+	.home-story-stage {
+		height: 100svh;
+		overflow-y: auto;
+	}
+
+	.home-scene {
+		height: 11rem;
 	}
 }
 

@@ -169,7 +169,7 @@ export const processSteps = [
 			"Layouts, materials and finishes take shape together. We review the details and agree on the direction before work begins.",
 		deliverable: "The result: approved designs, finishes and samples.",
 		label: "Material palette · Sample placeholders",
-		alt: "Four grayscale material samples representing design and finish selection",
+		alt: "Four material samples in marigold, ice silver, mauve, and cool gray, representing design and finish selection",
 		nav: "2 / Design",
 	},
 	{
