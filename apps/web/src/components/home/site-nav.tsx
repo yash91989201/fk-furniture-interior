@@ -1,4 +1,3 @@
-import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -6,6 +5,16 @@ const links = [
 	{ href: "#fk-services", label: "Services" },
 	{ href: "#fk-projects", label: "Projects" },
 	{ href: "#fk-enquiry", label: "Contact" },
+] as const;
+
+// Ticker lines stay inside the company profile's record: the 1986 family craft
+// start, in-house manufacturing, and turnkey design-to-installation scope.
+const slogans = [
+	"Designing Spaces, Creating Life.",
+	"Drawn by us, built by us.",
+	"Made to measure, made in house.",
+	"One team, from drawing to installation.",
+	"Craft in the family since 1986.",
 ] as const;
 
 // Hide only after sustained scrolling; show again once scrolling settles.
@@ -16,6 +25,7 @@ const SCROLL_IDLE_MS = 260;
 export function SiteNav() {
 	const [compact, setCompact] = useState(false);
 	const [covered, setCovered] = useState(false);
+	const [pastHero, setPastHero] = useState(false);
 	const [scrolling, setScrolling] = useState(false);
 	const hidden = covered || scrolling;
 
@@ -23,6 +33,7 @@ export function SiteNav() {
 		// Any .home-page [data-hide-nav] section hides this bar while it covers the
 		// top edge or most of the viewport.
 		const targets = document.querySelectorAll(".home-page [data-hide-nav]");
+		const hero = document.querySelector(".home-hero");
 		let frame = 0;
 		let hide = 0;
 		let idle = 0;
@@ -30,6 +41,10 @@ export function SiteNav() {
 		const update = () => {
 			frame = 0;
 			setCompact(window.scrollY > 64);
+			if (hero) {
+				const past = hero.getBoundingClientRect().bottom <= 0;
+				setPastHero((current) => (current === past ? current : past));
+			}
 			let nextCovered = false;
 			const viewport = window.innerHeight;
 			for (const target of targets) {
@@ -83,38 +98,55 @@ export function SiteNav() {
 	return (
 		<div className="home-nav-slot">
 			<header
-				className={`home-nav${compact ? " is-compact" : ""}${hidden ? " is-hidden" : ""}`}
+				className={[
+					"home-nav",
+					compact && "is-compact",
+					pastHero && "is-past-hero",
+					hidden && "is-hidden",
+				]
+					.filter(Boolean)
+					.join(" ")}
 				inert={hidden}
 			>
-				<a className="home-brand" href="#fk-hero">
-					FK / Logo placeholder
-				</a>
-				<nav aria-label="Primary" className="home-nav-links">
-					{links.map((link) => (
-						<a href={link.href} key={link.href}>
-							{link.label}
-						</a>
-					))}
-				</nav>
-				<a
-					className={buttonVariants({
-						className: "home-nav-cta",
-						size: compact ? "sm" : "default",
-						variant: "secondary",
-					})}
-					href="#fk-enquiry"
-				>
-					Discuss your project
-				</a>
-				<details className="home-menu">
-					<summary>Menu</summary>
-					{links.map((link) => (
-						<a href={link.href} key={`menu-${link.href}`}>
-							{link.label}
-						</a>
-					))}
-					<a href="#fk-enquiry">Discuss your project</a>
-				</details>
+				<div aria-hidden="true" className="home-nav-ticker">
+					<div className="home-nav-track">
+						{[0, 1].map((group) => (
+							<div className="home-nav-group" key={group}>
+								{[0, 1].map((copy) =>
+									slogans.map((slogan) => (
+										<span key={`${copy}-${slogan}`}>{slogan}</span>
+									))
+								)}
+							</div>
+						))}
+					</div>
+				</div>
+				<div className="home-nav-row">
+					<nav aria-label="Primary" className="home-nav-links">
+						{links.map((link) => (
+							<a href={link.href} key={`nav-${link.href}`}>
+								{link.label}
+							</a>
+						))}
+					</nav>
+					<a className="home-brand" href="#fk-hero">
+						FK / Logo placeholder
+					</a>
+					<a className="home-nav-cta" href="#fk-enquiry">
+						Discuss your project
+					</a>
+					<details className="home-menu">
+						<summary>Menu</summary>
+						<div className="home-menu-panel">
+							{links.map((link) => (
+								<a href={link.href} key={`menu-${link.href}`}>
+									{link.label}
+								</a>
+							))}
+							<a href="#fk-enquiry">Discuss your project</a>
+						</div>
+					</details>
+				</div>
 			</header>
 		</div>
 	);
