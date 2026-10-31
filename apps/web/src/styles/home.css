@@ -1509,12 +1509,26 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer {
+	/* Label and metadata roles sit a step below the 1rem body so weight alone does not separate them. */
+	--ft-label: 0.75rem;
+	--ft-meta: 0.8125rem;
+	/* Content stops growing past this; the plan keeps bleeding full width behind it. */
+	--ft-max: 88rem;
 	position: relative;
-	padding: clamp(3rem, 6vw, 6rem) var(--home-gutter)
+	padding-block: clamp(3rem, 6vw, 6rem)
 		max(1.75rem, env(safe-area-inset-bottom));
+	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
+		max(var(--home-gutter), env(safe-area-inset-right));
 	overflow: hidden;
 	background: var(--card);
 	isolation: isolate;
+}
+
+.home-footer-proof,
+.home-footer-grid,
+.home-legal {
+	max-width: var(--ft-max);
+	margin-inline: auto;
 }
 
 .home-footer-backdrop {
@@ -1748,21 +1762,22 @@ html.lenis:has(.home-page) {
 
 .home-footer-proof-head {
 	display: grid;
-	gap: 0.3rem;
+	gap: 0.4rem;
 }
 
 .home-footer-proof-title {
 	max-width: 20ch;
 	margin: 0;
 	font-size: clamp(1.75rem, 3vw, 2.5rem);
-	line-height: 0.95;
-	letter-spacing: -0.03em;
+	line-height: 1.06;
+	letter-spacing: -0.015em;
 }
 
 .home-footer-place {
-	font-size: 1rem;
-	line-height: 1.4;
+	font-size: var(--ft-meta);
+	line-height: 1.5;
 	color: var(--muted-foreground);
+	letter-spacing: 0.005em;
 }
 
 .home-footer-proof-copy:is(:hover, :focus-visible) .home-footer-proof-title {
@@ -1771,8 +1786,9 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer-scope {
-	max-width: 38rem;
-	line-height: 1.45;
+	max-width: 34rem;
+	line-height: 1.5;
+	text-wrap: pretty;
 }
 
 .home-footer-identity {
@@ -1787,10 +1803,12 @@ html.lenis:has(.home-page) {
 	font-weight: 500;
 	line-height: 1.05;
 	letter-spacing: -0.02em;
+	text-wrap: balance;
 }
 
 .home-footer-blurb {
-	max-width: 42ch;
+	max-width: 40ch;
+	text-wrap: pretty;
 }
 
 .home-footer-blurb,
@@ -1800,7 +1818,10 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer-note {
+	font-size: var(--ft-meta);
+	line-height: 1.5;
 	color: var(--muted-foreground);
+	letter-spacing: 0.005em;
 }
 
 .home-footer-grid {
@@ -1811,11 +1832,14 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer-label {
-	margin: 0 0 1rem;
+	margin: 0 0 0.75rem;
+	font-size: var(--ft-label);
 	font-weight: 500;
+	color: var(--muted-foreground);
+	letter-spacing: 0.12em;
 }
 
-.home-footer-grid a {
+.home-footer-grid a:not(.home-footer-action) {
 	text-decoration: underline;
 	text-underline-offset: 0.25rem;
 }
@@ -1830,6 +1854,8 @@ html.lenis:has(.home-page) {
 .home-footer-links {
 	display: flex;
 	flex-direction: column;
+	/* 44px rows centre 24px text; lift the list so the first link shares the facts column baseline. */
+	margin-top: calc((1.5rem - 2.75rem) / 2);
 }
 
 .home-footer-facts {
@@ -1849,7 +1875,9 @@ html.lenis:has(.home-page) {
 	width: fit-content;
 	padding: 0 0.75rem;
 	margin-top: 1.25rem;
-	font-size: 0.875rem;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	line-height: 1.3;
 	color: var(--primary-foreground);
 	background: var(--primary);
 }
@@ -1864,12 +1892,29 @@ html.lenis:has(.home-page) {
 	gap: 1rem 1.4rem;
 	padding-top: 1rem;
 	margin-top: 3rem;
-	font-size: 0.8rem;
+	font-size: var(--ft-meta);
+	line-height: 1.5;
+	color: var(--muted-foreground);
+	letter-spacing: 0.005em;
 	border-top: 1px solid var(--border);
 }
 
 .home-footer-grid .home-footer-note {
 	margin-top: 0.35rem;
+}
+
+/* Tablet: keep the proof side by side, but share the width so the project note keeps a reading measure. */
+@media (max-width: 64rem) {
+	.home-footer-proof {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 2rem 2.5rem;
+	}
+
+	/* Tighter gutter keeps the contact column wide enough for the enquiry button. */
+	.home-footer .home-footer-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 2.5rem 2rem;
+	}
 }
 
 @media (max-width: 47.99rem) {
@@ -1881,8 +1926,9 @@ html.lenis:has(.home-page) {
 		mask-image: linear-gradient(90deg, transparent, #000);
 	}
 
+	/* Explore sizes to its longest link so Contact keeps the room the enquiry button needs. */
 	.home-footer .home-footer-grid {
-		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		grid-template-columns: max-content minmax(0, 1fr);
 		gap: 2.5rem 1.5rem;
 	}
 
@@ -1903,6 +1949,15 @@ html.lenis:has(.home-page) {
 @media (max-width: 23rem) {
 	.home-footer .home-footer-grid {
 		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}
+
+/* Narrow columns cannot hold the label and the arrow, so the button takes the row. */
+@media (max-width: 26rem) {
+	.home-footer-action {
+		justify-content: space-between;
+		width: 100%;
 	}
 }
 
