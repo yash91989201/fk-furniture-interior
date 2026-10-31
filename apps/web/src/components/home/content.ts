@@ -1,39 +1,40 @@
 export const photos = {
+	// Keys describe the room in the photograph; filenames are the supplied assets.
 	lobby: {
 		src: "/home/lobby.webp",
-		alt: "Temporary lobby photograph from the company profile, Resort De Coracao, Rishikesh",
+		alt: "Hotel lobby with lounge seating and a staircase",
+	},
+	lobbyLounge: {
+		src: "/home/guest-bath.webp",
+		alt: "Hotel lounge with seating and a staircase",
 	},
 	lounge: {
-		src: "/home/lounge.webp",
-		alt: "Temporary lounge photograph from the company profile",
-	},
-	dining: {
 		src: "/home/dining.webp",
-		alt: "Temporary dining-room photograph from the company profile",
+		alt: "Lounge with green seating and brass tables",
 	},
-	guestRoom: {
-		src: "/home/guest-room.webp",
-		alt: "Temporary guest-room photograph from the company profile",
-	},
-	guestBath: {
-		src: "/home/guest-bath.webp",
-		alt: "Temporary guest bathroom photograph from the company profile",
-	},
-	meeting: {
-		src: "/home/meeting.webp",
-		alt: "Temporary meeting-room photograph from the company profile",
-	},
-	corridor: {
+	restaurant: {
 		src: "/home/corridor.webp",
-		alt: "Temporary corridor photograph from the company profile",
+		alt: "Restaurant with dining tables and chairs",
 	},
-	workplace: {
+	lobbyChandelier: {
+		src: "/home/guest-room.webp",
+		alt: "Hotel lobby with a chandelier and lounge seating",
+	},
+	guestRoomBalcony: {
+		src: "/home/lounge.webp",
+		alt: "Guest room with a bed and balcony doors",
+	},
+	guestRoomTv: {
+		src: "/home/meeting.webp",
+		alt: "Guest room with a balcony and wall-mounted television",
+	},
+	guestRoomWardrobe: {
 		src: "/home/workplace.webp",
-		alt: "Temporary workplace photograph from the company profile",
+		alt: "Guest room with a fitted wardrobe and desk",
 	},
-	building: {
+	exterior: {
 		src: "/home/office-building.webp",
-		alt: "Temporary exterior photograph of a completed hospitality building from the company profile",
+		alt: "Exterior of a completed hospitality building",
 	},
 } as const;
 
@@ -45,14 +46,14 @@ export const projects = [
 		location: "Tapovan, Rishikesh",
 		image: photos.lobby,
 		scope:
-			"Named in the company profile as a completed turnkey hospitality project. Detailed guest-room counts and scope still need client confirmation.",
+			"Completed turnkey hospitality interior, from design and bespoke furniture through to installation.",
 	},
 	{
 		id: "residential",
 		type: "Residential",
 		name: "[Residential project name]",
 		location: "[Location]",
-		image: photos.lounge,
+		image: photos.guestRoomTv,
 		scope:
 			"[Scope: living spaces, fitted storage and bespoke furniture. Client confirmation needed.]",
 	},
@@ -61,7 +62,7 @@ export const projects = [
 		type: "Commercial",
 		name: "[Commercial project name]",
 		location: "[Location]",
-		image: photos.workplace,
+		image: photos.lobbyLounge,
 		scope:
 			"[Scope: workplace interiors, meeting spaces and fitted furniture. Client confirmation needed.]",
 	},
@@ -71,17 +72,17 @@ export const services = [
 	{
 		title: "Interior design & execution",
 		body: "Homes, workplaces and hospitality spaces, planned around the client’s needs, then taken through to site.",
-		image: photos.lounge,
+		image: photos.guestRoomBalcony,
 	},
 	{
 		title: "Bespoke furniture",
 		body: "Furniture developed around the dimensions, materials and character of each space, made in the company’s own setup.",
-		image: photos.guestRoom,
+		image: photos.guestRoomWardrobe,
 	},
 	{
 		title: "Turnkey projects",
 		body: "Coordination from design and material selection through manufacturing, installation and handover.",
-		image: photos.dining,
+		image: photos.lobbyChandelier,
 	},
 ] as const;
 
@@ -97,7 +98,7 @@ export const furnitureCategories = [
 		],
 		cta: "Discuss guest-room furniture",
 		requirement: "Furniture quotation",
-		image: photos.guestRoom,
+		image: photos.guestRoomTv,
 	},
 	{
 		id: "reception",
@@ -123,7 +124,7 @@ export const furnitureCategories = [
 		],
 		cta: "Discuss dining & banquet furniture",
 		requirement: "Furniture quotation",
-		image: photos.dining,
+		image: photos.restaurant,
 	},
 	{
 		id: "woodwork",
@@ -136,7 +137,7 @@ export const furnitureCategories = [
 		],
 		cta: "Discuss custom woodwork",
 		requirement: "Furniture quotation",
-		image: photos.corridor,
+		image: photos.guestRoomWardrobe,
 	},
 	{
 		id: "executive",
@@ -149,7 +150,7 @@ export const furnitureCategories = [
 		],
 		cta: "Discuss workplace furniture",
 		requirement: "Furniture quotation",
-		image: photos.meeting,
+		image: photos.lounge,
 	},
 ] as const;
 
@@ -199,7 +200,7 @@ export const testimonials = [
 			"The guest room reads as one piece. Timber, stone, and the bed were drawn together, then built that way.",
 		name: "Meera Anand",
 		company: "Harbour House Hotels",
-		photo: photos.lobby,
+		photo: photos.guestRoomBalcony,
 	},
 	{
 		id: 1,
@@ -215,7 +216,7 @@ export const testimonials = [
 			"The meeting room had to work a full day and still feel calm. The joinery does both, quietly.",
 		name: "Leela Krishnan",
 		company: "Atelier North",
-		photo: photos.workplace,
+		photo: photos.lobbyLounge,
 	},
 	{
 		id: 3,
@@ -223,7 +224,7 @@ export const testimonials = [
 			"This table was made for the dining room, not fitted into it. The edge, the base, and the light agree.",
 		name: "Kabir Seth",
 		company: "Linea Studio",
-		photo: photos.dining,
+		photo: photos.restaurant,
 	},
 ] as const;
 
