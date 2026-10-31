@@ -526,8 +526,7 @@ export function Testimonials() {
 				<div className="home-testimonial-header">
 					<h2>Through our clients’ eyes.</h2>
 					<p className="home-testimonial-lede">
-						Sample notes from furnished rooms, standing in for approved client
-						words.
+						Sample notes, standing in for approved client words.
 					</p>
 				</div>
 

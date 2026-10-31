@@ -11,7 +11,7 @@ const exploreLinks = [
 	{ href: "#fk-about", label: "About" },
 	{ href: "#fk-services", label: "Services" },
 	{ href: "#fk-projects", label: "Projects" },
-	{ href: "#fk-craft", label: "Gallery" },
+	{ href: "#fk-craft", label: "Craft" },
 	{ href: "#fk-enquiry", label: "Contact" },
 ] as const;
 
@@ -195,7 +195,6 @@ export function SiteFooter() {
 						Interior design, bespoke furniture and turnkey execution from design
 						through installation.
 					</p>
-					<p className="home-footer-note">[Final logo placeholder]</p>
 				</div>
 				<a className="home-footer-proof-copy" href="#fk-projects">
 					<div className="home-footer-proof-head">
@@ -237,16 +236,14 @@ export function SiteFooter() {
 					</a>
 				</div>
 				<div>
-					<p className="home-footer-label" id="footer-socials">
-						Socials
+					<p className="home-footer-label">Studio</p>
+					<p className="home-footer-statement">
+						Designing Spaces, Creating Life.
 					</p>
-					<p className="home-footer-note">[Social links]</p>
 				</div>
 			</div>
 			<div className="home-legal">
-				<span>[Copyright]</span>
-				<span>Privacy policy</span>
-				<span>Terms & conditions</span>
+				<span>© {new Date().getFullYear()} FK Furniture &amp; Interior</span>
 			</div>
 		</footer>
 	);

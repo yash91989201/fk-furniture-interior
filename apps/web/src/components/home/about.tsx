@@ -229,7 +229,7 @@ export function About() {
 					Goa.
 				</p>
 				<a className="home-kicker-link" href="#fk-enquiry">
-					About FK →
+					Discuss your project →
 				</a>
 			</div>
 		</section>

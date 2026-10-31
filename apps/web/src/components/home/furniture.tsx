@@ -428,9 +428,6 @@ export function Furniture({
 						{openCategory.cta}
 						<ArrowUpRight aria-hidden="true" size={16} />
 					</a>
-					<p className="fv-note">
-						[Materials, dimensions and finishes to be confirmed.]
-					</p>
 				</div>
 			</div>
 		</section>

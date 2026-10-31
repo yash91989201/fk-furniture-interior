@@ -23,7 +23,6 @@ export function Projects() {
 		<section className="home-section home-projects-mosaic" id="fk-projects">
 			<div className="home-mosaic-head">
 				<h2>Selected projects</h2>
-				<span className="home-kicker-link">All projects →</span>
 			</div>
 			<nav aria-label="Select a project" className="home-mosaic-mosaic">
 				{projects.map((item, index) => (
@@ -64,10 +63,6 @@ export function Projects() {
 				</div>
 				<div className="home-mosaic-copy">
 					<p>{project.scope}</p>
-					<p className="home-mosaic-placeholder">
-						[Case-study destination will be connected to the project detail
-						template.]
-					</p>
 					<a
 						className={buttonVariants({ variant: "outline" })}
 						href="#fk-enquiry"

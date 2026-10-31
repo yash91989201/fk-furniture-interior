@@ -144,15 +144,6 @@
 	text-align: left;
 	white-space: normal;
 }
-.fv-detail .fv-note {
-	max-width: 40ch;
-	margin: 1rem 0 0;
-	font-size: 0.875rem;
-	line-height: 1.55;
-	color: color-mix(in oklch, var(--secondary-foreground) 82%, transparent);
-	letter-spacing: 0.01em;
-	text-wrap: pretty;
-}
 .fv-backdrop {
 	position: absolute;
 	inset: 0;
@@ -202,8 +193,7 @@
 	animation: furniture-word-reveal 480ms var(--home-ease) both;
 }
 .fv-detail li,
-.fv-detail > a,
-.fv-detail .fv-note {
+.fv-detail > a {
 	animation: furniture-detail-reveal 560ms var(--home-ease) both;
 }
 .fv-detail li:nth-child(1) {
@@ -217,9 +207,6 @@
 }
 .fv-detail > a {
 	animation-delay: 460ms;
-}
-.fv-detail .fv-note {
-	animation-delay: 540ms;
 }
 @keyframes furniture-word-reveal {
 	from {
@@ -297,9 +284,6 @@
 	.fv-detail ul {
 		margin-bottom: 1.25rem;
 	}
-	.fv-detail .fv-note {
-		margin-top: 0.75rem;
-	}
 }
 @media (max-width: 48rem) and (prefers-reduced-motion: no-preference) {
 	.fv-heading-word {
@@ -307,8 +291,7 @@
 		animation-duration: 360ms;
 	}
 	.fv-detail li,
-	.fv-detail > a,
-	.fv-detail .fv-note {
+	.fv-detail > a {
 		animation-name: furniture-mobile-reveal;
 		animation-duration: 400ms;
 	}
@@ -324,10 +307,7 @@
 	.fv-detail > a {
 		animation-delay: 340ms;
 	}
-	.fv-detail .fv-note {
-		animation-delay: 400ms;
-	}
-	.fv-detail[data-flow-ready="false"] :is(.fv-heading-word, li, a, .fv-note) {
+	.fv-detail[data-flow-ready="false"] :is(.fv-heading-word, li, a) {
 		animation-play-state: paused;
 	}
 }

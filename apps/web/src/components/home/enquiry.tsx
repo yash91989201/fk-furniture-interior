@@ -1,10 +1,6 @@
 /** biome-ignore-all lint/performance/noJsxPropsBind: handlers close over form state */
 import { Button } from "@fk-furniture-interior/ui/components/button";
-import {
-	Field,
-	FieldDescription,
-	FieldGroup,
-} from "@fk-furniture-interior/ui/components/field";
+import { Field, FieldGroup } from "@fk-furniture-interior/ui/components/field";
 import { Input } from "@fk-furniture-interior/ui/components/input";
 import {
 	Select,
@@ -27,7 +23,6 @@ export function Enquiry({
 	presetRequirement: string;
 }) {
 	const [feedback, setFeedback] = useState("");
-	const [contactNote, setContactNote] = useState("");
 	const [requirement, setRequirement] = useState(presetRequirement || "");
 	const [message, setMessage] = useState(
 		presetCategory
@@ -42,12 +37,6 @@ export function Enquiry({
 			subject
 				? `Brief received: ${subject.toLowerCase()}. Nothing has been sent or stored.`
 				: "Brief received. Nothing has been sent or stored."
-		);
-	}
-
-	function handleWhatsApp() {
-		setContactNote(
-			"WhatsApp destination will be connected once the contact number is confirmed."
 		);
 	}
 
@@ -70,15 +59,6 @@ export function Enquiry({
 					</h2>
 					<h3>Let’s discuss your project.</h3>
 					<p>Tell us about your space, your ideas and the support you need.</p>
-					<div className="home-actions">
-						<Button
-							className="home-enquiry-button"
-							onClick={handleWhatsApp}
-							variant="outline"
-						>
-							WhatsApp the team
-						</Button>
-					</div>
 					<p className="home-muted">
 						[Phone number]
 						<br />
@@ -86,7 +66,6 @@ export function Enquiry({
 						<br />
 						Gurgaon and Goa offices
 					</p>
-					<p aria-live="polite">{contactNote}</p>
 				</div>
 				<form className="home-enquiry-form" onSubmit={onSubmit}>
 					<FieldGroup className="home-form-grid !grid gap-4">
@@ -177,14 +156,10 @@ export function Enquiry({
 								surface="line"
 								value={message}
 							/>
-							<FieldDescription>
-								[Optional BOQ / drawing upload — placement placeholder]
-							</FieldDescription>
 						</Field>
 					</FieldGroup>
-					<p className="home-muted">[Privacy notice and policy link]</p>
 					<Button className="home-enquiry-button" type="submit">
-						{feedback ? "Revise the brief" : "Send enquiry · preview"}
+						Send enquiry · preview
 					</Button>
 					<p
 						aria-live="polite"

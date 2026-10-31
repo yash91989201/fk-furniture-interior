@@ -31,6 +31,17 @@ html.lenis:has(.home-page) {
 	top: 0.75rem;
 	left: var(--home-gutter);
 	z-index: 20;
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding: 0 1rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--primary-foreground);
+	text-decoration: none;
+	background: var(--primary);
+	box-shadow: 0 0.5rem 1.5rem
+		color-mix(in oklch, var(--foreground) 18%, transparent);
 	transform: translateY(-200%);
 }
 
@@ -132,16 +143,31 @@ html.lenis:has(.home-page) {
 
 .home-brand {
 	display: inline-flex;
+	gap: 0.6rem;
 	align-items: center;
 	min-height: 2.75rem;
-	font-family: var(--font-heading);
-	font-size: clamp(1.4rem, 2.2vw, 2rem);
-	font-weight: 500;
-	line-height: 1;
-	text-align: center;
-	letter-spacing: -0.03em;
-	white-space: nowrap;
+	color: inherit;
 	text-decoration: none;
+}
+
+.home-brand-mark {
+	font-family: var(--font-heading);
+	font-size: clamp(1.65rem, 2.2vw, 2rem);
+	font-weight: 500;
+	line-height: 0.9;
+	letter-spacing: -0.03em;
+}
+
+.home-brand-name {
+	padding-left: 0.6rem;
+	font-family: var(--font-sans);
+	font-size: 0.5625rem;
+	font-weight: 550;
+	line-height: 1.25;
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	white-space: nowrap;
+	border-left: 1px solid color-mix(in oklch, var(--border) 75%, transparent);
 }
 
 .home-nav-links {
@@ -453,8 +479,7 @@ html.lenis:has(.home-page) {
 	text-wrap: pretty;
 }
 
-.home-hero-actions,
-.home-actions {
+.home-hero-actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.9rem;
@@ -1674,8 +1699,8 @@ html.lenis:has(.home-page) {
 	line-height: 1.5;
 }
 
-.home-enquiry .home-actions {
-	margin-top: 1.35rem;
+.home-enquiry-invite > .home-muted {
+	margin-top: 1.5rem;
 }
 
 .home-enquiry .home-enquiry-button {
@@ -1708,6 +1733,10 @@ html.lenis:has(.home-page) {
 	line-height: 1.4;
 }
 
+.home-enquiry textarea {
+	min-height: 7.5rem;
+}
+
 .home-enquiry input::placeholder,
 .home-enquiry textarea::placeholder {
 	color: var(--muted-foreground);
@@ -1721,10 +1750,6 @@ html.lenis:has(.home-page) {
 	font-size: var(--eq-meta);
 	line-height: 1.5;
 	color: var(--muted-foreground);
-}
-
-.home-enquiry .home-actions + .home-muted {
-	margin-top: 1.15rem;
 }
 
 .home-enquiry form > .home-enquiry-button {
@@ -2078,22 +2103,21 @@ html.lenis:has(.home-page) {
 
 .home-footer-blurb {
 	max-width: 40ch;
+	margin: 0;
+	line-height: 1.45;
 	text-wrap: pretty;
 }
 
-.home-footer-blurb,
-.home-footer-note {
-	margin: 0;
-	line-height: 1.45;
+.home-footer-statement {
+	max-width: 16ch;
+	margin: 0.35rem 0 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.35rem, 2vw, 1.75rem);
+	font-weight: 500;
+	line-height: 1.12;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
 }
-
-.home-footer-note {
-	font-size: var(--ft-meta);
-	line-height: 1.5;
-	color: var(--muted-foreground);
-	letter-spacing: 0.005em;
-}
-
 .home-footer-grid {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2167,10 +2191,6 @@ html.lenis:has(.home-page) {
 	color: var(--muted-foreground);
 	letter-spacing: 0.005em;
 	border-top: 1px solid var(--border);
-}
-
-.home-footer-grid .home-footer-note {
-	margin-top: 0.35rem;
 }
 
 /* Tablet: keep the proof side by side, but share the width so the project note keeps a reading measure. */
@@ -2333,7 +2353,17 @@ html.lenis:has(.home-page) {
 	}
 
 	.home-brand {
-		font-size: 1.15rem;
+		gap: 0.45rem;
+	}
+
+	.home-brand-mark {
+		font-size: 1.45rem;
+	}
+
+	.home-brand-name {
+		padding-left: 0.45rem;
+		font-size: 0.5rem;
+		letter-spacing: 0.13em;
 	}
 
 	.home-menu {
@@ -2810,15 +2840,6 @@ html.lenis:has(.home-page) {
 	line-height: 1.65;
 	text-wrap: pretty;
 }
-.home-projects-mosaic .home-mosaic-copy .home-mosaic-placeholder {
-	font-size: 0.8125rem;
-	color: var(--muted-foreground);
-}
-.home-projects-mosaic .home-mosaic-note {
-	margin: calc(1rem * 1.25) 0 0;
-	font-size: 0.8125rem;
-	color: var(--muted-foreground);
-}
 .home-projects-mosaic button:focus-visible,
 .home-projects-mosaic a:focus-visible {
 	outline: 2px solid var(--ring);
@@ -2966,8 +2987,7 @@ html.lenis:has(.home-page) {
 		font-size: 1.375rem;
 	}
 	.home-projects-mosaic .home-mosaic-label,
-	.home-projects-mosaic .home-mosaic-meta,
-	.home-projects-mosaic .home-mosaic-copy .home-mosaic-placeholder {
+	.home-projects-mosaic .home-mosaic-meta {
 		font-size: 1rem;
 	}
 	.home-projects-mosaic .home-mosaic-mosaic {
@@ -3447,5 +3467,12 @@ html.lenis:has(.home-page) {
 @media (prefers-reduced-motion: reduce) and (max-width: 40rem) {
 	.home-story-nav {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* Wide screens show both peer cards in full; their names should not truncate. */
+@media (min-width: 64rem) {
+	.home-client-track {
+		--client-peer-width: 9.5rem;
 	}
 }

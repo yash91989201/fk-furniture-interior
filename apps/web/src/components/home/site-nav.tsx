@@ -136,7 +136,8 @@ export function SiteNav() {
 						))}
 					</nav>
 					<a className="home-brand" href="#fk-hero">
-						FK / Logo placeholder
+						<span className="home-brand-mark">FK</span>
+						<span className="home-brand-name">Furniture &amp; Interior</span>
 					</a>
 					<a className="home-nav-cta" href="#fk-enquiry">
 						Discuss your project
