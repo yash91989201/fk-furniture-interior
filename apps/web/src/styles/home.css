@@ -2991,6 +2991,70 @@ html.lenis:has(.home-page) {
 	color: var(--secondary-foreground);
 	pointer-events: none;
 	user-select: none;
+	animation: home-about-drift 44s ease-in-out infinite alternate;
+}
+
+@keyframes home-about-drift {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+
+	to {
+		transform: translate3d(16px, -12px, 0);
+	}
+}
+
+.home-about-plan {
+	width: 100%;
+	height: 100%;
+	transform: translate3d(0, 0, 0);
+}
+
+/* Studio drafting crosshair: hairline cross with coordinate and station HUD. */
+.home-about-crosshair {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	color: var(--primary);
+	pointer-events: none;
+	user-select: none;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+.home-about-crosshair::before,
+.home-about-crosshair::after {
+	position: absolute;
+	content: "";
+	background: currentColor;
+	opacity: 0.45;
+}
+
+.home-about-crosshair::before {
+	top: 0;
+	left: -1.5rem;
+	width: 3rem;
+	height: 1px;
+}
+
+.home-about-crosshair::after {
+	top: -1.5rem;
+	left: 0;
+	width: 1px;
+	height: 3rem;
+}
+
+.home-about-coords {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.75rem;
+	font-family: var(--font-mono, monospace);
+	font-size: 0.6875rem;
+	color: var(--primary);
+	letter-spacing: 0.08em;
+	white-space: nowrap;
+	opacity: 0.85;
 }
 .about-quiet::before {
 	position: absolute;
@@ -3021,23 +3085,106 @@ html.lenis:has(.home-page) {
 	vector-effect: non-scaling-stroke;
 }
 .home-about-drawing-guides {
+	--plan-opacity: 0.24;
 	opacity: 0.24;
 	stroke-width: 0.7;
 }
 .home-about-drawing-walls {
+	--plan-opacity: 0.4;
 	opacity: 0.4;
 	stroke-width: 1.1;
 }
 .home-about-drawing-furniture {
+	--plan-opacity: 0.32;
 	opacity: 0.32;
 	stroke-width: 0.85;
 }
 .home-about-drawing-accent {
+	--plan-opacity: 0.7;
 	opacity: 0.7;
 	stroke: var(--primary);
 	stroke-width: 1.5;
 }
+
+/* Normalized pathLength=100 gold elements cycle through continuous architectural tracing. */
+.home-about-drawing-accent :is(path, circle) {
+	stroke-dasharray: 14 86;
+	animation: home-about-trace 10s linear infinite;
+}
+
+.home-about-drawing-accent > :nth-child(2n) {
+	animation-delay: -2.5s;
+}
+
+.home-about-drawing-accent > :nth-child(3n) {
+	animation-delay: -5s;
+}
+
+.home-about-drawing-accent > :nth-child(4n) {
+	animation-delay: -7.5s;
+}
+
+@keyframes home-about-trace {
+	from {
+		stroke-dashoffset: 100;
+	}
+
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+/* Rotary tool / lathe fixture subtle continuous spin. */
+.home-about-spindle {
+	transform-origin: 1130px 470px;
+	animation: home-about-spindle-spin 28s linear infinite;
+}
+
+@keyframes home-about-spindle-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@supports (animation-timeline: view()) {
+	@media (prefers-reduced-motion: no-preference) {
+		.home-about {
+			view-timeline-name: --home-about-plan;
+			view-timeline-axis: block;
+		}
+
+		.home-about-drawing-guides {
+			--plan-range: entry 0% entry 20%;
+		}
+
+		.home-about-drawing-walls {
+			--plan-range: entry 10% entry 35%;
+		}
+
+		.home-about-drawing-furniture {
+			--plan-range: entry 22% entry 50%;
+		}
+
+		.home-about-drawing-accent {
+			--plan-range: entry 36% entry 65%;
+		}
+
+		.home-about-blueprint
+			:is(
+				.home-about-drawing-guides,
+				.home-about-drawing-walls,
+				.home-about-drawing-furniture,
+				.home-about-drawing-accent
+			) {
+			animation: home-plan-layer linear both;
+			animation-timeline: --home-about-plan;
+			animation-range: var(--plan-range, entry 0% entry 100%);
+		}
+	}
+}
 .about-quiet-inner {
+	position: relative;
+	z-index: 2;
 	max-width: 48rem;
 	margin-inline: auto;
 	text-align: center;
@@ -3084,15 +3231,19 @@ html.lenis:has(.home-page) {
 }
 @media (min-width: 64rem) {
 	.home-about-drawing-guides {
+		--plan-opacity: 0.36;
 		opacity: 0.36;
 	}
 	.home-about-drawing-walls {
+		--plan-opacity: 0.62;
 		opacity: 0.62;
 	}
 	.home-about-drawing-furniture {
+		--plan-opacity: 0.5;
 		opacity: 0.5;
 	}
 	.home-about-drawing-accent {
+		--plan-opacity: 0.9;
 		opacity: 0.9;
 	}
 }
