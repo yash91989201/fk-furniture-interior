@@ -32,7 +32,7 @@ Light body contrast is 12.50:1; primary button contrast is 7.90:1; muted text on
 
 ## Typography
 
-EB Garamond medium gives headings their editorial voice; italic is available for occasional phrase emphasis. Instrument Sans carries body, navigation, labels, and controls. Fonts are self-hosted through Fontsource variable packages. Shared buttons and labels use sentence case; card and empty-state headings retain the serif family without forced uppercase. Homepage display sizing remains to be designed against real content and viewports.
+EB Garamond medium gives headings their editorial voice; italic is available for occasional phrase emphasis. Instrument Sans carries body, navigation, labels, and controls. Fonts are self-hosted through Fontsource variable packages. Shared buttons and labels use sentence case; card and empty-state headings retain the serif family without forced uppercase. Homepage sections run role ladders rather than one-off sizes: the hero card scales its display, body, and metadata roles together from one fluid ramp, with leading and spacing from the same scale; dense sections keep their own compact ladders. Shared controls keep their control-role label size inside the hero.
 
 ## Layout
 
