@@ -1458,6 +1458,68 @@ html.lenis:has(.home-page) {
 	pointer-events: none;
 	user-select: none;
 	mask-image: linear-gradient(110deg, transparent 8%, #000 70%);
+	animation: home-footer-drift 38s ease-in-out infinite alternate;
+}
+
+@keyframes home-footer-drift {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+
+	to {
+		transform: translate3d(-1.5%, 1%, 0);
+	}
+}
+
+.home-footer-plan {
+	transform: translate3d(0, 0, 0);
+}
+
+/* Drafting crosshair: a hairline cross plus the plan coordinate under it. */
+.home-footer-crosshair {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	width: 0;
+	height: 0;
+	color: var(--primary);
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 220ms ease-out;
+}
+
+.home-footer-crosshair::before,
+.home-footer-crosshair::after {
+	position: absolute;
+	content: "";
+	background: currentColor;
+	opacity: 0.55;
+}
+
+.home-footer-crosshair::before {
+	top: 0;
+	left: -1.5rem;
+	width: 3rem;
+	height: 1px;
+}
+
+.home-footer-crosshair::after {
+	top: -1.5rem;
+	left: 0;
+	width: 1px;
+	height: 3rem;
+}
+
+.home-footer-coords {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.75rem;
+	font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+	font-size: 0.625rem;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.16em;
+	white-space: nowrap;
 }
 
 .home-footer-blueprint {
@@ -1474,11 +1536,13 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer-dimensions {
+	--plan-opacity: 0.1;
 	opacity: 0.1;
 	stroke-width: 0.65;
 }
 
 .home-footer-walls {
+	--plan-opacity: 0.18;
 	opacity: 0.18;
 	stroke-width: 1.15;
 }
@@ -1486,19 +1550,115 @@ html.lenis:has(.home-page) {
 .home-footer-joinery,
 .home-footer-furniture,
 .home-footer-courtyard {
+	--plan-opacity: 0.14;
 	opacity: 0.14;
 	stroke-width: 0.85;
 }
 
 .home-footer-doors {
+	--plan-opacity: 0.18;
 	opacity: 0.18;
 	stroke-width: 0.75;
 }
 
 .home-footer-gold {
+	--plan-opacity: 0.65;
 	opacity: 0.65;
 	stroke: var(--primary);
 	stroke-width: 2;
+}
+
+/* Dash period matches the pathLength=100 normalised gold paths, so the glint loops seamlessly. */
+.home-footer-gold :is(path, circle) {
+	stroke-dasharray: 12 88;
+	animation: home-footer-trace 9s linear infinite;
+}
+
+.home-footer-gold > :nth-child(2n) {
+	animation-delay: -3s;
+}
+
+.home-footer-gold > :nth-child(3n) {
+	animation-delay: -6s;
+}
+
+@keyframes home-footer-trace {
+	from {
+		stroke-dashoffset: 100;
+	}
+
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+/* The plan resolves layer by layer as the footer enters; unsupported browsers keep the drawn plan. */
+@supports (animation-timeline: view()) {
+	@media (prefers-reduced-motion: no-preference) {
+		.home-footer {
+			view-timeline-name: --home-footer-plan;
+			view-timeline-axis: block;
+		}
+
+		.home-footer-dimensions {
+			--plan-range: entry 0% entry 10%;
+		}
+
+		.home-footer-walls {
+			--plan-range: entry 8% entry 23%;
+		}
+
+		.home-footer-doors {
+			--plan-range: entry 20% entry 32%;
+		}
+
+		.home-footer-joinery {
+			--plan-range: entry 28% entry 42%;
+		}
+
+		.home-footer-furniture > :nth-child(-n + 12) {
+			--plan-opacity: 1;
+			--plan-range: entry 38% entry 52%;
+		}
+
+		.home-footer-furniture > :nth-child(n + 13) {
+			--plan-opacity: 1;
+			--plan-range: entry 48% entry 62%;
+		}
+
+		.home-footer-courtyard {
+			--plan-range: entry 58% entry 72%;
+		}
+
+		.home-footer-gold {
+			--plan-range: entry 68% entry 80%;
+		}
+
+		.home-footer-blueprint
+			:is(
+				.home-footer-dimensions,
+				.home-footer-walls,
+				.home-footer-doors,
+				.home-footer-joinery,
+				.home-footer-courtyard,
+				.home-footer-gold
+			),
+		.home-footer-furniture > * {
+			animation: home-plan-layer linear both;
+			animation-timeline: --home-footer-plan;
+			animation-range: var(--plan-range, entry 0% entry 100%);
+		}
+	}
+}
+
+@keyframes home-plan-layer {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: var(--plan-opacity, 1);
+	}
 }
 
 .home-footer-proof {
