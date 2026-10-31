@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -34,6 +35,7 @@ export function SiteNav() {
 		// top edge or most of the viewport.
 		const targets = document.querySelectorAll(".home-page [data-hide-nav]");
 		const hero = document.querySelector(".home-hero");
+		const menu = document.querySelector(".home-menu");
 		let frame = 0;
 		let hide = 0;
 		let idle = 0;
@@ -83,10 +85,14 @@ export function SiteNav() {
 				frame = requestAnimationFrame(update);
 			}
 		};
+		// In-page jumps land on a hash; close the mobile menu with them.
+		const onHashChange = () => menu?.removeAttribute("open");
 		update();
 		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("hashchange", onHashChange);
 		return () => {
 			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("hashchange", onHashChange);
 			clearTimeout(hide);
 			clearTimeout(idle);
 			if (frame) {
@@ -134,16 +140,29 @@ export function SiteNav() {
 					</a>
 					<a className="home-nav-cta" href="#fk-enquiry">
 						Discuss your project
+						<ArrowUpRight aria-hidden="true" size={15} />
 					</a>
 					<details className="home-menu">
-						<summary>Menu</summary>
+						<summary>
+							<svg
+								aria-hidden="true"
+								className="home-menu-arrow"
+								viewBox="0 0 12 12"
+							>
+								<path d="M3.4 1.9 10.1 5.4a.7.7 0 0 1 0 1.2L3.4 10.1a.7.7 0 0 1-1-.6V2.5a.7.7 0 0 1 1-.6Z" />
+							</svg>
+							Menu
+						</summary>
 						<div className="home-menu-panel">
 							{links.map((link) => (
 								<a href={link.href} key={`menu-${link.href}`}>
 									{link.label}
 								</a>
 							))}
-							<a href="#fk-enquiry">Discuss your project</a>
+							<a className="home-nav-cta home-menu-cta" href="#fk-enquiry">
+								Discuss your project
+								<ArrowUpRight aria-hidden="true" size={15} />
+							</a>
 						</div>
 					</details>
 				</div>
