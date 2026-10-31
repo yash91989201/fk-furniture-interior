@@ -38,6 +38,8 @@ EB Garamond medium gives headings their editorial voice; italic is available for
 
 Preserve the approved editorial prototype as the future homepage reference. Shared token customization does not prescribe a generic card-based page layout.
 
+The hero is one viewport tall at every size, never padded with a fixed-height floor. When viewport height drops below 38rem (landscape phones, short windows) the card switches to a compact ramp and tighter padding so the whole card, caption included, stays above the fold; below 22rem wide the card narrows its padding and display step. Coarse pointers get 44px-tall hero actions.
+
 ## Elevation & Depth
 
 Use restrained borders and tonal surfaces. The approved scrolled navigation glass effect belongs to that component; it is not a universal surface style.

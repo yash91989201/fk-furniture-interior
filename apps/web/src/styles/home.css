@@ -271,7 +271,7 @@ html.lenis:has(.home-page) {
 	position: relative;
 	display: flex;
 	align-items: flex-end;
-	min-height: max(40rem, 100svh);
+	min-height: 100svh;
 	padding: 0;
 	overflow: clip;
 	color: var(--background);
@@ -389,7 +389,8 @@ html.lenis:has(.home-page) {
 	gap: var(--hero-gap);
 	width: min(36rem, calc(100% - 2 * var(--home-gutter)));
 	padding: clamp(1.5rem, 3vw, 2.5rem);
-	margin: auto 0 clamp(1.5rem, 4vh, 3rem) var(--home-gutter);
+	margin: auto 0 max(clamp(1.5rem, 4vh, 3rem), env(safe-area-inset-bottom))
+		max(var(--home-gutter), env(safe-area-inset-left));
 	color: var(--foreground);
 	background: var(--card);
 }
@@ -465,7 +466,41 @@ html.lenis:has(.home-page) {
 	}
 
 	.home-hero-card {
-		margin-right: var(--home-gutter);
+		margin-right: max(var(--home-gutter), env(safe-area-inset-right));
+	}
+}
+
+@media (max-width: 22rem) {
+	.home-hero-card {
+		--hero-display: clamp(2.25rem, 1.6rem + 2.6vw, 2.5rem);
+		--hero-gap: 1rem;
+		padding: 1.25rem;
+	}
+}
+
+@media (min-width: 110rem) {
+	.home-hero-card {
+		--hero-display: clamp(4.5rem, 2rem + 2.6vw, 5.5rem);
+		--hero-body: 1.25rem;
+		--hero-meta: 0.875rem;
+		width: min(42rem, calc(100% - 2 * var(--home-gutter)));
+		padding: clamp(2.5rem, 3vw, 3rem);
+	}
+}
+
+@media (max-height: 38rem) {
+	.home-hero-card {
+		--hero-display: clamp(2rem, 1.2rem + 2.4vw, 2.75rem);
+		--hero-body: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+		--hero-gap: clamp(0.65rem, 1.4vh, 1rem);
+		padding: clamp(1rem, 2.4vh, 1.5rem);
+		margin-bottom: max(0.9rem, env(safe-area-inset-bottom));
+	}
+}
+
+@media (pointer: coarse) {
+	.home-hero-actions a {
+		min-height: 2.75rem;
 	}
 }
 
