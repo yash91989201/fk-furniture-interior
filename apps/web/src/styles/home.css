@@ -261,7 +261,21 @@ html.lenis:has(.home-page) {
 	min-height: 2.75rem;
 	font-size: 0.875rem;
 	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--foreground);
 	text-underline-offset: 0.3rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.home-kicker-link:hover {
+		text-decoration-thickness: 2px;
+	}
+}
+
+@media (hover: none) {
+	.home-kicker-link:active {
+		text-decoration-thickness: 2px;
+	}
 }
 
 .home-hero {
@@ -739,15 +753,6 @@ html.lenis:has(.home-page) {
 	color: var(--muted-foreground);
 }
 
-.home-about-copy .home-kicker-link {
-	text-decoration-thickness: 1px;
-	text-decoration-color: var(--foreground);
-}
-
-.home-about-copy .home-kicker-link:hover {
-	text-decoration-thickness: 2px;
-}
-
 .home-photo {
 	display: block;
 	width: 100%;
@@ -812,47 +817,100 @@ html.lenis:has(.home-page) {
 
 .home-services h2 {
 	font-size: clamp(2rem, 1.4rem + 1.8vw, 2.9rem);
+	line-height: 1.06;
+	letter-spacing: -0.02em;
 }
 
-.home-service-row {
-	display: grid;
-	grid-template-columns: 1.1fr 1fr 0.85fr;
-	gap: clamp(1.5rem, 3vw, 3rem);
-	align-items: center;
-	padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+.home-service-entry {
+	padding-block: clamp(1.35rem, 2.5vw, 1.85rem);
+	margin: 0;
 	border-top: 1px solid var(--home-service-rule);
 }
 
-.home-service-row:first-child {
+.home-services-split {
+	display: grid;
+	grid-template-columns: minmax(15rem, 21rem) minmax(0, 1fr);
+	gap: clamp(1.5rem, 5vw, 5rem);
+	align-items: start;
+	max-width: 90rem;
+	margin-inline: auto;
+}
+
+.home-services-rail {
+	position: sticky;
+	top: calc(var(--home-nav-compact) + 1.5rem);
+}
+
+.home-services-rail .home-kicker-link {
+	margin-top: 1.25rem;
+}
+
+.home-services-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.home-service-entry:first-child {
 	border-top-color: color-mix(in oklab, var(--foreground) 32%, transparent);
 }
 
-.home-service-row:last-child {
-	border-bottom: 1px solid var(--home-service-rule);
-}
-
-.home-service-row h3 {
+.home-service-entry h3 {
 	max-width: none;
-	margin: 0;
-	font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2rem);
-	line-height: 1.15;
-	letter-spacing: -0.02em;
+	margin: 0 0 0.55rem;
+	font-size: clamp(1.4rem, 1.15rem + 0.9vw, 1.85rem);
+	line-height: 1.18;
+	letter-spacing: -0.015em;
 	text-wrap: balance;
 }
 
-.home-service-row p {
-	max-width: 42ch;
-	margin: 0;
+.home-service-entry p {
+	max-width: 52ch;
+	margin: 0 0 1.35rem;
+	font-size: 1rem;
 	line-height: 1.65;
 	color: var(--muted-foreground);
 	text-wrap: pretty;
 }
 
-.home-service-row img,
-.home-service-row .home-placeholder {
+.home-service-band {
+	aspect-ratio: 21 / 9;
+	margin: 0;
+	overflow: hidden;
+	background: var(--muted);
+}
+
+.home-service-band img {
 	width: 100%;
-	aspect-ratio: 5 / 2;
+	height: 100%;
 	object-fit: cover;
+}
+
+@media (max-width: 64rem) {
+	.home-services-split {
+		grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr);
+	}
+}
+
+@media (max-width: 55.99rem) {
+	.home-services-split {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.home-services-rail {
+		position: static;
+	}
+
+	.home-service-band {
+		aspect-ratio: 16 / 9;
+	}
+}
+
+@media (max-width: 55.99rem) and (max-height: 34rem) {
+	.home-service-band {
+		aspect-ratio: 21 / 9;
+	}
 }
 
 .home-craft-heading {
@@ -2192,7 +2250,6 @@ html.lenis:has(.home-page) {
 
 	.home-project-browser,
 	.home-about-grid,
-	.home-service-row,
 	.home-story-body,
 	.home-enquiry-grid {
 		grid-template-columns: 1fr;
@@ -2239,16 +2296,6 @@ html.lenis:has(.home-page) {
 		padding: 1.1rem 0;
 		border-right: 0;
 		border-bottom: 1px solid var(--border);
-	}
-
-	.home-service-row {
-		gap: 0.75rem;
-		align-items: start;
-	}
-
-	.home-service-row img {
-		aspect-ratio: 16 / 9;
-		margin-top: 0.5rem;
 	}
 
 	.home-trust {
