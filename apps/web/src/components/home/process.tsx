@@ -14,7 +14,7 @@ import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import { processSteps } from "./content";
 import { ProcessDrawing } from "./process-drawing";
-import { usePrefersReducedMotion } from "./use-media";
+import { useMediaQuery, usePrefersReducedMotion } from "./use-media";
 
 const STEP_COUNT = processSteps.length;
 const SCROLL_SLOW = 1.2;
@@ -50,6 +50,8 @@ function StepFill({
 export function Process() {
 	const lenis = useLenis();
 	const reduced = usePrefersReducedMotion();
+	const short = useMediaQuery("(max-height: 40rem)");
+	const staticStory = reduced || short;
 	const [active, setActive] = useState(0);
 	const runwayRef = useRef<HTMLDivElement>(null);
 	const stageRef = useRef<HTMLDivElement>(null);
@@ -69,7 +71,7 @@ export function Process() {
 		}
 
 		const resize = () => {
-			runway.style.height = reduced
+			runway.style.height = staticStory
 				? "auto"
 				: `${stage.offsetHeight * STEP_COUNT * SCROLL_SLOW}px`;
 		};
@@ -77,7 +79,7 @@ export function Process() {
 		const observer = new ResizeObserver(resize);
 		observer.observe(stage);
 
-		if (reduced) {
+		if (staticStory) {
 			return () => observer.disconnect();
 		}
 
@@ -106,13 +108,25 @@ export function Process() {
 				cancelAnimationFrame(frame);
 			}
 		};
-	}, [rawProgress, reduced]);
+	}, [rawProgress, staticStory]);
+
+	useEffect(() => {
+		if (!staticStory) {
+			return;
+		}
+		rawProgress.set((active + 1) / STEP_COUNT);
+	}, [active, rawProgress, staticStory]);
 
 	function choose(index: number) {
 		const next = Math.max(0, Math.min(STEP_COUNT - 1, index));
 		const runway = runwayRef.current;
 		const stage = stageRef.current;
-		if (runway && stage && !reduced) {
+		if (staticStory) {
+			rawProgress.set((next + 1) / STEP_COUNT);
+			setActive(next);
+			return;
+		}
+		if (runway && stage) {
 			const top = runway.getBoundingClientRect().top + window.scrollY;
 			const travel = Math.max(1, runway.offsetHeight - stage.offsetHeight);
 			const target = top + (travel * (next + 0.15)) / STEP_COUNT;

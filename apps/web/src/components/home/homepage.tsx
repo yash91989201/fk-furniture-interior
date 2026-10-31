@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/performance/noJsxPropsBind: homepage wires section callbacks */
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { About } from "./about";
 import { Craft } from "./craft";
@@ -27,8 +27,13 @@ const SCROLL_OPTIONS = {
 
 export function Homepage() {
 	const reduced = usePrefersReducedMotion();
+	const [mounted, setMounted] = useState(false);
 	const [presetCategory, setPresetCategory] = useState("");
 	const [presetRequirement, setPresetRequirement] = useState("");
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	function handleEnquire(category: string, requirement: string) {
 		setPresetCategory(category);
@@ -37,7 +42,9 @@ export function Homepage() {
 
 	return (
 		<div className="home-page">
-			{reduced ? null : <ReactLenis options={SCROLL_OPTIONS} root />}
+			{mounted && !reduced ? (
+				<ReactLenis options={SCROLL_OPTIONS} root />
+			) : null}
 			<a className="home-skip" href="#fk-projects">
 				Skip to selected projects
 			</a>

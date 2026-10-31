@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 
 export function useMediaQuery(query: string): boolean {
-	const [matches, setMatches] = useState(() => {
-		if (typeof window === "undefined") {
-			return false;
-		}
-		return window.matchMedia(query).matches;
-	});
+	// Start false so the client's first render matches the server; the effect
+	// applies the real value immediately after hydration.
+	const [matches, setMatches] = useState(false);
 
 	useEffect(() => {
 		const media = window.matchMedia(query);

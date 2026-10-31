@@ -2586,6 +2586,9 @@ html.lenis:has(.home-page) {
 	.home-story-stage {
 		position: relative;
 		top: auto;
+		height: auto;
+		max-height: none;
+		overflow: visible;
 	}
 }
 
@@ -3307,5 +3310,142 @@ html.lenis:has(.home-page) {
 	}
 	.home-about-heading-end {
 		display: inline;
+	}
+}
+
+/* Keep the pinned story legible on laptop heights: the stage compacts before
+   the controls can fall inside its own scroll area. */
+@media (max-height: 50rem) {
+	.home-story-stage {
+		gap: 0.85rem;
+		padding-block: 1.3rem 1.1rem;
+	}
+
+	.home-story-body {
+		gap: 4%;
+	}
+
+	.home-scene {
+		height: 18rem;
+	}
+
+	.home-story-copy p {
+		margin-bottom: 0.75rem;
+	}
+
+	.home-story-copy p.home-deliverable {
+		padding-top: 0.75rem;
+	}
+}
+
+@media (max-height: 44rem) {
+	.home-story-stage {
+		gap: 0.6rem;
+		padding-block: 0.9rem 0.75rem;
+	}
+
+	.home-story-header h2 {
+		font-size: 1.25rem;
+	}
+
+	.home-story-body {
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 4%;
+	}
+
+	.home-scene {
+		height: 11rem;
+	}
+
+	.home-story-copy {
+		padding-bottom: 0;
+	}
+
+	.home-story-copy h3 {
+		margin-block: 0.35rem 0.3rem;
+		font-size: clamp(1.4rem, 1.15rem + 1.2vw, 2rem);
+	}
+
+	.home-story-copy p,
+	.home-story-copy p.home-deliverable {
+		font-size: 0.875rem;
+		line-height: 1.45;
+	}
+
+	.home-story-copy p {
+		margin-bottom: 0.5rem;
+	}
+
+	.home-story-copy p.home-deliverable {
+		padding-top: 0.5rem;
+	}
+
+	.home-story-nav button {
+		min-height: 2.5rem;
+		padding-block: 0.6rem;
+	}
+}
+
+/* Below 40rem tall the pinned stage cannot hold a step and its controls.
+   Flow the story normally and leave every step reachable by its tab. */
+@media (max-height: 40rem) {
+	.home-story-runway {
+		height: auto !important;
+	}
+
+	.home-story-stage {
+		position: relative;
+		top: auto;
+		height: auto;
+		max-height: none;
+		overflow: visible;
+	}
+
+	.home-story-nav {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.home-story-nav button:not([aria-current="step"]),
+	.home-story-controls p,
+	.home-story-buttons {
+		display: block;
+	}
+
+	.home-story-buttons {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+@media (max-height: 40rem) and (max-width: 40rem) {
+	.home-story-nav {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* Reduced motion also removes the scroll runway; keep the step controls
+   visible so the four steps do not depend on scrolling to advance. */
+@media (prefers-reduced-motion: reduce) {
+	.home-story-nav {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.home-story-nav button:not([aria-current="step"]) {
+		display: block;
+	}
+
+	.home-story-controls p {
+		display: block;
+	}
+
+	.home-story-buttons {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 40rem) {
+	.home-story-nav {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
