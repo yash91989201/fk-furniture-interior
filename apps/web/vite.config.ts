@@ -15,7 +15,13 @@ export default defineConfig({
 	plugins: [
 		varlockVitePlugin({ ssrInjectMode: "auto-load" }),
 		tailwindcss(),
-		tanstackStart(),
+		tanstackStart({
+			prerender: {
+				enabled: true,
+				crawlLinks: true,
+				filter: (page) => page.path === "/",
+			},
+		}),
 		nitro({ preset: "node-server" }),
 		viteReact(),
 	],
