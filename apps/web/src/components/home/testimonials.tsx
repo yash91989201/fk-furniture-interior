@@ -9,9 +9,8 @@ import {
 	useRef,
 	useState,
 } from "react";
-
+import { useMediaQuery, usePrefersReducedMotion } from "@/hooks/use-media";
 import { testimonials } from "./content";
-import { useMediaQuery, usePrefersReducedMotion } from "./use-media";
 
 const COUNT = testimonials.length;
 const SWIPE_CONSTRAINTS = { left: 0, right: 0 };

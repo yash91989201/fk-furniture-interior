@@ -11,10 +11,9 @@ import {
 	useTransform,
 } from "motion/react";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
-
+import { useMediaQuery, usePrefersReducedMotion } from "@/hooks/use-media";
 import { processSteps } from "./content";
 import { ProcessDrawing } from "./process-drawing";
-import { useMediaQuery, usePrefersReducedMotion } from "./use-media";
 
 const STEP_COUNT = processSteps.length;
 const SCROLL_SLOW = 1.2;

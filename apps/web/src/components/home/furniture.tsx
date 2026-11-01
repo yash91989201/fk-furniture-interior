@@ -12,9 +12,8 @@ import {
 	useRef,
 	useState,
 } from "react";
-
+import { usePrefersReducedMotion } from "@/hooks/use-media";
 import { furnitureCategories } from "./content";
-import { usePrefersReducedMotion } from "./use-media";
 
 const HEADING_WORDS = /\S+\s*/g;
 
