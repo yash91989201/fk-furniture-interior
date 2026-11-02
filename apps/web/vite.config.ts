@@ -19,7 +19,6 @@ export default defineConfig({
 			prerender: {
 				enabled: true,
 				crawlLinks: true,
-				filter: (page) => page.path === "/",
 			},
 		}),
 		nitro({ preset: "node-server" }),
