@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const links = [
 	{ hash: undefined, label: "About", to: "/about" },
-	{ hash: "fk-services", label: "Services", to: "/" },
+	{ hash: undefined, label: "Services", to: "/services" },
+	{ hash: undefined, label: "Projects", to: "/projects" },
 	{ hash: undefined, label: "Gallery", to: "/gallery" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
 	{ hash: undefined, label: "Contact", to: "/contact" },

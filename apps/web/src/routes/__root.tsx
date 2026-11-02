@@ -54,10 +54,12 @@ function RootDocument() {
 	});
 	const bare =
 		pathname === "/" ||
+		pathname.startsWith("/projects") ||
 		pathname === "/about" ||
 		pathname === "/contact" ||
 		pathname === "/faq" ||
 		pathname === "/gallery" ||
+		pathname === "/services" ||
 		pathname === "/privacy-policy" ||
 		pathname === "/terms-and-conditions";
 

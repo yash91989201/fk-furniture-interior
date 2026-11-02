@@ -2357,7 +2357,7 @@ html.lenis:has(.home-page) {
 	}
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 60rem) {
 	.home-nav-links,
 	.home-nav-row > .home-nav-cta {
 		display: none;

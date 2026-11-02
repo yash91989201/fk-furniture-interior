@@ -49,6 +49,7 @@ export const projects = [
 		name: "Resort De Coracao",
 		location: "Tapovan, Rishikesh",
 		image: photos.lobby,
+		slug: "resort-de-coracao",
 		scope:
 			"Completed turnkey hospitality interior, from design and bespoke furniture through to installation.",
 	},
@@ -58,6 +59,7 @@ export const projects = [
 		name: "[Residential project name]",
 		location: "[Location]",
 		image: photos.guestRoomTv,
+		slug: null,
 		scope:
 			"[Scope: living spaces, fitted storage and bespoke furniture. Client confirmation needed.]",
 	},
@@ -67,6 +69,7 @@ export const projects = [
 		name: "[Commercial project name]",
 		location: "[Location]",
 		image: photos.lobbyLounge,
+		slug: null,
 		scope:
 			"[Scope: workplace interiors, meeting spaces and fitted furniture. Client confirmation needed.]",
 	},

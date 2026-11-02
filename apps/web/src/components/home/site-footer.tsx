@@ -15,7 +15,8 @@ const contactLink =
 const exploreLinks = [
 	{ hash: undefined, label: "Home", to: "/" },
 	{ hash: undefined, label: "About", to: "/about" },
-	{ hash: "fk-services", label: "Services", to: "/" },
+	{ hash: undefined, label: "Services", to: "/services" },
+	{ hash: undefined, label: "Projects", to: "/projects" },
 	{ hash: undefined, label: "Gallery", to: "/gallery" },
 	{ hash: "fk-craft", label: "Craft", to: "/" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
@@ -203,7 +204,11 @@ export function SiteFooter() {
 						through installation.
 					</p>
 				</div>
-				<Link className="home-footer-proof-copy" to="/gallery">
+				<Link
+					className="home-footer-proof-copy"
+					params={{ slug: leadProject.slug }}
+					to="/projects/$slug"
+				>
 					<div className="home-footer-proof-head">
 						<h2 className="home-footer-proof-title">{leadProject.name}</h2>
 						<span className="home-footer-place">

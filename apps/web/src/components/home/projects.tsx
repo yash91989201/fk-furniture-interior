@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/performance/noJsxPropsBind: project index handlers close over selection */
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
+import { Link } from "@tanstack/react-router";
 import { type MouseEvent, useState } from "react";
 
 import { projects } from "./content";
@@ -63,12 +64,30 @@ export function Projects() {
 				</div>
 				<div className="home-mosaic-copy">
 					<p>{project.scope}</p>
-					<a
-						className={buttonVariants({ variant: "outline" })}
-						href="#fk-enquiry"
-					>
-						Discuss a similar project
-					</a>
+					<div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+						{project.slug ? (
+							<Link
+								className={buttonVariants({ variant: "outline" })}
+								params={{ slug: project.slug }}
+								to="/projects/$slug"
+							>
+								View project
+							</Link>
+						) : (
+							<Link
+								className={buttonVariants({ variant: "outline" })}
+								to="/projects"
+							>
+								View projects
+							</Link>
+						)}
+						<a
+							className="inline-flex min-h-11 items-center text-[0.8125rem] underline decoration-1 decoration-primary underline-offset-4 hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+							href="#fk-enquiry"
+						>
+							Discuss a similar project
+						</a>
+					</div>
 				</div>
 			</article>
 			<span aria-live="polite" className="sr-only">
