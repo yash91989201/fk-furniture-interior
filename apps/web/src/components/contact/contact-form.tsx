@@ -66,7 +66,7 @@ export function ContactForm() {
 					>
 						Tell us what you are planning.
 					</h2>
-					<p className="mt-[1.25rem] text-pretty text-[0.9375rem] text-muted-foreground leading-[1.7]">
+					<p className="mt-[1.25rem] text-pretty text-[1rem] text-muted-foreground leading-[1.65]">
 						A few lines about the space, the scope and the stage you are at is
 						enough to begin. If drawings or a BOQ exist, bring those into the
 						conversation.

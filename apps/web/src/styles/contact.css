@@ -1,0 +1,193 @@
+.office-dir {
+	padding: clamp(2.75rem, 6vw, 5rem)
+		max(var(--home-gutter), env(safe-area-inset-right))
+		clamp(2.75rem, 6vw, 5rem) max(var(--home-gutter), env(safe-area-inset-left));
+	color: var(--foreground);
+	background: var(--background);
+	border-bottom: 1px solid var(--border);
+}
+
+.office-dir__top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 2.5rem;
+	align-items: baseline;
+	justify-content: space-between;
+}
+
+.office-dir h2 {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: -0.022em;
+	text-wrap: balance;
+}
+
+.office-dir__mail {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.75rem;
+	align-items: baseline;
+	font-size: 1rem;
+	overflow-wrap: anywhere;
+}
+
+.office-dir__label,
+.office-dir__cols {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--muted-foreground);
+	letter-spacing: 0.09em;
+}
+
+.office-dir a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--primary);
+	text-underline-offset: 4px;
+}
+
+.office-dir a:active {
+	text-decoration-color: currentColor;
+}
+
+.office-dir a:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 4px;
+}
+
+@media (hover: hover) {
+	.office-dir a:hover {
+		text-decoration-color: currentColor;
+	}
+}
+
+@media (pointer: coarse) {
+	.office-dir a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+	}
+}
+
+.office-dir__cols {
+	display: none;
+	padding-bottom: 0.7rem;
+	margin-top: clamp(2rem, 4vw, 3.25rem);
+	border-bottom: 1px solid var(--border);
+}
+
+.office-dir__cols > span:last-child {
+	text-align: right;
+}
+
+.office-dir__list {
+	padding: 0;
+	margin: clamp(1.5rem, 4vw, 2rem) 0 0;
+	list-style: none;
+	border-top: 1px solid var(--border);
+}
+
+.office-dir__row {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.4rem;
+	padding: 1.1rem 0;
+	border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.office-dir__name {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.75rem);
+	font-weight: 500;
+	line-height: 1.1;
+	letter-spacing: -0.015em;
+}
+
+.office-dir__address {
+	font-size: 1rem;
+	font-style: normal;
+	line-height: 1.6;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+	overflow-wrap: anywhere;
+}
+
+.office-dir__address > span {
+	display: block;
+}
+
+.office-dir__phones {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.1rem 1rem;
+	justify-content: flex-start;
+	padding: 0;
+	margin: 0;
+	font-size: 1rem;
+	font-variant-numeric: tabular-nums;
+	list-style: none;
+}
+
+.office-dir__phones a {
+	white-space: nowrap;
+}
+
+@media (min-width: 52rem) {
+	.office-dir {
+		--office-dir-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 0.9fr);
+		--office-dir-gap: clamp(1rem, 2.2vw, 2.5rem);
+	}
+
+	.office-dir__cols {
+		display: grid;
+		grid-template-columns: var(--office-dir-columns);
+		gap: var(--office-dir-gap);
+		align-items: baseline;
+	}
+
+	.office-dir__list {
+		margin-top: 0;
+		border-top: 0;
+	}
+
+	.office-dir__row {
+		grid-template-columns: var(--office-dir-columns);
+		gap: var(--office-dir-gap);
+		align-items: baseline;
+		padding: 1.35rem 0;
+	}
+
+	.office-dir__phones {
+		gap: 0.3rem 1.1rem;
+		justify-content: flex-end;
+	}
+}
+
+@media (min-width: 72rem) {
+	.office-dir__address > span {
+		display: inline;
+	}
+
+	.office-dir__address > span:not(:last-child)::after {
+		content: ", ";
+	}
+
+	.office-dir__row {
+		padding: 1.15rem 0;
+	}
+}
+
+@media (min-width: 110rem) {
+	.office-dir h2 {
+		font-size: 3.25rem;
+	}
+
+	.office-dir__name {
+		font-size: 2rem;
+	}
+}

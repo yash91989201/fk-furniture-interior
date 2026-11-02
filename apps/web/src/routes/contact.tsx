@@ -31,8 +31,8 @@ function ContactComponent() {
 			<main>
 				<ContactHero />
 				<ContactForm />
-				<OfficeDetails />
 				<ContactInvitation />
+				<OfficeDetails />
 			</main>
 			<SiteFooter />
 		</div>
