@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const links = [
 	{ hash: undefined, label: "About", to: "/about" },
 	{ hash: "fk-services", label: "Services", to: "/" },
-	{ hash: "fk-projects", label: "Projects", to: "/" },
+	{ hash: undefined, label: "Gallery", to: "/gallery" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
 	{ hash: undefined, label: "Contact", to: "/contact" },
 ] as const;

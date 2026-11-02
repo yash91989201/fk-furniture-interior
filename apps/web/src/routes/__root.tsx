@@ -57,6 +57,7 @@ function RootDocument() {
 		pathname === "/about" ||
 		pathname === "/contact" ||
 		pathname === "/faq" ||
+		pathname === "/gallery" ||
 		pathname === "/privacy-policy" ||
 		pathname === "/terms-and-conditions";
 

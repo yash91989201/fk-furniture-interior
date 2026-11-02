@@ -16,7 +16,7 @@ const exploreLinks = [
 	{ hash: undefined, label: "Home", to: "/" },
 	{ hash: undefined, label: "About", to: "/about" },
 	{ hash: "fk-services", label: "Services", to: "/" },
-	{ hash: "fk-projects", label: "Projects", to: "/" },
+	{ hash: undefined, label: "Gallery", to: "/gallery" },
 	{ hash: "fk-craft", label: "Craft", to: "/" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
 	{ hash: undefined, label: "Contact", to: "/contact" },
@@ -203,7 +203,7 @@ export function SiteFooter() {
 						through installation.
 					</p>
 				</div>
-				<Link className="home-footer-proof-copy" hash="fk-projects" to="/">
+				<Link className="home-footer-proof-copy" to="/gallery">
 					<div className="home-footer-proof-head">
 						<h2 className="home-footer-proof-title">{leadProject.name}</h2>
 						<span className="home-footer-place">
