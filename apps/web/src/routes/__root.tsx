@@ -55,6 +55,7 @@ function RootDocument() {
 	const bare =
 		pathname === "/" ||
 		pathname === "/about" ||
+		pathname === "/contact" ||
 		pathname === "/faq" ||
 		pathname === "/privacy-policy" ||
 		pathname === "/terms-and-conditions";

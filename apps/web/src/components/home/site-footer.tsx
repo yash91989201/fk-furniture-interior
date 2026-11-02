@@ -2,10 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
+import { contactEmail } from "@/components/contact/content";
+
 import { projects } from "./content";
 import { FooterDrawing } from "./footer-drawing";
 
 const [leadProject] = projects;
+
+const contactLink =
+	"underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4";
 
 const exploreLinks = [
 	{ hash: undefined, label: "Home", to: "/" },
@@ -14,7 +19,7 @@ const exploreLinks = [
 	{ hash: "fk-projects", label: "Projects", to: "/" },
 	{ hash: "fk-craft", label: "Craft", to: "/" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
-	{ hash: "fk-enquiry", label: "Contact", to: "/" },
+	{ hash: undefined, label: "Contact", to: "/contact" },
 ] as const;
 
 // Drafting reveals nudge within these bounds; anything larger stops reading as a plan on a table.
@@ -232,13 +237,28 @@ export function SiteFooter() {
 						Contact
 					</p>
 					<ul aria-labelledby="footer-contact" className="home-footer-facts">
-						<li>Gurgaon office</li>
-						<li>Goa office</li>
-						<li>[Phone]</li>
-						<li>[Email]</li>
-						<li>[Company profile / catalogue]</li>
+						<li>
+							<Link className={contactLink} to="/contact">
+								Gurgaon office
+							</Link>
+						</li>
+						<li>
+							<Link className={contactLink} to="/contact">
+								Goa office
+							</Link>
+						</li>
+						<li>
+							<a className={contactLink} href="tel:+919873746270">
+								+91 98737 46270
+							</a>
+						</li>
+						<li>
+							<a className={contactLink} href={`mailto:${contactEmail}`}>
+								{contactEmail}
+							</a>
+						</li>
 					</ul>
-					<Link className="home-footer-action" hash="fk-enquiry" to="/">
+					<Link className="home-footer-action" to="/contact">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={18} />
 					</Link>

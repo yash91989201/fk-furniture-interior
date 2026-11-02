@@ -7,7 +7,7 @@ const links = [
 	{ hash: "fk-services", label: "Services", to: "/" },
 	{ hash: "fk-projects", label: "Projects", to: "/" },
 	{ hash: undefined, label: "FAQ", to: "/faq" },
-	{ hash: "fk-enquiry", label: "Contact", to: "/" },
+	{ hash: undefined, label: "Contact", to: "/contact" },
 ] as const;
 
 // Ticker lines stay inside the company profile's record: the 1986 family craft
@@ -153,7 +153,7 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 						<span className="home-brand-mark">FK</span>
 						<span className="home-brand-name">Furniture &amp; Interior</span>
 					</Link>
-					<Link className="home-nav-cta" hash="fk-enquiry" to="/">
+					<Link className="home-nav-cta" to="/contact">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={15} />
 					</Link>
@@ -181,9 +181,8 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 							))}
 							<Link
 								className="home-nav-cta home-menu-cta"
-								hash="fk-enquiry"
 								onClick={closeMenu}
-								to="/"
+								to="/contact"
 							>
 								Discuss your project
 								<ArrowUpRight aria-hidden="true" size={15} />
