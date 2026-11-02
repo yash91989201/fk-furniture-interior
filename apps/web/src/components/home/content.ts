@@ -1,3 +1,7 @@
+// <name>-720/-1280.webp are pre-generated next to each <name>.webp photo.
+export const bandSrcSet = (src: string) =>
+	`${src.replace(".webp", "-720.webp")} 720w, ${src.replace(".webp", "-1280.webp")} 1280w, ${src} 2000w`;
+
 export const photos = {
 	// Keys describe the room in the photograph; filenames are the supplied assets.
 	lobby: {

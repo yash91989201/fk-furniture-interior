@@ -1,11 +1,13 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const links = [
-	{ href: "#fk-about", label: "About" },
-	{ href: "#fk-services", label: "Services" },
-	{ href: "#fk-projects", label: "Projects" },
-	{ href: "#fk-enquiry", label: "Contact" },
+	{ hash: undefined, label: "About", to: "/about" },
+	{ hash: "fk-services", label: "Services", to: "/" },
+	{ hash: "fk-projects", label: "Projects", to: "/" },
+	{ hash: undefined, label: "FAQ", to: "/faq" },
+	{ hash: "fk-enquiry", label: "Contact", to: "/" },
 ] as const;
 
 // Ticker lines stay inside the company profile's record: the 1986 family craft
@@ -23,12 +25,17 @@ const SCROLL_HIDE_DELAY_MS = 150;
 const SCROLL_ACTIVE_MS = 40;
 const SCROLL_IDLE_MS = 260;
 
-export function SiteNav() {
-	const [compact, setCompact] = useState(false);
+export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
+	const [compact, setCompact] = useState(compactStart);
 	const [covered, setCovered] = useState(false);
-	const [pastHero, setPastHero] = useState(false);
+	// Pages without a full-bleed hero start past it so the ticker stays closed.
+	const [pastHero, setPastHero] = useState(compactStart);
 	const [scrolling, setScrolling] = useState(false);
+	const menuRef = useRef<HTMLDetailsElement>(null);
 	const hidden = covered || scrolling;
+	const closeMenu = useCallback(() => {
+		menuRef.current?.removeAttribute("open");
+	}, []);
 
 	useEffect(() => {
 		// Any .home-page [data-hide-nav] section hides this bar while it covers the
@@ -42,7 +49,7 @@ export function SiteNav() {
 		let lastEventAt = 0;
 		const update = () => {
 			frame = 0;
-			setCompact(window.scrollY > 64);
+			setCompact(compactStart || window.scrollY > 64);
 			if (hero) {
 				const past = hero.getBoundingClientRect().bottom <= 0;
 				setPastHero((current) => (current === past ? current : past));
@@ -99,7 +106,7 @@ export function SiteNav() {
 				cancelAnimationFrame(frame);
 			}
 		};
-	}, []);
+	}, [compactStart]);
 
 	return (
 		<div className="home-nav-slot">
@@ -130,20 +137,27 @@ export function SiteNav() {
 				<div className="home-nav-row">
 					<nav aria-label="Primary" className="home-nav-links">
 						{links.map((link) => (
-							<a href={link.href} key={`nav-${link.href}`}>
+							<Link
+								activeProps={{ "aria-current": "page" }}
+								className="aria-[current=page]:underline aria-[current=page]:underline-offset-[0.35em]"
+								hash={link.hash}
+								key={`nav-${link.label}`}
+								onClick={closeMenu}
+								to={link.to}
+							>
 								{link.label}
-							</a>
+							</Link>
 						))}
 					</nav>
-					<a className="home-brand" href="#fk-hero">
+					<Link className="home-brand" to="/">
 						<span className="home-brand-mark">FK</span>
 						<span className="home-brand-name">Furniture &amp; Interior</span>
-					</a>
-					<a className="home-nav-cta" href="#fk-enquiry">
+					</Link>
+					<Link className="home-nav-cta" hash="fk-enquiry" to="/">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={15} />
-					</a>
-					<details className="home-menu">
+					</Link>
+					<details className="home-menu" ref={menuRef}>
 						<summary>
 							<svg
 								aria-hidden="true"
@@ -156,14 +170,24 @@ export function SiteNav() {
 						</summary>
 						<div className="home-menu-panel">
 							{links.map((link) => (
-								<a href={link.href} key={`menu-${link.href}`}>
+								<Link
+									hash={link.hash}
+									key={`menu-${link.label}`}
+									onClick={closeMenu}
+									to={link.to}
+								>
 									{link.label}
-								</a>
+								</Link>
 							))}
-							<a className="home-nav-cta home-menu-cta" href="#fk-enquiry">
+							<Link
+								className="home-nav-cta home-menu-cta"
+								hash="fk-enquiry"
+								onClick={closeMenu}
+								to="/"
+							>
 								Discuss your project
 								<ArrowUpRight aria-hidden="true" size={15} />
-							</a>
+							</Link>
 						</div>
 					</details>
 				</div>

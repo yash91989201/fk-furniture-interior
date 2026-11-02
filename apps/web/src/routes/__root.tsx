@@ -52,7 +52,12 @@ function RootDocument() {
 	const pathname = useRouterState({
 		select: (state) => state.location.pathname,
 	});
-	const isHome = pathname === "/";
+	const bare =
+		pathname === "/" ||
+		pathname === "/about" ||
+		pathname === "/faq" ||
+		pathname === "/privacy-policy" ||
+		pathname === "/terms-and-conditions";
 
 	return (
 		<html lang="en">
@@ -60,7 +65,7 @@ function RootDocument() {
 				<HeadContent />
 			</head>
 			<body>
-				{isHome ? (
+				{bare ? (
 					<Outlet />
 				) : (
 					<div className="grid h-svh grid-rows-[auto_1fr]">

@@ -15,12 +15,20 @@ import { type ChangeEvent, type FormEvent, useState } from "react";
 
 import { enquiryOptions } from "./content";
 
+const HOME_COPY = {
+	body: "Tell us about your space, your ideas and the support you need.",
+	heading: "Let’s discuss your project.",
+	title: "Your space. Our next conversation.",
+};
+
 export function Enquiry({
 	presetCategory,
 	presetRequirement,
+	copy = HOME_COPY,
 }: {
 	presetCategory: string;
 	presetRequirement: string;
+	copy?: { body: string; heading: string; title: string };
 }) {
 	const [feedback, setFeedback] = useState("");
 	const [requirement, setRequirement] = useState(presetRequirement || "");
@@ -54,11 +62,9 @@ export function Enquiry({
 		<section className="home-section home-enquiry" id="fk-enquiry">
 			<div className="home-enquiry-grid">
 				<div className="home-enquiry-invite">
-					<h2 className="home-enquiry-title">
-						Your space. Our next conversation.
-					</h2>
-					<h3>Let’s discuss your project.</h3>
-					<p>Tell us about your space, your ideas and the support you need.</p>
+					<h2 className="home-enquiry-title">{copy.title}</h2>
+					<h3>{copy.heading}</h3>
+					<p>{copy.body}</p>
 					<p className="home-muted">
 						[Phone number]
 						<br />

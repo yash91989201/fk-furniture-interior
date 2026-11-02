@@ -1,8 +1,4 @@
-import { services } from "./content";
-
-// <name>-720/-1280.webp are pre-generated next to each <name>.webp band photo.
-const bandSrcSet = (src: string) =>
-	`${src.replace(".webp", "-720.webp")} 720w, ${src.replace(".webp", "-1280.webp")} 1280w, ${src} 2000w`;
+import { bandSrcSet, services } from "./content";
 
 export function Services() {
 	return (

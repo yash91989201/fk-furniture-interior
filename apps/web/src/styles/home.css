@@ -11,6 +11,10 @@ html.lenis:has(.home-page) {
 	--home-gutter: clamp(1.25rem, 5vw, 5rem);
 	--home-nav-height: 7.5rem;
 	--home-nav-compact: 3.75rem;
+	/* hero type ladder, shared by the home and about heroes */
+	--hero-display: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+	--hero-body: clamp(1rem, 0.9rem + 0.45vw, 1.125rem);
+	--hero-meta: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
 	--home-warm-aubergine: color-mix(
 		in oklab,
 		var(--secondary) 92%,
@@ -22,6 +26,12 @@ html.lenis:has(.home-page) {
 }
 
 .home-page :focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 3px;
+}
+
+/* shared buttons ship outline-none plus a translucent ring; restore the page ring */
+.home-page :is(a, button):focus-visible {
 	outline: 2px solid var(--ring);
 	outline-offset: 3px;
 }
@@ -184,6 +194,13 @@ html.lenis:has(.home-page) {
 }
 
 .home-nav-links a:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.4rem;
+}
+
+/* Unlayered, so this outranks the component's Tailwind aria-current utility. */
+.home-nav-links a[aria-current="page"] {
 	text-decoration: underline;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.4rem;
@@ -418,9 +435,6 @@ html.lenis:has(.home-page) {
 }
 
 .home-hero-card {
-	--hero-display: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
-	--hero-body: clamp(1rem, 0.9rem + 0.45vw, 1.125rem);
-	--hero-meta: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
 	--hero-gap: clamp(1.1rem, 0.8rem + 0.8vw, 1.5rem);
 
 	position: relative;
@@ -486,6 +500,7 @@ html.lenis:has(.home-page) {
 	align-items: center;
 }
 .home-page .home-hero-secondary {
+	padding-inline: 0;
 	color: var(--foreground);
 }
 

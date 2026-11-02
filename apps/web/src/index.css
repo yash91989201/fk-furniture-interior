@@ -1,2 +1,37 @@
 @import "@fk-furniture-interior/ui/globals.css";
 @import "./styles/home.css";
+
+/* About page motion: one load reveal and one scroll-drawn rule. */
+@keyframes about-hero-settle {
+	from {
+		opacity: 0.55;
+		transform: scale(1.05);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes about-hero-lift {
+	from {
+		opacity: 0;
+		transform: translateY(0.75rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes about-timeline-draw {
+	from {
+		transform: scaleY(0);
+	}
+
+	to {
+		transform: scaleY(1);
+	}
+}

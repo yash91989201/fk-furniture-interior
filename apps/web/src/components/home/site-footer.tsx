@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -7,12 +8,13 @@ import { FooterDrawing } from "./footer-drawing";
 const [leadProject] = projects;
 
 const exploreLinks = [
-	{ href: "#fk-hero", label: "Home" },
-	{ href: "#fk-about", label: "About" },
-	{ href: "#fk-services", label: "Services" },
-	{ href: "#fk-projects", label: "Projects" },
-	{ href: "#fk-craft", label: "Craft" },
-	{ href: "#fk-enquiry", label: "Contact" },
+	{ hash: undefined, label: "Home", to: "/" },
+	{ hash: undefined, label: "About", to: "/about" },
+	{ hash: "fk-services", label: "Services", to: "/" },
+	{ hash: "fk-projects", label: "Projects", to: "/" },
+	{ hash: "fk-craft", label: "Craft", to: "/" },
+	{ hash: undefined, label: "FAQ", to: "/faq" },
+	{ hash: "fk-enquiry", label: "Contact", to: "/" },
 ] as const;
 
 // Drafting reveals nudge within these bounds; anything larger stops reading as a plan on a table.
@@ -196,7 +198,7 @@ export function SiteFooter() {
 						through installation.
 					</p>
 				</div>
-				<a className="home-footer-proof-copy" href="#fk-projects">
+				<Link className="home-footer-proof-copy" hash="fk-projects" to="/">
 					<div className="home-footer-proof-head">
 						<h2 className="home-footer-proof-title">{leadProject.name}</h2>
 						<span className="home-footer-place">
@@ -204,7 +206,7 @@ export function SiteFooter() {
 						</span>
 					</div>
 					<span className="home-footer-scope">{leadProject.scope}</span>
-				</a>
+				</Link>
 			</div>
 			<div className="home-footer-grid">
 				<nav aria-labelledby="footer-explore">
@@ -213,8 +215,14 @@ export function SiteFooter() {
 					</p>
 					<ul className="home-footer-links">
 						{exploreLinks.map((link) => (
-							<li key={link.href}>
-								<a href={link.href}>{link.label}</a>
+							<li key={link.label}>
+								<Link
+									activeProps={{ "aria-current": "page" }}
+									hash={link.hash}
+									to={link.to}
+								>
+									{link.label}
+								</Link>
 							</li>
 						))}
 					</ul>
@@ -230,10 +238,10 @@ export function SiteFooter() {
 						<li>[Email]</li>
 						<li>[Company profile / catalogue]</li>
 					</ul>
-					<a className="home-footer-action" href="#fk-enquiry">
+					<Link className="home-footer-action" hash="fk-enquiry" to="/">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={18} />
-					</a>
+					</Link>
 				</div>
 				<div>
 					<p className="home-footer-label">Studio</p>
@@ -244,6 +252,18 @@ export function SiteFooter() {
 			</div>
 			<div className="home-legal">
 				<span>© {new Date().getFullYear()} FK Furniture &amp; Interior</span>
+				<Link
+					className="inline-flex min-h-11 items-center underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
+					to="/privacy-policy"
+				>
+					Privacy Policy
+				</Link>
+				<Link
+					className="inline-flex min-h-11 items-center underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
+					to="/terms-and-conditions"
+				>
+					Terms &amp; Conditions
+				</Link>
 			</div>
 		</footer>
 	);
