@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 import { AboutDrawing } from "@/components/home/about-drawing";
 
 import {
@@ -23,7 +25,7 @@ export function Quality() {
 			</div>
 			<span
 				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 z-[-1] bg-[color-mix(in_oklch,var(--secondary)_88%,transparent)] backdrop-blur-[8px] [mask-image:radial-gradient(ellipse_farthest-corner_at_center,#000_15%,rgb(0_0_0/95%)_35%,rgb(0_0_0/65%)_55%,rgb(0_0_0/30%)_78%,transparent_100%)]"
+				className="pointer-events-none absolute inset-0 z-[-1] bg-[radial-gradient(85%_75%_at_76%_62%,color-mix(in_oklch,var(--primary)_14%,transparent),transparent_72%),color-mix(in_oklch,var(--secondary)_88%,transparent)] backdrop-blur-[8px] [mask-image:radial-gradient(ellipse_farthest-corner_at_center,#000_15%,rgb(0_0_0/95%)_35%,rgb(0_0_0/65%)_55%,rgb(0_0_0/30%)_78%,transparent_100%)]"
 			/>
 			<div className="relative z-[1] grid grid-cols-[minmax(0,6fr)_minmax(0,5fr)] items-end gap-[clamp(1.25rem,4vw,4rem)] max-lg:grid-cols-[minmax(0,1fr)] max-lg:items-start max-lg:gap-[1.75rem]">
 				<h2 className={`${sectionTitle} max-w-[18ch]`} id="about-quality-title">
@@ -37,10 +39,17 @@ export function Quality() {
 			<dl className="relative z-[1] mt-[clamp(2rem,4vw,3rem)] grid grid-cols-[minmax(0,6fr)_minmax(0,5fr)] gap-x-[clamp(1.25rem,4vw,4rem)] max-lg:grid-cols-[repeat(2,minmax(0,1fr))] max-[47.99rem]:grid-cols-[minmax(0,1fr)]">
 				{checks.map((check) => (
 					<div
-						className="border-[color-mix(in_oklch,var(--secondary-foreground)_26%,var(--secondary))] border-t py-[1.1rem]"
+						className="border-[color-mix(in_oklch,var(--primary)_42%,transparent)] border-t py-[1.1rem]"
 						key={check.term}
 					>
-						<dt className={factTerm}>{check.term}</dt>
+						<dt className={factTerm}>
+							<Check
+								aria-hidden="true"
+								className="mr-[0.45em] inline-block size-[0.8em] align-[-0.06em] text-primary"
+								strokeWidth={2.5}
+							/>
+							{check.term}
+						</dt>
 						<dd
 							className={`${factText} text-[color-mix(in_oklch,var(--secondary-foreground)_80%,var(--secondary))]`}
 						>
@@ -49,8 +58,8 @@ export function Quality() {
 					</div>
 				))}
 			</dl>
-			<div className="relative z-[1] mt-[clamp(1.5rem,3vw,2.25rem)] border-[color-mix(in_oklch,var(--secondary-foreground)_26%,var(--secondary))] border-t pt-[1rem]">
-				<p className="m-0 max-w-[60ch] text-[0.9375rem] text-[color-mix(in_oklch,var(--secondary-foreground)_72%,var(--secondary))] leading-[1.55]">
+			<div className="relative z-[1] mt-[clamp(1.5rem,3vw,2.25rem)] border-[color-mix(in_oklch,var(--primary)_42%,transparent)] border-t pt-[1rem]">
+				<p className="m-0 max-w-[60ch] text-[0.9375rem] text-[color-mix(in_oklch,var(--secondary-foreground)_76%,var(--secondary))] leading-[1.55]">
 					Treatments, finishes and hardware are confirmed per project against
 					the approved sample.
 				</p>
