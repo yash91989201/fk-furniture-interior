@@ -17,7 +17,7 @@ export function WhyFk() {
 			className={`${sectionFrame} bg-muted/40`}
 			id="fk-why"
 		>
-			<div className="grid gap-x-[clamp(2rem,5vw,5rem)] gap-y-[clamp(2rem,4vw,3rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+			<div className="grid gap-x-[clamp(2rem,5vw,5rem)] gap-y-[clamp(2rem,4vw,3rem)] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
 				<div>
 					<h2 className={sectionTitle} id="services-why-title">
 						Why work with FK
@@ -33,9 +33,9 @@ export function WhyFk() {
 						Read the company story
 					</Link>
 				</div>
-				<dl className="m-0 grid gap-0 p-0">
+				<dl className="m-0 grid gap-x-[clamp(1.5rem,3vw,2.5rem)] gap-y-[clamp(1.25rem,2.5vw,2rem)] p-0 sm:grid-cols-2">
 					{distinctions.map((distinction) => (
-						<div className={`${factRow} last:border-b`} key={distinction.term}>
+						<div className={factRow} key={distinction.term}>
 							<dt className={factTerm}>{distinction.term}</dt>
 							<dd className={`${factText} text-muted-foreground`}>
 								{distinction.text}

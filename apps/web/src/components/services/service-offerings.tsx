@@ -1,15 +1,9 @@
-import { bandSrcSet } from "@/components/home/content";
+import { Plus } from "lucide-react";
 
-import {
-	bodyCopy,
-	factTerm,
-	factText,
-	figureCaption,
-	leadCopy,
-	offerings,
-	sectionFrame,
-	sectionTitle,
-} from "./content";
+import { bandSrcSet } from "@/components/home/content";
+import "@/styles/service-offerings.css";
+
+import { bodyCopy, offerings, sectionFrame, sectionTitle } from "./content";
 
 export function ServiceOfferings() {
 	return (
@@ -26,41 +20,34 @@ export function ServiceOfferings() {
 				catalogue. The final schedule of items follows the drawings, the BOQ and
 				the approved samples for the project.
 			</p>
-			<div className="mt-[clamp(2rem,4vw,3.25rem)]">
+			<div className="offerings-list">
 				{offerings.map((offering, index) => (
-					<article
-						className="border-border border-t py-[clamp(1.75rem,3vw,2.5rem)] [scroll-margin-top:calc(var(--home-nav-compact)+0.75rem)] lg:grid lg:grid-cols-12 lg:gap-x-[clamp(1.75rem,4vw,4rem)]"
+					<details
+						className="offerings-item"
 						id={offering.anchor}
 						key={offering.anchor}
+						name="fk-offering"
+						open={index === 0}
 					>
-						<div
-							className={`min-w-0 lg:col-span-7 ${index % 2 === 1 ? "lg:order-2" : ""}`}
-						>
-							<h3 className="m-0 font-heading font-medium text-[clamp(1.75rem,1.4rem+1.4vw,2.5rem)] leading-[1.12] tracking-tight">
-								{offering.title}
-							</h3>
-							<p className={`${leadCopy} mt-[0.9rem] max-w-[44ch]`}>
-								{offering.lead}
-							</p>
-							<ul className="m-0 mt-[1.5rem] grid list-none gap-x-[clamp(1.5rem,3vw,2.5rem)] p-0 sm:grid-cols-2">
-								{offering.scopes.map((scope) => (
-									<li
-										className="border-border border-t py-[0.6rem] text-[0.9375rem] leading-[1.5]"
-										key={scope}
-									>
-										{scope}
-									</li>
-								))}
-							</ul>
-						</div>
-						<div
-							className={`mt-[1.75rem] min-w-0 lg:col-span-5 lg:mt-0 ${index % 2 === 1 ? "lg:order-1" : ""}`}
-						>
+						<summary className="offerings-summary">
+							<h3 className="offerings-title">{offering.title}</h3>
+							<span className="offerings-blurb">{offering.summary}</span>
+							<span className="offerings-meta">
+								<span className="offerings-count">
+									{offering.scopes.length} scopes
+								</span>
+								<Plus
+									aria-hidden="true"
+									className="offerings-icon"
+									strokeWidth={1.5}
+								/>
+							</span>
+						</summary>
+						<div className="offerings-panel">
 							{offering.image ? (
-								<figure className="group m-0">
+								<figure className="offerings-figure">
 									<img
 										alt={offering.image.alt}
-										className="block aspect-[4/5] w-full object-cover transition-transform duration-[0.8s] ease-[var(--home-ease)] group-hover:scale-[1.02] motion-reduce:transition-none"
 										decoding="async"
 										height={1333}
 										loading="lazy"
@@ -69,29 +56,26 @@ export function ServiceOfferings() {
 										srcSet={bandSrcSet(offering.image.src)}
 										width={2000}
 									/>
-									<figcaption className={figureCaption}>
-										{offering.image.caption}
-									</figcaption>
+									<figcaption>{offering.image.caption}</figcaption>
 								</figure>
 							) : (
 								offering.note && (
-									<aside className="border-border border-t pt-[1rem]">
-										{offering.anchor === "contract-manufacturing" && (
-											<p className={leadCopy}>{offering.summary}</p>
-										)}
-										<h4
-											className={`${factTerm} ${offering.anchor === "contract-manufacturing" ? "mt-[1.5rem]" : ""}`}
-										>
-											{offering.note.title}
-										</h4>
-										<p className={`${factText} text-muted-foreground`}>
-											{offering.note.text}
-										</p>
+									<aside className="offerings-note">
+										<h4>{offering.note.title}</h4>
+										<p>{offering.note.text}</p>
 									</aside>
 								)
 							)}
+							<div>
+								<p className="offerings-lead">{offering.lead}</p>
+								<ul className="offerings-scopes">
+									{offering.scopes.map((scope) => (
+										<li key={scope}>{scope}</li>
+									))}
+								</ul>
+							</div>
 						</div>
-					</article>
+					</details>
 				))}
 			</div>
 		</section>

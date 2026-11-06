@@ -127,16 +127,16 @@ export const sectionFrame =
 	"py-[clamp(3.5rem,7vw,6.5rem)] pl-[max(var(--home-gutter),env(safe-area-inset-left))] pr-[max(var(--home-gutter),env(safe-area-inset-right))] [scroll-margin-top:calc(var(--home-nav-compact)+0.75rem)]";
 
 export const figureCaption =
-	"pt-[0.6rem] text-[0.75rem] leading-[1.45] text-muted-foreground";
+	"pt-[0.6rem] text-[0.8125rem] leading-[1.5] tracking-[0.006em] text-muted-foreground";
 
 // Term and explanation pairs share one role across every definition list.
-export const factRow = "border-border border-t py-[1.1rem]";
+export const factRow = "border-border border-t py-[clamp(1rem,1.7vw,1.3rem)]";
 
 export const factTerm =
 	"m-0 font-heading font-medium text-[clamp(1.15rem,1rem+0.4vw,1.4rem)] leading-[1.2] tracking-[-0.01em]";
 
 export const factText =
-	"m-0 mt-[0.4rem] max-w-[42ch] text-pretty text-[0.9375rem] leading-[1.55]";
+	"m-0 mt-[0.35rem] max-w-[46ch] text-pretty text-[clamp(1rem,0.95rem+0.16vw,1.0625rem)] leading-[1.65]";
 
 // Small label that names a group; it never labels a single term.
 export const groupLabel =
