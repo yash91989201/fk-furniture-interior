@@ -13,6 +13,12 @@
   "files": {
     "ignoreUnknown": false,
     "includes": [
+      "!**/.agents",
+      "!**/.claude",
+      "!**/.codex",
+      "!**/.impeccable",
+      "!**/.omp",
+      "!**/src/env.ts",
       "!**/.next",
       "!**/dist",
       "!**/.turbo",

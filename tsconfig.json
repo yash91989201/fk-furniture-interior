@@ -1,3 +1,4 @@
 {
-  "extends": "@fk-furniture-interior/config/tsconfig.base.json"
+  "extends": "@fk-furniture-interior/config/tsconfig.base.json",
+  "files": []
 }
