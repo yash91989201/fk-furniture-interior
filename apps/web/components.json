@@ -13,7 +13,7 @@
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
-    "utils": "@fk-furniture-interior/ui/lib/utils",
+    "utils": "cn",
     "ui": "@fk-furniture-interior/ui/components",
     "lib": "@/lib",
     "hooks": "@/hooks"
