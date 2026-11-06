@@ -1,6 +1,7 @@
 {
   "name": "fk-furniture-interior",
   "private": true,
+  "type": "module",
   "workspaces": {
     "packages": [
       "apps/*",
@@ -21,25 +22,24 @@
       "drizzle-orm": "1.0.0-rc.5"
     }
   },
-  "type": "module",
   "scripts": {
-    "dev": "nx run-many -t dev",
+    "auth:generate": "cd apps/web && bun run auth:generate",
     "build": "nx run-many -t build",
+    "check": "ultracite check",
     "check-types": "nx run-many -t check-types",
-    "dev:web": "nx run-many -t dev --projects=web",
-    "db:push": "nx run-many -t db:push --projects=@fk-furniture-interior/db",
-    "db:studio": "nx run-many -t db:studio --projects=@fk-furniture-interior/db",
     "db:generate": "nx run-many -t db:generate --projects=@fk-furniture-interior/db",
     "db:migrate": "nx run-many -t db:migrate --projects=@fk-furniture-interior/db",
+    "db:push": "nx run-many -t db:push --projects=@fk-furniture-interior/db",
+    "db:studio": "nx run-many -t db:studio --projects=@fk-furniture-interior/db",
+    "dev": "nx run-many -t dev",
+    "dev:web": "nx run-many -t dev --projects=web",
     "docker:build": "docker compose build",
-    "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
+    "docker:up": "docker compose up -d --build",
     "env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./packages/db/",
-    "postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./packages/db/",
-    "auth:generate": "cd apps/web && bun run auth:generate",
-    "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./packages/db/"
   },
   "dependencies": {
     "zod": "catalog:"
