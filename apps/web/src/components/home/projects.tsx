@@ -7,7 +7,7 @@ import { projects } from "./content";
 
 export function Projects() {
 	const [current, setCurrent] = useState(0);
-	const project = projects[current];
+	const project = projects[current] ?? projects[0];
 
 	function select(index: number) {
 		if (index === current) {

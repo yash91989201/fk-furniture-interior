@@ -60,7 +60,7 @@ export function Process() {
 		visualDuration: 0.6,
 	});
 	const progress = reduced ? rawProgress : sprungProgress;
-	const step = processSteps[active];
+	const step = processSteps[active] ?? processSteps[0];
 
 	useEffect(() => {
 		const runway = runwayRef.current;

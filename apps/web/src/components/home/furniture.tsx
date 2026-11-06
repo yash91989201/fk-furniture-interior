@@ -151,12 +151,12 @@ export function Furniture({
 	);
 	const handleCategoryClick = useCallback(
 		(event: MouseEvent<HTMLButtonElement>) => {
-			const { id } =
+			const category =
 				furnitureCategories[Number(event.currentTarget.dataset.index)];
-			if (id === openId) {
+			if (!category || category.id === openId) {
 				return;
 			}
-			selectedCategory(id, event.currentTarget);
+			selectedCategory(category.id, event.currentTarget);
 		},
 		[openId, selectedCategory]
 	);
@@ -194,7 +194,7 @@ export function Furniture({
 			const button = nav.querySelector<HTMLElement>(
 				`[data-index="${nextIndex}"]`
 			);
-			if (button) {
+			if (next && button) {
 				selectedCategory(next.id, button);
 			}
 		}, AUTOPLAY_MS);
@@ -318,7 +318,9 @@ export function Furniture({
 		(event: MouseEvent<HTMLAnchorElement>) => {
 			const category =
 				furnitureCategories[Number(event.currentTarget.dataset.index)];
-			onEnquire(category.title, category.requirement);
+			if (category) {
+				onEnquire(category.title, category.requirement);
+			}
 		},
 		[onEnquire]
 	);

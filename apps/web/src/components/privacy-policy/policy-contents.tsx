@@ -22,14 +22,15 @@ export function PolicyContents() {
 		const targets = sections
 			.map(([id]) => document.getElementById(id))
 			.filter((node): node is HTMLElement => node !== null);
-		if (targets.length === 0) {
+		const [firstTarget] = targets;
+		if (!firstTarget) {
 			return;
 		}
 
 		let frame = 0;
 		const measure = () => {
 			frame = 0;
-			let current = targets[0].id;
+			let current = firstTarget.id;
 			for (const target of targets) {
 				if (target.getBoundingClientRect().top <= ACTIVE_LINE) {
 					current = target.id;

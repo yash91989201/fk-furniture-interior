@@ -154,6 +154,9 @@ export function ProcessDrawing({
 	reduced: boolean;
 }) {
 	const drawing = DRAWINGS[active];
+	if (!drawing) {
+		return null;
+	}
 	return (
 		<div aria-hidden="true" className="home-scene-drawing">
 			<AnimatePresence mode="wait">

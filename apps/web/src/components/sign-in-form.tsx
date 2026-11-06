@@ -3,12 +3,21 @@ import { Input } from "@fk-furniture-interior/ui/components/input";
 import { Label } from "@fk-furniture-interior/ui/components/label";
 import { useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
+import { type ChangeEvent, type FormEvent, useCallback } from "react";
 import { toast } from "sonner";
 import z from "zod";
 
 import { authClient } from "@/lib/auth-client";
 
 import Loader from "./loader";
+
+const selectSubmitState = (state: {
+	canSubmit: boolean;
+	isSubmitting: boolean;
+}) => ({
+	canSubmit: state.canSubmit,
+	isSubmitting: state.isSubmitting,
+});
 
 export default function SignInForm({
 	onSwitchToSignUp,
@@ -52,6 +61,25 @@ export default function SignInForm({
 		},
 	});
 
+	const handleSubmit = useCallback(
+		(e: FormEvent<HTMLFormElement>) => {
+			e.preventDefault();
+			e.stopPropagation();
+			form.handleSubmit();
+		},
+		[form]
+	);
+	const handleEmailChange = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) =>
+			form.setFieldValue("email", e.target.value),
+		[form]
+	);
+	const handlePasswordChange = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) =>
+			form.setFieldValue("password", e.target.value),
+		[form]
+	);
+
 	if (isPending) {
 		return <Loader />;
 	}
@@ -60,14 +88,7 @@ export default function SignInForm({
 		<div className="mx-auto mt-10 w-full max-w-md p-6">
 			<h1 className="mb-6 text-center font-bold text-3xl">Welcome Back</h1>
 
-			<form
-				className="space-y-4"
-				onSubmit={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					form.handleSubmit();
-				}}
-			>
+			<form className="space-y-4" onSubmit={handleSubmit}>
 				<div>
 					<form.Field name="email">
 						{(field) => (
@@ -77,7 +98,7 @@ export default function SignInForm({
 									id={field.name}
 									name={field.name}
 									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
+									onChange={handleEmailChange}
 									type="email"
 									value={field.state.value}
 								/>
@@ -100,7 +121,7 @@ export default function SignInForm({
 									id={field.name}
 									name={field.name}
 									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
+									onChange={handlePasswordChange}
 									type="password"
 									value={field.state.value}
 								/>
@@ -114,12 +135,7 @@ export default function SignInForm({
 					</form.Field>
 				</div>
 
-				<form.Subscribe
-					selector={(state) => ({
-						canSubmit: state.canSubmit,
-						isSubmitting: state.isSubmitting,
-					})}
-				>
+				<form.Subscribe selector={selectSubmitState}>
 					{({ canSubmit, isSubmitting }) => (
 						<Button
 							className="w-full"
