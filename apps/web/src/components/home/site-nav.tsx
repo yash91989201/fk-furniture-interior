@@ -150,9 +150,25 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 							</Link>
 						))}
 					</nav>
-					<Link className="home-brand" to="/">
-						<span className="home-brand-mark">FK</span>
-						<span className="home-brand-name">Furniture &amp; Interior</span>
+					<Link
+						aria-label="FK Furniture & Interior home"
+						className="home-brand"
+						to="/"
+					>
+						<img
+							alt=""
+							className="home-brand-mark"
+							height={694}
+							src="/brand/logo-mark.webp"
+							width={729}
+						/>
+						<img
+							alt=""
+							className="home-brand-name"
+							height={138}
+							src="/brand/logo-wordmark.png"
+							width={1441}
+						/>
 					</Link>
 					<Link className="home-nav-cta" to="/contact">
 						Discuss your project

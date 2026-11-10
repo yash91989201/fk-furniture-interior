@@ -39,6 +39,26 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 		],
 		links: [
 			{
+				rel: "icon",
+				href: "/favicon.ico",
+				sizes: "16x16 32x32 48x48",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				href: "/favicon-32x32.png",
+				sizes: "32x32",
+			},
+			{
+				rel: "apple-touch-icon",
+				href: "/apple-touch-icon.png",
+				sizes: "180x180",
+			},
+			{
+				rel: "manifest",
+				href: "/site.webmanifest",
+			},
+			{
 				rel: "stylesheet",
 				href: appCss,
 			},

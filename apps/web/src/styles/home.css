@@ -161,23 +161,15 @@ html.lenis:has(.home-page) {
 }
 
 .home-brand-mark {
-	font-family: var(--font-heading);
-	font-size: clamp(1.65rem, 2.2vw, 2rem);
-	font-weight: 500;
-	line-height: 0.9;
-	letter-spacing: -0.03em;
+	display: block;
+	width: auto;
+	height: 2.75rem;
 }
 
 .home-brand-name {
-	padding-left: 0.6rem;
-	font-family: var(--font-sans);
-	font-size: 0.5625rem;
-	font-weight: 550;
-	line-height: 1.25;
-	text-transform: uppercase;
-	letter-spacing: 0.16em;
-	white-space: nowrap;
-	border-left: 1px solid color-mix(in oklch, var(--border) 75%, transparent);
+	display: block;
+	width: clamp(9rem, 14vw, 12rem);
+	height: auto;
 }
 
 .home-nav-links {
@@ -2106,14 +2098,15 @@ html.lenis:has(.home-page) {
 	gap: 1rem;
 }
 
-.home-footer-wordmark {
-	margin: 0;
-	font-family: var(--font-heading);
-	font-size: clamp(2.75rem, 4.75vw, 4.5rem);
-	font-weight: 500;
-	line-height: 1.05;
-	letter-spacing: -0.02em;
-	text-wrap: balance;
+.home-footer-logo {
+	display: block;
+	width: min(100%, 24rem);
+}
+
+.home-footer-logo img {
+	display: block;
+	width: 100%;
+	height: auto;
 }
 
 .home-footer-blurb {
@@ -2372,13 +2365,11 @@ html.lenis:has(.home-page) {
 	}
 
 	.home-brand-mark {
-		font-size: 1.45rem;
+		height: 2.5rem;
 	}
 
 	.home-brand-name {
-		padding-left: 0.45rem;
-		font-size: 0.5rem;
-		letter-spacing: 0.13em;
+		width: 9rem;
 	}
 
 	.home-menu {

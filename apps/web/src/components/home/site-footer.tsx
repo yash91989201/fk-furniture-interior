@@ -198,7 +198,19 @@ export function SiteFooter() {
 			</div>
 			<div className="home-footer-proof">
 				<div className="home-footer-identity">
-					<p className="home-footer-wordmark">FK Furniture & Interior</p>
+					<Link
+						aria-label="FK Furniture & Interior home"
+						className="home-footer-logo"
+						to="/"
+					>
+						<img
+							alt="FK Furniture & Interior — Designing Spaces, Creating Life"
+							height={963}
+							loading="lazy"
+							src="/brand/logo-full.webp"
+							width={1457}
+						/>
+					</Link>
 					<p className="home-footer-blurb">
 						Interior design, bespoke furniture and turnkey execution from design
 						through installation.
