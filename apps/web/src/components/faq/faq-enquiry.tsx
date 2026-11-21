@@ -27,9 +27,9 @@ export function FaqEnquiry() {
 					Ask the project desk.
 				</h2>
 				<p className="mx-auto max-w-[65ch] text-pretty text-[clamp(1rem,0.95rem+0.2vw,1.125rem)] text-[color-mix(in_oklch,var(--secondary-foreground)_82%,var(--secondary))] leading-[1.75] tracking-[0.005em]">
-					Scope, rates, dates and warranty periods are settled per project. Send
-					the rooms, the city, and any drawings or BOQ you already hold; we will
-					answer against your brief.
+					Scope and dates are settled per project. Send the rooms, the city, and
+					any drawings or BOQ you already hold, and we will answer against your
+					brief.
 				</p>
 			</div>
 		</section>

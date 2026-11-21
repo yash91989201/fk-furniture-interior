@@ -50,9 +50,10 @@ export function Story() {
 				</p>
 				<div className="grid gap-[0.9rem]">
 					<p className={bodyCopy}>
-						The professional company was formalised later. It still runs from
-						Gurgaon and Goa today, with design, material supply and execution
-						under one team.
+						Once material supply joined execution in 2012, specification and
+						making sat with one team. Today FK Furniture & Interior works from
+						offices in Gurugram and Goa, with 40 years in hospitality interiors
+						behind it.
 					</p>
 					<p className={bodyCopy}>
 						Interiors are designed and furniture is made for the way a room is
@@ -61,9 +62,8 @@ export function Story() {
 						remain comfortable years later.
 					</p>
 					<p className={bodyCopy}>
-						Hospitality furniture carries heavier daily use than most
-						residential pieces, so hardware, substrates and finishes are chosen
-						for the room rather than for a catalogue photograph.
+						Hospitality furniture takes heavier daily use than most residential
+						pieces. Hardware, substrates and finishes are chosen for the room.
 					</p>
 				</div>
 			</div>

@@ -29,11 +29,11 @@ export function Quality() {
 			/>
 			<div className="relative z-[1] grid grid-cols-[minmax(0,6fr)_minmax(0,5fr)] items-end gap-[clamp(1.25rem,4vw,4rem)] max-lg:grid-cols-[minmax(0,1fr)] max-lg:items-start max-lg:gap-[1.75rem]">
 				<h2 className={`${sectionTitle} max-w-[18ch]`} id="about-quality-title">
-					Nothing ships before it is checked.
+					The approved sample is the standard.
 				</h2>
 				<p className="m-0 max-w-[42ch] text-pretty text-[clamp(1rem,0.95rem+0.2vw,1.0625rem)] text-[color-mix(in_oklch,var(--secondary-foreground)_80%,var(--secondary))] leading-[1.6]">
-					Every piece is inspected before packing, and the specification that
-					was approved is the specification delivered.
+					Mock-up rooms and samples are approved before production, and the
+					approved specification is what gets built.
 				</p>
 			</div>
 			<dl className="relative z-[1] mt-[clamp(2rem,4vw,3rem)] grid grid-cols-[minmax(0,6fr)_minmax(0,5fr)] gap-x-[clamp(1.25rem,4vw,4rem)] max-lg:grid-cols-[repeat(2,minmax(0,1fr))] max-[47.99rem]:grid-cols-[minmax(0,1fr)]">

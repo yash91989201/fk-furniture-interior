@@ -30,15 +30,15 @@ export function ProjectsEnquiry() {
 						className={`${projectsTitle} mt-[0.9rem] max-w-[18ch]`}
 						id="projects-enquiry-title"
 					>
-						Have a new hotel, home, workplace or commercial project?
+						Planning a hotel, resort or hospitality project?
 					</h2>
 					<p className={`${projectsLead} mt-[1.35rem] max-w-[28ch]`}>
 						Start with the location, the scope and the drawings you hold.
 					</p>
 					<p className={`${projectsBody} mt-[1rem] max-w-[50ch]`}>
 						Share the project location, the spaces involved and any drawings or
-						BOQ you already have. The studio will review them and reply with the
-						next practical step.
+						BOQ you already have. The team will review them and reply with the
+						next step.
 					</p>
 				</div>
 				<div className="flex flex-col justify-end gap-[1.25rem]">

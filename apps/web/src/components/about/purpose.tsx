@@ -23,8 +23,8 @@ export function Purpose() {
 				<div className="border-border border-t pt-[0.85rem]">
 					<h3 className={`${groupLabel} mb-[0.6rem]`}>Vision</h3>
 					<p className="m-0 max-w-[30ch] text-pretty text-[0.9375rem] leading-[1.6]">
-						A fit-out partner that boutique hotels, resorts, designers and
-						homeowners return to, project after project.
+						A fit-out partner that hotels, resorts, designers and homeowners
+						return to, project after project.
 					</p>
 				</div>
 			</div>
@@ -34,7 +34,7 @@ export function Purpose() {
 					<em className="underline decoration-[0.09em] decoration-primary underline-offset-[0.14em]">
 						lasts
 					</em>
-					, made in our own workshop to the specification signed off.
+					, made in our own factory to the specification signed off.
 				</p>
 				<h3 className={`${groupLabel} mt-[clamp(3rem,6vw,5rem)]`}>
 					How we work

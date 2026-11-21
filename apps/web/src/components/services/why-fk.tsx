@@ -23,8 +23,8 @@ export function WhyFk() {
 						Why work with FK
 					</h2>
 					<p className={`${bodyCopy} mt-[1.25rem] max-w-[40ch]`}>
-						The same team is accountable for what is specified, made and
-						installed.
+						Forty years in hospitality interiors, and one team from
+						specification to installation.
 					</p>
 					<Link
 						className="text mt-[0.75rem] inline-flex min-h-11 items-center underline decoration-primary underline-offset-4 transition-colors duration-300 ease-[var(--home-ease)] hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4 motion-reduce:transition-none"

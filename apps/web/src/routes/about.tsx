@@ -18,7 +18,7 @@ export const Route = createFileRoute("/about")({
 			{
 				name: "description",
 				content:
-					"A family craft that began in Gurgaon in 1986, making bespoke furniture and turnkey interiors for homes, workplaces and hospitality spaces.",
+					"A family craft that began in Gurugram in 1986. FK Furniture & Interior makes furniture and interiors in a 4,500 sq ft factory with a 22-person team.",
 			},
 		],
 	}),

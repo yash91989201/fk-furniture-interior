@@ -52,7 +52,7 @@ export function GalleryFilters({
 						aria-live="polite"
 						className="mt-[0.4rem] text-[0.8125rem] text-muted-foreground leading-[1.5]"
 					>
-						{label} · {visible} {visible === 1 ? "work" : "works"} published
+						{label} · {visible} {visible === 1 ? "photograph" : "photographs"}
 					</p>
 				</div>
 				<fieldset className="flex flex-wrap gap-2 border-0 p-0">
@@ -90,7 +90,7 @@ export function GalleryFilters({
 									{String(count).padStart(2, "0")}
 								</span>
 								<span className="sr-only">
-									{count} {count === 1 ? "work" : "works"}
+									{count} {count === 1 ? "photograph" : "photographs"}
 								</span>
 							</button>
 						);

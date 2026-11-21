@@ -163,14 +163,15 @@ export function Process() {
 					<div className="home-story-stage" ref={stageRef}>
 						<div className="home-story-header">
 							<h2>From idea to handover.</h2>
-							<a className="home-kicker-link home-story-skip" href="#fk-proof">
+							<a
+								className="home-kicker-link home-story-skip"
+								href="#fk-enquiry"
+							>
 								<ChevronsRight
 									aria-hidden="true"
 									className="home-story-skip-icon"
 								/>
-								<span className="home-story-skip-label">
-									Continue past the story
-								</span>
+								<span className="home-story-skip-label">Skip to enquiry</span>
 							</a>
 						</div>
 						<div className="home-story-body">

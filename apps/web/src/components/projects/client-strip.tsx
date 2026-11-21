@@ -16,19 +16,20 @@ export function ClientStrip() {
 			<div className="grid gap-[clamp(1.75rem,4vw,3.5rem)] lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
 				<div>
 					<p className={`${projectsLabel} text-secondary-foreground/75`}>
-						Selected clients
+						Client list from our company profile
 					</p>
 					<h2
 						className={`${projectsTitle} mt-[0.9rem] max-w-[14ch]`}
 						id="client-strip-title"
 					>
-						Trusted across sectors.
+						Clients we have worked with.
 					</h2>
 					<p
 						className={`${projectsBody} mt-[1rem] max-w-[36ch] text-secondary-foreground/80`}
 					>
-						Resorts, hotels, villas, venues, aviation, institutional and
-						corporate clients, listed in the FK company profile.
+						Names as listed in the FK Furniture &amp; Interior company profile.
+						Resort De Coracao is the only project documented on this site so
+						far.
 					</p>
 				</div>
 				<ul className="m-0 grid list-none grid-cols-1 gap-x-[clamp(1rem,3vw,3rem)] p-0 sm:grid-cols-2 lg:grid-cols-3">

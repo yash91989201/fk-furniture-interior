@@ -8,15 +8,15 @@ import {
 const highlights = [
 	{
 		title: "Sample and mock-up approval",
-		body: "Where a project calls for it, a sample or mock-up room is reviewed with the client before bulk production begins.",
+		body: "A mock-up room takes 3 weeks. It is reviewed with the client before mass production begins.",
 	},
 	{
 		title: "Installation coordination",
-		body: "Factory-made pieces are packed and scheduled for delivery, then installed with the site team so fitted work meets the room as drawn.",
+		body: "Pieces made in the factory are packed and delivered, then installed on site by our own team.",
 	},
 	{
 		title: "Delivery planning",
-		body: "Production and dispatch are planned against the agreed project schedule. Dates are confirmed for each project rather than promised as a standard.",
+		body: "Mass production takes 8 weeks. Delivery and installation across India are planned per project around location, site access and schedule.",
 	},
 ] as const;
 
@@ -34,7 +34,7 @@ export function ExecutionHighlights() {
 						className={`${projectsTitle} mt-[0.9rem] max-w-[14ch]`}
 						id="execution-title"
 					>
-						The delivery standard.
+						From drawing to installation.
 					</h2>
 					<p className={`${projectsBody} mt-[1rem] max-w-[38ch]`}>
 						The same team follows the work from approved drawings through

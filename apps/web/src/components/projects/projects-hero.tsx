@@ -4,7 +4,7 @@ import { projectsBody, projectsLabel, projectsLead } from "./content";
 import { projectImages } from "./project-images";
 
 export function ProjectsHero() {
-	const image = projectImages.lobby;
+	const image = projectImages.lobbyLounge;
 
 	return (
 		<section
@@ -24,14 +24,12 @@ export function ProjectsHero() {
 					<p
 						className={`${projectsLead} mt-[clamp(1.5rem,3vw,2.25rem)] max-w-[26ch]`}
 					>
-						A portfolio across hospitality, residential, commercial and
-						institutional work.
+						Hospitality interiors, made in our own factory.
 					</p>
 					<p className={`${projectsBody} mt-[1.1rem] max-w-[46ch]`}>
-						The work spans resort guest rooms and public areas, villas and
-						boutique stays, nightclubs and banquets, and corporate and
-						institutional spaces, made through design, manufacture and
-						installation.
+						Our featured project is Resort De Coracao in Tapovan, Rishikesh:
+						lobby and reception, guest rooms, dining, furniture, lighting and
+						finishes, made through design, manufacture and installation.
 					</p>
 					<div className="mt-[clamp(1.75rem,3vw,2.5rem)]">
 						<a

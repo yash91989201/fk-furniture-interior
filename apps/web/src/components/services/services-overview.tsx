@@ -31,12 +31,11 @@ export function ServicesOverview() {
 		>
 			<div className={head}>
 				<h2 className={sectionTitle} id="services-overview-title">
-					Four ways to start.
+					Four areas of work.
 				</h2>
 				<p className={`${bodyCopy} max-w-[52ch] lg:justify-self-end`}>
-					A project may need one of these or all four. Each scope is confirmed
-					against the drawings, specification and budget before production
-					starts.
+					A project may need one of these or all four. Scope is quoted per BOQ
+					and project. There is no fixed minimum order.
 				</p>
 			</div>
 			<ol className={listFrame}>

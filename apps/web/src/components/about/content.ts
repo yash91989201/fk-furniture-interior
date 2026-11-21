@@ -1,26 +1,26 @@
 // Filenames are the supplied assets; alts describe what each photograph shows.
 export const photos = {
 	foyer: {
-		alt: "Hotel foyer with green lounge chairs, brass side tables and a lit staircase",
+		alt: "Double-height hotel lobby with a chandelier, green lounge chairs, sofas, brass tables and a staircase",
 		src: "/home/lobby.webp",
 	},
 	guestRoom: {
-		alt: "Guest room with a made bed, timber desk, artwork and sheer curtains",
+		alt: "Hotel guest room with a bed, timber desk, artwork and sheer curtains",
 		src: "/home/lounge.webp",
 	},
 	fitted: {
-		alt: "Guest room with a fitted wardrobe, tea station and bedside storage",
+		alt: "Hotel guest room with a fitted wardrobe, tea station and bed",
 		src: "/home/workplace.webp",
 	},
 	restaurant: {
-		alt: "Restaurant dining room with timber tables and upholstered chairs",
+		alt: "Restaurant dining room with laid tables and upholstered chairs",
 		src: "/home/corridor.webp",
 	},
 } as const;
 
 export const timeline = [
 	{
-		text: "The family’s craft work begins in Gurgaon with labour-based site work.",
+		text: "The family’s craft work begins in Gurugram with labour-based site work.",
 		year: "1986",
 	},
 	{
@@ -28,14 +28,14 @@ export const timeline = [
 		year: "2012",
 	},
 	{
-		text: "Design, in-house manufacturing and installation for homes, workplaces and hospitality.",
+		text: "Design, in-house manufacturing and installation for homes, workplaces and hospitality, with offices in Gurugram and Goa.",
 		year: "Today",
 	},
 ] as const;
 
 export const buildFacts = [
 	{
-		text: "Made in our own facility rather than bought in and resold.",
+		text: "A 4,500 sq ft factory, a team of 22, and a capacity of 20 guest rooms per month.",
 		term: "In-house manufacturing",
 	},
 	{
@@ -47,8 +47,20 @@ export const buildFacts = [
 		term: "BOQ compliance",
 	},
 	{
-		text: "Veneer, laminate, polish and fittings agreed from samples before production.",
+		text: "Veneer, laminate, polish and commercial-grade hardware agreed from samples before production.",
 		term: "Finishes and hardware",
+	},
+	{
+		text: "CNC routing, automatic edge banding, a hydraulic cold press and a dust-free PU and veneer spray booth.",
+		term: "Machinery",
+	},
+	{
+		text: "Commercial-grade BWP marine plywood, high-density HDHMR, moisture-resistant MDF, and kiln-seasoned teak, ash and oak.",
+		term: "Materials",
+	},
+	{
+		text: "Mock-up rooms take 3 weeks. Mass production takes 8 weeks.",
+		term: "Lead times",
 	},
 ] as const;
 
@@ -62,12 +74,24 @@ export const checks = [
 		term: "Specification held",
 	},
 	{
-		text: "Soft-close channels and concealed hinges specified for daily hotel use.",
+		text: "Commercial-grade hardware chosen for daily hotel use.",
 		term: "Commercial hardware",
 	},
 	{
-		text: "Packing and site installation are handled by the same team.",
-		term: "Packed, delivered, installed",
+		text: "Delivery and site installation across India are planned per project around location, site access and schedule.",
+		term: "Delivered and installed",
+	},
+	{
+		text: "Timber is treated against termites and borers.",
+		term: "Termite and borer treatment",
+	},
+	{
+		text: "Fire-retardant options are available on request for boards, laminates, foams and fabrics.",
+		term: "Fire-retardant options",
+	},
+	{
+		text: "Manufacturing warranty of 5 years.",
+		term: "Five-year warranty",
 	},
 ] as const;
 
@@ -77,8 +101,8 @@ export const values = [
 		text: "What is signed off is what ships.",
 	},
 	{
-		label: "Agreed dates hold.",
-		text: "Handovers are planned backwards from the date that cannot move.",
+		label: "Lead times are stated.",
+		text: "Mock-up rooms take 3 weeks and mass production 8 weeks, with delivery planned per project around site access and schedule.",
 	},
 	{
 		label: "Materials stated plainly.",
@@ -106,9 +130,9 @@ export const roles = [
 ] as const;
 
 export const visitCopy = {
-	body: "Hotel developers, architects and designers are welcome at our factory. Inspect production and material samples, and bring drawings or a BOQ for a first conversation.",
+	body: "Hotel developers, architects and designers are welcome at our factory. See CNC routing, edge banding, the cold press and the spray booth at work, look over material samples, and bring drawings or a BOQ for a first conversation.",
 	heading: "Request a factory visit.",
-	title: "Experience our manufacturing standards in person.",
+	title: "See the factory and the samples.",
 };
 
 // Role ladder shared by the section headings, matching the homepage h2 step.

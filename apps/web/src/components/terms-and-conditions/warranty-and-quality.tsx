@@ -1,11 +1,5 @@
 import { termsSections } from "./content";
-import {
-	bodyText,
-	leadTerm,
-	PendingNote,
-	TermsSection,
-	termList,
-} from "./terms-section";
+import { bodyText, leadTerm, TermsSection, termList } from "./terms-section";
 
 export function WarrantyAndQuality() {
 	return (
@@ -17,9 +11,8 @@ export function WarrantyAndQuality() {
 			<ul className={termList}>
 				<li className={bodyText}>
 					<span className={leadTerm}>Manufacturing warranty.</span> A limited
-					warranty applies to structural defects, joint failure and hardware
-					malfunction under normal commercial usage. The period runs from
-					handover and is stated in the project agreement.
+					5-year manufacturing warranty applies to structural defects, joint
+					failure and hardware malfunction under normal commercial usage.
 				</li>
 				<li className={bodyText}>
 					<span className={leadTerm}>What it excludes.</span> Water seepage,
@@ -28,10 +21,6 @@ export function WarrantyAndQuality() {
 					upholstery are outside the warranty.
 				</li>
 			</ul>
-			<PendingNote>
-				the warranty period in years, and whether it differs by product type or
-				by hospitality versus residential use.
-			</PendingNote>
 		</TermsSection>
 	);
 }

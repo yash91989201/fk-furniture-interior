@@ -21,7 +21,7 @@ export const Route = createFileRoute("/privacy-policy")({
 			{
 				name: "description",
 				content:
-					"How FK Furniture & Interior collects, uses, shares and stores the details you share about a project, and the choices you have.",
+					"Draft privacy policy for FK Furniture & Interior: what the website collects when you ask about a project, how details are used and shared, and how to contact us.",
 			},
 		],
 	}),

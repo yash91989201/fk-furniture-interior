@@ -348,8 +348,9 @@ export function Furniture({
 					<em>your space.</em>
 				</h2>
 				<p>
-					Furniture and architectural woodwork, considered as part of the whole
-					interior.
+					Furniture and architectural woodwork for hospitality, residential and
+					workplace interiors, made in BWP marine ply, HDHMR, MDF, teak, ash and
+					oak.
 				</p>
 			</header>
 			<div className="fv-catalogue">

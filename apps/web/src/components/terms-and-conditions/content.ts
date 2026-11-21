@@ -1,9 +1,7 @@
-// Source: the supplied "Terms & Conditions" draft (nine proposed sections).
-// That draft carries bracketed values for quotation validity, payment
-// milestones, storage grace, warranty duration, jurisdiction and contact
-// details, and dates itself "October 2026" without approval. None of those are
-// published here: each stays a decision the business has to make, and the whole
-// text waits for business and legal review before it is shown as binding.
+// The client has confirmed quotation validity, payment milestones, storage
+// grace, warranty duration and jurisdiction. The remaining gaps are listed in
+// openDecisions. The whole text waits for business and legal review before it
+// is shown as binding.
 
 export interface TermsSectionMeta {
 	id: string;
@@ -20,7 +18,7 @@ export const termsSections = {
 		index: "01",
 		title: "Services, quotations, and specification changes",
 		summary:
-			"Made-to-order work, how long a quotation holds, and what a change costs.",
+			"Made-to-order work, the 20-day quotation, and what a change costs.",
 	},
 	orders: {
 		id: "fk-terms-orders",
@@ -35,7 +33,8 @@ export const termsSections = {
 		short: "Prices and payments",
 		index: "03",
 		title: "Prices, payments, taxes, and freight",
-		summary: "Payment milestones, and what a quoted price excludes.",
+		summary:
+			"Payment milestones, cancellation, and what a quoted price excludes.",
 	},
 	delivery: {
 		id: "fk-terms-delivery",
@@ -43,15 +42,14 @@ export const termsSections = {
 		index: "04",
 		title: "Delivery, installation, site readiness, and storage",
 		summary:
-			"Schedules, what the site must have ready, and holding charges after a missed date.",
+			"Lead times, what the site must have ready, and storage after a missed delivery.",
 	},
 	warranty: {
 		id: "fk-terms-warranty",
 		short: "Warranty and quality",
 		index: "05",
 		title: "Warranty, quality, and exclusions",
-		summary:
-			"Manufacturing cover under commercial use, and what it never covers.",
+		summary: "The 5-year manufacturing warranty, and what it does not cover.",
 	},
 	intellectualProperty: {
 		id: "fk-terms-property",
@@ -73,7 +71,8 @@ export const termsSections = {
 		short: "Governing law",
 		index: "08",
 		title: "Governing law and jurisdiction",
-		summary: "Which law applies, and where a dispute is heard.",
+		summary:
+			"Which law applies, and that disputes are heard in Gurugram, Haryana.",
 	},
 	contact: {
 		id: "fk-terms-contact",
@@ -106,28 +105,31 @@ export const termsStatus =
 
 export const openDecisions = [
 	{
-		label: "Quotation validity",
+		label: "Final 10% payment",
 		detail:
-			"How many days a quotation stays open before prices are revised against raw material costs.",
+			"Payments confirmed so far total 90% (50% + 30% + 10%). The final 10% and its due date are not defined.",
 	},
 	{
-		label: "Payment milestones",
+		label: "Cancellation scope",
 		detail:
-			"The advance, production or dispatch, and final balance percentages in the standard schedule.",
+			'The supplied wording is "Cancelled order is non refundable." It is not settled whether this covers the advance only or all payments.',
 	},
 	{
-		label: "Storage grace period",
+		label: "Storage rate",
 		detail:
-			"How many days after a scheduled delivery date warehousing charges may begin.",
+			"The 10-day grace period is confirmed. The storage charge rate is not.",
 	},
 	{
-		label: "Warranty duration",
+		label: "Mock-up approval",
 		detail:
-			"Years of cover for structural defects, joint failure and hardware under commercial use.",
+			"Whether mock-up approval is mandatory on every project or only above a stated order size.",
 	},
 	{
-		label: "Jurisdiction",
-		detail:
-			"The city and state courts with exclusive jurisdiction over a dispute.",
+		label: "Revision date",
+		detail: "No revision date has been approved.",
+	},
+	{
+		label: "Legal sign-off",
+		detail: "Business and legal review is pending.",
 	},
 ] as const;

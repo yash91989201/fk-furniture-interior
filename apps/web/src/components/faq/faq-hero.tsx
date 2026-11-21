@@ -13,12 +13,11 @@ export function FaqHero() {
 				</h1>
 				<div className="max-w-[46ch]">
 					<p className="m-0 text-pretty text-[clamp(1rem,0.95rem+0.22vw,1.125rem)] text-muted-foreground leading-[1.65]">
-						Scope, materials, lead times and warranty, for hospitality,
-						residential and commercial work.
+						Scope, materials, lead times, delivery and warranty for hospitality
+						furniture and interiors.
 					</p>
 					<p className="mt-[1.15rem] max-w-[52ch] border-border border-t pt-[0.9rem] text-[0.8125rem] text-muted-foreground leading-[1.55]">
-						Where a term is still being worked through with our project desk,
-						the answer says so before it is published as a commitment.
+						Quotations are valid for 20 days. Manufacturing warranty is 5 years.
 					</p>
 				</div>
 			</div>

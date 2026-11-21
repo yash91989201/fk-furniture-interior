@@ -4,11 +4,6 @@ export interface ProjectImage {
 	alt: string;
 	caption?: string;
 	height: number;
-	/**
-	 * Provisional repository photograph, not approved photography of the named
-	 * project. Replace the record here when final assets are cleared.
-	 */
-	provisional: true;
 	src: string;
 	srcSet?: string;
 	width: number;
@@ -25,7 +20,6 @@ function photo(
 		alt,
 		caption,
 		height,
-		provisional: true,
 		src,
 		srcSet: variants ? bandSrcSet(src) : undefined,
 		width,
@@ -33,57 +27,36 @@ function photo(
 }
 
 /**
- * Every project image is referenced through this registry. Page components
- * never hold a file path, so swapping in approved photography is one edit.
+ * Confirmed Resort De Coracao photographs from the company profile. Page
+ * components reference this registry rather than file paths.
  */
 export const projectImages = {
-	lobby: photo(
-		"/home/lobby.webp",
-		"Lounge seating, brass tables and a staircase in a hotel lobby",
-		"Lobby lounge seating and joinery"
-	),
-	lobbyChandelier: photo(
-		"/home/guest-room.webp",
-		"Hotel lobby with a chandelier, lounge seating and a staircase",
-		"Lobby seating beneath a chandelier"
-	),
-	lounge: photo(
-		"/home/dining.webp",
-		"Lounge with green armchairs, brass tables and a staircase",
-		"Green lounge seating and brass tables"
-	),
 	lobbyLounge: photo(
 		"/home/guest-bath.webp",
-		"Hotel lounge with green armchairs, brass tables and a staircase",
-		"Lounge seating and tables",
+		"Hotel lobby with green armchairs, a sofa, brass tables and a staircase",
+		"Lobby and reception at Resort De Coracao",
 		{ variants: false }
-	),
-	guestRoomWardrobe: photo(
-		"/home/workplace.webp",
-		"Guest room with a fitted wardrobe, desk, television and bed",
-		"Fitted wardrobe, desk and bedside storage"
 	),
 	guestRoomBed: photo(
 		"/home/lounge.webp",
-		"Guest room with a bed, balcony doors and a wall-mounted television",
-		"Guest room bed and balcony doors"
+		"Hotel guest room with a bed, timber desk, artwork and sheer curtains",
+		"Guest room at Resort De Coracao"
 	),
-	guestRoomBalcony: photo(
-		"/home/meeting.webp",
-		"Guest room with a bed, balcony and wall-mounted television",
-		"Guest room with balcony access",
-		{ variants: false }
+	lounge: photo(
+		"/home/dining.webp",
+		"Hotel reception lounge with green armchairs, a long sofa, brass tables and a staircase",
+		"Reception lounge at Resort De Coracao"
 	),
 	dining: photo(
 		"/home/corridor.webp",
 		"Restaurant dining room with laid tables and upholstered chairs",
-		"Restaurant dining tables and seating",
+		"Dining room at Resort De Coracao",
 		{ variants: false }
 	),
 	exterior: photo(
 		"/home/office-building.webp",
-		"Exterior of a multi-storey building against a mountain backdrop",
-		"Building exterior",
+		"Hotel exterior against a mountain backdrop",
+		"Exterior of Resort De Coracao",
 		{ height: 1120, variants: false }
 	),
 } as const;

@@ -219,17 +219,17 @@ export function About() {
 					</span>
 				</h2>
 				<p className="home-about-intro">
-					FK Furniture & Interior is a Gurgaon-based interior design and bespoke
-					furniture business with its own manufacturing setup. Work runs from
-					listening and design through making, finishing and installation, for
-					homes, workplaces and hospitality spaces.
+					FK Furniture & Interior is a Gurugram-based maker of bespoke furniture
+					and interiors for homes, workplaces and hospitality. The 22-person
+					team works from a 4,500 sq ft factory, with 40 years in hospitality
+					interiors behind it.
 				</p>
 				<p className="home-about-history">
-					The family craft began in Gurgaon in 1986; offices are in Gurgaon and
-					Goa.
+					The family craft began in Gurugram in 1986, and material supply joined
+					execution in 2012. Offices are in Gurugram and Goa.
 				</p>
 				<a className="home-kicker-link" href="#fk-enquiry">
-					Discuss your project →
+					Talk to our team →
 				</a>
 			</div>
 		</section>

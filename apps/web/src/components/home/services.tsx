@@ -7,7 +7,7 @@ export function Services() {
 				<header className="home-services-rail">
 					<h2>What we do</h2>
 					<a className="home-kicker-link" href="#fk-capabilities">
-						Explore the catalogue →
+						See what we make →
 					</a>
 				</header>
 				<ol className="home-services-list">

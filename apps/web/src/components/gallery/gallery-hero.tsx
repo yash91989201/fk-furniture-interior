@@ -21,7 +21,7 @@ const entryFields = [
 	{
 		index: "03",
 		label: "Specification",
-		note: "Confirmed material, finish and hardware.",
+		note: "Listed only where confirmed for that photograph.",
 	},
 	{
 		index: "04",
@@ -43,22 +43,24 @@ export function GalleryHero() {
 						className="m-0 mt-[clamp(1rem,2vw,1.5rem)] max-w-[13ch] text-balance font-heading font-medium text-[clamp(2.75rem,1.6rem+5vw,5.75rem)] leading-[0.98] tracking-[-0.035em] [animation:home-rise_0.9s_var(--home-ease)_backwards] motion-reduce:[animation:none]"
 						id="gallery-title"
 					>
-						A record of <em className="font-normal italic">finished rooms.</em>
+						Resort De Coracao,{" "}
+						<em className="font-normal italic">Tapovan, Rishikesh.</em>
 					</h1>
 					<p className={`${galleryLead} mt-[clamp(1.5rem,3vw,2.25rem)]`}>
-						Bespoke furniture and interior work for hotels, restaurants,
-						workplaces and homes, arranged by the space it was made for.
+						Lobby, guest room, reception lounge and dining room from our resort
+						project in Rishikesh.
 					</p>
 					<p className={`${galleryBody} mt-[1.25rem] max-w-[52ch]`}>
-						Each published entry carries the agreed scope and only the material,
-						finish and hardware details confirmed for that space.
+						The project covered the lobby and reception, guest rooms, dining,
+						furniture, lighting and finishes, in BWP marine ply and natural teak
+						veneer with commercial-grade hardware.
 					</p>
 					<div className="mt-[clamp(1.75rem,3vw,2.5rem)] flex flex-wrap items-center gap-x-6 gap-y-3">
 						<a
 							className={buttonVariants({ className: "h-11" })}
 							href="#gallery-work"
 						>
-							Browse the work
+							See the photographs
 						</a>
 						<a
 							className="inline-flex min-h-11 items-center font-medium text-[0.8125rem] underline decoration-1 underline-offset-4 transition-colors hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
@@ -71,9 +73,7 @@ export function GalleryHero() {
 				<aside className="border-border border-t pt-[1.5rem] lg:border-t-0 lg:border-l lg:pt-0 lg:pl-[clamp(1.5rem,3vw,2.75rem)]">
 					<p className="flex items-center gap-2 font-sans font-semibold text-[0.6875rem] uppercase tracking-[0.16em]">
 						<span aria-hidden="true" className="size-2 bg-primary" />
-						{galleryWorks.length === 0
-							? "Portfolio in preparation"
-							: `${galleryWorks.length} published ${galleryWorks.length === 1 ? "work" : "works"}`}
+						{galleryWorks.length} photographs
 					</p>
 					<p className={`${galleryLabel} mt-[1.75rem]`}>In every entry</p>
 					<ol className="m-0 mt-[0.75rem] grid list-none p-0">
@@ -100,8 +100,8 @@ export function GalleryHero() {
 						))}
 					</ol>
 					<p className="mt-[1.25rem] max-w-[34ch] text-[0.75rem] text-muted-foreground leading-[1.55]">
-						Photographs are published only with project permission. Empty
-						categories stay visible until approved work is ready.
+						All photographs show Resort De Coracao. More projects will be added
+						as they are cleared for publication.
 					</p>
 				</aside>
 			</div>

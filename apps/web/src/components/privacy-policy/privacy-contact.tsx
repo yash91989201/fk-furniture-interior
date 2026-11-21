@@ -1,12 +1,17 @@
-import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+import {
+	contactEmail,
+	gstin,
+	gurgaonOffice,
+} from "@/components/contact/content";
 
 import { PolicySection } from "./policy-section";
 
 const details = [
-	["Entity", "FK Furniture Interior"],
+	["Entity", "FK Furniture & Interior"],
+	["GSTIN", gstin],
 	["Email", contactEmail],
 	["Phone", gurgaonOffice.phones[0].display],
-	["Registered address", gurgaonOffice.address.join(", ")],
+	["Gurugram office", gurgaonOffice.address.join(", ")],
 ] as const;
 
 export function PrivacyContact() {

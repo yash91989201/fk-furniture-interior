@@ -29,8 +29,9 @@ export function Team() {
 				<p
 					className={`${bodyCopy} mt-[clamp(0.8rem,1.2vw,1.0625rem)] max-w-[52ch]`}
 				>
-					Carpenters, CAD draftsmen and finishing specialists work in house. The
-					same team follows a piece from drawing to installation.
+					A 22-person team of carpenters, CAD draftsmen, finishing specialists
+					and site staff works in house. The same team follows a piece from
+					drawing to installation.
 				</p>
 				<dl className="m-0 mt-[clamp(1.75rem,3vw,2.4rem)] max-w-[52ch] border-border border-b">
 					{roles.map((role) => (
@@ -56,7 +57,7 @@ export function Team() {
 					width={2000}
 				/>
 				<figcaption className={figureCaption}>
-					Bed, desk and storage made for a completed guest room
+					Hotel guest room with a bed, desk and curtains
 				</figcaption>
 			</figure>
 		</section>

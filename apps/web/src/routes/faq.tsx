@@ -21,7 +21,7 @@ export const Route = createFileRoute("/faq")({
 			{
 				name: "description",
 				content:
-					"Answers on project scope, drawings and BOQ manufacturing, materials, mock-up approval, finishes, lead times, delivery, installation and warranty for hospitality, residential and commercial furniture.",
+					"Answers on minimum order, manufacturing from drawings and BOQ, materials, mock-ups, finishes, lead times, delivery across India and the 5-year manufacturing warranty.",
 			},
 		],
 	}),

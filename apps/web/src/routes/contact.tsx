@@ -15,7 +15,7 @@ export const Route = createFileRoute("/contact")({
 			{
 				name: "description",
 				content:
-					"Discuss a furniture, interior or turnkey project with FK Furniture & Interior. Offices in Gurgaon and Goa, with direct phone and email contact.",
+					"Send FK Furniture & Interior a brief, drawings or a BOQ. Offices in Gurugram and Goa, with direct phone and email contact.",
 			},
 		],
 	}),

@@ -1,19 +1,14 @@
 import { termsSections } from "./content";
-import {
-	bodyText,
-	leadTerm,
-	PendingNote,
-	TermsSection,
-	termList,
-} from "./terms-section";
+import { bodyText, leadTerm, TermsSection, termList } from "./terms-section";
 
 export function ServicesAndQuotations() {
 	return (
 		<TermsSection {...termsSections.services}>
 			<p className={bodyText}>
-				Work is quoted and made against what the client supplies: drawings, a
-				Bill of Quantities, or a written specification. Nothing goes into
-				production from a verbal description.
+				Work is quoted and made against what the client supplies: drawings,
+				renders, a Bill of Quantities (BOQ) or a written specification. There is
+				no fixed minimum order. Scope is quoted per BOQ and project. Nothing
+				goes into production from a verbal description.
 			</p>
 			<ul className={termList}>
 				<li className={bodyText}>
@@ -26,10 +21,10 @@ export function ServicesAndQuotations() {
 					from stock.
 				</li>
 				<li className={bodyText}>
-					<span className={leadTerm}>Quotations hold for a stated period.</span>{" "}
-					Price estimates are open for a fixed number of days from the date of
-					issue. After that, prices follow raw material costs — plywood, HDHMR,
-					veneers and metals — and are revised against them.
+					<span className={leadTerm}>Quotations are valid for 20 days.</span> A
+					quotation is open for 20 days from the date of issue. After that,
+					prices follow raw material costs, such as plywood, HDHMR and veneers,
+					and are revised against them.
 				</li>
 				<li className={bodyText}>
 					<span className={leadTerm}>Specification changes are repriced.</span>{" "}
@@ -38,9 +33,6 @@ export function ServicesAndQuotations() {
 					revised figures are shared in writing before the change is made.
 				</li>
 			</ul>
-			<PendingNote>
-				how many days a quotation stays valid before prices are revised.
-			</PendingNote>
 		</TermsSection>
 	);
 }

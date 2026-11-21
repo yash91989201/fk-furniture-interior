@@ -11,8 +11,8 @@ export function ProjectProcess() {
 				From brief to installation.
 			</h2>
 			<p className={`${bodyCopy} mt-[1.15rem] max-w-[52ch]`}>
-				The steps below describe the usual path. The actual sequence and
-				responsibilities depend on the project and the agreed scope.
+				This is the usual path. Sequence and responsibilities are confirmed in
+				your quotation.
 			</p>
 			<ol className="m-0 mt-[clamp(2rem,4vw,3.25rem)] grid list-none gap-x-[clamp(1.5rem,3vw,2.5rem)] gap-y-[2rem] p-0 sm:grid-cols-2 lg:grid-cols-4">
 				{processSteps.map((step, index) => (
@@ -30,9 +30,8 @@ export function ProjectProcess() {
 				))}
 			</ol>
 			<p className="mt-[clamp(2rem,4vw,3rem)] max-w-[62ch] border-border border-t pt-[1rem] text-[0.875rem] text-muted-foreground leading-[1.6]">
-				Not every project needs a mock-up, and delivery or installation scope
-				varies by site. Steps and responsibilities are confirmed in the
-				quotation and project schedule.
+				Quotations are valid for 20 days. Delivery and installation are planned
+				per project.
 			</p>
 		</section>
 	);

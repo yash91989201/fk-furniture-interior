@@ -18,7 +18,7 @@ export const Route = createFileRoute("/services")({
 			{
 				name: "description",
 				content:
-					"Custom furniture, architectural woodwork, modular storage and contract manufacturing for hospitality, residential and workplace projects, from drawings or a BOQ.",
+					"Custom furniture, architectural woodwork, modular storage and contract manufacturing for hospitality, residential and workplace projects, from drawings, renders or a BOQ. Made in our own factory, installed across India.",
 			},
 		],
 	}),

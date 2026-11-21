@@ -14,17 +14,17 @@ export function ProjectGallery({ project }: { project: Project }) {
 		>
 			<div className="flex flex-col gap-3 border-border border-b pb-[1.25rem] sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p className={projectsLabel}>Imagery</p>
+					<p className={projectsLabel}>Photographs</p>
 					<h2
 						className={`${projectsTitle} mt-[0.9rem]`}
 						id="project-gallery-title"
 					>
-						Project imagery.
+						Resort De Coracao in photographs.
 					</h2>
 				</div>
 				<p className="m-0 max-w-[34ch] text-[0.8125rem] text-muted-foreground leading-[1.55] sm:text-right">
-					Interior details from the studio’s work. Final project photography is
-					being prepared.
+					Photographs from the company profile: guest room, reception lounge,
+					dining and exterior.
 				</p>
 			</div>
 			<div className="grid grid-cols-1 gap-4 pt-[clamp(2rem,4vw,3rem)] sm:grid-cols-2">

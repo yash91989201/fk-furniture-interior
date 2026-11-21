@@ -20,8 +20,8 @@ export function AboutHero() {
 				</h1>
 				<p className="m-0 max-w-[42ch] text-pretty text-[length:var(--hero-body)] text-muted-foreground leading-[1.55] tracking-[0.005em] [animation:about-hero-lift_0.9s_var(--home-ease)_90ms_backwards] motion-reduce:[animation:none]">
 					FK Furniture &amp; Interior designs, manufactures and installs bespoke
-					furniture and turnkey interiors for homes, workplaces and hospitality
-					spaces.
+					furniture and interiors for homes, workplaces and hospitality spaces.
+					The work runs from a 4,500 sq ft factory with an in-house team of 22.
 				</p>
 				<div className="home-hero-actions mt-[0.25rem] [animation:about-hero-lift_0.9s_var(--home-ease)_180ms_backwards] motion-reduce:[animation:none]">
 					<a className={buttonVariants()} href="#fk-enquiry">
@@ -39,7 +39,8 @@ export function AboutHero() {
 					</Link>
 				</div>
 				<p className="mt-[0.5rem] border-border border-t pt-[0.85rem] text-[length:var(--hero-meta)] text-muted-foreground leading-[1.45] tracking-[0.01em] [animation:about-hero-lift_0.9s_var(--home-ease)_270ms_backwards] motion-reduce:[animation:none]">
-					Family craft since 1986 · Offices in Gurgaon and Goa
+					Family craft since 1986 · 40 years in hospitality interiors · Offices
+					in Gurugram and Goa
 				</p>
 			</div>
 			<figure className="group relative m-0 min-w-0 overflow-hidden bg-muted max-lg:aspect-[16/11]">
@@ -55,7 +56,7 @@ export function AboutHero() {
 					width={2000}
 				/>
 				<figcaption className="absolute bottom-4 left-4 max-w-[calc(100%-2rem)] bg-[color-mix(in_oklch,var(--card)_92%,transparent)] px-[0.7rem] py-[0.45rem] text-[length:var(--hero-meta)] text-foreground leading-[1.4] tracking-[0.01em] backdrop-blur-[6px]">
-					Completed hospitality foyer and lounge
+					Hotel lobby and lounge seating
 				</figcaption>
 			</figure>
 		</section>

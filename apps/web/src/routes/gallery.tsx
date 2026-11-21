@@ -5,7 +5,6 @@ import type {
 	GalleryCategoryId,
 	GalleryWork,
 } from "@/components/gallery/content";
-import { CraftStrip } from "@/components/gallery/craft-strip";
 import { GalleryEnquiry } from "@/components/gallery/gallery-enquiry";
 import { GalleryFilters } from "@/components/gallery/gallery-filters";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
@@ -23,7 +22,7 @@ export const Route = createFileRoute("/gallery")({
 			{
 				name: "description",
 				content:
-					"Completed furniture and interior work for hotel guest rooms, lobbies, restaurants, wall panelling and executive spaces, with verified scope and specification details.",
+					"Photographs of Resort De Coracao in Tapovan, Rishikesh: lobby and reception, guest room, reception lounge and dining room.",
 			},
 		],
 	}),
@@ -76,7 +75,6 @@ function GalleryComponent() {
 				<GalleryHero />
 				<GalleryFilters active={active} onChange={setActive} />
 				<GalleryGrid active={active} onOpen={handleOpen} />
-				<CraftStrip />
 				<GalleryEnquiry reference={reference} />
 			</main>
 			<SiteFooter />

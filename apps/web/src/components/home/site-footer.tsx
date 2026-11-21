@@ -2,7 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+import {
+	contactEmail,
+	gstin,
+	gurgaonOffice,
+} from "@/components/contact/content";
 
 import { projects } from "./content";
 import { FooterDrawing } from "./footer-drawing";
@@ -212,8 +216,8 @@ export function SiteFooter() {
 						/>
 					</Link>
 					<p className="home-footer-blurb">
-						Interior design, bespoke furniture and turnkey execution from design
-						through installation.
+						Furniture and interiors for hospitality, homes and workplaces, made
+						in our own factory and installed on site.
 					</p>
 				</div>
 				<Link
@@ -256,7 +260,7 @@ export function SiteFooter() {
 					<ul aria-labelledby="footer-contact" className="home-footer-facts">
 						<li>
 							<Link className={contactLink} to="/contact">
-								Gurgaon office
+								Gurugram office
 							</Link>
 						</li>
 						<li>
@@ -288,7 +292,10 @@ export function SiteFooter() {
 				</div>
 			</div>
 			<div className="home-legal">
-				<span>© {new Date().getFullYear()} FK Furniture &amp; Interior</span>
+				<span>
+					© {new Date().getFullYear()} FK Furniture &amp; Interior · GSTIN{" "}
+					{gstin}
+				</span>
 				<Link
 					className="inline-flex min-h-11 items-center underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
 					to="/privacy-policy"

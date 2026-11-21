@@ -11,8 +11,9 @@ export function DeliveryAndInstallation() {
 	return (
 		<TermsSection {...termsSections.delivery}>
 			<p className={bodyText}>
-				Delivery dates follow factory capacity and project size. The site has to
-				be ready before the installation team arrives.
+				Delivery dates follow factory capacity and project size. Mass production
+				lead time is 8 weeks. The site has to be ready before the installation
+				team arrives.
 			</p>
 			<ul className={termList}>
 				<li className={bodyText}>
@@ -31,13 +32,13 @@ export function DeliveryAndInstallation() {
 				</li>
 				<li className={bodyText}>
 					<span className={leadTerm}>Late acceptance can attract storage.</span>{" "}
-					If delivery cannot be accepted on the scheduled date, warehousing and
-					storage charges may apply once the grace period ends.
+					If delivery cannot be accepted on the scheduled date, there is a
+					10-day grace period. Warehousing and storage charges may apply after
+					that.
 				</li>
 			</ul>
 			<PendingNote>
-				the grace period in days before storage charges start, and the storage
-				rate.
+				the storage charge rate. The 10-day grace period is confirmed.
 			</PendingNote>
 		</TermsSection>
 	);

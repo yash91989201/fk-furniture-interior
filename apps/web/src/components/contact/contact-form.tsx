@@ -64,17 +64,17 @@ export function ContactForm() {
 						className="m-0 max-w-[14ch] text-balance font-medium text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] leading-[1.08] tracking-[-0.025em]"
 						id="contact-form-title"
 					>
-						Tell us what you are planning.
+						Tell us about your project.
 					</h2>
 					<p className="mt-[1.25rem] text-pretty text-[1rem] text-muted-foreground leading-[1.65]">
-						A few lines about the space, the scope and the stage you are at is
-						enough to begin. If drawings or a BOQ exist, bring those into the
-						conversation.
+						A few lines on the space, the scope and the timeline are enough to
+						begin. If you have drawings, renders or a BOQ, attach them to the
+						email.
 					</p>
 					<p className="mt-[1rem] border-border border-t pt-[0.9rem] text-[0.8125rem] text-muted-foreground leading-[1.55]">
-						This form prepares an email in your own mail app. The website does
-						not send, store or upload anything, so attach plans or a BOQ in the
-						email itself.
+						This form prepares a draft in your own mail app. The website does
+						not send, store or upload anything, so attach drawings or a BOQ to
+						the email itself.
 					</p>
 				</div>
 				<form
@@ -173,7 +173,7 @@ export function ContactForm() {
 								className="min-h-32"
 								id="contact-details"
 								name="details"
-								placeholder="The space, the scope, the timeline, and what you need help with"
+								placeholder="The space, the scope, the timeline and any drawings or BOQ you will attach"
 								required
 								surface="box"
 							/>

@@ -25,7 +25,7 @@ export const Route = createFileRoute("/terms-and-conditions")({
 			{
 				name: "description",
 				content:
-					"Proposed terms for quotations, orders, mock-up approval, payment, delivery, installation, warranty, intellectual property and liability on custom furniture and interior fit-out work.",
+					"Draft terms for quotations, orders, mock-up approval, payment, delivery, installation, warranty, intellectual property and liability on custom furniture and interior fit-out work.",
 			},
 		],
 	}),

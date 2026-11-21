@@ -43,11 +43,11 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 				name: readField(data, "name"),
 				phone: readField(data, "phone") || undefined,
 				requirement: reference
-					? `Gallery design ${reference}`
+					? `Gallery photograph ${reference}`
 					: "Gallery project enquiry",
 			});
 			setFeedback(
-				"Opening your email app with the brief. Attach drawings or the BOQ there before sending."
+				"Opening your email app. Attach drawings or a BOQ before you send."
 			);
 		},
 		[reference]
@@ -56,7 +56,7 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 	const [gurgaon] = offices;
 	const [phone] = gurgaon.phones;
 	const whatsappText = reference
-		? `Hello FK Furniture & Interior, I would like to discuss design ${reference}.`
+		? `Hello FK Furniture & Interior, I would like to discuss a project like ${reference}.`
 		: "Hello FK Furniture & Interior, I would like to discuss a project.";
 	const whatsappHref = `https://wa.me/${phone.href.replace("tel:+", "")}?text=${encodeURIComponent(whatsappText)}`;
 
@@ -80,9 +80,8 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 						Send what you already hold.
 					</p>
 					<p className={`${galleryBody} mt-[1rem] max-w-[44ch]`}>
-						Layouts, drawings or a bill of quantities help us understand the
-						scope before the first conversation. We will review what you send
-						and reply with the next practical step.
+						Send drawings, renders or a BOQ, with the location and scope. We
+						quote per BOQ and project, with no fixed minimum order.
 					</p>
 					<dl className="m-0 mt-[clamp(1.75rem,3vw,2.5rem)] grid border-border border-t">
 						<div className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 border-border border-b py-[0.8rem]">
@@ -229,8 +228,8 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 							Send project details
 						</Button>
 						<p className="m-0 max-w-[34ch] text-[0.75rem] text-muted-foreground leading-[1.5]">
-							This opens an email draft. Attach the drawings or BOQ before
-							sending.
+							This opens a draft in your email app. Attach drawings or a BOQ
+							before sending.
 						</p>
 					</div>
 					<p

@@ -16,9 +16,8 @@ export function ServiceOfferings() {
 				What we make
 			</h2>
 			<p className={`${bodyCopy} mt-[1.15rem] max-w-[52ch]`}>
-				Each scope below is a possible starting point rather than a fixed
-				catalogue. The final schedule of items follows the drawings, the BOQ and
-				the approved samples for the project.
+				Each area below lists what we typically make. The final schedule of
+				items follows your drawings, the BOQ and the approved mock-up.
 			</p>
 			<div className="offerings-list">
 				{offerings.map((offering, index) => (

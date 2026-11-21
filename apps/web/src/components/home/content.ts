@@ -6,39 +6,39 @@ export const photos = {
 	// Keys describe the room in the photograph; filenames are the supplied assets.
 	lobby: {
 		src: "/home/lobby.webp",
-		alt: "Hotel lobby with lounge seating and a staircase",
+		alt: "Double-height hotel lobby with a chandelier, green lounge chairs, sofas, brass tables and a staircase",
 	},
 	lobbyLounge: {
 		src: "/home/guest-bath.webp",
-		alt: "Hotel lounge with seating and a staircase",
+		alt: "Hotel lobby with green armchairs, a sofa, brass tables and a staircase",
 	},
 	lounge: {
 		src: "/home/dining.webp",
-		alt: "Lounge with green seating and brass tables",
+		alt: "Hotel reception lounge with green armchairs, a long sofa, brass tables and a staircase",
 	},
 	restaurant: {
 		src: "/home/corridor.webp",
-		alt: "Restaurant with dining tables and chairs",
+		alt: "Restaurant dining room with laid tables and upholstered chairs",
 	},
 	lobbyChandelier: {
 		src: "/home/guest-room.webp",
-		alt: "Hotel lobby with a chandelier and lounge seating",
+		alt: "Hotel lobby at night with a chandelier, lounge seating and a staircase",
 	},
 	guestRoomBalcony: {
 		src: "/home/lounge.webp",
-		alt: "Guest room with a bed and balcony doors",
+		alt: "Hotel guest room with a bed, timber desk, artwork and sheer curtains",
 	},
 	guestRoomTv: {
 		src: "/home/meeting.webp",
-		alt: "Guest room with a balcony and wall-mounted television",
+		alt: "Hotel guest room with a bed, wall-mounted television and balcony doors",
 	},
 	guestRoomWardrobe: {
 		src: "/home/workplace.webp",
-		alt: "Guest room with a fitted wardrobe and desk",
+		alt: "Hotel guest room with a fitted wardrobe, tea station and bed",
 	},
 	exterior: {
 		src: "/home/office-building.webp",
-		alt: "Exterior of a completed hospitality building",
+		alt: "Hotel exterior against a mountain backdrop",
 	},
 } as const;
 
@@ -48,47 +48,27 @@ export const projects = [
 		type: "Hospitality",
 		name: "Resort De Coracao",
 		location: "Tapovan, Rishikesh",
-		image: photos.lobby,
+		image: photos.lobbyLounge,
 		slug: "resort-de-coracao",
 		scope:
-			"Completed turnkey hospitality interior, from design and bespoke furniture through to installation.",
-	},
-	{
-		id: "residential",
-		type: "Residential",
-		name: "[Residential project name]",
-		location: "[Location]",
-		image: photos.guestRoomTv,
-		slug: null,
-		scope:
-			"[Scope: living spaces, fitted storage and bespoke furniture. Client confirmation needed.]",
-	},
-	{
-		id: "commercial",
-		type: "Commercial",
-		name: "[Commercial project name]",
-		location: "[Location]",
-		image: photos.lobbyLounge,
-		slug: null,
-		scope:
-			"[Scope: workplace interiors, meeting spaces and fitted furniture. Client confirmation needed.]",
+			"A resort in Tapovan, Rishikesh. Scope covered the lobby and reception, guest rooms, dining, furniture, lighting and finishes, in BWP marine ply and natural teak veneer with commercial-grade hardware.",
 	},
 ] as const;
 
 export const services = [
 	{
 		title: "Interior design & execution",
-		body: "Homes, workplaces and hospitality spaces, planned around the client’s needs, then taken through to site.",
+		body: "Homes, workplaces and hospitality spaces, planned from your drawings, renders or BOQ and carried through to installation on site.",
 		image: photos.guestRoomBalcony,
 	},
 	{
 		title: "Bespoke furniture",
-		body: "Furniture developed around the dimensions, materials and character of each space, made in the company’s own setup.",
+		body: "Beds, wardrobes, reception counters, dining furniture and wall panelling, made to the dimensions of each room in our own factory.",
 		image: photos.guestRoomWardrobe,
 	},
 	{
 		title: "Turnkey projects",
-		body: "Coordination from design and material selection through manufacturing, installation and handover.",
+		body: "One team from material selection through manufacturing, delivery and installation. Delivery and fitting are planned around your site access and schedule.",
 		image: photos.lobbyChandelier,
 	},
 ] as const;
@@ -97,7 +77,7 @@ export const furnitureCategories = [
 	{
 		id: "guest-room",
 		title: "Guest-room furniture",
-		heading: "A complete room, thoughtfully fitted.",
+		heading: "Everything a guest room needs.",
 		items: [
 			"Beds and headboards",
 			"Wardrobes and luggage racks",
@@ -110,7 +90,7 @@ export const furnitureCategories = [
 	{
 		id: "reception",
 		title: "Reception & lobby",
-		heading: "Set the tone from the entrance.",
+		heading: "Where guests first arrive.",
 		items: [
 			"Reception counters",
 			"Lounge seating and centre tables",
@@ -123,7 +103,7 @@ export const furnitureCategories = [
 	{
 		id: "dining",
 		title: "Dining, bars & banquets",
-		heading: "Spaces that bring people together.",
+		heading: "Furniture for dining, bars and banquets.",
 		items: [
 			"Dining tables and seating",
 			"Booths and banquet furniture",
@@ -136,7 +116,7 @@ export const furnitureCategories = [
 	{
 		id: "woodwork",
 		title: "Wooden fit-outs & panelling",
-		heading: "The details that shape the room.",
+		heading: "Woodwork made to your drawings.",
 		items: [
 			"Wall cladding and acoustic panels",
 			"Wooden ceilings and rafters",
@@ -149,7 +129,7 @@ export const furnitureCategories = [
 	{
 		id: "executive",
 		title: "Executive & meeting spaces",
-		heading: "Furniture that supports the working day.",
+		heading: "Desks, tables and cabinetry for offices and meeting rooms.",
 		items: [
 			"Executive desks and workstations",
 			"Conference tables",
@@ -163,75 +143,42 @@ export const furnitureCategories = [
 
 export const processSteps = [
 	{
-		title: "First, we listen.",
+		title: "Brief and BOQ",
 		description:
-			"Your space, your routines, your ambitions. We begin by understanding what the project needs to achieve.",
-		deliverable: "Together, we establish the brief and project scope.",
+			"Send drawings, renders or a BOQ. We review scope, materials and site conditions, and quote per BOQ and project. There is no fixed minimum order.",
+		deliverable: "Result: a written scope and itemised quotation.",
 		label: "Space plan",
 		alt: "Illustrative architectural floor plan with door swings, furniture layouts, and dimension lines",
-		nav: "1 / Consult",
+		nav: "1 / Brief",
 	},
 	{
-		title: "Then, we find its character.",
+		title: "Mock-up and approval",
 		description:
-			"Layouts, materials and finishes take shape together. We review the details and agree on the direction before work begins.",
-		deliverable: "The result: approved designs, finishes and samples.",
+			"For larger projects, we build a mock-up room so you can check materials, finishes and joinery before mass production. Mock-up lead time is 3 weeks.",
+		deliverable: "Result: an approved mock-up and signed-off samples.",
 		label: "Material palette",
 		alt: "Illustrative finish study with linear timber grain, diagonal stone hatching, and a marigold sample",
-		nav: "2 / Design",
+		nav: "2 / Mock-up",
 	},
 	{
-		title: "The idea becomes tangible.",
+		title: "Production",
 		description:
-			"Furniture is manufactured and site work is coordinated. Approved details guide the making, assembly and finishing.",
-		deliverable: "The result: components and interiors ready for installation.",
+			"Approved details guide cutting, assembly and finishing in our factory. Mass production lead time is 8 weeks.",
+		deliverable:
+			"Result: finished furniture and panelling, ready for dispatch.",
 		label: "Component assembly",
 		alt: "Illustrative furniture elevation showing a tabletop, two legs, and a rail assembling into a table",
 		nav: "3 / Make",
 	},
 	{
-		title: "Finally, a space to step into.",
+		title: "Delivery and installation",
 		description:
-			"Furniture is fitted, details are checked and the finished space is handed over. The brief becomes a place to live or work.",
-		deliverable: "The result: installation, final inspection and handover.",
+			"We deliver across India and install on site, planned around your location, site access and schedule.",
+		deliverable:
+			"Result: installed furniture and a 5-year manufacturing warranty.",
 		label: "Completed space",
 		alt: "Illustrative furnished floor plan with seating, a rug, fitted furniture, and a final inspection mark",
-		nav: "4 / Handover",
-	},
-] as const;
-
-export const testimonials = [
-	{
-		id: 0,
-		quote:
-			"The guest room reads as one piece. Timber, stone, and the bed were drawn together, then built that way.",
-		name: "Meera Anand",
-		company: "Harbour House Hotels",
-		photo: photos.guestRoomBalcony,
-	},
-	{
-		id: 1,
-		quote:
-			"We sent a rough plan of the lounge. What returned fitted the room, including the corners we had drawn poorly.",
-		name: "Rohan Varghese",
-		company: "Northlight Residences",
-		photo: photos.lounge,
-	},
-	{
-		id: 2,
-		quote:
-			"The meeting room had to work a full day and still feel calm. The joinery does both, quietly.",
-		name: "Leela Krishnan",
-		company: "Atelier North",
-		photo: photos.lobbyLounge,
-	},
-	{
-		id: 3,
-		quote:
-			"This table was made for the dining room, not fitted into it. The edge, the base, and the light agree.",
-		name: "Kabir Seth",
-		company: "Linea Studio",
-		photo: photos.restaurant,
+		nav: "4 / Install",
 	},
 ] as const;
 

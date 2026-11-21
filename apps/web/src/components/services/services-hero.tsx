@@ -16,27 +16,28 @@ export function ServicesHero() {
 					className="m-0 max-w-[15ch] text-balance font-medium text-[clamp(2.5rem,1.5rem+3.6vw,4.75rem)] leading-[1.02] tracking-[-0.03em]"
 					id="services-hero-title"
 				>
-					Made for your drawings.{" "}
-					<em className="italic">Built for the room.</em>
+					Made to your drawings.{" "}
+					<em className="italic">Built in our own factory.</em>
 				</h1>
 				<div className="max-w-[44ch]">
 					<p className="m-0 text-pretty text-[clamp(1rem,0.95rem+0.22vw,1.125rem)] text-muted-foreground leading-[1.65]">
 						FK Furniture &amp; Interior makes custom furniture, architectural
 						woodwork and fitted interiors for hospitality, residential and
-						workplace projects.
+						workplace projects. Work is made in our 4,500 sq ft factory and
+						installed across India.
 					</p>
 					<div className="mt-[1.5rem] flex flex-wrap items-center gap-x-5 gap-y-3">
 						<Link
 							className={buttonVariants({ className: "min-h-11" })}
 							to="/contact"
 						>
-							Discuss a project
+							Send a brief or BOQ
 						</Link>
 						<a
 							className="inline-flex min-h-11 items-center text-[0.9375rem] text-foreground underline decoration-1 decoration-primary underline-offset-4 hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
 							href="#fk-overview"
 						>
-							Explore services
+							See what we make
 						</a>
 					</div>
 				</div>

@@ -133,8 +133,7 @@ export function GalleryLightbox({
 							</dl>
 						) : (
 							<p className="m-0 mt-[1.5rem] max-w-[42ch] text-[0.75rem] text-muted-foreground leading-[1.55]">
-								Material, finish and hardware details have not been published
-								for this work.
+								No material or finish details are listed for this photograph.
 							</p>
 						)}
 						<button
@@ -142,7 +141,7 @@ export function GalleryLightbox({
 							onClick={handleInquireClick}
 							type="button"
 						>
-							Inquire about this design
+							Ask about a similar project
 						</button>
 					</div>
 				</div>

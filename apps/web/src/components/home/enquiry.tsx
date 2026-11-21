@@ -18,9 +18,9 @@ import { contactEmail, gurgaonOffice } from "@/components/contact/content";
 import { enquiryOptions } from "./content";
 
 const HOME_COPY = {
-	body: "Tell us about your space, your ideas and the support you need.",
-	heading: "Let’s discuss your project.",
-	title: "Your space. Our next conversation.",
+	body: "Share the location, scope and timeline, with drawings, renders or a BOQ if you have them. We reply with questions or a quotation plan.",
+	heading: "Tell us about your project.",
+	title: "Start with the brief.",
 };
 
 export function Enquiry({
@@ -82,7 +82,7 @@ export function Enquiry({
 							{contactEmail}
 						</a>
 						<br />
-						Gurgaon and Goa offices
+						Gurugram and Goa offices
 					</p>
 				</div>
 				<form className="home-enquiry-form" onSubmit={onSubmit}>

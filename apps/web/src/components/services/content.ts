@@ -1,18 +1,18 @@
 // Supplied project photographs; alts describe what the frame shows.
 export const photos = {
 	guestRoom: {
-		alt: "Guest room with a made bed, timber desk, artwork and sheer curtains",
-		caption: "Completed guest-room furniture and joinery",
+		alt: "Hotel guest room with a bed, timber desk, artwork and sheer curtains",
+		caption: "Guest room at Resort De Coracao",
 		src: "/home/lounge.webp",
 	},
 	fitted: {
-		alt: "Guest room with a fitted wardrobe, tea station and bedside storage",
-		caption: "Fitted wardrobe, tea station and bedside storage",
+		alt: "Hotel guest room with a fitted wardrobe, tea station and bed",
+		caption: "Hotel guest room with a fitted wardrobe and tea station",
 		src: "/home/workplace.webp",
 	},
 	hero: {
-		alt: "Hotel lobby with a chandelier and lounge seating",
-		caption: "Completed lobby seating and joinery",
+		alt: "Hotel lobby at night with a chandelier, lounge seating and a staircase",
+		caption: "Hotel lobby at night",
 		src: "/home/guest-room.webp",
 	},
 } as const;
@@ -33,7 +33,7 @@ export const offerings: readonly ServiceOffering[] = [
 		title: "Custom furniture",
 		summary:
 			"Guest rooms, shared spaces, homes and workplaces, made to the room and the approved finish.",
-		lead: "Beds, seating, counters and tables are built for how the room is used rather than adapted from a standard range.",
+		lead: "Beds, seating, counters and tables are built to the dimensions and drawings of each room.",
 		scopes: [
 			"Beds, headboards and luggage racks",
 			"Desks and minibar units",
@@ -50,8 +50,8 @@ export const offerings: readonly ServiceOffering[] = [
 		anchor: "architectural-woodwork",
 		title: "Architectural woodwork and fit-outs",
 		summary:
-			"Panelling, cladding, ceilings, doors, partitions and screens, made and fitted as one interior.",
-		lead: "Woodwork that has to meet a drawing as closely as it meets the room’s structure.",
+			"Panelling, cladding, ceilings, doors, partitions and screens, made and fitted with the furniture.",
+		lead: "Woodwork is made to your drawing and fitted to the room’s structure on site.",
 		scopes: [
 			"Wall panelling and cladding",
 			"Wooden ceilings and rafter details",
@@ -61,8 +61,8 @@ export const offerings: readonly ServiceOffering[] = [
 			"Reception and buffet surrounds",
 		],
 		note: {
-			title: "Drawn together",
-			text: "Panelling, ceilings and doors are set out with the furniture, so junctions, reveals and fixings are resolved before production.",
+			title: "Set out with the furniture",
+			text: "Panelling, ceilings and doors are planned together with the furniture. Junctions, reveals and fixings are checked at mock-up stage, before mass production.",
 		},
 	},
 	{
@@ -70,7 +70,7 @@ export const offerings: readonly ServiceOffering[] = [
 		title: "Modular furniture and storage",
 		summary:
 			"Wardrobes, vanities, kitchenettes and office storage, built to a module and a plan.",
-		lead: "Storage and cabinetry are sized for the space, then finished to match the rest of the interior.",
+		lead: "Storage and cabinetry are sized for the room and finished to match the rest of the interior.",
 		scopes: [
 			"Wardrobes and storage systems",
 			"Bathroom and hospitality vanities",
@@ -85,18 +85,18 @@ export const offerings: readonly ServiceOffering[] = [
 		anchor: "contract-manufacturing",
 		title: "Contract manufacturing",
 		summary:
-			"Production from the drawings, specifications or bill of quantities your team already holds.",
-		lead: "We can make to another designer’s or contractor’s documentation, with the specification confirmed before production.",
+			"Production from the CAD drawings, renders or bill of quantities your team already holds.",
+		lead: "We manufacture from CAD drawings, renders and BOQs, and confirm the specification with you before production.",
 		scopes: [
 			"CAD drawings and 3D renders",
 			"BOQs and dimensioned plans",
 			"Approved samples and mock-ups",
-			"Batch production and packing",
+			"Batch production and packing for delivery",
 			"Finish matching across a run",
 		],
 		note: {
 			title: "Send what you hold",
-			text: "Share the CAD package, BOQ or a set of dimensioned drawings. We will confirm what is missing before quoting.",
+			text: "Share the CAD package, BOQ or dimensioned drawings. We will tell you what is missing before we quote.",
 		},
 	},
 ] as const;
@@ -104,61 +104,66 @@ export const offerings: readonly ServiceOffering[] = [
 export const materials = [
 	{
 		term: "Boards and substrates",
-		options: "Plywood, HDHMR and MDF grades",
-		text: "The board is chosen against the approved specification, the way the piece is used and the project budget.",
+		options:
+			"Commercial-grade BWP marine plywood, high-density HDHMR, moisture-resistant MDF",
+		text: "Board is chosen to suit how the piece is used and the approved specification.",
 	},
 	{
 		term: "Solid wood",
-		options: "Teak, ash and oak",
-		text: "Species are discussed against the design, the intended finish and the budget, then confirmed as a specified option.",
+		options: "Kiln-seasoned teak, ash and oak",
+		text: "Timber is treated against termites and borers.",
 	},
 	{
 		term: "Surface finishes",
-		options: "Veneers, laminates and PU polish",
-		text: "Finish direction is matched to an approved sample, with sheen and colour checked before production.",
+		options: "Natural veneer, laminates and PU",
+		text: "Finishes are applied in a dust-free PU and veneer spray booth. Sheen and colour are checked against the approved mock-up.",
 	},
 	{
 		term: "Hardware and details",
-		options: "Channels, hinges and fittings",
-		text: "Hardware is selected for the piece and the specification, including soft-close and concealed options where agreed.",
+		options: "Commercial-grade hardware",
+		text: "Hardware is specified for each piece and confirmed in the BOQ.",
 	},
 ] as const;
 
 export const processSteps = [
 	{
-		title: "Review the project documents",
-		text: "Drawings, floor plans, specifications and the BOQ are read together to understand scope, quantities and site conditions.",
+		title: "Review the brief",
+		text: "We read your drawings, renders and BOQ together to understand scope, quantities and site conditions, then quote.",
 	},
 	{
-		title: "Agree materials and samples",
-		text: "Materials, finishes and hardware are fixed against the specification. A sample or mock-up is agreed where the project calls for one.",
+		title: "Build and approve a mock-up",
+		text: "Materials, finishes and hardware are fixed against the specification. The mock-up room takes 3 weeks and is approved before mass production begins.",
 	},
 	{
-		title: "Manufacture and inspect",
-		text: "Production follows the approved drawings and finish. Pieces are checked against the agreed specification before packing.",
+		title: "Manufacture",
+		text: "Production follows the approved mock-up and finish. Mass production takes 8 weeks. The factory runs CNC routing, automatic edge banding and a hydraulic cold press.",
 	},
 	{
 		title: "Pack, deliver and install",
-		text: "Protective packing, transport and installation are coordinated for the agreed project scope.",
+		text: "We deliver and install across India, planned around location, site access and schedule.",
 	},
 ] as const;
 
 export const distinctions = [
 	{
 		term: "Made in house",
-		text: "Furniture is produced in our own manufacturing setup rather than bought in and resold.",
+		text: "A 22-person in-house team works from a 4,500 sq ft factory with CNC routing, automatic edge banding and a hydraulic cold press.",
 	},
 	{
 		term: "From drawing to installation",
-		text: "Design, specification and execution sit with one team.",
+		text: "Specification, manufacturing, delivery and installation are handled by one team.",
 	},
 	{
-		term: "Specification and samples first",
-		text: "Drawings, BOQ and approved finishes guide production and inspection.",
+		term: "Mock-up before production",
+		text: "Where a project calls for one, a mock-up room (3 weeks) is approved before mass production (8 weeks).",
 	},
 	{
-		term: "One coordinated scope",
-		text: "Making and installation are planned together for the agreed work.",
+		term: "Capacity",
+		text: "The factory produces up to 20 guest rooms per month.",
+	},
+	{
+		term: "Manufacturing warranty",
+		text: "Five years on manufacturing, under normal commercial use.",
 	},
 ] as const;
 

@@ -8,7 +8,7 @@ import { ProjectHeader } from "@/components/project-detail/project-header";
 import { ProjectNavigation } from "@/components/project-detail/project-navigation";
 import { ProjectOverview } from "@/components/project-detail/project-overview";
 import { ProjectScope } from "@/components/project-detail/project-scope";
-import { getProject, getRelatedProject } from "@/components/projects/content";
+import { getProject } from "@/components/projects/content";
 
 export const Route = createFileRoute("/projects/$slug")({
 	loader: ({ params }) => {
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/projects/$slug")({
 		if (!project) {
 			throw notFound();
 		}
-		return { project, related: getRelatedProject(project) };
+		return { project };
 	},
 	head: ({ loaderData }) => ({
 		meta: [
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetailComponent() {
-	const { project, related } = Route.useLoaderData();
+	const { project } = Route.useLoaderData();
 
 	return (
 		<div className="home-page selection:bg-primary selection:text-primary-foreground">
@@ -54,7 +54,7 @@ function ProjectDetailComponent() {
 				<ProjectOverview project={project} />
 				<ProjectScope project={project} />
 				<ProjectGallery project={project} />
-				<ProjectNavigation related={related} />
+				<ProjectNavigation />
 			</main>
 			<SiteFooter />
 		</div>
@@ -74,7 +74,7 @@ function ProjectNotFound() {
 				</h1>
 				<p className="m-0 mt-[1.1rem] max-w-[48ch] text-pretty text-[1rem] text-muted-foreground leading-[1.7]">
 					This project page does not exist, or the address has changed. Browse
-					the full portfolio to find the work you were looking for.
+					the project index to find the work you were looking for.
 				</p>
 				<div className="mt-[clamp(1.75rem,3vw,2.5rem)]">
 					<Link

@@ -33,7 +33,7 @@ export function Manufacturing() {
 						width={2000}
 					/>
 					<figcaption className={figureCaption}>
-						Fitted wardrobe, tea station and bedside storage
+						Hotel guest room with a fitted wardrobe and tea station
 					</figcaption>
 				</figure>
 				<figure className="group m-0 min-w-0">
@@ -48,7 +48,7 @@ export function Manufacturing() {
 						width={2000}
 					/>
 					<figcaption className={figureCaption}>
-						Restaurant tables, seating and joinery
+						Dining room at Resort De Coracao
 					</figcaption>
 				</figure>
 			</div>
@@ -60,9 +60,10 @@ export function Manufacturing() {
 					Drawn by us, built by us.
 				</h2>
 				<p className={`${bodyCopy} mt-[1.15rem] max-w-[46ch]`}>
-					Furniture is manufactured in our own setup rather than traded in.
-					Custom specifications, finishes and BOQ compliance stay with one team
-					from the first drawing to the last coat.
+					We manufacture in our own 4,500 sq ft factory. The in-house team of 22
+					can produce for 20 guest rooms a month, and custom specifications,
+					finishes and BOQ compliance stay with one team from the first drawing
+					to the last coat.
 				</p>
 				<dl className="m-0 mt-[clamp(1.75rem,3vw,2.4rem)] grid">
 					{buildFacts.map((fact) => (

@@ -12,7 +12,9 @@ export function ContactHero() {
 				className="m-0 max-w-[24ch] text-balance text-[clamp(2.5rem,1.1rem+4.6vw,5rem)] leading-[0.98] tracking-[-0.03em]"
 				id="contact-hero-title"
 			>
-				Let’s talk about <em className="italic">the space you have in mind.</em>
+				Let’s talk about <em className="italic">
+					the space you have in mind.
+				</em>{" "}
 			</h1>
 			<div className="flex flex-wrap items-baseline gap-[0.5rem_clamp(1rem,2.5vw,2rem)] text-[1rem] leading-[1.5] max-sm:flex-col max-sm:items-start max-sm:gap-[0.4rem] [&>*+*]:border-border [&>*+*]:border-l [&>*+*]:pl-[clamp(1rem,2.5vw,2rem)] max-sm:[&>*+*]:border-l-0 max-sm:[&>*+*]:pl-0">
 				<a
@@ -27,12 +29,12 @@ export function ContactHero() {
 				>
 					{gurgaon.phones[0].display}
 				</a>
-				<p className="m-0 text-muted-foreground">Offices in Gurgaon and Goa</p>
+				<p className="m-0 text-muted-foreground">Offices in Gurugram and Goa</p>
 			</div>
 			<p className="m-0 max-w-[62ch] text-pretty text-[1rem] text-muted-foreground leading-[1.65]">
-				Tell us about the project, the room or the brief. We will read it
-				against the drawings or BOQ you already hold, and take the first
-				conversation from there.
+				Tell us about the project, its location and its scope. We quote per BOQ
+				and project, with no fixed minimum order, and we deliver and install
+				across India.
 			</p>
 		</section>
 	);

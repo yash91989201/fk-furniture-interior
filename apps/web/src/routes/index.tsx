@@ -14,7 +14,6 @@ import { Projects } from "@/components/home/projects";
 import { Services } from "@/components/home/services";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteNav } from "@/components/home/site-nav";
-import { Testimonials } from "@/components/home/testimonials";
 import { usePrefersReducedMotion } from "@/hooks/use-media";
 
 const SCROLL_OPTIONS = {
@@ -30,11 +29,11 @@ export const Route = createFileRoute("/")({
 	component: HomeComponent,
 	head: () => ({
 		meta: [
-			{ title: "FK Furniture & Interior" },
+			{ title: "FK Furniture & Interior · Furniture and interiors" },
 			{
 				name: "description",
 				content:
-					"Interior design, bespoke furniture and turnkey execution for homes, workplaces and hospitality spaces.",
+					"FK Furniture & Interior designs and manufactures bespoke furniture and interiors for hotels, resorts, homes and workplaces. Family craft since 1986; own factory; installation across India.",
 			},
 		],
 	}),
@@ -61,7 +60,7 @@ function HomeComponent() {
 				<ReactLenis options={SCROLL_OPTIONS} root />
 			) : null}
 			<a className="home-skip" href="#fk-projects">
-				Skip to selected projects
+				Skip to selected project
 			</a>
 			<SiteNav />
 			<main>
@@ -72,7 +71,6 @@ function HomeComponent() {
 				<Furniture onEnquire={handleEnquire} />
 				<Craft />
 				<Process />
-				<Testimonials />
 				<Enquiry
 					key={`${presetCategory}-${presetRequirement}`}
 					presetCategory={presetCategory}

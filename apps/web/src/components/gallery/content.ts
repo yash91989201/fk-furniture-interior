@@ -1,3 +1,5 @@
+import { projectImages } from "@/components/projects/project-images";
+
 export const galleryCategories = [
 	{ id: "all", label: "All work" },
 	{
@@ -11,14 +13,6 @@ export const galleryCategories = [
 	{
 		id: "restaurants-banquets",
 		label: "Restaurants & banquets",
-	},
-	{
-		id: "panelling-ceilings",
-		label: "Wall panelling & wooden ceilings",
-	},
-	{
-		id: "executive-meeting",
-		label: "Executive & meeting rooms",
 	},
 ] as const;
 
@@ -48,48 +42,49 @@ export interface GalleryWork {
 	space: string;
 }
 
-/**
- * Publish only after the client has cleared the photograph and the written
- * scope/specification. The empty array is intentional: the brochure images and
- * generated previews in this repository are not approved project photography.
- */
-export const galleryWorks: GalleryWork[] = [];
+const project = {
+	name: "Resort De Coracao",
+	location: "Tapovan, Rishikesh",
+} as const;
 
-export interface CraftShot {
-	alt: string;
-	caption: string;
-	height: number;
-	sizes?: string;
-	src: string;
-	srcSet?: string;
-	stage: string;
-	width: number;
-}
-
-/**
- * Factory and site photographs must show actual FK production or execution,
- * with captions checked against what is visible in the frame.
- */
-export const craftShots: CraftShot[] = [];
-
-export const craftStages = [
+// Four photographs confirmed to show Resort De Coracao in the company profile.
+export const galleryWorks: GalleryWork[] = [
 	{
-		id: "cutting",
-		label: "Cutting and joinery",
+		category: "lobby-reception",
+		emphasis: "wide",
+		image: projectImages.lobbyLounge,
+		project,
+		reference: "RDC-01",
+		scope:
+			"Lounge seating, brass tables and staircase in the lobby and reception area.",
+		space: "Lobby and reception",
 	},
 	{
-		id: "veneering",
-		label: "Veneer and edge finishing",
+		category: "hotel-guest-rooms",
+		image: projectImages.guestRoomBed,
+		project,
+		reference: "RDC-02",
+		scope: "Bed, timber desk, artwork and curtains in a guest room.",
+		space: "Guest room",
 	},
 	{
-		id: "finishing",
-		label: "Finishing",
+		category: "lobby-reception",
+		image: projectImages.lounge,
+		project,
+		reference: "RDC-03",
+		scope:
+			"Green armchairs, a long sofa and brass tables in the reception lounge.",
+		space: "Reception lounge",
 	},
 	{
-		id: "inspection",
-		label: "Assembly and inspection",
+		category: "restaurants-banquets",
+		image: projectImages.dining,
+		project,
+		reference: "RDC-04",
+		scope: "Laid tables and upholstered chairs in the resort dining room.",
+		space: "Dining room",
 	},
-] as const;
+];
 
 // Shared Tailwind roles, matching the type and spacing ladder used on About.
 export const gallerySection =

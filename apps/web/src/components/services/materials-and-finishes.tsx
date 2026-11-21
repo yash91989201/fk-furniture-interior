@@ -17,13 +17,13 @@ export function MaterialsAndFinishes() {
 		>
 			<div className="grid items-end gap-x-[clamp(2rem,5vw,5rem)] gap-y-[1.5rem] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
 				<h2 className={sectionTitle} id="services-materials-title">
-					Materials are chosen against the specification.
+					Materials we work in.
 				</h2>
 				<p
 					className={`${bodyCopy} max-w-[52ch] text-secondary-foreground/80 lg:justify-self-end`}
 				>
-					Options are selected against each project&apos;s specification,
-					budget, use and approved samples, then confirmed in the BOQ.
+					We choose each material against your specification and budget, then
+					confirm it in the BOQ.
 				</p>
 			</div>
 			<dl className="m-0 mt-[clamp(2rem,4vw,3.25rem)] grid gap-x-[clamp(2rem,5vw,4rem)] gap-y-0 p-0 md:grid-cols-2">
@@ -46,13 +46,12 @@ export function MaterialsAndFinishes() {
 			</dl>
 			<aside className="mt-[clamp(2rem,4vw,3rem)] border-secondary-foreground/25 border-t pt-[1.5rem]">
 				<p className={`${leadCopy} max-w-[62ch] text-secondary-foreground/80`}>
-					A material option is not a performance claim. Moisture, wear, fire and
-					treatment claims are published only where the project carries approved
-					test evidence.
+					Fire-retardant options are available on request for boards, laminates,
+					foams and fabrics.
 				</p>
 				<p className="m-0 mt-[1rem] max-w-[62ch] text-pretty text-[0.9375rem] text-secondary-foreground/80 leading-[1.6]">
-					Final availability is confirmed against the approved specification and
-					BOQ.
+					Final material selection is confirmed in the approved specification
+					and BOQ.
 				</p>
 			</aside>
 		</section>

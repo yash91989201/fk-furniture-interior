@@ -23,35 +23,37 @@ export function Projects() {
 	return (
 		<section className="home-section home-projects-mosaic" id="fk-projects">
 			<div className="home-mosaic-head">
-				<h2>Selected projects</h2>
+				<h2>Selected project</h2>
 			</div>
-			<nav aria-label="Select a project" className="home-mosaic-mosaic">
-				{projects.map((item, index) => (
-					<button
-						aria-pressed={index === current}
-						data-project={String(index)}
-						key={item.id}
-						onClick={handleProjectClick}
-						type="button"
-					>
-						<span className="home-mosaic-media">
-							<img
-								alt=""
-								height={400}
-								loading="lazy"
-								src={item.image.src}
-								width={600}
-							/>
-						</span>
-						<span>
-							<strong className="home-mosaic-name">{item.name}</strong>
-							<small className="home-mosaic-label">
-								{item.location} · {item.type}
-							</small>
-						</span>
-					</button>
-				))}
-			</nav>
+			{projects.length > 1 ? (
+				<nav aria-label="Select a project" className="home-mosaic-mosaic">
+					{projects.map((item, index) => (
+						<button
+							aria-pressed={index === current}
+							data-project={String(index)}
+							key={item.id}
+							onClick={handleProjectClick}
+							type="button"
+						>
+							<span className="home-mosaic-media">
+								<img
+									alt=""
+									height={400}
+									loading="lazy"
+									src={item.image.src}
+									width={600}
+								/>
+							</span>
+							<span>
+								<strong className="home-mosaic-name">{item.name}</strong>
+								<small className="home-mosaic-label">
+									{item.location} · {item.type}
+								</small>
+							</span>
+						</button>
+					))}
+				</nav>
+			) : null}
 			<article
 				aria-label="Selected project preview"
 				className="home-mosaic-caption"
@@ -65,22 +67,13 @@ export function Projects() {
 				<div className="home-mosaic-copy">
 					<p>{project.scope}</p>
 					<div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-						{project.slug ? (
-							<Link
-								className={buttonVariants({ variant: "outline" })}
-								params={{ slug: project.slug }}
-								to="/projects/$slug"
-							>
-								View project
-							</Link>
-						) : (
-							<Link
-								className={buttonVariants({ variant: "outline" })}
-								to="/projects"
-							>
-								View projects
-							</Link>
-						)}
+						<Link
+							className={buttonVariants({ variant: "outline" })}
+							params={{ slug: project.slug }}
+							to="/projects/$slug"
+						>
+							View project
+						</Link>
 						<a
 							className="inline-flex min-h-11 items-center text-[0.8125rem] underline decoration-1 decoration-primary underline-offset-4 hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
 							href="#fk-enquiry"

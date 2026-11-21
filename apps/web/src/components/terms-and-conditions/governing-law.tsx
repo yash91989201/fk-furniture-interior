@@ -1,18 +1,12 @@
 import { termsSections } from "./content";
-import {
-	bodyText,
-	leadTerm,
-	PendingNote,
-	TermsSection,
-	termList,
-} from "./terms-section";
+import { bodyText, leadTerm, TermsSection, termList } from "./terms-section";
 
 export function GoverningLaw() {
 	return (
 		<TermsSection {...termsSections.law}>
 			<p className={bodyText}>
-				These terms are governed by Indian law. Where a dispute is heard is not
-				yet fixed.
+				These terms are governed by Indian law. Disputes are heard in Gurugram,
+				Haryana.
 			</p>
 			<ul className={termList}>
 				<li className={bodyText}>
@@ -20,15 +14,11 @@ export function GoverningLaw() {
 					governed by and construed in accordance with the laws of India.
 				</li>
 				<li className={bodyText}>
-					<span className={leadTerm}>Exclusive jurisdiction.</span> Disputes
-					arising from a transaction are subject to the exclusive jurisdiction
-					of the courts at the city and state named in the agreement.
+					<span className={leadTerm}>Jurisdiction.</span> Disputes arising from
+					a transaction are subject to the jurisdiction of the courts at
+					Gurugram, Haryana.
 				</li>
 			</ul>
-			<PendingNote>
-				the city and state whose courts hold exclusive jurisdiction — Gurgaon,
-				Goa, or the registered office location.
-			</PendingNote>
 		</TermsSection>
 	);
 }

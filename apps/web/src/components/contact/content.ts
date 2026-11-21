@@ -1,5 +1,6 @@
-// Gurgaon office details confirmed by the client; Goa office from the company profile, p. 9.
+// Gurugram office details confirmed by the client; Goa office from the company profile, p. 9.
 export const contactEmail = "interiorfkfurniture@gmail.com";
+export const gstin = "06AHBPW2112P1Z6";
 
 export const gurgaonOffice = {
 	address: [
@@ -7,7 +8,7 @@ export const gurgaonOffice = {
 		"Street No. 74, Rajendra Park",
 		"Daultabad Industrial Area, Gurugram",
 	],
-	name: "Gurgaon office",
+	name: "Gurugram office",
 	phones: [{ display: "+91 92110 45757", href: "tel:+919211045757" }],
 } as const;
 

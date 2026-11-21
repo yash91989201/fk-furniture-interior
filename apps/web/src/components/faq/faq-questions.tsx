@@ -58,16 +58,6 @@ export function FaqQuestions() {
 										<p className="m-0 max-w-[34rem] text-pretty text-[clamp(1rem,0.95rem+0.2vw,1.0625rem)] text-foreground leading-[1.7]">
 											{question.answer}
 										</p>
-										{question.pending ? (
-											<p className="mt-[0.9rem] flex max-w-[58ch] items-start gap-[0.45rem] text-[0.8125rem] text-muted-foreground leading-[1.55]">
-												<span
-													aria-hidden="true"
-													className="mt-[0.4em] size-1.5 shrink-0 rounded-full bg-primary"
-												/>
-												Awaiting confirmation before this is published as a
-												commitment.
-											</p>
-										) : null}
 									</div>
 								</details>
 							))}

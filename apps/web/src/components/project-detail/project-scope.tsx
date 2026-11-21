@@ -1,6 +1,5 @@
 import type { Project } from "@/components/projects/content";
 import {
-	draftScopeNote,
 	projectsBody,
 	projectsLabel,
 	projectsSection,
@@ -24,11 +23,6 @@ export function ProjectScope({ project }: { project: Project }) {
 						What the project covers.
 					</h2>
 				</div>
-				{project.scopeStatus === "draft" ? (
-					<p className="m-0 max-w-[38ch] text-[0.8125rem] text-muted-foreground leading-[1.55] sm:text-right">
-						{draftScopeNote}
-					</p>
-				) : null}
 			</div>
 			<ul className="m-0 grid list-none grid-cols-1 items-start gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-[clamp(1.5rem,3vw,2.5rem)] p-0 pt-[clamp(2rem,4vw,3rem)] sm:grid-cols-2 lg:grid-cols-3">
 				{project.scope.map((group) => (

@@ -20,19 +20,19 @@ export function ContactInvitation() {
 				<h2 id="contact-invitation-title">
 					Bring the drawings.{" "}
 					<span className="home-about-heading-end">
-						We will bring the <em>questions.</em>
+						We will check the <em>scope.</em>
 					</span>
 				</h2>
 				<p>
-					Tell us where the project is and what stage it is at. We will arrange
-					a consultation, and discuss a site visit where it helps.
+					Tell us where the project is and what you have so far. We will tell
+					you what else we need before we quote.
 				</p>
 				<div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 max-sm:justify-start">
 					<a
 						className={buttonVariants({ className: "min-h-11" })}
 						href={`mailto:${contactEmail}`}
 					>
-						Email the project desk
+						Email us
 					</a>
 					<a
 						className={buttonVariants({

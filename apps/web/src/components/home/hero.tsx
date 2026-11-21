@@ -11,12 +11,12 @@ export function Hero() {
 		>
 			<div aria-hidden="true" className="home-hero-media">
 				<img
-					alt={photos.lobby.alt}
+					alt={photos.lobbyLounge.alt}
 					className="home-hero-photo"
 					decoding="async"
 					fetchPriority="high"
 					height={1333}
-					src={photos.lobby.src}
+					src={photos.lobbyLounge.src}
 					width={2000}
 				/>
 				<div className="home-hero-glass">
@@ -25,7 +25,7 @@ export function Hero() {
 						decoding="async"
 						height={1333}
 						loading="lazy"
-						src={photos.lobby.src}
+						src={photos.lobbyLounge.src}
 						width={2000}
 					/>
 				</div>
@@ -38,18 +38,19 @@ export function Hero() {
 			</div>
 			<div className="home-hero-card">
 				<h1 id="fk-hero-title">
-					<span>Spaces with</span>
+					<span>Bespoke interiors,</span>
 					<em>
-						<span>a point of view.</span>
+						<span>made in our own factory.</span>
 					</em>
 				</h1>
 				<p className="home-hero-lede">
-					Interior design, bespoke furniture and turnkey execution for homes,
-					workplaces and hospitality spaces.
+					Furniture, interior fit-outs and turnkey execution for hotels,
+					resorts, homes and workplaces. Manufactured in our own factory,
+					installed across India.
 				</p>
 				<div className="home-hero-actions">
 					<a className={buttonVariants()} href="#fk-projects">
-						Explore our work
+						See our work
 					</a>
 					<a
 						className={buttonVariants({
@@ -58,12 +59,11 @@ export function Hero() {
 						})}
 						href="#fk-enquiry"
 					>
-						Discuss your project
+						Send a BOQ or brief
 					</a>
 				</div>
 				<p className="home-hero-caption">
-					Resort De Coracao · Rishikesh · Interior design · Furniture ·
-					Execution
+					Resort De Coracao · Tapovan, Rishikesh · Lobby, guest rooms, dining
 				</p>
 			</div>
 		</section>

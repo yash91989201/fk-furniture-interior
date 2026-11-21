@@ -1,14 +1,16 @@
-import { contactEmail, offices } from "./content";
+import { contactEmail, gstin, offices } from "./content";
 import "@/styles/contact.css";
 
 export function OfficeDetails() {
 	return (
 		<section aria-labelledby="contact-offices-title" className="office-dir">
 			<div className="office-dir__top">
-				<h2 id="contact-offices-title">Two offices, one team.</h2>
+				<h2 id="contact-offices-title">Offices in Gurugram and Goa.</h2>
 				<div className="office-dir__mail">
 					<span className="office-dir__label">Email</span>
 					<a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+					<span className="office-dir__label">GSTIN</span>
+					<span>{gstin}</span>
 				</div>
 			</div>
 			<div aria-hidden="true" className="office-dir__cols">

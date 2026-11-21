@@ -20,7 +20,7 @@ export function ProjectOverview({ project }: { project: Project }) {
 						className={`${projectsTitle} mt-[0.9rem] max-w-[18ch]`}
 						id="project-overview-title"
 					>
-						The engagement.
+						About the project.
 					</h2>
 					<p className={`${projectsBody} mt-[1.25rem] max-w-[62ch]`}>
 						{project.overview}

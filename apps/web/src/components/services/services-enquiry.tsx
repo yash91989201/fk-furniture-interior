@@ -23,12 +23,12 @@ export function ServicesEnquiry() {
 						className={`${sectionTitle} max-w-[18ch]`}
 						id="services-enquiry-title"
 					>
-						Have drawings, or just the room?
+						Have drawings or a BOQ?
 					</h2>
 					<p className={`${bodyCopy} mt-[1.15rem] max-w-[46ch]`}>
-						Share the type of space, project location, approximate scope, and
-						any drawings or BOQ already held. The more complete the brief, the
-						more useful the first conversation.
+						Tell us the type of space, the location and the approximate scope.
+						Send drawings, renders or a BOQ if you have them. We quote per BOQ
+						and project, with no fixed minimum.
 					</p>
 				</div>
 				<div className="min-w-0">
@@ -59,9 +59,9 @@ export function ServicesEnquiry() {
 				</div>
 			</div>
 			<p className="mt-[clamp(2rem,4vw,3rem)] max-w-[54ch] border-border border-t pt-[1rem] text-[0.8125rem] text-muted-foreground leading-[1.55]">
-				The contact form prepares an email in your own mail app. It does not
-				upload or store files. Attach drawings or a BOQ to that email before
-				sending.
+				The contact form opens a draft in your own mail app. It does not upload
+				or store anything. Attach drawings or a BOQ to that email before you
+				send it.
 			</p>
 		</section>
 	);

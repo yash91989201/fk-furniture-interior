@@ -10,7 +10,7 @@ export function PolicyHero() {
 					ask about a project, and what this website records while you read it.
 				</p>
 				<p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-border border-t pt-4 text-[0.875rem] text-muted-foreground leading-[1.5]">
-					<span>Last updated 1 November 2026</span>
+					<span>Last updated 21 November 2026</span>
 					<span
 						aria-hidden="true"
 						className="hidden size-1 rounded-full bg-primary sm:block"
