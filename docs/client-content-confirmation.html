@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1" name="viewport">
+		<title>FK Furniture &amp; Interior — Website content confirmation</title>
+		<style>
+		:root {
+			--cream: #f7f1e9;
+			--paper: #fffdf9;
+			--ink: #1f1b17;
+			--muted: #6d635a;
+			--line: #ddd2c4;
+			--brass: #9a6b2f;
+			--ok: #2f6b45;
+			--warn: #8a3b2e;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		html {
+			-webkit-text-size-adjust: 100%;
+		}
+		body {
+			margin: 0;
+			font:
+				16px / 1.55 ui-sans-serif,
+				system-ui,
+				-apple-system,
+				"Segoe UI",
+				Roboto,
+				Arial,
+				sans-serif;
+			color: var(--ink);
+			background: var(--cream);
+		}
+		.shell {
+			max-width: 54rem;
+			padding: 1.75rem 1.1rem 7rem;
+			margin: 0 auto;
+		}
+		header {
+			padding-bottom: 1.25rem;
+			margin-bottom: 1.5rem;
+			border-bottom: 1px solid var(--line);
+		}
+		.brand {
+			margin: 0;
+			font:
+				600 0.72rem / 1 ui-serif,
+				Georgia,
+				serif;
+			color: var(--brass);
+			text-transform: uppercase;
+			letter-spacing: 0.2em;
+		}
+		h1 {
+			margin: 0.55rem 0 0.5rem;
+			font:
+				500 clamp(1.7rem, 1.2rem + 2.2vw, 2.5rem) / 1.08 ui-serif,
+				Georgia,
+				serif;
+			letter-spacing: -0.02em;
+		}
+		.lede {
+			max-width: 60ch;
+			margin: 0;
+			color: var(--muted);
+		}
+		.lede + .lede {
+			margin-top: 0.6rem;
+		}
+		.lede-points {
+			display: grid;
+			gap: 0.5rem;
+			max-width: 62ch;
+			padding-left: 1.2rem;
+			margin: 0.85rem 0 0.95rem;
+			list-style: disc;
+		}
+		.lede-points li {
+			font-weight: 600;
+			color: var(--ink);
+		}
+		.lede-points li::marker {
+			color: var(--brass);
+		}
+		fieldset {
+			min-width: 0;
+			padding: 1.1rem;
+			margin: 0 0 1.1rem;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 4px;
+		}
+		legend {
+			padding: 0 0.4rem;
+			font:
+				600 1.05rem / 1.3 ui-serif,
+				Georgia,
+				serif;
+		}
+		.hint {
+			margin: 0.35rem 0 1rem;
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 0.9rem;
+		}
+		@media (min-width: 36rem) {
+			.grid.two {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+		label {
+			display: grid;
+			gap: 0.3rem;
+			font-size: 0.82rem;
+			font-weight: 600;
+			color: var(--muted);
+		}
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		input[type="number"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 0.6rem 0.65rem;
+			font: inherit;
+			font-weight: 400;
+			color: var(--ink);
+			background: #fff;
+			border: 1px solid var(--line);
+			border-radius: 3px;
+		}
+		textarea {
+			min-height: 5.5rem;
+			resize: vertical;
+		}
+		input:focus-visible,
+		select:focus-visible,
+		textarea:focus-visible,
+		button:focus-visible {
+			outline: 2px solid var(--brass);
+			outline-offset: 2px;
+		}
+		.repeat-row {
+			padding: 1rem 0;
+			border-top: 1px solid var(--line);
+		}
+		.repeat-row:first-child {
+			padding-top: 0.35rem;
+			border-top: 0;
+		}
+		.row-head {
+			display: flex;
+			gap: 0.75rem;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 0.7rem;
+		}
+		.row-title {
+			font:
+				600 0.95rem / 1.3 ui-sans-serif,
+				system-ui,
+				sans-serif;
+		}
+		.row-remove {
+			min-height: 32px;
+			padding: 0.4rem;
+			font: 400 0.8rem / 1 inherit;
+			color: var(--warn);
+			text-decoration: underline;
+			cursor: pointer;
+			background: none;
+			border: 0;
+		}
+		.add-row {
+			width: 100%;
+			min-height: 44px;
+			padding: 0.75rem 1rem;
+			margin-top: 0.6rem;
+			font:
+				600 0.9rem / 1 ui-sans-serif,
+				system-ui,
+				sans-serif;
+			color: var(--ink);
+			cursor: pointer;
+			background: transparent;
+			border: 1px dashed var(--line);
+			border-radius: 3px;
+		}
+		.add-row:hover {
+			background: #efe5d8;
+		}
+		.actions {
+			position: sticky;
+			bottom: 0;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.6rem;
+			justify-content: center;
+			padding: 0.9rem 1.1rem calc(0.9rem + env(safe-area-inset-bottom));
+			background: var(--cream);
+			border-top: 1px solid var(--line);
+		}
+		.actions button {
+			min-height: 44px;
+			padding: 0.8rem 1.25rem;
+			font:
+				600 0.95rem / 1 ui-sans-serif,
+				system-ui,
+				sans-serif;
+			color: var(--cream);
+			cursor: pointer;
+			background: var(--ink);
+			border: 1px solid var(--ink);
+			border-radius: 3px;
+		}
+		.actions button.secondary {
+			color: var(--ink);
+			background: transparent;
+		}
+		.actions button:hover {
+			filter: brightness(1.12);
+		}
+		.actions button.secondary:hover {
+			background: #efe5d8;
+		}
+		dialog {
+			width: calc(100% - 2rem);
+			max-width: 30rem;
+			padding: 1.25rem;
+			color: var(--ink);
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 5px;
+			box-shadow: 0 24px 60px rgb(31 27 23 / 0.25);
+		}
+		dialog::backdrop {
+			background: rgb(31 27 23 / 0.45);
+		}
+		dialog h2 {
+			margin: 0 0 0.6rem;
+			font:
+				500 1.35rem / 1.2 ui-serif,
+				Georgia,
+				serif;
+		}
+		dialog p {
+			margin: 0 0 0.75rem;
+		}
+		dialog .num {
+			font-weight: 700;
+			letter-spacing: 0.02em;
+		}
+		dialog textarea {
+			min-height: 7rem;
+			font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+			font-size: 0.78rem;
+		}
+		dialog .close {
+			width: 100%;
+			min-height: 44px;
+			padding: 0.75rem;
+			margin-top: 0.5rem;
+			font: 600 0.95rem / 1 inherit;
+			color: var(--cream);
+			cursor: pointer;
+			background: var(--ink);
+			border: 1px solid var(--ink);
+			border-radius: 3px;
+		}
+		.status-ok {
+			font-weight: 600;
+			color: var(--ok);
+		}
+		.status-warn {
+			font-weight: 600;
+			color: var(--warn);
+		}
+		footer.note {
+			margin-top: 1.5rem;
+			font-size: 0.8rem;
+			color: var(--muted);
+		}
+		</style>
+	</head>
+	<body>
+		<div class="shell">
+			<header>
+				<p class="brand">FK Furniture &amp; Interior</p>
+				<h1>Website content confirmation</h1>
+				<p class="lede">
+					Nothing here is public until you approve it. What this questionnaire
+					settles:
+				</p>
+				<ul class="lede-points">
+					<li>
+						Confirmed copy replaces placeholders. Legal and contact details
+						close the blanks on the Privacy Policy and Terms pages.
+					</li>
+					<li>
+						Real projects, not borrowed photos. Each project records its
+						location, year, type, scope and materials.
+					</li>
+					<li>
+						Approved testimonials only. Add the quotes you want published; the
+						invented ones are removed.
+					</li>
+					<li>
+						Commercial and factory facts. Payments, warranty, lead times,
+						capacity and machinery are confirmed here.
+					</li>
+					<li>
+						Correct content improves on-page SEO. Accurate names, locations,
+						scopes and terms are what search engines index.
+					</li>
+					<li>
+						Please fill all the relevant information, as we will use this on the
+						site.
+					</li>
+				</ul>
+				<p class="lede">
+					Answer every field you can. Answers stay in this browser, and
+					<strong>Copy response</strong>
+					copies a JSON summary you can paste into the WhatsApp group.
+				</p>
+			</header>
+
+			<form id="content-form" novalidate>
+				<fieldset data-key="company" data-section="Company and legal details">
+					<legend>Company and legal details</legend>
+					<p class="hint">
+						Company name, email, phone and address are already confirmed. Only
+						GSTIN and jurisdiction are needed.
+					</p>
+					<div class="grid two">
+						<label
+							>GSTIN
+							<input data-label="GSTIN" name="gstin" type="text">
+						</label>
+						<label
+							>City and state for legal jurisdiction
+							<input
+								data-label="Legal jurisdiction city and state"
+								name="jurisdiction"
+								type="text"
+							>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="terms" data-section="Commercial terms">
+					<legend>Commercial terms</legend>
+					<p class="hint">
+						The Terms page cannot go live without these values. Lead times and
+						warranty are prefilled from the draft brief; adjust if different.
+					</p>
+					<div class="grid two">
+						<label
+							>Quotation validity (days)
+							<input
+								data-label="Quotation validity (days)"
+								inputmode="numeric"
+								min="0"
+								name="quote_validity"
+								type="number"
+							>
+						</label>
+						<label
+							>Warranty (years)
+							<input
+								data-label="Manufacturing warranty (years)"
+								inputmode="numeric"
+								min="0"
+								name="warranty_years"
+								type="number"
+								value="3"
+							>
+						</label>
+						<label
+							>Advance payment (%)
+							<input
+								data-label="Advance payment (%)"
+								inputmode="numeric"
+								max="100"
+								min="0"
+								name="advance_pct"
+								type="number"
+							>
+						</label>
+						<label
+							>Payment before dispatch (%)
+							<input
+								data-label="Payment before dispatch (%)"
+								inputmode="numeric"
+								max="100"
+								min="0"
+								name="dispatch_pct"
+								type="number"
+							>
+						</label>
+						<label
+							>Payment before installation (%)
+							<input
+								data-label="Payment before installation (%)"
+								inputmode="numeric"
+								max="100"
+								min="0"
+								name="install_pct"
+								type="number"
+							>
+						</label>
+						<label
+							>Storage grace after missed delivery (days)
+							<input
+								data-label="Storage grace period (days)"
+								inputmode="numeric"
+								min="0"
+								name="storage_days"
+								type="number"
+							>
+						</label>
+						<label
+							>Mock-up room lead time (weeks)
+							<input
+								data-label="Mock-up lead time (weeks)"
+								inputmode="numeric"
+								min="0"
+								name="mockup_weeks"
+								type="number"
+								value="3"
+							>
+						</label>
+						<label
+							>Mass production lead time (weeks)
+							<input
+								data-label="Mass production lead time (weeks)"
+								inputmode="numeric"
+								min="0"
+								name="production_weeks"
+								type="number"
+								value="8"
+							>
+						</label>
+					</div>
+					<div class="grid" style="margin-top: 0.9rem">
+						<label
+							>Minimum order policy
+							<textarea
+								data-label="Minimum order policy"
+								name="moq"
+							>No fixed minimum order. Scope is quoted per BOQ and project.</textarea>
+						</label>
+						<label
+							>Cancellation and refund policy
+							<textarea
+								data-label="Cancellation and refund policy"
+								name="cancellation"
+								placeholder="What happens if an order is cancelled after advance, drawings approval or production"
+							></textarea>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="testimonials" data-section="Client testimonials">
+					<legend>Client testimonials</legend>
+					<p class="hint">
+						Add a quote for each client who has approved one. Add as many as you
+						like. The website currently shows four invented names and quotes, so
+						approved quotes replace them.
+					</p>
+					<div id="testimonial-rows"></div>
+					<button class="add-row" id="add-testimonial" type="button">
+						Add testimonial
+					</button>
+				</fieldset>
+
+				<fieldset data-key="projects" data-section="Projects">
+					<legend>Projects</legend>
+					<p class="hint">
+						Add every project that should appear on the site and describe the
+						actual work. Start with the first project and add as many as you
+						like.
+					</p>
+					<div id="project-rows"></div>
+					<button class="add-row" id="add-project" type="button">
+						Add project
+					</button>
+				</fieldset>
+
+				<fieldset data-key="factory" data-section="Factory and capability">
+					<legend>Factory and capability</legend>
+					<p class="hint">
+						Years and machinery are prefilled from the brief; adjust if
+						different. Area, capacity and team size still need figures.
+					</p>
+					<div class="grid two">
+						<label
+							>Factory area (sq ft)
+							<input
+								data-label="Factory area (sq ft)"
+								inputmode="numeric"
+								min="0"
+								name="factory_area"
+								type="number"
+							>
+						</label>
+						<label
+							>Monthly capacity (guest rooms)
+							<input
+								data-label="Monthly capacity (guest rooms)"
+								inputmode="numeric"
+								min="0"
+								name="monthly_capacity"
+								type="number"
+							>
+						</label>
+						<label
+							>Team size
+							<input
+								data-label="In-house team size"
+								inputmode="numeric"
+								min="0"
+								name="team_size"
+								type="number"
+							>
+						</label>
+						<label
+							>Years in hospitality interiors
+							<input
+								data-label="Years in hospitality interiors"
+								inputmode="numeric"
+								min="0"
+								name="years_hospitality"
+								type="number"
+								value="40"
+							>
+						</label>
+					</div>
+					<div class="grid" style="margin-top: 0.9rem">
+						<label
+							>Machinery and processes you want stated
+							<textarea
+								data-label="Machinery and processes"
+								name="machinery"
+							>CNC routing, automatic edge banding, hydraulic cold press, dust-free PU and veneer spray booth.</textarea>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="about" data-section="About and credibility">
+					<legend>About and credibility</legend>
+					<p class="hint">
+						The About page lists team roles but has no founder note or
+						certifications yet.
+					</p>
+					<div class="grid two">
+						<label
+							>Founder or leadership name and role
+							<input
+								data-label="Founder or leadership name and role"
+								name="founder_name"
+								type="text"
+							>
+						</label>
+						<label
+							>Certifications or registrations to show
+							<input
+								data-label="Certifications or registrations"
+								name="certifications"
+								type="text"
+							>
+						</label>
+						<label style="grid-column: 1 / -1"
+							>Founder note for the About page
+							<textarea
+								data-label="Founder note"
+								name="founder_note"
+								placeholder="A short note on experience and how the business works"
+							></textarea>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="compliance" data-section="Materials and compliance">
+					<legend>Materials and compliance</legend>
+					<p class="hint">
+						The FAQ still marks substrates and fire safety as unconfirmed. These
+						answers close those questions.
+					</p>
+					<div class="grid">
+						<label
+							>Substrates and core materials used
+							<textarea
+								data-label="Substrates and core materials"
+								name="substrates"
+							>Commercial-grade BWP marine plywood, high-density HDHMR, moisture-resistant MDF, kiln-seasoned teak, ash and oak, treated against termites and borers.</textarea>
+						</label>
+						<label
+							>Fire-retardant options
+							<select data-label="Fire-retardant options" name="fire_safety">
+								<option value="">Select</option>
+								<option
+									value="Available on request for boards, laminates, foams and fabrics"
+								>
+									Available on request for boards, laminates, foams and fabrics
+								</option>
+								<option value="Available but not yet verified">
+									Available but not yet verified
+								</option>
+								<option value="Not offered">Not offered</option>
+							</select>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="service" data-section="Delivery and service area">
+					<legend>Delivery and service area</legend>
+					<p class="hint">
+						The FAQ currently says delivery coverage is confirmed per project.
+					</p>
+					<div class="grid">
+						<label
+							>Where do you deliver and install?
+							<textarea
+								data-label="Delivery and installation coverage"
+								name="service_area"
+							>Pan-India delivery and on-site installation, planned per project around location, site access and schedule.</textarea>
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset data-key="notes" data-section="Anything else">
+					<legend>Anything else</legend>
+					<div class="grid">
+						<label
+							>Additional notes
+							<textarea
+								data-label="Additional notes"
+								name="final_notes"
+							></textarea>
+						</label>
+					</div>
+				</fieldset>
+			</form>
+
+			<footer class="note">
+				<p>
+					Questions: FK Furniture &amp; Interior, 6370106392. Paste the copied
+					response into the WhatsApp group. Answers stay on this device until
+					you clear them.
+				</p>
+			</footer>
+		</div>
+
+		<div class="actions">
+			<button id="share-button" type="button">Share on WhatsApp</button>
+			<button class="secondary" id="copy-button" type="button">
+				Copy response
+			</button>
+			<button class="secondary" id="clear-button" type="button">
+				Clear answers
+			</button>
+		</div>
+
+		<dialog aria-labelledby="copy-title" id="copy-dialog">
+			<h2 id="copy-title">Response copied</h2>
+			<p class="status-ok" id="copy-status"></p>
+			<p id="copy-instruction">
+				Paste it into the WhatsApp group and mention
+				<span class="num">6370106392</span>
+				so it reaches the right person.
+			</p>
+			<p hidden id="copy-manual-hint">
+				Automatic copying was blocked. The JSON is selected below — copy it
+				manually, then paste it into WhatsApp.
+			</p>
+			<textarea
+				aria-label="JSON summary"
+				hidden
+				id="copy-fallback"
+				readonly
+			></textarea>
+			<form method="dialog">
+				<button class="close" type="submit" value="close">Close</button>
+			</form>
+		</dialog>
+
+		<script>
+		"use strict";
+		(() => {
+			const STORAGE_KEY = "fk-content-confirmation-v1";
+
+			// WhatsApp cannot prefill a message inside a group, only in a direct chat.
+			// Paste the group invite link here to open the group instead; the response is
+			// copied to the clipboard first so it can be pasted into the group.
+			const WHATSAPP_NUMBER = "916370106392";
+			const WHATSAPP_GROUP_INVITE = "";
+
+			const form = document.getElementById("content-form");
+			const dialog = document.getElementById("copy-dialog");
+			const statusEl = document.getElementById("copy-status");
+			const fallbackEl = document.getElementById("copy-fallback");
+			const manualHint = document.getElementById("copy-manual-hint");
+			const copyTitle = document.getElementById("copy-title");
+			const copyInstruction = document.getElementById("copy-instruction");
+			const testimonialRows = document.getElementById("testimonial-rows");
+			const projectRows = document.getElementById("project-rows");
+
+			const escapeHtml = (value) =>
+				String(value ?? "").replace(
+					/[&<>"]/g,
+					(c) =>
+						({
+							"&": "&amp;",
+							"<": "&lt;",
+							">": "&gt;",
+							'"': "&quot;",
+						})[c]
+				);
+
+			function testimonialFields(values) {
+				return `<div class="grid two">
+      <label>Client name
+        <input type="text" data-field="name" value="${escapeHtml(values.name)}">
+      </label>
+      <label>Company
+        <input type="text" data-field="company" value="${escapeHtml(values.company)}">
+      </label>
+      <label style="grid-column: 1 / -1">Quote
+        <textarea data-field="quote">${escapeHtml(values.quote)}</textarea>
+      </label>
+    </div>`;
+			}
+
+			function projectFields(values) {
+				return `<div class="grid two">
+      <label>Project name
+        <input type="text" data-field="name" value="${escapeHtml(values.name)}">
+      </label>
+      <label>Location
+        <input type="text" data-field="location" value="${escapeHtml(values.location)}">
+      </label>
+      <label>Completion year
+        <input type="number" data-field="year" min="1900" max="2100" inputmode="numeric" value="${escapeHtml(values.year)}">
+      </label>
+      <label>Project type
+        <input type="text" data-field="type" placeholder="Resort, hotel, villa, office, institutional" value="${escapeHtml(values.type)}">
+      </label>
+      <label style="grid-column: 1 / -1">Scope of work
+        <textarea data-field="scope" placeholder="Rooms, furniture, joinery and finishes delivered">${escapeHtml(values.scope)}</textarea>
+      </label>
+      <label style="grid-column: 1 / -1">Materials and finishes
+        <textarea data-field="materials" placeholder="Substrates, veneers, polish, hardware, upholstery">${escapeHtml(values.materials)}</textarea>
+      </label>
+    </div>`;
+			}
+
+			function repeatRow(kind, values) {
+				const row = document.createElement("div");
+				row.className = "repeat-row";
+				row.dataset.kind = kind;
+				const fields =
+					kind === "testimonial"
+						? testimonialFields(values)
+						: projectFields(values);
+				row.innerHTML = `<div class="row-head">
+      <span class="row-title"></span>
+      <button type="button" class="row-remove">Remove</button>
+    </div>${fields}`;
+				return row;
+			}
+
+			function renumberRows() {
+				for (const [container, label] of [
+					[testimonialRows, "Testimonial"],
+					[projectRows, "Project"],
+				]) {
+					for (const [index, row] of [...container.children].entries()) {
+						row.querySelector(".row-title").textContent =
+							`${label} ${index + 1}`;
+						row
+							.querySelector(".row-remove")
+							.setAttribute(
+								"aria-label",
+								`Remove ${label.toLowerCase()} ${index + 1}`
+							);
+					}
+				}
+			}
+
+			function renderRows(container, kind, list) {
+				container.replaceChildren();
+				for (const values of list) {
+					container.appendChild(
+						repeatRow(kind, values && typeof values === "object" ? values : {})
+					);
+				}
+				if (container.children.length === 0) {
+					container.appendChild(repeatRow(kind, {}));
+				}
+				renumberRows();
+			}
+
+			function readRows(container) {
+				return [...container.querySelectorAll(".repeat-row")]
+					.map((row) => {
+						const entry = {};
+						for (const field of row.querySelectorAll("[data-field]")) {
+							entry[field.dataset.field] = fieldValue(field);
+						}
+						return entry;
+					})
+					.filter((entry) =>
+						Object.values(entry).some((value) => value !== null)
+					);
+			}
+
+			function seedRows() {
+				renderRows(testimonialRows, "testimonial", []);
+				renderRows(projectRows, "project", [
+					{
+						location: "Tapovan, Rishikesh",
+						materials:
+							"BWP marine ply, natural teak veneer, commercial-grade hardware.",
+						name: "Resort De Coracao",
+						scope:
+							"Lobby and reception, guest rooms, dining, furniture, lighting and finishes.",
+						type: "Resort",
+					},
+				]);
+			}
+
+			for (const container of [testimonialRows, projectRows]) {
+				container.addEventListener("click", (event) => {
+					const button = event.target.closest(".row-remove");
+					if (!button) {
+						return;
+					}
+					button.closest(".repeat-row").remove();
+					if (container.children.length === 0) {
+						container.appendChild(
+							repeatRow(
+								container === projectRows ? "project" : "testimonial",
+								{}
+							)
+						);
+					}
+					renumberRows();
+					save();
+				});
+			}
+			document
+				.getElementById("add-testimonial")
+				.addEventListener("click", () => {
+					testimonialRows.appendChild(repeatRow("testimonial", {}));
+					renumberRows();
+					save();
+				});
+			document.getElementById("add-project").addEventListener("click", () => {
+				projectRows.appendChild(repeatRow("project", {}));
+				renumberRows();
+				save();
+			});
+
+			function fieldValue(el) {
+				const raw = el.value.trim();
+				if (raw === "") {
+					return null;
+				}
+				if (el.type === "number") {
+					const num = Number(raw);
+					return Number.isFinite(num) ? num : raw;
+				}
+				return raw;
+			}
+
+			function collectData() {
+				const data = {
+					form: "fk-website-content-confirmation",
+					version: 1,
+					generatedAt: new Date().toISOString(),
+				};
+
+				for (const fieldset of document.querySelectorAll(
+					"fieldset[data-key]"
+				)) {
+					const { key } = fieldset.dataset;
+					if (key === "projects" || key === "testimonials") {
+						continue;
+					}
+					const section = {};
+					for (const el of fieldset.querySelectorAll("[name]")) {
+						section[el.name] = fieldValue(el);
+					}
+					data[key] = section;
+				}
+
+				data.testimonials = readRows(testimonialRows);
+				data.projects = readRows(projectRows);
+
+				return data;
+			}
+
+			function hasAnswers(data) {
+				const answered = (cell) => cell !== null;
+				return Object.entries(data).some(([key, value]) => {
+					if (key === "form" || key === "version" || key === "generatedAt") {
+						return false;
+					}
+					if (Array.isArray(value)) {
+						return value.some((row) =>
+							Object.entries(row).some(
+								([field, cell]) => field !== "name" && answered(cell)
+							)
+						);
+					}
+					return Object.values(value).some(answered);
+				});
+			}
+
+			function save() {
+				const data = collectData();
+				try {
+					localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+				} catch {
+					/* private mode: answers stay for this session only */
+				}
+			}
+
+			function setField(name, value) {
+				const el = form.elements[name];
+				if (!el) {
+					return;
+				}
+				el.value = value === null || value === undefined ? "" : String(value);
+			}
+
+			function applyData(data) {
+				form.reset();
+				for (const fieldset of document.querySelectorAll(
+					"fieldset[data-key]"
+				)) {
+					const { key } = fieldset.dataset;
+					if (key === "projects" || key === "testimonials") {
+						continue;
+					}
+					const section = data[key];
+					if (!section || typeof section !== "object") {
+						continue;
+					}
+					for (const [name, value] of Object.entries(section)) {
+						setField(name, value);
+					}
+				}
+				renderRows(
+					testimonialRows,
+					"testimonial",
+					Array.isArray(data.testimonials) ? data.testimonials : []
+				);
+				renderRows(
+					projectRows,
+					"project",
+					Array.isArray(data.projects) ? data.projects : []
+				);
+			}
+
+			function restoreSaved() {
+				let data;
+				try {
+					data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+				} catch {
+					return;
+				}
+				if (data && typeof data === "object") {
+					applyData(data);
+				}
+			}
+
+			async function copyText(text) {
+				try {
+					await navigator.clipboard.writeText(text);
+					return true;
+				} catch {
+					fallbackEl.hidden = false;
+					manualHint.hidden = false;
+					fallbackEl.value = text;
+					fallbackEl.focus();
+					fallbackEl.select();
+					try {
+						return document.execCommand("copy");
+					} catch {
+						return false;
+					}
+				}
+			}
+
+			async function handleCopy() {
+				copyTitle.textContent = "Response copied";
+				copyInstruction.innerHTML =
+					'Paste it into the WhatsApp group and mention <span class="num">6370106392</span> so it reaches the right person.';
+				const data = collectData();
+				if (!hasAnswers(data)) {
+					statusEl.className = "status-warn";
+					statusEl.textContent =
+						"Nothing to copy yet. Fill at least one field.";
+					dialog.showModal();
+					return;
+				}
+				const copied = await copyText(JSON.stringify(data, null, 2));
+				statusEl.className = copied ? "status-ok" : "status-warn";
+				statusEl.textContent = copied
+					? "The response is copied to your clipboard."
+					: "Could not copy automatically.";
+				if (copied) {
+					manualHint.hidden = true;
+					fallbackEl.hidden = true;
+				}
+				dialog.showModal();
+			}
+
+			async function handleShare() {
+				const data = collectData();
+				if (!hasAnswers(data)) {
+					copyTitle.textContent = "Nothing to share yet";
+					copyInstruction.textContent =
+						"Fill at least one field, then try again.";
+					statusEl.className = "status-warn";
+					statusEl.textContent = "";
+					dialog.showModal();
+					return;
+				}
+
+				const text = `Website content confirmation\n\n${JSON.stringify(data)}`;
+				const usingGroup = Boolean(WHATSAPP_GROUP_INVITE);
+				const url = usingGroup
+					? WHATSAPP_GROUP_INVITE
+					: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+				const opened = window.open(url, "_blank");
+				if (!opened) {
+					window.location.href = url;
+				}
+
+				const copied = await copyText(text);
+				copyTitle.textContent = usingGroup
+					? "WhatsApp group opened"
+					: "WhatsApp opened";
+				copyInstruction.textContent = usingGroup
+					? "The response is copied. Paste it into the group and tap send."
+					: "The response is already in the message box. Tap send in WhatsApp.";
+				statusEl.className = copied ? "status-ok" : "status-warn";
+				statusEl.textContent = copied
+					? "The response is also copied to your clipboard."
+					: "The response could not be copied automatically.";
+				if (copied) {
+					manualHint.hidden = true;
+					fallbackEl.hidden = true;
+				}
+				dialog.showModal();
+			}
+
+			function handleClear() {
+				// biome-ignore lint/suspicious/noAlert: confirm guards destructive local-data deletion
+				if (!window.confirm("Clear all answers? This cannot be undone.")) {
+					return;
+				}
+				form.reset();
+				try {
+					localStorage.removeItem(STORAGE_KEY);
+				} catch {
+					/* nothing to remove */
+				}
+				seedRows();
+				document.getElementById("copy-button").focus();
+			}
+
+			form.addEventListener("input", save);
+			form.addEventListener("change", save);
+			document
+				.getElementById("share-button")
+				.addEventListener("click", handleShare);
+			document
+				.getElementById("copy-button")
+				.addEventListener("click", handleCopy);
+			document
+				.getElementById("clear-button")
+				.addEventListener("click", handleClear);
+
+			seedRows();
+			restoreSaved();
+		})();
+		</script>
+	</body>
+</html>
