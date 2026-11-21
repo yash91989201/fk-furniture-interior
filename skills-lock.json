@@ -33,6 +33,20 @@
       "skillPath": "better-auth/emailAndPassword/SKILL.md",
       "computedHash": "863886759f729081e265941f4f72c503835d55a1f34f6d63cebe6571159fff4a"
     },
+    "firecrawl": {
+      "source": "firecrawl/skills",
+      "commit": "1d4b0728d0f448cafef2eb8370c907fde7cb6f42",
+      "sourceType": "github",
+      "skillPath": "skills/core/firecrawl/SKILL.md",
+      "computedHash": "0d6bcdb47575b44702f2dc64de395d6d652fa30d2b8b515034733a0c9b0506aa"
+    },
+    "firecrawl-seo-audit": {
+      "source": "firecrawl/skills",
+      "commit": "1d4b0728d0f448cafef2eb8370c907fde7cb6f42",
+      "sourceType": "github",
+      "skillPath": "skills/workflows/firecrawl-seo-audit/SKILL.md",
+      "computedHash": "c0edf9e75b64c9375c532480fb7cf40507a3a4e5f19e529e11fa68155eaaceab"
+    },
     "humanizer": {
       "source": "blader/humanizer",
       "commit": "a32f24407364c74c812b43c15926d638bee1e072",
@@ -52,6 +66,13 @@
       "sourceType": "github",
       "skillPath": "skills/shadcn/SKILL.md",
       "computedHash": "b864a958765563321f485a96f4d59c0bb6539f4286ab6d8b8b66895b7ebd302d"
+    },
+    "tanstack-start-deployment": {
+      "source": "TanStack/router",
+      "commit": "6b9fe6d29552270836c511bc9b343d73541f4424",
+      "sourceType": "github",
+      "skillPath": "packages/start-client-core/skills/start-core/deployment/SKILL.md",
+      "computedHash": "21951f692db00c7bd18d2b1e7fe46e610ba6157b8c8bde59edd5f25e53b0fc03"
     },
     "ultracite": {
       "source": "haydenbleasel/ultracite",
@@ -76,6 +97,12 @@
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
       "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+    },
+    "web-perf": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-perf/SKILL.md",
+      "computedHash": "0160c9e7f1b73eb80347efd899a6082219d43bb9de30424667c8017628a48469"
     }
   }
 }
