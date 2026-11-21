@@ -1,10 +1,12 @@
-import { PolicyReview, PolicySection } from "./policy-section";
+import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+
+import { PolicySection } from "./policy-section";
 
 const details = [
-	["Entity", "[Registered company name — to confirm]"],
-	["Email", "[Official email address — to confirm]"],
-	["Phone", "[Official phone number — to confirm]"],
-	["Registered address", "[Factory or corporate office address — to confirm]"],
+	["Entity", "FK Furniture Interior"],
+	["Email", contactEmail],
+	["Phone", gurgaonOffice.phones[0].display],
+	["Registered address", gurgaonOffice.address.join(", ")],
 ] as const;
 
 export function PrivacyContact() {
@@ -26,11 +28,6 @@ export function PrivacyContact() {
 					</div>
 				))}
 			</dl>
-			<PolicyReview>
-				The four values above are placeholders carried over from the source
-				document. Replace them with the approved entity name, email, phone and
-				registered address before the policy goes live.
-			</PolicyReview>
 		</PolicySection>
 	);
 }

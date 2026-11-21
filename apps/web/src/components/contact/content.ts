@@ -1,15 +1,18 @@
-// Office addresses, phones and email from the company profile, p. 9.
+// Gurgaon office details confirmed by the client; Goa office from the company profile, p. 9.
 export const contactEmail = "interiorfkfurniture@gmail.com";
 
+export const gurgaonOffice = {
+	address: [
+		"Khasra No. 3212/77",
+		"Street No. 74, Rajendra Park",
+		"Daultabad Industrial Area, Gurugram",
+	],
+	name: "Gurgaon office",
+	phones: [{ display: "+91 92110 45757", href: "tel:+919211045757" }],
+} as const;
+
 export const offices = [
-	{
-		address: ["Office No. 4, Sec 65", "Near M3M Latitude", "Gurgaon, Haryana"],
-		name: "Gurgaon office",
-		phones: [
-			{ display: "+91 98737 46270", href: "tel:+919873746270" },
-			{ display: "+91 97118 55985", href: "tel:+919711855985" },
-		],
-	},
+	gurgaonOffice,
 	{
 		address: ["1411, Aradi, Candolim", "Goa"],
 		name: "Goa office",

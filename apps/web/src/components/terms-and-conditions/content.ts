@@ -130,9 +130,4 @@ export const openDecisions = [
 		detail:
 			"The city and state courts with exclusive jurisdiction over a dispute.",
 	},
-	{
-		label: "Contact details",
-		detail:
-			"The email address, phone number and factory or office address to publish for terms queries.",
-	},
 ] as const;

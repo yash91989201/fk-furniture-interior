@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-import { contactEmail } from "@/components/contact/content";
+import { contactEmail, gurgaonOffice } from "@/components/contact/content";
 
 import { projects } from "./content";
 import { FooterDrawing } from "./footer-drawing";
@@ -265,8 +265,8 @@ export function SiteFooter() {
 							</Link>
 						</li>
 						<li>
-							<a className={contactLink} href="tel:+919873746270">
-								+91 98737 46270
+							<a className={contactLink} href={gurgaonOffice.phones[0].href}>
+								{gurgaonOffice.phones[0].display}
 							</a>
 						</li>
 						<li>

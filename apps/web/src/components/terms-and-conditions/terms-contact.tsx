@@ -1,17 +1,17 @@
 import { Link } from "@tanstack/react-router";
 
+import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+
 import { termsSections } from "./content";
-import {
-	bodyText,
-	labelRole,
-	PendingNote,
-	TermsSection,
-} from "./terms-section";
+import { bodyText, labelRole, TermsSection } from "./terms-section";
 
 const channels = [
-	{ label: "Email", value: "To be confirmed" },
-	{ label: "Phone", value: "To be confirmed" },
-	{ label: "Factory and office address", value: "To be confirmed" },
+	{ label: "Email", value: contactEmail },
+	{ label: "Phone", value: gurgaonOffice.phones[0].display },
+	{
+		label: "Factory and office address",
+		value: gurgaonOffice.address.join(", "),
+	},
 ] as const;
 
 export function TermsContact() {
@@ -35,10 +35,6 @@ export function TermsContact() {
 					</div>
 				))}
 			</dl>
-			<PendingNote>
-				the email address, phone number and factory or office address to publish
-				here. The footer carries the same open placeholders.
-			</PendingNote>
 			<p className={bodyText}>
 				For a new project, the{" "}
 				<Link

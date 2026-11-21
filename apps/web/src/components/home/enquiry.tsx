@@ -13,6 +13,8 @@ import {
 import { Textarea } from "@fk-furniture-interior/ui/components/textarea";
 import { type ChangeEvent, type FormEvent, useState } from "react";
 
+import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+
 import { enquiryOptions } from "./content";
 
 const HOME_COPY = {
@@ -66,9 +68,19 @@ export function Enquiry({
 					<h3>{copy.heading}</h3>
 					<p>{copy.body}</p>
 					<p className="home-muted">
-						[Phone number]
+						<a
+							className="underline decoration-1 underline-offset-4 hover:text-foreground"
+							href={gurgaonOffice.phones[0].href}
+						>
+							{gurgaonOffice.phones[0].display}
+						</a>
 						<br />
-						[Email address]
+						<a
+							className="underline decoration-1 underline-offset-4 hover:text-foreground"
+							href={`mailto:${contactEmail}`}
+						>
+							{contactEmail}
+						</a>
 						<br />
 						Gurgaon and Goa offices
 					</p>
