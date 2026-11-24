@@ -1,29 +1,13 @@
-import { Toaster } from "@fk-furniture-interior/ui/components/sonner";
-import type { QueryClient } from "@tanstack/react-query";
 import {
-	createRootRouteWithContext,
+	createRootRoute,
 	HeadContent,
 	Outlet,
 	Scripts,
-	useRouterState,
 } from "@tanstack/react-router";
-import { createMiddleware } from "@tanstack/react-start";
-import { evlogErrorHandler } from "evlog/nitro/v3";
 
-import type { orpc } from "@/utils/orpc";
-
-import Header from "../components/header";
 import appCss from "../index.css?url";
-export interface RouterAppContext {
-	orpc: typeof orpc;
-	queryClient: QueryClient;
-}
 
-export const Route = createRootRouteWithContext<RouterAppContext>()({
-	server: {
-		middleware: [createMiddleware().server(evlogErrorHandler)],
-	},
-
+export const Route = createRootRoute({
 	head: () => ({
 		meta: [
 			{
@@ -69,35 +53,13 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 });
 
 function RootDocument() {
-	const pathname = useRouterState({
-		select: (state) => state.location.pathname,
-	});
-	const bare =
-		pathname === "/" ||
-		pathname.startsWith("/projects") ||
-		pathname === "/about" ||
-		pathname === "/contact" ||
-		pathname === "/faq" ||
-		pathname === "/gallery" ||
-		pathname === "/services" ||
-		pathname === "/privacy-policy" ||
-		pathname === "/terms-and-conditions";
-
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				{bare ? (
-					<Outlet />
-				) : (
-					<div className="grid h-svh grid-rows-[auto_1fr]">
-						<Header />
-						<Outlet />
-					</div>
-				)}
-				<Toaster richColors />
+				<Outlet />
 				<Scripts />
 			</body>
 		</html>

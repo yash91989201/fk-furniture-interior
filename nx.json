@@ -4,13 +4,10 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
-      "!{workspaceRoot}/apps/web/dist/**",
+      "!{workspaceRoot}/apps/web/.output/**",
       "!{workspaceRoot}/apps/web/.vinxi/**",
       "!{workspaceRoot}/apps/web/.tanstack/**",
       "!{workspaceRoot}/apps/web/src/routeTree.gen.ts",
-      "!{workspaceRoot}/packages/db/dist/**",
-      "!{workspaceRoot}/packages/api/dist/**",
-      "!{workspaceRoot}/packages/auth/dist/**",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json"
     ],
@@ -31,19 +28,6 @@
     },
     "start": {
       "dependsOn": ["build"],
-      "cache": false,
-      "continuous": true
-    },
-    "db:push": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false
-    },
-    "db:migrate": {
-      "cache": false
-    },
-    "db:studio": {
       "cache": false,
       "continuous": true
     }
