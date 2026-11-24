@@ -8,10 +8,7 @@ import {
 	gurgaonOffice,
 } from "@/components/contact/content";
 
-import { projects } from "./content";
 import { FooterDrawing } from "./footer-drawing";
-
-const [leadProject] = projects;
 
 const contactLink =
 	"underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4";
@@ -220,19 +217,6 @@ export function SiteFooter() {
 						in our own factory and installed on site.
 					</p>
 				</div>
-				<Link
-					className="home-footer-proof-copy"
-					params={{ slug: leadProject.slug }}
-					to="/projects/$slug"
-				>
-					<div className="home-footer-proof-head">
-						<h2 className="home-footer-proof-title">{leadProject.name}</h2>
-						<span className="home-footer-place">
-							{leadProject.location} · {leadProject.type}
-						</span>
-					</div>
-					<span className="home-footer-scope">{leadProject.scope}</span>
-				</Link>
 			</div>
 			<div className="home-footer-grid">
 				<nav aria-labelledby="footer-explore">

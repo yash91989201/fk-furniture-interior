@@ -452,10 +452,10 @@ html.lenis:has(.home-page) {
 .home-hero h1 {
 	margin: 0;
 	font-family: var(--font-heading);
-	font-size: var(--hero-display);
+	font-size: calc(var(--hero-display) * 0.82);
 	font-weight: 500;
-	line-height: 1.04;
-	letter-spacing: -0.02em;
+	line-height: 0.95;
+	letter-spacing: -0.03em;
 	text-wrap: balance;
 }
 
@@ -476,9 +476,9 @@ html.lenis:has(.home-page) {
 }
 
 .home-hero-lede {
-	max-width: 42ch;
+	max-width: 54ch;
 	margin: 0;
-	font-size: var(--hero-body);
+	font-size: 0.875rem;
 	line-height: 1.55;
 	color: var(--muted-foreground);
 	letter-spacing: 0.005em;
@@ -488,22 +488,12 @@ html.lenis:has(.home-page) {
 .home-hero-actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.9rem;
+	gap: 0.55rem;
 	align-items: center;
 }
 .home-page .home-hero-secondary {
 	padding-inline: 0;
 	color: var(--foreground);
-}
-
-.home-hero-caption {
-	padding-top: 0.9rem;
-	margin: 0;
-	font-size: var(--hero-meta);
-	line-height: 1.45;
-	color: var(--muted-foreground);
-	letter-spacing: 0.01em;
-	border-top: 1px solid var(--border);
 }
 
 @media (max-width: 44rem) {
@@ -2046,51 +2036,9 @@ html.lenis:has(.home-page) {
 }
 
 .home-footer-proof {
-	display: grid;
-	grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.8fr);
-	gap: 2.5rem 5rem;
-	align-items: start;
 	padding-bottom: 3rem;
 	margin-bottom: 3rem;
 	border-bottom: 1px solid var(--border);
-}
-
-.home-footer-proof-copy {
-	display: grid;
-	gap: 0.85rem;
-	color: inherit;
-	text-decoration: none;
-}
-
-.home-footer-proof-head {
-	display: grid;
-	gap: 0.4rem;
-}
-
-.home-footer-proof-title {
-	max-width: 20ch;
-	margin: 0;
-	font-size: clamp(1.75rem, 3vw, 2.5rem);
-	line-height: 1.06;
-	letter-spacing: -0.015em;
-}
-
-.home-footer-place {
-	font-size: var(--ft-meta);
-	line-height: 1.5;
-	color: var(--muted-foreground);
-	letter-spacing: 0.005em;
-}
-
-.home-footer-proof-copy:is(:hover, :focus-visible) .home-footer-proof-title {
-	text-decoration: underline;
-	text-underline-offset: 0.12em;
-}
-
-.home-footer-scope {
-	max-width: 34rem;
-	line-height: 1.5;
-	text-wrap: pretty;
 }
 
 .home-footer-identity {
@@ -2201,13 +2149,7 @@ html.lenis:has(.home-page) {
 	border-top: 1px solid var(--border);
 }
 
-/* Tablet: keep the proof side by side, but share the width so the project note keeps a reading measure. */
 @media (max-width: 64rem) {
-	.home-footer-proof {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-		gap: 2rem 2.5rem;
-	}
-
 	/* Tighter gutter keeps the contact column wide enough for the enquiry button. */
 	.home-footer .home-footer-grid {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2228,15 +2170,6 @@ html.lenis:has(.home-page) {
 	.home-footer .home-footer-grid {
 		grid-template-columns: max-content minmax(0, 1fr);
 		gap: 2.5rem 1.5rem;
-	}
-
-	.home-footer-proof {
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
-
-	.home-footer-proof-copy {
-		max-width: 42ch;
 	}
 
 	.home-footer-grid > :last-child {
@@ -2787,265 +2720,108 @@ html.lenis:has(.home-page) {
 	}
 }
 
-/* Projects: mosaic accepted in Impeccable Live. */
+/* Projects: cinematic selected-project feature accepted in Impeccable Live. */
 
-.home-projects-mosaic {
+.home-projects-cinema {
 	padding-block: calc(clamp(3rem, 6vw, 5rem) * 1.25);
 	padding-right: max(var(--home-gutter), env(safe-area-inset-right));
 	padding-left: max(var(--home-gutter), env(safe-area-inset-left));
 	color: var(--foreground);
 	background: var(--card);
 }
-.home-projects-mosaic .home-mosaic-head {
+.home-projects-cinema .home-cinema-cover {
+	position: relative;
 	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	align-items: baseline;
-	justify-content: space-between;
-	margin-bottom: 2.25rem;
-}
-.home-projects-mosaic .home-mosaic-head h2 {
-	margin: 0;
-	font: 500 clamp(2.25rem, 4vw, 3.5rem) / 1.08 var(--font-heading);
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-}
-.home-projects-mosaic .home-mosaic-title {
-	max-width: 18ch;
-	margin: 0;
-	font: 500 clamp(1.75rem, 2.4vw, 2.35rem) / 1.15 var(--font-heading);
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-	overflow-wrap: break-word;
-}
-.home-projects-mosaic .home-mosaic-meta {
-	margin: 0.75rem 0 0;
-	font-size: 0.875rem;
-	line-height: 1.5;
-	color: var(--muted-foreground);
-}
-.home-projects-mosaic .home-mosaic-copy {
-	display: grid;
-	gap: 0.875rem;
-	align-content: start;
-	justify-items: start;
-	min-width: 0;
-	padding-top: 0.35rem;
-}
-.home-projects-mosaic .home-mosaic-copy a {
-	height: auto;
-	min-height: 2.75rem;
-	padding-inline: 0;
-	text-decoration: underline;
-	text-underline-offset: 0.28rem;
-}
-.home-projects-mosaic .home-mosaic-copy p {
-	max-width: 65ch;
-	margin: 0;
-	font-size: 1rem;
-	line-height: 1.65;
-	text-wrap: pretty;
-}
-.home-projects-mosaic button:focus-visible,
-.home-projects-mosaic a:focus-visible {
-	outline: 2px solid var(--ring);
-	outline-offset: 5px;
-}
-@media (max-width: 44rem) {
-	.home-projects-mosaic .home-mosaic-head {
-		flex-direction: column;
-		gap: 0.25rem;
-		align-items: flex-start;
-	}
-	.home-projects-mosaic .home-mosaic-copy a {
-		height: auto;
-		min-height: 2.75rem;
-		white-space: normal;
-	}
-}
-
-.home-projects-mosaic nav button {
-	min-width: 0;
-	color: var(--foreground);
-	text-align: left;
-	cursor: pointer;
-	background: transparent;
-	border: 0;
-}
-.home-projects-mosaic .home-mosaic-name {
-	display: block;
-	font: 500 1.1875rem / 1.28 var(--font-heading);
-	color: var(--muted-foreground);
-	text-wrap: pretty;
-	overflow-wrap: break-word;
-}
-.home-projects-mosaic nav button:focus-visible .home-mosaic-name,
-.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-name {
-	color: var(--foreground);
-}
-@media (hover: hover) and (pointer: fine) {
-	.home-projects-mosaic nav button:hover .home-mosaic-name {
-		color: var(--foreground);
-	}
-}
-@media (hover: none) {
-	.home-projects-mosaic nav button:active .home-mosaic-name {
-		color: var(--foreground);
-	}
-}
-.home-projects-mosaic nav button[aria-pressed="true"] .home-mosaic-name {
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.28rem;
-}
-.home-projects-mosaic .home-mosaic-label {
-	display: block;
-	margin-top: 0.375rem;
-	font-size: 0.8125rem;
-	line-height: 1.55;
-	color: var(--muted-foreground);
-	text-wrap: pretty;
-	overflow-wrap: break-word;
-}
-.home-projects-mosaic .home-mosaic-head,
-.home-projects-mosaic .home-mosaic-mosaic,
-.home-projects-mosaic .home-mosaic-caption {
-	width: 100%;
-}
-.home-projects-mosaic .home-mosaic-mosaic {
-	display: grid;
-	grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-	gap: 1.5rem 1.75rem;
-	align-items: start;
-}
-.home-projects-mosaic .home-mosaic-mosaic button {
-	display: grid;
-	gap: 0.75rem;
-	align-content: start;
-	padding: 0;
-}
-.home-projects-mosaic .home-mosaic-mosaic button:first-child {
-	grid-template-rows: auto auto;
-	grid-row: span 2;
-	align-self: start;
-}
-.home-projects-mosaic .home-mosaic-media {
-	display: block;
-	width: 100%;
-	aspect-ratio: 3 / 2;
+	align-items: flex-end;
+	min-height: clamp(26rem, 58vh, 40rem);
 	overflow: hidden;
+	background: var(--secondary);
+	isolation: isolate;
 }
-.home-projects-mosaic .home-mosaic-media img {
-	display: block;
+.home-projects-cinema .home-cinema-img {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	object-position: center;
-	transform: scale(1);
-	transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-@media (prefers-reduced-motion: no-preference) and (hover: hover) and (
-		pointer: fine
-	) {
-	.home-projects-mosaic
-		.home-mosaic-mosaic
-		button:hover
-		.home-mosaic-media
-		img {
-		transform: scale(1.08);
-	}
+.home-projects-cinema .home-cinema-cover::after {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	content: "";
+	background: linear-gradient(
+		to top,
+		color-mix(in oklab, var(--secondary) 94%, black) 0%,
+		color-mix(in oklab, var(--secondary) 58%, transparent) 46%,
+		transparent 78%
+	);
 }
-@media (prefers-reduced-motion: no-preference) {
-	.home-projects-mosaic
-		.home-mosaic-mosaic
-		button:focus-visible
-		.home-mosaic-media
-		img {
-		transform: scale(1.08);
-	}
+.home-projects-cinema .home-cinema-caption {
+	padding: clamp(1.75rem, 4vw, 3.5rem);
+	color: var(--card);
 }
-@media (min-width: 45rem) {
-	.home-projects-mosaic .home-mosaic-media {
-		max-height: min(26vh, 18rem);
-	}
-	.home-projects-mosaic
-		.home-mosaic-mosaic
-		button:first-child
-		.home-mosaic-media {
-		max-height: min(52vh, 32rem);
-	}
+.home-projects-cinema .home-cinema-caption h2 {
+	margin: 0 0 1.25rem;
+	font: 400 0.9375rem / 1.4 var(--font-sans);
+	color: color-mix(in oklab, var(--card) 82%, transparent);
+	letter-spacing: 0.02em;
 }
-.home-projects-mosaic .home-mosaic-caption {
+.home-projects-cinema .home-cinema-title {
+	max-width: 16ch;
+	margin: 0;
+	font: 500 clamp(2.5rem, 5.4vw, 4.75rem) / 0.98 var(--font-heading);
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+.home-projects-cinema .home-cinema-meta {
+	margin: 1rem 0 0;
+	font-size: 0.9375rem;
+	color: color-mix(in oklab, var(--card) 84%, transparent);
+}
+.home-projects-cinema .home-cinema-foot {
 	display: grid;
-	grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
-	gap: 1.25rem 2.5rem;
-	align-items: start;
-	margin-top: 3rem;
+	grid-template-columns: minmax(0, 1.2fr) auto;
+	gap: 1.5rem 3rem;
+	align-items: end;
+	margin-top: 1.75rem;
 }
-.home-projects-mosaic .home-mosaic-caption > * {
-	min-width: 0;
+.home-projects-cinema .home-cinema-scope {
+	max-width: 62ch;
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.7;
+	text-wrap: pretty;
 }
-@media (max-width: 44rem) {
-	.home-projects-mosaic {
-		padding-block: 2.75rem;
-	}
-	.home-projects-mosaic .home-mosaic-name {
-		font-size: 1.375rem;
-	}
-	.home-projects-mosaic .home-mosaic-label,
-	.home-projects-mosaic .home-mosaic-meta {
-		font-size: 1rem;
-	}
-	.home-projects-mosaic .home-mosaic-mosaic {
+.home-projects-cinema .home-cinema-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.5rem;
+	align-items: center;
+}
+.home-projects-cinema .home-cinema-alt {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	font-size: 0.875rem;
+	color: var(--foreground);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--primary);
+	text-underline-offset: 0.28rem;
+}
+.home-projects-cinema .home-cinema-alt:hover {
+	color: var(--muted-foreground);
+}
+.home-projects-cinema a:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 5px;
+}
+@media (max-width: 48rem) {
+	.home-projects-cinema .home-cinema-foot {
 		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
-	.home-projects-mosaic .home-mosaic-mosaic button:first-child {
-		grid-template-rows: auto;
-		grid-row: auto;
-	}
-	.home-projects-mosaic .home-mosaic-media {
-		height: 11rem;
-		min-height: 0;
-		aspect-ratio: auto;
-	}
-	.home-projects-mosaic .home-mosaic-caption {
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-		margin-top: 2rem;
-	}
-}
-@media (min-width: 36rem) and (max-width: 64rem) and (max-height: 32rem) {
-	.home-projects-mosaic {
-		padding-block: 1.75rem;
-	}
-	.home-projects-mosaic .home-mosaic-head {
-		flex-direction: row;
-		align-items: baseline;
-		margin-bottom: 1.25rem;
-	}
-	.home-projects-mosaic .home-mosaic-mosaic {
-		grid-template-columns: 1.35fr 1fr;
-	}
-	.home-projects-mosaic .home-mosaic-mosaic button:first-child {
-		grid-template-rows: minmax(0, 1fr) auto;
-		grid-row: span 2;
-	}
-	.home-projects-mosaic .home-mosaic-media {
-		height: auto;
-		aspect-ratio: 16 / 9;
-	}
-	.home-projects-mosaic
-		.home-mosaic-mosaic
-		button:first-child
-		.home-mosaic-media {
-		height: 100%;
-		min-height: 0;
-		aspect-ratio: auto;
-	}
-	.home-projects-mosaic .home-mosaic-caption {
-		grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
-		margin-top: 1.5rem;
+		align-items: start;
 	}
 }
 

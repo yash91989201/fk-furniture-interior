@@ -62,9 +62,6 @@ export function Hero() {
 						Send a BOQ or brief
 					</a>
 				</div>
-				<p className="home-hero-caption">
-					Resort De Coracao · Tapovan, Rishikesh · Lobby, guest rooms, dining
-				</p>
 			</div>
 		</section>
 	);

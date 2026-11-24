@@ -13,8 +13,6 @@ import {
 import { Textarea } from "@fk-furniture-interior/ui/components/textarea";
 import { type ChangeEvent, type FormEvent, useState } from "react";
 
-import { contactEmail, gurgaonOffice } from "@/components/contact/content";
-
 import { enquiryOptions } from "./content";
 
 const HOME_COPY = {
@@ -60,6 +58,96 @@ export function Enquiry({
 		setMessage(event.currentTarget.value);
 	}
 
+	const formFields = (
+		<>
+			<Field>
+				<Input
+					aria-label="Your name"
+					autoComplete="name"
+					id="enquiry-name"
+					name="name"
+					placeholder="Your name"
+					required
+					surface="line"
+				/>
+			</Field>
+			<Field>
+				<Input
+					aria-label="Email address"
+					autoComplete="email"
+					id="enquiry-email"
+					name="email"
+					placeholder="Email address"
+					required
+					surface="line"
+					type="email"
+				/>
+			</Field>
+			<Field>
+				<Input
+					aria-label="Phone number (optional)"
+					autoComplete="tel"
+					id="enquiry-phone"
+					name="phone"
+					placeholder="Phone number (optional)"
+					surface="line"
+					type="tel"
+				/>
+			</Field>
+			<Field>
+				<Input
+					aria-label="Company or hotel (optional)"
+					autoComplete="organization"
+					id="enquiry-company"
+					name="company"
+					placeholder="Company or hotel (optional)"
+					surface="line"
+				/>
+			</Field>
+			<Field>
+				<Input
+					aria-label="Project city"
+					autoComplete="address-level2"
+					id="enquiry-city"
+					name="city"
+					placeholder="City of the project"
+					surface="line"
+				/>
+			</Field>
+			<Field>
+				<Select onValueChange={handleRequirementChange} value={requirement}>
+					<SelectTrigger
+						aria-label="I need help with"
+						className="w-full"
+						id="enquiry-requirement"
+					>
+						<SelectValue placeholder="I need help with" />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							{enquiryOptions.map((option) => (
+								<SelectItem key={option} value={option}>
+									{option}
+								</SelectItem>
+							))}
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			</Field>
+			<Field className="home-full">
+				<Textarea
+					aria-label="About your project"
+					id="enquiry-message"
+					name="message"
+					onChange={handleMessageChange}
+					placeholder="The space, the scope, and what you need"
+					surface="line"
+					value={message}
+				/>
+			</Field>
+		</>
+	);
+
 	return (
 		<section className="home-section home-enquiry" id="fk-enquiry">
 			<div className="home-enquiry-grid">
@@ -67,114 +155,10 @@ export function Enquiry({
 					<h2 className="home-enquiry-title">{copy.title}</h2>
 					<h3>{copy.heading}</h3>
 					<p>{copy.body}</p>
-					<p className="home-muted">
-						<a
-							className="underline decoration-1 underline-offset-4 hover:text-foreground"
-							href={gurgaonOffice.phones[0].href}
-						>
-							{gurgaonOffice.phones[0].display}
-						</a>
-						<br />
-						<a
-							className="underline decoration-1 underline-offset-4 hover:text-foreground"
-							href={`mailto:${contactEmail}`}
-						>
-							{contactEmail}
-						</a>
-						<br />
-						Gurugram and Goa offices
-					</p>
 				</div>
 				<form className="home-enquiry-form" onSubmit={onSubmit}>
 					<FieldGroup className="home-form-grid !grid gap-4">
-						<Field>
-							<Input
-								aria-label="Your name"
-								autoComplete="name"
-								id="enquiry-name"
-								name="name"
-								placeholder="Your name"
-								required
-								surface="line"
-							/>
-						</Field>
-						<Field>
-							<Input
-								aria-label="Email address"
-								autoComplete="email"
-								id="enquiry-email"
-								name="email"
-								placeholder="Email address"
-								required
-								surface="line"
-								type="email"
-							/>
-						</Field>
-						<Field>
-							<Input
-								aria-label="Phone number (optional)"
-								autoComplete="tel"
-								id="enquiry-phone"
-								name="phone"
-								placeholder="Phone number (optional)"
-								surface="line"
-								type="tel"
-							/>
-						</Field>
-						<Field>
-							<Input
-								aria-label="Company or hotel (optional)"
-								autoComplete="organization"
-								id="enquiry-company"
-								name="company"
-								placeholder="Company or hotel (optional)"
-								surface="line"
-							/>
-						</Field>
-						<Field>
-							<Input
-								aria-label="Project city"
-								autoComplete="address-level2"
-								id="enquiry-city"
-								name="city"
-								placeholder="City of the project"
-								surface="line"
-							/>
-						</Field>
-						<Field>
-							<Select
-								onValueChange={handleRequirementChange}
-								value={requirement}
-							>
-								<SelectTrigger
-									aria-label="I need help with"
-									className="w-full"
-									id="enquiry-requirement"
-								>
-									<SelectValue placeholder="I need help with" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										{enquiryOptions.map((option) => (
-											<SelectItem key={option} value={option}>
-												{option}
-											</SelectItem>
-										))}
-									</SelectGroup>
-								</SelectContent>
-							</Select>
-						</Field>
-						<Field className="home-full">
-							<Textarea
-								aria-label="About your project"
-								id="enquiry-message"
-								name="message"
-								onChange={handleMessageChange}
-								placeholder="The space, the scope, and what you need"
-								surface="line"
-								value={message}
-							/>
-						</Field>
+						{formFields}
 					</FieldGroup>
 					<Button className="home-enquiry-button" type="submit">
 						Send enquiry · preview
