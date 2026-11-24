@@ -3,6 +3,7 @@ import { type MouseEvent, useCallback } from "react";
 import {
 	type GalleryCategoryId,
 	galleryCategories,
+	galleryDarkSurface,
 	galleryWorks,
 } from "./content";
 
@@ -37,7 +38,7 @@ export function GalleryFilters({
 	return (
 		<section
 			aria-labelledby="gallery-filter-title"
-			className="border-border border-b bg-card py-[clamp(1.75rem,3vw,2.5rem)] pr-[max(var(--home-gutter),env(safe-area-inset-right))] pl-[max(var(--home-gutter),env(safe-area-inset-left))]"
+			className={`${galleryDarkSurface} border-border border-b py-[clamp(1.75rem,3vw,2.5rem)] pr-[max(var(--home-gutter),env(safe-area-inset-right))] pl-[max(var(--home-gutter),env(safe-area-inset-left))]`}
 			id="gallery-filters"
 		>
 			<div className="flex flex-col gap-[1.25rem] lg:flex-row lg:items-end lg:justify-between lg:gap-8">
@@ -70,7 +71,7 @@ export function GalleryFilters({
 								aria-pressed={selected}
 								className={`inline-flex min-h-11 items-center gap-2 border px-3 py-2 text-left text-[0.8125rem] leading-[1.25] transition-colors focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 ${
 									selected
-										? "border-secondary bg-secondary text-secondary-foreground"
+										? "border-foreground bg-foreground text-background"
 										: "border-border bg-transparent text-muted-foreground hover:border-foreground/50 hover:text-foreground"
 								}`}
 								data-category={category.id}
@@ -81,11 +82,7 @@ export function GalleryFilters({
 								<span>{category.label}</span>
 								<span
 									aria-hidden="true"
-									className={`text-[0.6875rem] tabular-nums ${
-										selected
-											? "text-secondary-foreground/70"
-											: "text-muted-foreground"
-									}`}
+									className="text-[0.6875rem] tabular-nums"
 								>
 									{String(count).padStart(2, "0")}
 								</span>

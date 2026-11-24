@@ -1,0 +1,87 @@
+/* Services enquiry: one centered notice, checklist as ruled rows, actions below. */
+.enquiry-section {
+	padding-block: clamp(4.375rem, 8.75vw, 8.125rem);
+	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
+		max(var(--home-gutter), env(safe-area-inset-right));
+	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
+	background: var(--card);
+	border-top: 1px solid var(--border);
+}
+
+.enquiry-inner {
+	max-width: 34rem;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.enquiry-title {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.9rem, 1.35rem + 2.2vw, 2.9rem);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: -0.024em;
+	text-wrap: balance;
+}
+
+.enquiry-body {
+	margin: 1.1rem 0 0;
+	font-size: clamp(1rem, 0.96rem + 0.14vw, 1.0625rem);
+	line-height: 1.7;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+.enquiry-list {
+	padding: 0;
+	margin: clamp(2.1875rem, 3.75vw, 3.125rem) 0 0;
+	text-align: left;
+	list-style: none;
+}
+
+.enquiry-list li {
+	padding-block: 0.875rem;
+	font-size: 0.9375rem;
+	line-height: 1.55;
+	border-top: 1px solid var(--border);
+}
+
+.enquiry-list li:last-child {
+	border-bottom: 1px solid var(--border);
+}
+
+.enquiry-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.5rem;
+	align-items: center;
+	justify-content: center;
+	margin-top: clamp(2.1875rem, 3.75vw, 3.125rem);
+}
+
+.enquiry-email {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--primary);
+	text-underline-offset: 4px;
+}
+
+.enquiry-email:hover {
+	color: var(--muted-foreground);
+}
+
+.enquiry-email:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 4px;
+}
+
+.enquiry-note {
+	margin: clamp(2.1875rem, 3.75vw, 3.125rem) 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.55;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}

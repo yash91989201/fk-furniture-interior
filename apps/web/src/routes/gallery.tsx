@@ -71,7 +71,7 @@ function GalleryComponent() {
 				Skip to gallery work
 			</a>
 			<SiteNav compactStart />
-			<main>
+			<main className="[--gallery-aubergine:var(--secondary)]">
 				<GalleryHero />
 				<GalleryFilters active={active} onChange={setActive} />
 				<GalleryGrid active={active} onOpen={handleOpen} />

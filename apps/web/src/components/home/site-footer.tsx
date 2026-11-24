@@ -277,21 +277,20 @@ export function SiteFooter() {
 			</div>
 			<div className="home-legal">
 				<span>
-					© {new Date().getFullYear()} FK Furniture &amp; Interior · GSTIN{" "}
-					{gstin}
+					© {new Date().getFullYear()} FK Furniture &amp; Interior
+					<span className="hidden sm:inline"> · </span>
+					<span className="block whitespace-nowrap sm:inline">
+						GSTIN {gstin}
+					</span>
 				</span>
-				<Link
-					className="inline-flex min-h-11 items-center underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
-					to="/privacy-policy"
-				>
-					Privacy Policy
-				</Link>
-				<Link
-					className="inline-flex min-h-11 items-center underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
-					to="/terms-and-conditions"
-				>
-					Terms &amp; Conditions
-				</Link>
+				<nav aria-label="Legal" className="home-legal-links">
+					<Link className={contactLink} to="/privacy-policy">
+						Privacy Policy
+					</Link>
+					<Link className={contactLink} to="/terms-and-conditions">
+						Terms &amp; Conditions
+					</Link>
+				</nav>
 			</div>
 		</footer>
 	);

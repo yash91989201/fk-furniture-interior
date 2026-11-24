@@ -45,6 +45,7 @@ export function Manufacturing() {
 						loading="lazy"
 						sizes="(max-width: 47.99rem) 100vw, (max-width: 80rem) 42vw, 30vw"
 						src={photos.restaurant.src}
+						srcSet={bandSrcSet(photos.restaurant.src)}
 						width={2000}
 					/>
 					<figcaption className={figureCaption}>

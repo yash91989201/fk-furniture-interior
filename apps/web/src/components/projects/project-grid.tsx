@@ -1,22 +1,59 @@
-import { projects, projectsSection, projectsTitle } from "./content";
-import { ProjectCard } from "./project-card";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+
+import "@/styles/project-list.css";
+
+import { categoryLabel, projects } from "./content";
 
 export function ProjectGrid() {
 	return (
 		<section
 			aria-labelledby="project-list-title"
-			className={`${projectsSection} bg-background`}
+			className="project-list-section"
 			id="project-list"
 		>
-			<div className="flex flex-col gap-3 border-border border-b pb-[1.25rem] sm:flex-row sm:items-end sm:justify-between">
-				<h2 className={projectsTitle} id="project-list-title">
-					Featured project
-				</h2>
-			</div>
-			<ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 pt-[clamp(2rem,4vw,3rem)]">
+			<h2 className="project-list-title" id="project-list-title">
+				Featured project
+			</h2>
+			<ul className="project-list">
 				{projects.map((project) => (
 					<li key={project.slug}>
-						<ProjectCard emphasis="feature" project={project} />
+						<Link
+							className="project-list-link"
+							params={{ slug: project.slug }}
+							to="/projects/$slug"
+						>
+							<span className="project-list-copy">
+								<span className="project-list-name">{project.name}</span>
+								<dl className="project-list-meta">
+									<div>
+										<dt>Type</dt>
+										<dd>{categoryLabel(project.category)}</dd>
+									</div>
+									<div>
+										<dt>Location</dt>
+										<dd>{project.location}</dd>
+									</div>
+								</dl>
+								<span className="project-list-summary">{project.summary}</span>
+								<span className="project-list-cta">
+									View project
+									<ArrowUpRight aria-hidden="true" size={14} />
+								</span>
+							</span>
+							<span className="project-list-media">
+								<img
+									alt={project.image.alt}
+									decoding="async"
+									height={project.image.height}
+									loading="lazy"
+									sizes="(max-width: 63.99rem) 100vw, 58vw"
+									src={project.image.src}
+									srcSet={project.image.srcSet}
+									width={project.image.width}
+								/>
+							</span>
+						</Link>
 					</li>
 				))}
 			</ul>

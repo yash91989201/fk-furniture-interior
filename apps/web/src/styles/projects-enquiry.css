@@ -1,0 +1,107 @@
+/* Projects enquiry: one centered notice above an inline contact pair. */
+.projects-enquiry-section {
+	padding-block: clamp(4.375rem, 8.75vw, 8.125rem);
+	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
+		max(var(--home-gutter), env(safe-area-inset-right));
+	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
+	background: var(--background);
+}
+
+.projects-enquiry-inner {
+	max-width: 44rem;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.projects-enquiry-label {
+	margin: 0;
+	font-family: var(--font-sans);
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--muted-foreground);
+	letter-spacing: 0.09em;
+}
+
+.projects-enquiry-title {
+	margin: 0.9rem 0 0;
+	font-family: var(--font-heading);
+	font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+
+.projects-enquiry-lead {
+	margin: 1.15rem 0 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.3rem, 1.1rem + 0.85vw, 1.7rem);
+	font-weight: 500;
+	line-height: 1.42;
+	letter-spacing: -0.01em;
+	text-wrap: pretty;
+}
+
+.projects-enquiry-body {
+	margin: 1rem 0 0;
+	font-size: clamp(1rem, 0.96rem + 0.14vw, 1.0625rem);
+	line-height: 1.7;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+.projects-enquiry-actions {
+	display: flex;
+	justify-content: center;
+	margin-top: clamp(2.1875rem, 3.75vw, 3.125rem);
+}
+
+.projects-enquiry-note {
+	margin: 0.9rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.6;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+.projects-enquiry-contacts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem clamp(1.5rem, 4vw, 2.5rem);
+	justify-content: center;
+	padding-top: clamp(1.25rem, 2.5vw, 1.6875rem);
+	margin: clamp(2.1875rem, 3.75vw, 3.125rem) 0 0;
+	border-top: 1px solid var(--border);
+}
+
+.projects-enquiry-contacts div {
+	display: flex;
+	gap: 0.5rem;
+	align-items: baseline;
+}
+
+.projects-enquiry-contacts dt {
+	margin: 0;
+	font-size: 0.75rem;
+	color: var(--muted-foreground);
+}
+
+.projects-enquiry-contacts dd {
+	margin: 0;
+	font-size: 0.8125rem;
+}
+
+.projects-enquiry-contacts a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+}
+
+.projects-enquiry-contacts a:hover {
+	color: var(--muted-foreground);
+}
+
+.projects-enquiry-contacts a:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}

@@ -90,6 +90,9 @@ export const galleryWorks: GalleryWork[] = [
 export const gallerySection =
 	"pl-[max(var(--home-gutter),env(safe-area-inset-left))] pr-[max(var(--home-gutter),env(safe-area-inset-right))] py-[clamp(3.5rem,7vw,6.5rem)] [scroll-margin-top:calc(var(--home-nav-compact)+0.75rem)]";
 
+export const galleryDarkSurface =
+	"dark bg-[var(--gallery-aubergine)] text-foreground [color-scheme:dark]";
+
 export const galleryTitle =
 	"m-0 font-heading font-medium text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] leading-[1.08] tracking-[-0.025em] text-balance";
 

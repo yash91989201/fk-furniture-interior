@@ -1,0 +1,133 @@
+/* Purpose: sticky label rail beside a serif statement and a two-up values list.
+   Statement stays at reading measure; the vision line is the only italic role. */
+.purpose-section {
+	display: grid;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+	gap: clamp(2rem, 6vw, 6rem);
+	align-items: start;
+	padding-block: clamp(3.5rem, 7vw, 6.5rem);
+	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
+		max(var(--home-gutter), env(safe-area-inset-right));
+	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
+}
+
+.purpose-section ::selection {
+	color: var(--primary-foreground);
+	background: var(--primary);
+}
+
+.purpose-rail {
+	position: sticky;
+	top: calc(var(--home-nav-compact) + 1.5rem);
+}
+
+.purpose-title {
+	max-width: 12ch;
+	margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+	font-family: var(--font-heading);
+	font-size: clamp(1.8rem, 1.35rem + 1.7vw, 2.6rem);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: -0.022em;
+	text-wrap: balance;
+}
+
+.purpose-label {
+	margin: 0 0 0.5rem;
+	font-family: var(--font-sans);
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--muted-foreground);
+	letter-spacing: 0.09em;
+}
+
+.purpose-vision {
+	padding-top: 0.9rem;
+	border-top: 1px solid var(--border);
+}
+
+.purpose-vision-text {
+	max-width: 28ch;
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: 1.1875rem;
+	font-style: italic;
+	line-height: 1.45;
+	letter-spacing: -0.005em;
+	text-wrap: pretty;
+}
+
+.purpose-statement {
+	max-width: 30ch;
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.9rem, 1.35rem + 2.2vw, 2.9rem);
+	font-weight: 500;
+	line-height: 1.24;
+	letter-spacing: -0.018em;
+	text-wrap: pretty;
+}
+
+.purpose-statement em {
+	font-style: italic;
+	text-decoration: underline;
+	text-decoration-thickness: 0.07em;
+	text-decoration-color: var(--primary);
+	text-underline-offset: 0.12em;
+}
+
+.purpose-values-label {
+	margin: clamp(2.75rem, 5vw, 4rem) 0 0.9rem;
+}
+
+.purpose-values {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: clamp(1.5rem, 3vw, 2.75rem);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.purpose-values li {
+	padding: 1rem 0 0;
+	border-top: 1px solid var(--border);
+}
+
+.purpose-value-label {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.15rem, 1rem + 0.4vw, 1.35rem);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.012em;
+}
+
+.purpose-value-text {
+	max-width: 38ch;
+	margin: 0.35rem 0 0;
+	font-size: 0.9375rem;
+	line-height: 1.62;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+@media (max-width: 64rem) {
+	.purpose-section {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.purpose-rail {
+		position: static;
+	}
+
+	.purpose-statement {
+		max-width: 34ch;
+	}
+}
+
+@media (max-width: 47.99rem) {
+	.purpose-values {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

@@ -1,0 +1,120 @@
+/* Why FK: sticky heading rail beside one ruled row per distinction. */
+.why-fk-section {
+	display: grid;
+	grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+	gap: clamp(2rem, 6vw, 6rem);
+	align-items: start;
+	padding-block: clamp(3.5rem, 7vw, 6.5rem);
+	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
+		max(var(--home-gutter), env(safe-area-inset-right));
+	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
+	background: color-mix(in oklch, var(--muted) 40%, var(--background));
+}
+
+.why-fk-rail {
+	position: sticky;
+	top: calc(var(--home-nav-compact) + 1.5rem);
+}
+
+.why-fk-title {
+	max-width: 13ch;
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+	font-weight: 500;
+	line-height: 1.06;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+
+.why-fk-intro {
+	max-width: 32ch;
+	margin: 1.25rem 0 0;
+	font-size: clamp(1rem, 0.96rem + 0.14vw, 1.0625rem);
+	line-height: 1.65;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+.why-fk-link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-top: 0.75rem;
+	text-decoration: underline;
+	text-decoration-color: var(--primary);
+	text-underline-offset: 4px;
+	transition: color 300ms var(--home-ease);
+}
+
+.why-fk-link:hover {
+	color: var(--muted-foreground);
+}
+
+.why-fk-link:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.why-fk-link {
+		transition: none;
+	}
+}
+
+.why-fk-list {
+	display: grid;
+	padding: 0;
+	margin: 0;
+}
+
+.why-fk-row {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.7fr);
+	column-gap: clamp(1.5rem, 3.5vw, 3rem);
+	padding-block: clamp(1rem, 1.9vw, 1.5rem);
+	border-top: 1px solid var(--border);
+}
+
+.why-fk-row:last-child {
+	border-bottom: 1px solid var(--border);
+}
+
+.why-fk-term {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.15rem, 1rem + 0.4vw, 1.4rem);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+}
+
+.why-fk-text {
+	max-width: 46ch;
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.62;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+@media (max-width: 63.99rem) {
+	.why-fk-section {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.why-fk-rail {
+		position: static;
+	}
+
+	.why-fk-intro {
+		max-width: 46ch;
+	}
+}
+
+@media (max-width: 47.99rem) {
+	.why-fk-row {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 0.4rem;
+	}
+}

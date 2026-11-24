@@ -15,6 +15,7 @@ import {
 
 import {
 	galleryBody,
+	galleryDarkSurface,
 	galleryLabel,
 	galleryLead,
 	gallerySection,
@@ -63,7 +64,7 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 	return (
 		<section
 			aria-labelledby="gallery-enquiry-title"
-			className={`${gallerySection} border-border border-t bg-background outline-none`}
+			className={`${gallerySection} ${galleryDarkSurface} border-border border-y outline-none`}
 			id="gallery-enquiry"
 			tabIndex={-1}
 		>
