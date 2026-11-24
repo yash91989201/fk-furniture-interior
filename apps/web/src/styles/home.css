@@ -1052,12 +1052,11 @@ html.lenis:has(.home-page) {
 	overflow-y: auto;
 }
 
-.home-story-header,
-.home-story-controls {
+.home-story-header {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	align-items: baseline;
+	align-items: center;
 	justify-content: space-between;
 }
 
@@ -1072,27 +1071,21 @@ html.lenis:has(.home-page) {
 	text-wrap: balance;
 }
 
-.home-process .home-kicker-link,
 .home-process .home-muted {
 	font-size: var(--proc-meta);
 	font-weight: 450;
+	font-variant-numeric: tabular-nums;
 	line-height: 1.4;
 	letter-spacing: 0.01em;
 }
 
-.home-process .home-muted {
-	font-variant-numeric: tabular-nums;
-}
-
-.home-story-skip {
-	display: inline-flex;
+.home-story-transport {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
 	align-items: center;
-}
-
-.home-story-skip-icon {
-	display: none;
-	width: 1.25rem;
-	height: 1.25rem;
+	justify-content: flex-end;
+	margin-left: auto;
 }
 
 .home-story-body {
@@ -1256,21 +1249,6 @@ html.lenis:has(.home-page) {
 
 .home-story-nav button[aria-current="step"] {
 	color: var(--foreground);
-}
-
-.home-story-buttons {
-	display: flex;
-	gap: 0.5rem;
-	margin-left: auto;
-}
-
-.home-story-buttons button {
-	flex: 1 1 7.5rem;
-	min-width: 7.5rem;
-	font-size: var(--proc-meta);
-	font-weight: 500;
-	line-height: 1.2;
-	text-wrap: balance;
 }
 
 .home-testimonials {
@@ -2417,34 +2395,6 @@ html.lenis:has(.home-page) {
 	.home-story-nav-label {
 		text-wrap: nowrap;
 	}
-
-	.home-story-controls p,
-	.home-story-buttons {
-		display: none;
-	}
-
-	.home-process .home-story-skip {
-		justify-content: center;
-		min-width: 2.75rem;
-		min-height: 2.75rem;
-		text-decoration: none;
-	}
-
-	.home-story-skip-icon {
-		display: block;
-	}
-
-	.home-story-skip-label {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0;
-		clip: rect(0, 0, 0, 0);
-	}
 }
 
 @media (max-height: 34rem) {
@@ -3207,15 +3157,8 @@ html.lenis:has(.home-page) {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
-	.home-story-nav button:not([aria-current="step"]),
-	.home-story-controls p,
-	.home-story-buttons {
+	.home-story-nav button:not([aria-current="step"]) {
 		display: block;
-	}
-
-	.home-story-buttons {
-		display: flex;
-		flex-wrap: wrap;
 	}
 }
 
@@ -3234,15 +3177,6 @@ html.lenis:has(.home-page) {
 
 	.home-story-nav button:not([aria-current="step"]) {
 		display: block;
-	}
-
-	.home-story-controls p {
-		display: block;
-	}
-
-	.home-story-buttons {
-		display: flex;
-		flex-wrap: wrap;
 	}
 }
 

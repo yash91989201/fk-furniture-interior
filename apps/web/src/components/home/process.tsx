@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/performance/noJsxPropsBind: process controls close over active step */
 import { Button } from "@fk-furniture-interior/ui/components/button";
 import { useLenis } from "lenis/react";
-import { ChevronsRight } from "lucide-react";
+import { ChevronDown, ChevronsDown, ChevronsUp, ChevronUp } from "lucide-react";
 import {
 	MotionConfig,
 	type MotionValue,
@@ -16,6 +16,7 @@ import { processSteps } from "./content";
 import { ProcessDrawing } from "./process-drawing";
 
 const STEP_COUNT = processSteps.length;
+const LAST_STEP = STEP_COUNT - 1;
 const SCROLL_SLOW = 1.2;
 
 const STEP_SPRING = {
@@ -61,6 +62,30 @@ export function Process() {
 	});
 	const progress = reduced ? rawProgress : sprungProgress;
 	const step = processSteps[active] ?? processSteps[0];
+
+	function choose(index: number) {
+		const next = Math.max(0, Math.min(LAST_STEP, index));
+		const runway = runwayRef.current;
+		const stage = stageRef.current;
+		if (staticStory) {
+			rawProgress.set((next + 1) / STEP_COUNT);
+			setActive(next);
+			return;
+		}
+		if (runway && stage) {
+			const top = runway.getBoundingClientRect().top + window.scrollY;
+			const travel = Math.max(1, runway.offsetHeight - stage.offsetHeight);
+			const target = top + (travel * (next + 0.15)) / STEP_COUNT;
+			if (lenis) {
+				lenis.scrollTo(target, { immediate: true });
+			} else {
+				window.scrollTo({ behavior: "instant", top: target });
+			}
+		} else {
+			rawProgress.set((next + 1) / STEP_COUNT);
+		}
+		setActive(next);
+	}
 
 	useEffect(() => {
 		const runway = runwayRef.current;
@@ -116,30 +141,6 @@ export function Process() {
 		rawProgress.set((active + 1) / STEP_COUNT);
 	}, [active, rawProgress, staticStory]);
 
-	function choose(index: number) {
-		const next = Math.max(0, Math.min(STEP_COUNT - 1, index));
-		const runway = runwayRef.current;
-		const stage = stageRef.current;
-		if (staticStory) {
-			rawProgress.set((next + 1) / STEP_COUNT);
-			setActive(next);
-			return;
-		}
-		if (runway && stage) {
-			const top = runway.getBoundingClientRect().top + window.scrollY;
-			const travel = Math.max(1, runway.offsetHeight - stage.offsetHeight);
-			const target = top + (travel * (next + 0.15)) / STEP_COUNT;
-			if (lenis) {
-				lenis.scrollTo(target, { immediate: true });
-			} else {
-				window.scrollTo({ behavior: "instant", top: target });
-			}
-		} else {
-			rawProgress.set((next + 1) / STEP_COUNT);
-		}
-		setActive(next);
-	}
-
 	function handleStepClick(event: MouseEvent<HTMLButtonElement>) {
 		choose(Number(event.currentTarget.dataset.step));
 	}
@@ -150,6 +151,18 @@ export function Process() {
 
 	function handleNext() {
 		choose(active + 1);
+	}
+
+	function jump(target: string) {
+		const section = document.getElementById(target);
+		if (!section) {
+			return;
+		}
+		if (lenis) {
+			lenis.scrollTo(section);
+		} else {
+			section.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+		}
 	}
 
 	return (
@@ -163,16 +176,46 @@ export function Process() {
 					<div className="home-story-stage" ref={stageRef}>
 						<div className="home-story-header">
 							<h2>From idea to handover.</h2>
-							<a
-								className="home-kicker-link home-story-skip"
-								href="#fk-enquiry"
-							>
-								<ChevronsRight
-									aria-hidden="true"
-									className="home-story-skip-icon"
-								/>
-								<span className="home-story-skip-label">Skip to enquiry</span>
-							</a>
+							<div className="home-story-transport">
+								<Button
+									aria-label="Skip to the previous section"
+									onClick={() => jump("fk-craft")}
+									size="icon-sm"
+									type="button"
+									variant="outline"
+								>
+									<ChevronsUp aria-hidden="true" />
+								</Button>
+								<Button
+									aria-label="Previous step"
+									disabled={active === 0}
+									onClick={handlePrevious}
+									size="icon-sm"
+									type="button"
+									variant="outline"
+								>
+									<ChevronUp aria-hidden="true" />
+								</Button>
+								<Button
+									aria-label="Next step"
+									disabled={active === LAST_STEP}
+									onClick={handleNext}
+									size="icon-sm"
+									type="button"
+									variant="outline"
+								>
+									<ChevronDown aria-hidden="true" />
+								</Button>
+								<Button
+									aria-label="Skip to the next section"
+									onClick={() => jump("fk-enquiry")}
+									size="icon-sm"
+									type="button"
+									variant="outline"
+								>
+									<ChevronsDown aria-hidden="true" />
+								</Button>
+							</div>
 						</div>
 						<div className="home-story-body">
 							<div
@@ -230,31 +273,6 @@ export function Process() {
 									</button>
 								))}
 							</nav>
-							<div className="home-story-controls">
-								{reduced ? (
-									<p className="home-muted">
-										Choose a step. Reduced motion is enabled.
-									</p>
-								) : null}
-								<div className="home-story-buttons">
-									<Button
-										disabled={active === 0}
-										onClick={handlePrevious}
-										size="sm"
-										variant="outline"
-									>
-										Previous
-									</Button>
-									<Button
-										disabled={active === 3}
-										onClick={handleNext}
-										size="sm"
-										variant="secondary"
-									>
-										Next
-									</Button>
-								</div>
-							</div>
 							<span aria-live="polite" className="sr-only">
 								Step {active + 1} of 4: {step.title}
 							</span>
