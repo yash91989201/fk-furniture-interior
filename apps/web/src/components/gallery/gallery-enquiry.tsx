@@ -5,7 +5,7 @@ import {
 import { Input } from "@fk-furniture-interior/ui/components/input";
 import { Textarea } from "@fk-furniture-interior/ui/components/textarea";
 import { MessageCircle } from "lucide-react";
-import { type FormEvent, useCallback, useState } from "react";
+import { type FormEvent, useCallback, useEffect, useState } from "react";
 
 import {
 	buildEnquiryMailto,
@@ -28,6 +28,11 @@ function readField(data: FormData, name: string) {
 
 export function GalleryEnquiry({ reference }: { reference: string }) {
 	const [feedback, setFeedback] = useState("");
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const handleSubmit = useCallback(
 		(event: FormEvent<HTMLFormElement>) => {
@@ -140,99 +145,101 @@ export function GalleryEnquiry({ reference }: { reference: string }) {
 					</a>
 				</div>
 				<form className="grid gap-[1.25rem]" onSubmit={handleSubmit}>
-					<input name="reference" type="hidden" value={reference} />
-					<div className="grid gap-5 sm:grid-cols-2">
-						<label className="grid gap-1.5" htmlFor="gallery-enquiry-name">
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Your name
-							</span>
-							<Input
-								autoComplete="name"
-								id="gallery-enquiry-name"
-								name="name"
-								placeholder="Your name"
-								required
-								surface="box"
-							/>
-						</label>
-						<label className="grid gap-1.5" htmlFor="gallery-enquiry-email">
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Email address
-							</span>
-							<Input
-								autoComplete="email"
-								id="gallery-enquiry-email"
-								name="email"
-								placeholder="Email address"
-								required
-								surface="box"
-								type="email"
-							/>
-						</label>
-						<label className="grid gap-1.5" htmlFor="gallery-enquiry-phone">
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Phone number (optional)
-							</span>
-							<Input
-								autoComplete="tel"
-								id="gallery-enquiry-phone"
-								name="phone"
-								placeholder="Phone number"
-								surface="box"
-								type="tel"
-							/>
-						</label>
-						<label className="grid gap-1.5" htmlFor="gallery-enquiry-company">
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Company or hotel (optional)
-							</span>
-							<Input
-								autoComplete="organization"
-								id="gallery-enquiry-company"
-								name="company"
-								placeholder="Company or hotel"
-								surface="box"
-							/>
-						</label>
-						<label
-							className="grid gap-1.5 sm:col-span-2"
-							htmlFor="gallery-enquiry-city"
-						>
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Project city
-							</span>
-							<Input
-								autoComplete="address-level2"
-								id="gallery-enquiry-city"
-								name="city"
-								placeholder="City of the project"
-								surface="box"
-							/>
-						</label>
-						<label
-							className="grid gap-1.5 sm:col-span-2"
-							htmlFor="gallery-enquiry-message"
-						>
-							<span className="font-medium text-[0.75rem] text-muted-foreground">
-								Project details
-							</span>
-							<Textarea
-								id="gallery-enquiry-message"
-								name="message"
-								placeholder="The space, the scope, and the drawings or BOQ you hold"
-								surface="box"
-							/>
-						</label>
-					</div>
-					<div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-						<Button className="h-11" type="submit">
-							Send project details
-						</Button>
-						<p className="m-0 max-w-[34ch] text-[0.75rem] text-muted-foreground leading-[1.5]">
-							This opens a draft in your email app. Attach drawings or a BOQ
-							before sending.
-						</p>
-					</div>
+					<fieldset className="contents" disabled={!mounted}>
+						<input name="reference" type="hidden" value={reference} />
+						<div className="grid gap-5 sm:grid-cols-2">
+							<label className="grid gap-1.5" htmlFor="gallery-enquiry-name">
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Your name
+								</span>
+								<Input
+									autoComplete="name"
+									id="gallery-enquiry-name"
+									name="name"
+									placeholder="Your name"
+									required
+									surface="box"
+								/>
+							</label>
+							<label className="grid gap-1.5" htmlFor="gallery-enquiry-email">
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Email address
+								</span>
+								<Input
+									autoComplete="email"
+									id="gallery-enquiry-email"
+									name="email"
+									placeholder="Email address"
+									required
+									surface="box"
+									type="email"
+								/>
+							</label>
+							<label className="grid gap-1.5" htmlFor="gallery-enquiry-phone">
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Phone number (optional)
+								</span>
+								<Input
+									autoComplete="tel"
+									id="gallery-enquiry-phone"
+									name="phone"
+									placeholder="Phone number"
+									surface="box"
+									type="tel"
+								/>
+							</label>
+							<label className="grid gap-1.5" htmlFor="gallery-enquiry-company">
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Company or hotel (optional)
+								</span>
+								<Input
+									autoComplete="organization"
+									id="gallery-enquiry-company"
+									name="company"
+									placeholder="Company or hotel"
+									surface="box"
+								/>
+							</label>
+							<label
+								className="grid gap-1.5 sm:col-span-2"
+								htmlFor="gallery-enquiry-city"
+							>
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Project city
+								</span>
+								<Input
+									autoComplete="address-level2"
+									id="gallery-enquiry-city"
+									name="city"
+									placeholder="City of the project"
+									surface="box"
+								/>
+							</label>
+							<label
+								className="grid gap-1.5 sm:col-span-2"
+								htmlFor="gallery-enquiry-message"
+							>
+								<span className="font-medium text-[0.75rem] text-muted-foreground">
+									Project details
+								</span>
+								<Textarea
+									id="gallery-enquiry-message"
+									name="message"
+									placeholder="The space, the scope, and the drawings or BOQ you hold"
+									surface="box"
+								/>
+							</label>
+						</div>
+						<div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+							<Button className="h-11" type="submit">
+								Open email draft
+							</Button>
+							<p className="m-0 max-w-[34ch] text-[0.75rem] text-muted-foreground leading-[1.5]">
+								This opens a draft in your email app. Attach drawings or a BOQ
+								before sending.
+							</p>
+						</div>
+					</fieldset>
 					<p
 						aria-live="polite"
 						className="m-0 min-h-5 text-[0.8125rem] text-muted-foreground"

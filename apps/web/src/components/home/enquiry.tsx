@@ -11,7 +11,13 @@ import {
 	SelectValue,
 } from "@fk-furniture-interior/ui/components/select";
 import { Textarea } from "@fk-furniture-interior/ui/components/textarea";
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
+
+import {
+	buildEnquiryMailto,
+	contactEmail,
+	gurgaonOffice,
+} from "@/components/contact/content";
 
 import { enquiryOptions } from "./content";
 
@@ -30,7 +36,7 @@ export function Enquiry({
 	presetRequirement: string;
 	copy?: { body: string; heading: string; title: string };
 }) {
-	const [feedback, setFeedback] = useState("");
+	const [mounted, setMounted] = useState(false);
 	const [requirement, setRequirement] = useState(presetRequirement || "");
 	const [message, setMessage] = useState(
 		presetCategory
@@ -38,14 +44,23 @@ export function Enquiry({
 			: ""
 	);
 
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
 	function onSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const subject = requirement.trim();
-		setFeedback(
-			subject
-				? `Brief received: ${subject.toLowerCase()}. Nothing has been sent or stored.`
-				: "Brief received. Nothing has been sent or stored."
-		);
+		const data = new FormData(event.currentTarget);
+		const value = (key: string) => String(data.get(key) ?? "").trim();
+		window.location.href = buildEnquiryMailto({
+			city: value("city"),
+			company: value("company") || undefined,
+			details: value("message"),
+			email: value("email"),
+			name: value("name"),
+			phone: value("phone") || undefined,
+			requirement,
+		});
 	}
 
 	function handleRequirementChange(value: unknown) {
@@ -155,20 +170,33 @@ export function Enquiry({
 					<h2 className="home-enquiry-title">{copy.title}</h2>
 					<h3>{copy.heading}</h3>
 					<p>{copy.body}</p>
+					<p className="home-muted">
+						Prefer to write directly? Email{" "}
+						<a
+							className="underline decoration-1 underline-offset-4 hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+							href={`mailto:${contactEmail}`}
+						>
+							{contactEmail}
+						</a>{" "}
+						or call{" "}
+						<a
+							className="underline decoration-1 underline-offset-4 hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+							href={gurgaonOffice.phones[0].href}
+						>
+							{gurgaonOffice.phones[0].display}
+						</a>
+						.
+					</p>
 				</div>
 				<form className="home-enquiry-form" onSubmit={onSubmit}>
-					<FieldGroup className="home-form-grid !grid gap-4">
-						{formFields}
-					</FieldGroup>
-					<Button className="home-enquiry-button" type="submit">
-						Send enquiry · preview
-					</Button>
-					<p
-						aria-live="polite"
-						className={feedback ? "home-enquiry-note" : undefined}
-					>
-						{feedback}
-					</p>
+					<fieldset className="contents" disabled={!mounted}>
+						<FieldGroup className="home-form-grid !grid gap-4">
+							{formFields}
+						</FieldGroup>
+						<Button className="home-enquiry-button" type="submit">
+							Open email draft
+						</Button>
+					</fieldset>
 				</form>
 			</div>
 		</section>

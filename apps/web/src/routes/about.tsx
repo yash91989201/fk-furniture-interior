@@ -38,7 +38,11 @@ function AboutComponent() {
 				<Quality />
 				<Purpose />
 				<Team />
-				<Enquiry copy={visitCopy} presetCategory="" presetRequirement="" />
+				<Enquiry
+					copy={visitCopy}
+					presetCategory=""
+					presetRequirement="Factory visit"
+				/>
 			</main>
 			<SiteFooter />
 		</div>

@@ -186,4 +186,5 @@ export const enquiryOptions = [
 	"Design consultation",
 	"Furniture quotation",
 	"Turnkey project enquiry",
+	"Factory visit",
 ] as const;

@@ -29,11 +29,10 @@ export function InformationCollected() {
 				beyond what the hosting provider may log at the server.
 			</p>
 			<PolicyReview>
-				The home-page enquiry form is a preview: nothing is sent or stored. The
-				contact form prepares an email in the visitor's mail app. Confirm the
-				fields retained, where enquiries will land if the form is connected to a
-				service, whether an upload will be added, and how long hosting logs are
-				kept.
+				Enquiry forms on every page prepare a draft in the visitor's mail app
+				and send nothing themselves. Confirm the fields retained, where
+				enquiries will land if a form is connected to a service, whether an
+				upload will be added, and how long hosting logs are kept.
 			</PolicyReview>
 		</PolicySection>
 	);

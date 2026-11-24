@@ -6,12 +6,13 @@ import {
 } from "@fk-furniture-interior/ui/components/field";
 import { Input } from "@fk-furniture-interior/ui/components/input";
 import { Textarea } from "@fk-furniture-interior/ui/components/textarea";
-import { type FormEvent, useCallback, useState } from "react";
+import { type FormEvent, useCallback, useEffect, useState } from "react";
 
 import {
 	buildEnquiryMailto,
 	contactEmail,
 	type EnquiryFields,
+	gurgaonOffice,
 	requirementOptions,
 } from "./content";
 
@@ -26,7 +27,12 @@ const fieldLabel =
 const optional = "font-normal text-muted-foreground text-xs";
 
 export function ContactForm() {
+	const [mounted, setMounted] = useState(false);
 	const [status, setStatus] = useState<Status>({ message: "", tone: "idle" });
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -81,141 +87,163 @@ export function ContactForm() {
 					className="border border-border bg-card p-[clamp(1.25rem,3vw,2.25rem)]"
 					onSubmit={onSubmit}
 				>
-					<FieldGroup className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-name">
-								Name
-							</FieldLabel>
-							<Input
-								autoComplete="name"
-								id="contact-name"
-								name="name"
-								required
-								surface="box"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-email">
-								Email
-							</FieldLabel>
-							<Input
-								autoComplete="email"
-								id="contact-email"
-								name="email"
-								required
-								surface="box"
-								type="email"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-phone">
-								Phone
-								<span className={optional}>Optional</span>
-							</FieldLabel>
-							<Input
-								autoComplete="tel"
-								id="contact-phone"
-								name="phone"
-								surface="box"
-								type="tel"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-company">
-								Company or hotel
-								<span className={optional}>Optional</span>
-							</FieldLabel>
-							<Input
-								autoComplete="organization"
-								id="contact-company"
-								name="company"
-								surface="box"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-city">
-								Project city
-							</FieldLabel>
-							<Input
-								autoComplete="address-level2"
-								id="contact-city"
-								name="city"
-								required
-								surface="box"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel className={fieldLabel} htmlFor="contact-requirement">
-								Type of requirement
-							</FieldLabel>
-							<select
-								className="h-10 w-full border border-input bg-card px-3 py-2 text-base outline-none transition-[color,border-color,background-color] focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 md:text-sm"
-								defaultValue=""
-								id="contact-requirement"
-								name="requirement"
-								required
-							>
-								<option disabled value="">
-									Select one
-								</option>
-								{requirementOptions.map((option) => (
-									<option key={option} value={option}>
-										{option}
-									</option>
-								))}
-							</select>
-						</Field>
-						<Field className="sm:col-span-2">
-							<FieldLabel className={fieldLabel} htmlFor="contact-details">
-								Project details
-							</FieldLabel>
-							<Textarea
-								className="min-h-32"
-								id="contact-details"
-								name="details"
-								placeholder="The space, the scope, the timeline and any drawings or BOQ you will attach"
-								required
-								surface="box"
-							/>
-						</Field>
-					</FieldGroup>
-					<div className="mt-6 flex flex-col gap-3">
-						<Button className="w-full sm:w-fit" type="submit">
-							Prepare email enquiry
-						</Button>
-						<p className="m-0 text-[0.8125rem] text-muted-foreground leading-[1.55]">
-							Nothing is sent or stored by this website. Your email app sends
-							the message.
-						</p>
-						<div
-							aria-live="polite"
-							className="min-h-6 text-[0.875rem] leading-[1.55]"
-						>
-							{status.message ? (
-								<p
-									className={
-										status.tone === "error"
-											? "m-0 text-destructive"
-											: "m-0 text-muted-foreground"
-									}
+					<fieldset className="contents" disabled={!mounted}>
+						<FieldGroup className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+							<Field>
+								<FieldLabel className={fieldLabel} htmlFor="contact-name">
+									Name
+								</FieldLabel>
+								<Input
+									autoComplete="name"
+									id="contact-name"
+									name="name"
+									required
+									surface="box"
+								/>
+							</Field>
+							<Field>
+								<FieldLabel className={fieldLabel} htmlFor="contact-email">
+									Email
+								</FieldLabel>
+								<Input
+									autoComplete="email"
+									id="contact-email"
+									name="email"
+									required
+									surface="box"
+									type="email"
+								/>
+							</Field>
+							<Field>
+								<FieldLabel className={fieldLabel} htmlFor="contact-phone">
+									Phone
+									<span className={optional}>Optional</span>
+								</FieldLabel>
+								<Input
+									autoComplete="tel"
+									id="contact-phone"
+									name="phone"
+									surface="box"
+									type="tel"
+								/>
+							</Field>
+							<Field>
+								<FieldLabel className={fieldLabel} htmlFor="contact-company">
+									Company or hotel
+									<span className={optional}>Optional</span>
+								</FieldLabel>
+								<Input
+									autoComplete="organization"
+									id="contact-company"
+									name="company"
+									surface="box"
+								/>
+							</Field>
+							<Field>
+								<FieldLabel className={fieldLabel} htmlFor="contact-city">
+									Project city
+								</FieldLabel>
+								<Input
+									autoComplete="address-level2"
+									id="contact-city"
+									name="city"
+									required
+									surface="box"
+								/>
+							</Field>
+							<Field>
+								<FieldLabel
+									className={fieldLabel}
+									htmlFor="contact-requirement"
 								>
-									{status.message}
-									{status.href ? (
-										<>
-											{" "}
-											<a
-												className="underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
-												href={status.href}
-											>
-												Open the draft
-											</a>
-											.
-										</>
-									) : null}
-								</p>
-							) : null}
+									Type of requirement
+								</FieldLabel>
+								<select
+									className="h-10 w-full border border-input bg-card px-3 py-2 text-base outline-none transition-[color,border-color,background-color] focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 md:text-sm"
+									defaultValue=""
+									id="contact-requirement"
+									name="requirement"
+									required
+								>
+									<option disabled value="">
+										Select one
+									</option>
+									{requirementOptions.map((option) => (
+										<option key={option} value={option}>
+											{option}
+										</option>
+									))}
+								</select>
+							</Field>
+							<Field className="sm:col-span-2">
+								<FieldLabel className={fieldLabel} htmlFor="contact-details">
+									Project details
+								</FieldLabel>
+								<Textarea
+									className="min-h-32"
+									id="contact-details"
+									name="details"
+									placeholder="The space, the scope, the timeline and any drawings or BOQ you will attach"
+									required
+									surface="box"
+								/>
+							</Field>
+						</FieldGroup>
+						<div className="mt-6 flex flex-col gap-3">
+							<Button className="w-full sm:w-fit" type="submit">
+								Open email draft
+							</Button>
+							<p className="m-0 text-[0.8125rem] text-muted-foreground leading-[1.55]">
+								Nothing is sent or stored by this website. Your email app sends
+								the message.
+							</p>
+							<div
+								aria-live="polite"
+								className="min-h-6 text-[0.875rem] leading-[1.55]"
+							>
+								{status.message ? (
+									<p
+										className={
+											status.tone === "error"
+												? "m-0 text-destructive"
+												: "m-0 text-muted-foreground"
+										}
+									>
+										{status.message}
+										{status.href ? (
+											<>
+												{" "}
+												<a
+													className="underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
+													href={status.href}
+												>
+													Open the draft
+												</a>
+												.
+											</>
+										) : null}
+									</p>
+								) : null}
+							</div>
 						</div>
-					</div>
+					</fieldset>
+					<p className="m-0 mt-[0.75rem] text-[0.8125rem] text-muted-foreground leading-[1.55]">
+						Prefer to write directly? Email{" "}
+						<a
+							className="underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
+							href={`mailto:${contactEmail}`}
+						>
+							{contactEmail}
+						</a>{" "}
+						or call{" "}
+						<a
+							className="underline decoration-1 decoration-primary underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4"
+							href={gurgaonOffice.phones[0].href}
+						>
+							{gurgaonOffice.phones[0].display}
+						</a>
+						.
+					</p>
 				</form>
 			</div>
 		</section>
