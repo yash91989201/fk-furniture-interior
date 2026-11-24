@@ -17,7 +17,7 @@ export function ProjectProcess() {
 			<ol className="m-0 mt-[clamp(2rem,4vw,3.25rem)] grid list-none gap-x-[clamp(1.5rem,3vw,2.5rem)] gap-y-[2rem] p-0 sm:grid-cols-2 lg:grid-cols-4">
 				{processSteps.map((step, index) => (
 					<li className="border-border border-t pt-[1rem]" key={step.title}>
-						<span className="font-sans font-semibold text-[0.75rem] text-primary tabular-nums tracking-[0.09em]">
+						<span className="font-sans font-semibold text-[0.75rem] text-foreground tabular-nums tracking-[0.09em]">
 							{String(index + 1).padStart(2, "0")}
 						</span>
 						<h3 className="m-0 mt-[0.75rem] font-heading font-medium text-[clamp(1.3rem,1.15rem+0.6vw,1.6rem)] leading-[1.2] tracking-[-0.01em]">

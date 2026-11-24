@@ -34,8 +34,8 @@ export const Route = createFileRoute("/terms-and-conditions")({
 function TermsAndConditionsComponent() {
 	return (
 		<div className="home-page bg-background text-foreground">
-			<a className="home-skip" href="#fk-terms-contents">
-				Skip to contents
+			<a className="home-skip" href="#fk-terms-services">
+				Skip to first clause
 			</a>
 			<div className="print:hidden">
 				<SiteNav compactStart />

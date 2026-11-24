@@ -37,6 +37,18 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 	const closeMenu = useCallback(() => {
 		menuRef.current?.removeAttribute("open");
 	}, []);
+	useEffect(() => {
+		const onKeyDown = (event: KeyboardEvent) => {
+			const menu = menuRef.current;
+			if (event.key !== "Escape" || !menu?.open) {
+				return;
+			}
+			menu.removeAttribute("open");
+			menu.querySelector("summary")?.focus();
+		};
+		document.addEventListener("keydown", onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	}, []);
 
 	useEffect(() => {
 		// Any .home-page [data-hide-nav] section hides this bar while it covers the

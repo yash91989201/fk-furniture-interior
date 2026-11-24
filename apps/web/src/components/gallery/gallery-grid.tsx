@@ -65,7 +65,6 @@ export function GalleryGrid({
 						key={work.reference}
 					>
 						<button
-							aria-label={`Open full view: ${work.space}`}
 							className="group flex h-full w-full flex-col border border-border bg-card text-left transition-colors hover:border-foreground/50 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
 							data-reference={work.reference}
 							onClick={handleWorkClick}
@@ -104,6 +103,7 @@ export function GalleryGrid({
 								) : null}
 								<span className="mt-auto inline-flex items-center gap-1.5 pt-[0.75rem] font-semibold text-[0.75rem] tracking-[0.04em]">
 									View photograph
+									<span className="sr-only">: {work.space}</span>
 									<ArrowUpRight
 										aria-hidden="true"
 										className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"

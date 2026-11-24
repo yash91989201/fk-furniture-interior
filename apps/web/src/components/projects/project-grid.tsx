@@ -23,8 +23,8 @@ export function ProjectGrid() {
 							params={{ slug: project.slug }}
 							to="/projects/$slug"
 						>
-							<span className="project-list-copy">
-								<span className="project-list-name">{project.name}</span>
+							<div className="project-list-copy">
+								<h3 className="project-list-name">{project.name}</h3>
 								<dl className="project-list-meta">
 									<div>
 										<dt>Type</dt>
@@ -40,8 +40,8 @@ export function ProjectGrid() {
 									View project
 									<ArrowUpRight aria-hidden="true" size={14} />
 								</span>
-							</span>
-							<span className="project-list-media">
+							</div>
+							<div className="project-list-media">
 								<img
 									alt={project.image.alt}
 									decoding="async"
@@ -53,7 +53,7 @@ export function ProjectGrid() {
 									srcSet={project.image.srcSet}
 									width={project.image.width}
 								/>
-							</span>
+							</div>
 						</Link>
 					</li>
 				))}

@@ -13,7 +13,7 @@ export function OfficeDetails() {
 					<span>{gstin}</span>
 				</div>
 			</div>
-			<div aria-hidden="true" className="office-dir__cols">
+			<div className="office-dir__cols">
 				<span>Office</span>
 				<span>Address</span>
 				<span>Telephone</span>
@@ -22,12 +22,18 @@ export function OfficeDetails() {
 				{offices.map((office) => (
 					<li className="office-dir__row" key={office.name}>
 						<h3 className="office-dir__name">{office.name}</h3>
-						<address className="office-dir__address">
+						<address
+							aria-label={`${office.name} address`}
+							className="office-dir__address"
+						>
 							{office.address.map((line) => (
 								<span key={line}>{line}</span>
 							))}
 						</address>
-						<ul className="office-dir__phones">
+						<ul
+							aria-label={`${office.name} telephone`}
+							className="office-dir__phones"
+						>
 							{office.phones.map((phone) => (
 								<li key={phone.href}>
 									<a href={phone.href}>{phone.display}</a>

@@ -30,7 +30,8 @@ export function FaqQuestions() {
 						<div className="mt-[clamp(1rem,1.6vw,1.25rem)] border-border border-y">
 							{group.questions.map((question, questionIndex) => (
 								<details
-									className="group border-border not-first:border-t"
+									className="group border-border not-first:border-t [scroll-margin-top:calc(var(--home-nav-compact)+1.5rem)]"
+									id={question.id}
 									key={question.id}
 									name={group.id}
 									open={
