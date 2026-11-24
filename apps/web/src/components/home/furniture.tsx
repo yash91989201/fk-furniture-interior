@@ -13,7 +13,7 @@ import {
 	useState,
 } from "react";
 import { usePrefersReducedMotion } from "@/hooks/use-media";
-import { furnitureCategories } from "./content";
+import { bandSrcSet, furnitureCategories } from "./content";
 
 const HEADING_WORDS = /\S+\s*/g;
 
@@ -88,9 +88,13 @@ function FurnitureBackgroundReveal({
 		<img
 			alt=""
 			className="fv-background-reveal"
+			fetchPriority="low"
 			height={1333}
+			loading="lazy"
 			ref={imageRef}
+			sizes="100vw"
 			src={category.image.src}
+			srcSet={bandSrcSet(category.image.src)}
 			width={2000}
 		/>
 	);
@@ -329,8 +333,12 @@ export function Furniture({
 			<div aria-hidden="true" className="fv-backdrop">
 				<img
 					alt=""
+					fetchPriority="low"
 					height={1333}
+					loading="lazy"
+					sizes="100vw"
 					src={backgroundCategory.image.src}
+					srcSet={bandSrcSet(backgroundCategory.image.src)}
 					width={2000}
 				/>
 				{reveal !== null && (

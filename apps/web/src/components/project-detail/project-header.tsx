@@ -49,7 +49,7 @@ export function ProjectHeader({ project }: { project: Project }) {
 						decoding="async"
 						fetchPriority="high"
 						height={project.image.height}
-						sizes="(max-width: 63.99rem) 100vw, 92vw"
+						sizes="(max-width: 63.99rem) 94vw, 92vw"
 						src={project.image.src}
 						srcSet={project.image.srcSet}
 						width={project.image.width}

@@ -49,6 +49,7 @@ export function Team() {
 					alt={photos.guestRoom.alt}
 					className="block aspect-[3/4] w-full object-cover max-lg:aspect-[16/11]"
 					decoding="async"
+					fetchPriority="low"
 					height={1333}
 					loading="lazy"
 					sizes="(max-width: 64rem) 100vw, 30vw"

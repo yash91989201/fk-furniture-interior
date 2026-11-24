@@ -1,317 +1,4 @@
-html:has(.home-page) {
-	scroll-behavior: smooth;
-}
-
-html.lenis:has(.home-page) {
-	scroll-behavior: auto;
-}
-
-.home-page {
-	--home-ease: cubic-bezier(0.16, 1, 0.3, 1);
-	--home-gutter: clamp(1.25rem, 5vw, 5rem);
-	--home-nav-height: 7.5rem;
-	--home-nav-compact: 3.75rem;
-	/* hero type ladder, shared by the home and about heroes */
-	--hero-display: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
-	--hero-body: clamp(1rem, 0.9rem + 0.45vw, 1.125rem);
-	--hero-meta: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
-	--home-warm-aubergine: color-mix(
-		in oklab,
-		var(--secondary) 92%,
-		var(--primary)
-	);
-	font-family: var(--font-sans);
-	color: var(--foreground);
-	background: var(--background);
-}
-
-.home-page :focus-visible {
-	outline: 2px solid var(--ring);
-	outline-offset: 3px;
-}
-
-/* shared buttons ship outline-none plus a translucent ring; restore the page ring */
-.home-page :is(a, button):focus-visible {
-	outline: 2px solid var(--ring);
-	outline-offset: 3px;
-}
-
-.home-skip {
-	position: absolute;
-	top: 0.75rem;
-	left: var(--home-gutter);
-	z-index: 20;
-	display: inline-flex;
-	align-items: center;
-	min-height: 2.75rem;
-	padding: 0 1rem;
-	font-size: 0.875rem;
-	font-weight: 500;
-	color: var(--primary-foreground);
-	text-decoration: none;
-	background: var(--primary);
-	box-shadow: 0 0.5rem 1.5rem
-		color-mix(in oklch, var(--foreground) 18%, transparent);
-	transform: translateY(-200%);
-}
-
-.home-skip:focus {
-	transform: none;
-}
-
-.home-nav-slot {
-	position: sticky;
-	top: 0;
-	z-index: 8;
-	height: 0;
-}
-
-.home-nav {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	color: var(--foreground);
-	background: color-mix(in oklch, var(--background) 68%, transparent);
-	border-bottom: 1px solid color-mix(in oklch, var(--border) 55%, transparent);
-	box-shadow:
-		inset 0 1px 0 color-mix(in oklch, var(--card) 85%, transparent),
-		0 8px 32px color-mix(in oklch, var(--foreground) 10%, transparent);
-	backdrop-filter: blur(40px) saturate(180%);
-	transition: transform 0.45s var(--home-ease);
-}
-
-.home-nav.is-hidden {
-	pointer-events: none;
-	transform: translateY(calc(-100% - 1.25rem));
-	transition: transform 0.3s var(--home-ease);
-}
-
-.home-nav-ticker {
-	display: flex;
-	align-items: center;
-	height: 2rem;
-	overflow: hidden;
-	color: var(--primary-foreground);
-	background: var(--primary);
-	transition: height 0.35s var(--home-ease);
-}
-
-.home-nav-track {
-	display: flex;
-	width: max-content;
-	animation: home-nav-ticker 36s linear infinite;
-}
-
-.home-nav-group {
-	display: flex;
-	gap: 2rem;
-	padding-right: 2rem;
-	font-size: 0.625rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.3em;
-	white-space: nowrap;
-}
-
-@keyframes home-nav-ticker {
-	to {
-		transform: translateX(-50%);
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.home-nav-track {
-		animation: none;
-	}
-
-	.home-menu-panel {
-		animation: none;
-	}
-
-	.home-menu-arrow {
-		transition: none;
-	}
-}
-
-.home-nav-row {
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-	gap: 1.5rem;
-	align-items: center;
-	height: calc(var(--home-nav-height) - 2rem);
-	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
-		max(var(--home-gutter), env(safe-area-inset-right));
-}
-
-.home-nav.is-past-hero .home-nav-ticker {
-	height: 0;
-}
-
-.home-nav.is-compact .home-nav-row {
-	height: var(--home-nav-compact);
-}
-
-.home-brand {
-	display: inline-flex;
-	gap: 0.6rem;
-	align-items: center;
-	min-height: 2.75rem;
-	color: inherit;
-	text-decoration: none;
-}
-
-.home-brand-mark {
-	display: block;
-	width: auto;
-	height: 2.75rem;
-}
-
-.home-brand-name {
-	display: block;
-	width: clamp(9rem, 14vw, 12rem);
-	height: auto;
-}
-
-.home-nav-links {
-	display: flex;
-	gap: 1.5rem;
-	font-size: 0.75rem;
-}
-
-.home-nav-links a {
-	display: inline-flex;
-	align-items: center;
-	min-height: 2.75rem;
-	text-decoration: none;
-}
-
-.home-nav-links a:hover {
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.4rem;
-}
-
-/* Unlayered, so this outranks the component's Tailwind aria-current utility. */
-.home-nav-links a[aria-current="page"] {
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.4rem;
-}
-
-.home-nav-cta {
-	display: inline-flex;
-	gap: 0.6rem;
-	align-items: center;
-	justify-self: end;
-	min-height: 2.75rem;
-	padding: 0.8rem 1.5rem;
-	font-size: 0.6875rem;
-	font-weight: 600;
-	color: var(--background);
-	text-transform: uppercase;
-	letter-spacing: 0.14em;
-	text-decoration: none;
-	background: var(--foreground);
-	transition: background-color 0.2s var(--home-ease);
-}
-
-.home-nav-cta svg {
-	flex: none;
-}
-
-.home-nav-cta:hover {
-	background: color-mix(in oklch, var(--foreground) 84%, var(--background));
-}
-
-.home-menu {
-	display: none;
-}
-
-.home-menu summary {
-	display: inline-flex;
-	gap: 0.45rem;
-	align-items: center;
-	min-height: 2.75rem;
-	font-size: 0.625rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.18em;
-	cursor: pointer;
-	list-style: none;
-}
-
-.home-menu summary::-webkit-details-marker {
-	display: none;
-}
-
-.home-menu-arrow {
-	width: 0.625rem;
-	height: 0.625rem;
-	fill: currentColor;
-	transition: transform 0.3s var(--home-ease);
-}
-
-.home-menu[open] .home-menu-arrow {
-	transform: rotate(90deg);
-}
-
-@keyframes home-menu-in {
-	from {
-		opacity: 0;
-		transform: translateY(-0.75rem);
-	}
-}
-
-.home-section {
-	padding-block: clamp(3rem, 7vw, 5.5rem);
-	padding-inline: max(
-		var(--home-gutter),
-		env(safe-area-inset-left),
-		env(safe-area-inset-right)
-	);
-	scroll-margin-top: calc(var(--home-nav-compact) + 0.75rem);
-}
-
-.home-section-head {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	align-items: baseline;
-	justify-content: space-between;
-	margin-bottom: 2rem;
-}
-
-.home-section-head h2,
-.home-display {
-	max-width: 16ch;
-	font-family: var(--font-heading);
-	font-weight: 500;
-	line-height: 1.08;
-	letter-spacing: -0.025em;
-}
-
-.home-kicker-link {
-	display: inline-flex;
-	align-items: center;
-	min-height: 2.75rem;
-	font-size: 0.875rem;
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-decoration-color: var(--foreground);
-	text-underline-offset: 0.3rem;
-}
-
-@media (hover: hover) and (pointer: fine) {
-	.home-kicker-link:hover {
-		text-decoration-thickness: 2px;
-	}
-}
-
-@media (hover: none) {
-	.home-kicker-link:active {
-		text-decoration-thickness: 2px;
-	}
-}
+/* Home-only sections, loaded by the Home route. */
 
 .home-hero {
 	--home-origin-x: 26%;
@@ -485,22 +172,10 @@ html.lenis:has(.home-page) {
 	text-wrap: pretty;
 }
 
-.home-hero-actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.55rem;
-	align-items: center;
-}
-.home-page .home-hero-secondary {
-	padding-inline: 0;
-	color: var(--foreground);
-}
-
 @media (max-width: 44rem) {
 	.home-hero {
 		--home-origin-x: 50%;
 	}
-
 	.home-hero-card {
 		margin-right: max(var(--home-gutter), env(safe-area-inset-right));
 	}
@@ -531,25 +206,6 @@ html.lenis:has(.home-page) {
 		--hero-gap: clamp(0.65rem, 1.4vh, 1rem);
 		padding: clamp(1rem, 2.4vh, 1.5rem);
 		margin-bottom: max(0.9rem, env(safe-area-inset-bottom));
-	}
-}
-
-@media (pointer: coarse) {
-	.home-hero-actions a {
-		min-height: 2.75rem;
-	}
-}
-
-@keyframes home-rise {
-	from {
-		opacity: 0.001;
-		transform: translateY(0.45em);
-		clip-path: inset(0 0 100% 0);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-		clip-path: inset(0 0 0 0);
 	}
 }
 
@@ -587,11 +243,6 @@ html.lenis:has(.home-page) {
 	to {
 		opacity: 1;
 	}
-}
-
-.home-muted {
-	font-size: 0.8rem;
-	color: var(--muted-foreground);
 }
 
 .home-projects {
@@ -740,41 +391,6 @@ html.lenis:has(.home-page) {
 	color: var(--muted-foreground);
 }
 
-.home-about {
-	color: var(--foreground);
-	background: color-mix(in oklch, var(--muted) 70%, var(--background));
-}
-
-.home-about-grid {
-	display: grid;
-	grid-template-columns: 0.9fr 1.2fr;
-	gap: clamp(1.5rem, 5vw, 4rem);
-	align-items: stretch;
-}
-
-.home-about-grid h2 {
-	max-width: 16ch;
-	margin: 0 0 1.5rem;
-	font-family: var(--font-heading);
-	font-size: clamp(2.4rem, 5vw, 4.2rem);
-	font-weight: 500;
-	line-height: 1.08;
-	letter-spacing: -0.025em;
-	text-wrap: balance;
-}
-
-.home-about-copy {
-	align-self: center;
-	padding-block: 0.5rem;
-}
-
-.home-about-copy p {
-	max-width: 65ch;
-	margin: 0 0 1.5rem;
-	line-height: 1.7;
-	color: var(--muted-foreground);
-}
-
 .home-photo {
 	display: block;
 	width: 100%;
@@ -786,10 +402,6 @@ html.lenis:has(.home-page) {
 	min-height: 16rem;
 	overflow: hidden;
 	background: var(--muted);
-}
-
-.home-about .home-photo-frame {
-	min-height: clamp(18rem, 30vw, 27rem);
 }
 
 .home-placeholder {
@@ -919,11 +531,9 @@ html.lenis:has(.home-page) {
 		grid-template-columns: 1fr;
 		gap: 1.5rem;
 	}
-
 	.home-services-rail {
 		position: static;
 	}
-
 	.home-service-band {
 		aspect-ratio: 16 / 9;
 	}
@@ -1417,6 +1027,7 @@ html.lenis:has(.home-page) {
 	padding: 1.35rem 1.4rem var(--client-control-rail);
 	overflow: hidden;
 }
+
 .home-client-open {
 	position: absolute;
 	inset: 0;
@@ -1627,573 +1238,6 @@ html.lenis:has(.home-page) {
 	border-radius: 999px;
 }
 
-.home-enquiry {
-	--eq-meta: clamp(0.875rem, 0.82rem + 0.2vw, 0.9375rem);
-	--eq-body: clamp(1rem, 0.94rem + 0.22vw, 1.0625rem);
-	--eq-sub: clamp(1.5rem, 1.2rem + 0.85vw, 1.875rem);
-	--eq-display: clamp(2.25rem, 1.45rem + 2.15vw, 3.75rem);
-	font-size: var(--eq-body);
-	color: var(--foreground);
-	caret-color: var(--foreground);
-	background: var(--background);
-}
-
-.home-enquiry ::selection {
-	color: var(--primary-foreground);
-	background: var(--primary);
-}
-
-.home-enquiry-title {
-	max-width: min(16ch, 100%);
-	padding-bottom: 0.85rem;
-	margin: 0 0 1.35rem;
-	font-family: var(--font-heading);
-	font-size: var(--eq-display);
-	font-weight: 500;
-	line-height: 1.02;
-	letter-spacing: -0.03em;
-	text-wrap: balance;
-	border-bottom: 1px solid var(--border);
-}
-
-.home-enquiry-invite > h3 {
-	max-width: 18ch;
-	margin: 0;
-	font-family: var(--font-heading);
-	font-size: var(--eq-sub);
-	font-weight: 500;
-	line-height: 1.15;
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-}
-
-.home-enquiry-invite > h3 + p {
-	max-width: 36ch;
-	margin: 0.85rem 0 0;
-	font-size: var(--eq-body);
-	line-height: 1.5;
-}
-
-.home-enquiry-invite > .home-muted {
-	margin-top: 1.5rem;
-}
-
-.home-enquiry .home-enquiry-button {
-	width: min(100%, 16.5rem);
-	min-width: 0;
-	height: auto;
-	min-height: 2.75rem;
-	padding: 0.7rem 1.25rem;
-	font-size: var(--eq-body);
-	font-weight: 500;
-	line-height: 1.3;
-	text-align: center;
-	text-wrap: balance;
-	white-space: normal;
-}
-
-.home-enquiry input:-webkit-autofill,
-.home-enquiry textarea:-webkit-autofill {
-	-webkit-text-fill-color: var(--foreground);
-	caret-color: var(--foreground);
-	box-shadow: 0 0 0 1000px var(--background) inset;
-}
-
-.home-enquiry input,
-.home-enquiry textarea,
-.home-enquiry [data-slot="select-trigger"] {
-	height: auto;
-	min-height: 2.75rem;
-	font-size: var(--eq-body);
-	line-height: 1.4;
-}
-
-.home-enquiry textarea {
-	min-height: 7.5rem;
-}
-
-.home-enquiry input::placeholder,
-.home-enquiry textarea::placeholder {
-	color: var(--muted-foreground);
-	opacity: 1;
-}
-
-.home-enquiry .home-muted,
-.home-enquiry [data-slot="field-description"],
-.home-enquiry [aria-live] {
-	max-width: 42ch;
-	font-size: var(--eq-meta);
-	line-height: 1.5;
-	color: var(--muted-foreground);
-}
-
-.home-enquiry form > .home-enquiry-button {
-	margin-top: 1.15rem;
-}
-
-.home-enquiry .home-enquiry-note {
-	position: relative;
-	padding-bottom: 0.65rem;
-	margin-top: 0.85rem;
-	color: var(--foreground);
-}
-
-.home-enquiry .home-enquiry-note::after {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 4.5rem;
-	height: 1px;
-	content: "";
-	background: var(--foreground);
-	transform: scaleX(1);
-	transform-origin: left center;
-	animation: home-enquiry-mark 280ms var(--home-ease);
-}
-
-@keyframes home-enquiry-mark {
-	from {
-		transform: scaleX(0);
-	}
-
-	to {
-		transform: scaleX(1);
-	}
-}
-
-.home-enquiry-grid {
-	display: grid;
-	grid-template-columns: 0.8fr 1.2fr;
-	gap: clamp(1.5rem, 5vw, 4rem);
-	align-items: start;
-}
-
-.home-form-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1.35rem 1.75rem;
-}
-
-.home-form-grid .home-full {
-	grid-column: 1 / -1;
-}
-
-.home-footer {
-	/* Label and metadata roles sit a step below the 1rem body so weight alone does not separate them. */
-	--ft-label: 0.75rem;
-	--ft-meta: 0.8125rem;
-	--ft-bottom: max(1.75rem, env(safe-area-inset-bottom));
-	/* Content stops growing past this; the plan keeps bleeding full width behind it. */
-	--ft-max: 88rem;
-	position: relative;
-	padding-block: clamp(3rem, 6vw, 6rem) var(--ft-bottom);
-	padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
-		max(var(--home-gutter), env(safe-area-inset-right));
-	overflow: hidden;
-	background: var(--card);
-	isolation: isolate;
-}
-
-.home-footer-proof,
-.home-footer-grid,
-.home-legal {
-	max-width: var(--ft-max);
-	margin-inline: auto;
-}
-
-.home-footer-backdrop {
-	position: absolute;
-	top: -3rem;
-	right: -8%;
-	z-index: -1;
-	width: clamp(60rem, 108vw, 112rem);
-	pointer-events: none;
-	user-select: none;
-	mask-image: linear-gradient(110deg, transparent 8%, #000 70%);
-	animation: home-footer-drift 38s ease-in-out infinite alternate;
-}
-
-@keyframes home-footer-drift {
-	from {
-		transform: translate3d(0, 0, 0);
-	}
-
-	to {
-		transform: translate3d(-1.5%, 1%, 0);
-	}
-}
-
-.home-footer-plan {
-	transform: translate3d(0, 0, 0);
-}
-
-/* Drafting crosshair: a hairline cross plus the plan coordinate under it. */
-.home-footer-crosshair {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	width: 0;
-	height: 0;
-	color: var(--primary);
-	pointer-events: none;
-	opacity: 0;
-	transition: opacity 220ms ease-out;
-}
-
-.home-footer-crosshair::before,
-.home-footer-crosshair::after {
-	position: absolute;
-	content: "";
-	background: currentColor;
-	opacity: 0.55;
-}
-
-.home-footer-crosshair::before {
-	top: 0;
-	left: -1.5rem;
-	width: 3rem;
-	height: 1px;
-}
-
-.home-footer-crosshair::after {
-	top: -1.5rem;
-	left: 0;
-	width: 1px;
-	height: 3rem;
-}
-
-.home-footer-coords {
-	position: absolute;
-	top: 0.5rem;
-	left: 0.75rem;
-	font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-	font-size: 0.625rem;
-	font-variant-numeric: tabular-nums;
-	letter-spacing: 0.16em;
-	white-space: nowrap;
-}
-
-.home-footer-blueprint {
-	display: block;
-	width: 100%;
-	height: auto;
-	stroke: currentColor;
-	stroke-linecap: square;
-	stroke-linejoin: miter;
-}
-
-.home-footer-blueprint :is(path, rect, circle) {
-	vector-effect: non-scaling-stroke;
-}
-
-.home-footer-dimensions {
-	--plan-opacity: 0.1;
-	opacity: 0.1;
-	stroke-width: 0.65;
-}
-
-.home-footer-walls {
-	--plan-opacity: 0.18;
-	opacity: 0.18;
-	stroke-width: 1.15;
-}
-
-.home-footer-joinery,
-.home-footer-furniture,
-.home-footer-courtyard {
-	--plan-opacity: 0.14;
-	opacity: 0.14;
-	stroke-width: 0.85;
-}
-
-.home-footer-doors {
-	--plan-opacity: 0.18;
-	opacity: 0.18;
-	stroke-width: 0.75;
-}
-
-.home-footer-gold {
-	--plan-opacity: 0.65;
-	opacity: 0.65;
-	stroke: var(--primary);
-	stroke-width: 2;
-}
-
-/* Dash period matches the pathLength=100 normalised gold paths, so the glint loops seamlessly. */
-.home-footer-gold :is(path, circle) {
-	stroke-dasharray: 12 88;
-	animation: home-footer-trace 9s linear infinite;
-}
-
-.home-footer-gold > :nth-child(2n) {
-	animation-delay: -3s;
-}
-
-.home-footer-gold > :nth-child(3n) {
-	animation-delay: -6s;
-}
-
-@keyframes home-footer-trace {
-	from {
-		stroke-dashoffset: 100;
-	}
-
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-/* The plan resolves layer by layer as the footer enters; unsupported browsers keep the drawn plan. */
-@supports (animation-timeline: view()) {
-	@media (prefers-reduced-motion: no-preference) {
-		.home-footer {
-			view-timeline-name: --home-footer-plan;
-			view-timeline-axis: block;
-		}
-
-		.home-footer-dimensions {
-			--plan-range: entry 0% entry 10%;
-		}
-
-		.home-footer-walls {
-			--plan-range: entry 8% entry 23%;
-		}
-
-		.home-footer-doors {
-			--plan-range: entry 20% entry 32%;
-		}
-
-		.home-footer-joinery {
-			--plan-range: entry 28% entry 42%;
-		}
-
-		.home-footer-furniture > :nth-child(-n + 12) {
-			--plan-opacity: 1;
-			--plan-range: entry 38% entry 52%;
-		}
-
-		.home-footer-furniture > :nth-child(n + 13) {
-			--plan-opacity: 1;
-			--plan-range: entry 48% entry 62%;
-		}
-
-		.home-footer-courtyard {
-			--plan-range: entry 58% entry 72%;
-		}
-
-		.home-footer-gold {
-			--plan-range: entry 68% entry 80%;
-		}
-
-		.home-footer-blueprint
-			:is(
-				.home-footer-dimensions,
-				.home-footer-walls,
-				.home-footer-doors,
-				.home-footer-joinery,
-				.home-footer-courtyard,
-				.home-footer-gold
-			),
-		.home-footer-furniture > * {
-			animation: home-plan-layer linear both;
-			animation-timeline: --home-footer-plan;
-			animation-range: var(--plan-range, entry 0% entry 100%);
-		}
-	}
-}
-
-@keyframes home-plan-layer {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: var(--plan-opacity, 1);
-	}
-}
-
-.home-footer-proof {
-	padding-bottom: 3rem;
-	margin-bottom: 3rem;
-	border-bottom: 1px solid var(--border);
-}
-
-.home-footer-identity {
-	display: grid;
-	gap: 1rem;
-}
-
-.home-footer-logo {
-	display: block;
-	width: min(100%, 24rem);
-}
-
-.home-footer-logo img {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-.home-footer-blurb {
-	max-width: 40ch;
-	margin: 0;
-	line-height: 1.45;
-	text-wrap: pretty;
-}
-
-.home-footer-statement {
-	max-width: 16ch;
-	margin: 0.35rem 0 0;
-	font-family: var(--font-heading);
-	font-size: clamp(1.35rem, 2vw, 1.75rem);
-	font-weight: 500;
-	line-height: 1.12;
-	letter-spacing: -0.015em;
-	text-wrap: balance;
-}
-.home-footer-grid {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 2.5rem 3rem;
-	align-items: start;
-}
-
-.home-footer-label {
-	margin: 0 0 0.75rem;
-	font-size: var(--ft-label);
-	font-weight: 500;
-	color: var(--muted-foreground);
-	letter-spacing: 0.12em;
-}
-
-.home-footer-grid a:not(.home-footer-action) {
-	text-decoration: underline;
-	text-underline-offset: 0.25rem;
-}
-
-.home-footer-links,
-.home-footer-facts {
-	padding: 0;
-	margin: 0.35rem 0 0;
-	list-style: none;
-}
-
-.home-footer-links {
-	display: flex;
-	flex-direction: column;
-	/* 44px rows centre 24px text; lift the list so the first link shares the facts column baseline. */
-	margin-top: calc((1.5rem - 2.75rem) / 2);
-}
-
-.home-footer-facts {
-	display: grid;
-	gap: 0.35rem;
-}
-
-.home-footer-links a,
-.home-footer-action {
-	display: flex;
-	align-items: center;
-	min-height: 2.75rem;
-}
-
-.home-footer-action {
-	gap: 0.75rem;
-	width: fit-content;
-	padding: 0 0.75rem;
-	margin-top: 1.25rem;
-	font-size: 0.9375rem;
-	font-weight: 500;
-	line-height: 1.3;
-	color: var(--primary-foreground);
-	background: var(--primary);
-}
-
-.home-footer-action:hover {
-	background: color-mix(in oklch, var(--primary) 85%, var(--card));
-}
-
-.home-legal {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.25rem 2rem;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 1rem;
-	margin-top: 3rem;
-	font-size: var(--ft-meta);
-	line-height: 1.5;
-	color: var(--muted-foreground);
-	letter-spacing: 0.005em;
-	border-top: 1px solid var(--border);
-	isolation: isolate;
-}
-
-.home-legal::before {
-	position: absolute;
-	inset: 0 -100vw calc(-1 * var(--ft-bottom));
-	z-index: -1;
-	content: "";
-	background: var(--card);
-}
-
-.home-legal-links {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0 1.4rem;
-}
-
-.home-legal-links a {
-	display: inline-flex;
-	align-items: center;
-	min-height: 2.75rem;
-}
-
-@media (max-width: 64rem) {
-	/* Tighter gutter keeps the contact column wide enough for the enquiry button. */
-	.home-footer .home-footer-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 2.5rem 2rem;
-	}
-}
-
-@media (max-width: 47.99rem) {
-	.home-footer-backdrop {
-		top: auto;
-		right: -18rem;
-		bottom: 0;
-		width: 70rem;
-		mask-image: linear-gradient(90deg, transparent, #000);
-	}
-
-	/* Explore sizes to its longest link so Contact keeps the room the enquiry button needs. */
-	.home-footer .home-footer-grid {
-		grid-template-columns: max-content minmax(0, 1fr);
-		gap: 2.5rem 1.5rem;
-	}
-
-	.home-footer-grid > :last-child {
-		grid-column: 1 / -1;
-	}
-}
-
-@media (max-width: 23rem) {
-	.home-footer .home-footer-grid {
-		grid-template-columns: 1fr;
-		gap: 2rem;
-	}
-}
-
-/* Narrow columns cannot hold the label and the arrow, so the button takes the row. */
-@media (max-width: 26rem) {
-	.home-footer-action {
-		justify-content: space-between;
-		width: 100%;
-	}
-}
-
 @media (min-width: 43rem) and (max-width: 52.875rem) {
 	.home-client-track {
 		--client-peer-width: 7.5rem;
@@ -2206,26 +1250,15 @@ html.lenis:has(.home-page) {
 	.home-client-controls .home-client-step {
 		display: none;
 	}
-
 	.home-testimonials {
 		min-height: 38rem;
 	}
-
-	.home-project-browser,
-	.home-about-grid,
-	.home-story-body,
-	.home-enquiry-grid {
-		grid-template-columns: 1fr;
-	}
-
 	.home-project-index button:hover strong {
 		transform: none;
 	}
-
 	.home-project-story {
 		display: contents;
 	}
-
 	.home-project-feature {
 		grid-template-areas:
 			"lead"
@@ -2233,26 +1266,21 @@ html.lenis:has(.home-page) {
 			"copy";
 		grid-template-columns: 1fr;
 	}
-
 	.home-project-lead {
 		grid-area: lead;
 	}
-
 	.home-project-preview {
 		grid-area: preview;
 		justify-self: start;
 		width: min(100%, 22rem);
 		height: 13.5rem;
 	}
-
 	.home-project-copy {
 		grid-area: copy;
 	}
-
 	.home-project-index {
 		grid-template-columns: 1fr;
 	}
-
 	.home-project-index button,
 	.home-project-index button:last-of-type,
 	.home-project-index button:not(:first-of-type) {
@@ -2260,25 +1288,20 @@ html.lenis:has(.home-page) {
 		border-right: 0;
 		border-bottom: 1px solid var(--border);
 	}
-
 	.home-trust {
 		display: block;
 	}
-
 	.home-trust > div + div {
 		width: auto;
 		margin-top: 1.25rem;
 	}
-
 	.home-craft-bento {
 		grid-template-rows: 10.5rem 10.5rem 11rem;
 		grid-template-columns: 1.2fr 1fr;
 	}
-
 	.home-craft-workshop {
 		grid-row: 1 / 3;
 	}
-
 	.home-craft-finished {
 		grid-row: 3;
 		grid-column: 1 / 3;
@@ -2286,82 +1309,14 @@ html.lenis:has(.home-page) {
 }
 
 @media (max-width: 60rem) {
-	.home-nav-links,
-	.home-nav-row > .home-nav-cta {
-		display: none;
-	}
-
-	.home-nav-row {
-		gap: 0.75rem;
-	}
-
-	.home-brand {
-		gap: 0.45rem;
-	}
-
-	.home-brand-mark {
-		height: 2.5rem;
-	}
-
-	.home-brand-name {
-		width: 9rem;
-	}
-
-	.home-menu {
-		display: block;
-		grid-column: 3;
-		justify-self: end;
-	}
-
-	.home-menu[open] .home-menu-panel {
-		position: absolute;
-		top: 100%;
-		right: 0;
-		left: 0;
-		z-index: 2;
-		display: flex;
-		flex-direction: column;
-		padding-block: 0.25rem max(1.25rem, env(safe-area-inset-bottom));
-		padding-inline: max(var(--home-gutter), env(safe-area-inset-left))
-			max(var(--home-gutter), env(safe-area-inset-right));
-		background: var(--card);
-		border-bottom: 1px solid var(--border);
-		animation: home-menu-in 0.35s var(--home-ease);
-	}
-
-	.home-menu-panel > a:not(.home-menu-cta) {
-		display: flex;
-		align-items: center;
-		min-height: 3.75rem;
-		font-family: var(--font-heading);
-		font-size: 1.75rem;
-		font-weight: 500;
-		line-height: 1.1;
-		text-decoration: none;
-		border-bottom: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
-	}
-
-	.home-menu-panel > a:not(.home-menu-cta):hover {
-		text-decoration: underline;
-		text-underline-offset: 0.35rem;
-	}
-
-	.home-menu-cta {
-		justify-content: space-between;
-		width: 100%;
-		margin-top: 1.5rem;
-	}
-
 	.home-craft-bento {
 		grid-template-rows: 14rem 11rem 12rem;
 		grid-template-columns: 1fr 1fr;
 	}
-
 	.home-craft-workshop {
 		grid-row: 1;
 		grid-column: 1 / 3;
 	}
-
 	.home-testimonials {
 		min-height: 100svh;
 		padding-top: 1.5rem;
@@ -2369,76 +1324,40 @@ html.lenis:has(.home-page) {
 		padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 		padding-left: max(var(--home-gutter), env(safe-area-inset-left));
 	}
-
 	.home-testimonials h2 {
 		font-size: clamp(2.15rem, 11vw, 3.25rem);
 	}
-
 	.home-testimonial-lede {
 		font-size: 1rem;
 	}
-
 	.home-client-quote {
 		font-size: clamp(1.2rem, 4.8vw, 1.55rem);
 	}
-
 	.home-client-card.is-active {
 		padding: 1.15rem 1.1rem 1rem;
 	}
-
 	.home-client-controls {
 		flex-wrap: nowrap;
 		gap: 0.35rem;
 		padding-top: 1rem;
 	}
-
 	.home-client-anchored-controls .home-client-controls {
 		padding-top: 0.65rem;
 	}
-
-	.home-form-grid {
-		grid-template-columns: 1fr;
-	}
-
 	.home-story-stage {
 		gap: 0.75rem;
 	}
-
 	.home-scene {
 		height: calc(20.5rem * 0.95);
 	}
-
 	.home-story-nav {
 		grid-template-columns: 1fr;
 	}
-
 	.home-story-nav button:not([aria-current="step"]) {
 		display: none;
 	}
-
 	.home-story-nav-label {
 		text-wrap: nowrap;
-	}
-}
-
-@media (max-height: 34rem) {
-	.home-page {
-		--home-nav-height: var(--home-nav-compact);
-	}
-
-	.home-nav-ticker {
-		display: none;
-	}
-
-	.home-nav-row,
-	.home-nav.is-compact .home-nav-row {
-		height: var(--home-nav-compact);
-	}
-
-	.home-menu[open] .home-menu-panel {
-		max-height: calc(100svh - var(--home-nav-compact));
-		overflow-y: auto;
-		overscroll-behavior: contain;
 	}
 }
 
@@ -2446,12 +1365,10 @@ html.lenis:has(.home-page) {
 	.home-testimonials {
 		min-height: max(40rem, calc(100svh - var(--home-nav-compact)));
 	}
-
 	.home-client-viewport {
 		margin-right: calc(-1 * var(--home-gutter));
 		overflow-x: clip;
 	}
-
 	.home-client-track {
 		--client-rail-inset: 1.05rem;
 		width: calc(100% + var(--client-peer-width) + var(--client-peer-gap));
@@ -2460,11 +1377,9 @@ html.lenis:has(.home-page) {
 		overflow: visible;
 		touch-action: pan-y;
 	}
-
 	.home-client-ghost {
 		display: none;
 	}
-
 	.home-client-slot.is-active {
 		flex: none;
 		width: calc(
@@ -2477,21 +1392,17 @@ html.lenis:has(.home-page) {
 		max-width: none;
 		height: auto;
 	}
-
 	.home-client-card.is-active {
 		height: auto;
 		padding: 0;
 	}
-
 	.home-client-active-body {
 		padding: 1.15rem 1.15rem var(--client-control-rail);
 	}
-
 	.home-client-card.is-active .home-client-active-body {
 		position: relative;
 		height: auto;
 	}
-
 	.home-client-anchored-controls {
 		bottom: 0;
 		padding: 0 1.15rem 1.05rem;
@@ -2503,29 +1414,15 @@ html.lenis:has(.home-page) {
 		height: 100svh;
 		overflow-y: auto;
 	}
-
 	.home-scene {
 		height: 11rem;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	html:has(.home-page) {
-		scroll-behavior: auto;
-	}
-
-	.home-page *,
-	.home-page *::before,
-	.home-page *::after {
-		animation: none !important;
-		transition: none !important;
-		scroll-behavior: auto !important;
-	}
-
 	.home-story-runway {
 		height: auto !important;
 	}
-
 	.home-story-stage {
 		position: relative;
 		top: auto;
@@ -2535,13 +1432,12 @@ html.lenis:has(.home-page) {
 	}
 }
 
-/* Selected Projects: approved text-and-photo split. */
-
 .home-projects {
 	padding-block: calc(clamp(3rem, 6vw, 5rem) * 1);
 	color: var(--foreground);
 	background: var(--card);
 }
+
 .home-projects .home-projects-heading {
 	display: flex;
 	flex-wrap: wrap;
@@ -2550,12 +1446,14 @@ html.lenis:has(.home-page) {
 	justify-content: space-between;
 	margin-bottom: calc(2rem * 1);
 }
+
 .home-projects .home-projects-heading h2 {
 	margin: 0;
 	font: 500 clamp(2.5rem, 5vw, 4.5rem) / 1.02 var(--font-heading);
 	letter-spacing: -0.025em;
 	text-wrap: balance;
 }
+
 .home-projects .home-projects-title {
 	max-width: 18ch;
 	margin: 0;
@@ -2564,24 +1462,28 @@ html.lenis:has(.home-page) {
 	text-wrap: balance;
 	overflow-wrap: anywhere;
 }
+
 .home-projects .home-projects-photo {
 	aspect-ratio: 1.6;
 	margin: 0;
 	overflow: hidden;
 	background: var(--muted);
 }
+
 .home-projects .home-projects-photo img {
 	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
+
 .home-projects .home-projects-meta {
 	margin: 0.75rem 0 0;
 	font-size: 0.875rem;
 	line-height: 1.5;
 	color: var(--muted-foreground);
 }
+
 .home-projects .home-projects-details {
 	display: grid;
 	gap: calc(1rem * 1);
@@ -2589,20 +1491,24 @@ html.lenis:has(.home-page) {
 	justify-items: start;
 	min-width: 0;
 }
+
 .home-projects .home-projects-details p {
 	max-width: 65ch;
 	margin: 0;
 	line-height: 1.6;
 }
+
 .home-projects .home-projects-details .home-projects-placeholder {
 	font-size: 0.8125rem;
 	color: var(--muted-foreground);
 }
+
 .home-projects .home-projects-choices {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: calc(1.5rem * 1);
 }
+
 .home-projects .home-projects-choice {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
@@ -2619,10 +1525,12 @@ html.lenis:has(.home-page) {
 	border: 0;
 	border-top: 1px solid var(--border);
 }
+
 .home-projects .home-projects-kind {
 	display: block;
 	font: 500 1.5rem / 1.15 var(--font-heading);
 }
+
 .home-projects .home-projects-choice small {
 	display: block;
 	margin-top: 0.5rem;
@@ -2630,6 +1538,7 @@ html.lenis:has(.home-page) {
 	line-height: 1.5;
 	overflow-wrap: anywhere;
 }
+
 .home-projects .home-projects-select {
 	display: grid;
 	place-items: center;
@@ -2639,13 +1548,16 @@ html.lenis:has(.home-page) {
 	font-size: 0.75rem;
 	border: 1px solid var(--border);
 }
+
 .home-projects .home-projects-choice[aria-pressed="true"],
 .home-projects .home-projects-choice:hover {
 	color: var(--foreground);
 }
+
 .home-projects .home-projects-choice[aria-pressed="true"] {
 	border-top-color: var(--foreground);
 }
+
 .home-projects
 	.home-projects-choice[aria-pressed="true"]
 	.home-projects-select {
@@ -2658,11 +1570,13 @@ html.lenis:has(.home-page) {
 	font-size: 0.8125rem;
 	color: var(--muted-foreground);
 }
+
 .home-projects button:focus-visible,
 .home-projects a:focus-visible {
 	outline: 2px solid var(--ring);
 	outline-offset: 5px;
 }
+
 @media (max-width: 44rem) {
 	.home-projects .home-projects-choices {
 		grid-template-columns: 1fr;
@@ -2677,6 +1591,7 @@ html.lenis:has(.home-page) {
 		white-space: normal;
 	}
 }
+
 .home-projects .home-projects-split {
 	display: grid;
 	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
@@ -2684,17 +1599,17 @@ html.lenis:has(.home-page) {
 	align-items: center;
 	padding-bottom: calc(2.5rem * 1);
 }
+
 .home-projects .home-projects-story {
 	display: grid;
 	gap: calc(2rem * 1);
 }
+
 @media (max-width: 64rem) {
 	.home-projects .home-projects-split {
 		grid-template-columns: 1fr;
 	}
 }
-
-/* Projects: cinematic selected-project feature accepted in Impeccable Live. */
 
 .home-projects-cinema {
 	padding-block: calc(clamp(3rem, 6vw, 5rem) * 1.25);
@@ -2703,6 +1618,7 @@ html.lenis:has(.home-page) {
 	color: var(--foreground);
 	background: var(--card);
 }
+
 .home-projects-cinema .home-cinema-cover {
 	position: relative;
 	display: flex;
@@ -2712,6 +1628,7 @@ html.lenis:has(.home-page) {
 	background: var(--secondary);
 	isolation: isolate;
 }
+
 .home-projects-cinema .home-cinema-img {
 	position: absolute;
 	inset: 0;
@@ -2720,6 +1637,7 @@ html.lenis:has(.home-page) {
 	height: 100%;
 	object-fit: cover;
 }
+
 .home-projects-cinema .home-cinema-cover::after {
 	position: absolute;
 	inset: 0;
@@ -2732,16 +1650,19 @@ html.lenis:has(.home-page) {
 		transparent 78%
 	);
 }
+
 .home-projects-cinema .home-cinema-caption {
 	padding: clamp(1.75rem, 4vw, 3.5rem);
 	color: var(--card);
 }
+
 .home-projects-cinema .home-cinema-caption h2 {
 	margin: 0 0 1.25rem;
 	font: 400 0.9375rem / 1.4 var(--font-sans);
 	color: color-mix(in oklab, var(--card) 82%, transparent);
 	letter-spacing: 0.02em;
 }
+
 .home-projects-cinema .home-cinema-title {
 	max-width: 16ch;
 	margin: 0;
@@ -2749,11 +1670,13 @@ html.lenis:has(.home-page) {
 	letter-spacing: -0.03em;
 	text-wrap: balance;
 }
+
 .home-projects-cinema .home-cinema-meta {
 	margin: 1rem 0 0;
 	font-size: 0.9375rem;
 	color: color-mix(in oklab, var(--card) 84%, transparent);
 }
+
 .home-projects-cinema .home-cinema-foot {
 	display: grid;
 	grid-template-columns: minmax(0, 1.2fr) auto;
@@ -2761,6 +1684,7 @@ html.lenis:has(.home-page) {
 	align-items: end;
 	margin-top: 1.75rem;
 }
+
 .home-projects-cinema .home-cinema-scope {
 	max-width: 62ch;
 	margin: 0;
@@ -2768,12 +1692,14 @@ html.lenis:has(.home-page) {
 	line-height: 1.7;
 	text-wrap: pretty;
 }
+
 .home-projects-cinema .home-cinema-actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75rem 1.5rem;
 	align-items: center;
 }
+
 .home-projects-cinema .home-cinema-alt {
 	display: inline-flex;
 	align-items: center;
@@ -2785,13 +1711,16 @@ html.lenis:has(.home-page) {
 	text-decoration-color: var(--primary);
 	text-underline-offset: 0.28rem;
 }
+
 .home-projects-cinema .home-cinema-alt:hover {
 	color: var(--muted-foreground);
 }
+
 .home-projects-cinema a:focus-visible {
 	outline: 2px solid var(--ring);
 	outline-offset: 5px;
 }
+
 @media (max-width: 48rem) {
 	.home-projects-cinema .home-cinema-foot {
 		grid-template-columns: 1fr;
@@ -2799,316 +1728,20 @@ html.lenis:has(.home-page) {
 	}
 }
 
-/* About: accepted centered reading layout. */
-.about-quiet {
-	position: relative;
-	padding-block: clamp(3.5rem, 7vw, 6rem);
-	overflow: hidden;
-	isolation: isolate;
-}
-.home-about.about-quiet {
-	color: var(--secondary-foreground);
-	background: var(--home-warm-aubergine);
-}
-.home-about-backdrop {
-	position: absolute;
-	inset: -24% -20%;
-	z-index: -2;
-	color: var(--secondary-foreground);
-	pointer-events: none;
-	user-select: none;
-	animation: home-about-drift 44s ease-in-out infinite alternate;
-}
-
-@keyframes home-about-drift {
-	from {
-		transform: translate3d(0, 0, 0);
-	}
-
-	to {
-		transform: translate3d(16px, -12px, 0);
-	}
-}
-
-.home-about-plan {
-	width: 100%;
-	height: 100%;
-	transform: translate3d(0, 0, 0);
-}
-
-/* Studio drafting crosshair: hairline cross with coordinate and station HUD. */
-.home-about-crosshair {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	color: var(--primary);
-	pointer-events: none;
-	user-select: none;
-	opacity: 0;
-	transition: opacity 0.25s ease;
-}
-
-.home-about-crosshair::before,
-.home-about-crosshair::after {
-	position: absolute;
-	content: "";
-	background: currentColor;
-	opacity: 0.45;
-}
-
-.home-about-crosshair::before {
-	top: 0;
-	left: -1.5rem;
-	width: 3rem;
-	height: 1px;
-}
-
-.home-about-crosshair::after {
-	top: -1.5rem;
-	left: 0;
-	width: 1px;
-	height: 3rem;
-}
-
-.home-about-coords {
-	position: absolute;
-	top: 0.5rem;
-	left: 0.75rem;
-	font-family: var(--font-mono, monospace);
-	font-size: 0.6875rem;
-	color: var(--primary);
-	letter-spacing: 0.08em;
-	white-space: nowrap;
-	opacity: 0.85;
-}
-.about-quiet::before {
-	position: absolute;
-	inset: 0;
-	z-index: -1;
-	pointer-events: none;
-	content: "";
-	background: color-mix(in oklch, var(--home-warm-aubergine) 88%, transparent);
-	backdrop-filter: blur(8px);
-	mask-image: radial-gradient(
-		ellipse farthest-corner at center,
-		#000 15%,
-		rgb(0 0 0 / 95%) 35%,
-		rgb(0 0 0 / 65%) 55%,
-		rgb(0 0 0 / 30%) 78%,
-		transparent 100%
-	);
-}
-.home-about-blueprint {
-	display: block;
-	width: 100%;
-	height: 100%;
-	stroke: currentColor;
-	stroke-linecap: square;
-	stroke-linejoin: miter;
-}
-.home-about-blueprint :is(path, rect, circle) {
-	vector-effect: non-scaling-stroke;
-}
-.home-about-drawing-guides {
-	--plan-opacity: 0.24;
-	opacity: 0.24;
-	stroke-width: 0.7;
-}
-.home-about-drawing-walls {
-	--plan-opacity: 0.4;
-	opacity: 0.4;
-	stroke-width: 1.1;
-}
-.home-about-drawing-furniture {
-	--plan-opacity: 0.32;
-	opacity: 0.32;
-	stroke-width: 0.85;
-}
-.home-about-drawing-accent {
-	--plan-opacity: 0.7;
-	opacity: 0.7;
-	stroke: var(--primary);
-	stroke-width: 1.5;
-}
-
-/* Normalized pathLength=100 gold elements cycle through continuous architectural tracing. */
-.home-about-drawing-accent :is(path, circle) {
-	stroke-dasharray: 14 86;
-	animation: home-about-trace 10s linear infinite;
-}
-
-.home-about-drawing-accent > :nth-child(2n) {
-	animation-delay: -2.5s;
-}
-
-.home-about-drawing-accent > :nth-child(3n) {
-	animation-delay: -5s;
-}
-
-.home-about-drawing-accent > :nth-child(4n) {
-	animation-delay: -7.5s;
-}
-
-@keyframes home-about-trace {
-	from {
-		stroke-dashoffset: 100;
-	}
-
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-/* Rotary tool / lathe fixture subtle continuous spin. */
-.home-about-spindle {
-	transform-origin: 1130px 470px;
-	animation: home-about-spindle-spin 28s linear infinite;
-}
-
-@keyframes home-about-spindle-spin {
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-@supports (animation-timeline: view()) {
-	@media (prefers-reduced-motion: no-preference) {
-		.home-about {
-			view-timeline-name: --home-about-plan;
-			view-timeline-axis: block;
-		}
-
-		.home-about-drawing-guides {
-			--plan-range: entry 0% entry 20%;
-		}
-
-		.home-about-drawing-walls {
-			--plan-range: entry 10% entry 35%;
-		}
-
-		.home-about-drawing-furniture {
-			--plan-range: entry 22% entry 50%;
-		}
-
-		.home-about-drawing-accent {
-			--plan-range: entry 36% entry 65%;
-		}
-
-		.home-about-blueprint
-			:is(
-				.home-about-drawing-guides,
-				.home-about-drawing-walls,
-				.home-about-drawing-furniture,
-				.home-about-drawing-accent
-			) {
-			animation: home-plan-layer linear both;
-			animation-timeline: --home-about-plan;
-			animation-range: var(--plan-range, entry 0% entry 100%);
-		}
-	}
-}
-.about-quiet-inner {
-	position: relative;
-	z-index: 2;
-	max-width: 48rem;
-	margin-inline: auto;
-	text-align: center;
-}
-.home-about.about-quiet h2 {
-	max-width: 21ch;
-	margin: 0 auto clamp(1.75rem, 3vw, 2.25rem);
-	font: 500 clamp(2.5rem, 4.5vw, 4rem) / 1.06 var(--font-heading);
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-}
-.home-about-heading-end {
-	display: block;
-}
-.home-about.about-quiet p {
-	max-width: 65ch;
-	margin: 0 auto;
-	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
-	line-height: 1.75;
-	color: color-mix(in oklch, var(--secondary-foreground) 82%, var(--secondary));
-	letter-spacing: 0.005em;
-	text-wrap: pretty;
-}
-.home-about.about-quiet .home-about-history {
-	max-width: 54ch;
-	margin-top: 1.5rem;
-	font-size: 1rem;
-	line-height: 1.65;
-	text-wrap: balance;
-}
-.about-quiet .home-kicker-link {
-	margin-top: 1.5rem;
-	font-weight: 500;
-	color: var(--primary);
-	letter-spacing: 0.01em;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.35em;
-}
-.about-quiet .home-kicker-link:is(:hover, :focus-visible) {
-	text-decoration-thickness: 2px;
-}
-.home-about.about-quiet :focus-visible {
-	outline-color: var(--primary);
-}
-@media (min-width: 64rem) {
-	.home-about-drawing-guides {
-		--plan-opacity: 0.36;
-		opacity: 0.36;
-	}
-	.home-about-drawing-walls {
-		--plan-opacity: 0.62;
-		opacity: 0.62;
-	}
-	.home-about-drawing-furniture {
-		--plan-opacity: 0.5;
-		opacity: 0.5;
-	}
-	.home-about-drawing-accent {
-		--plan-opacity: 0.9;
-		opacity: 0.9;
-	}
-}
-@media (max-width: 40rem) {
-	.home-about-backdrop {
-		opacity: 0.45;
-	}
-
-	.about-quiet-inner {
-		text-align: left;
-	}
-	.home-about.about-quiet h2 {
-		margin-left: 0;
-	}
-	.home-about-heading-end {
-		display: inline;
-	}
-}
-
-/* Keep the pinned story legible on laptop heights: the stage compacts before
-   the controls can fall inside its own scroll area. */
 @media (max-height: 50rem) {
 	.home-story-stage {
 		gap: 0.85rem;
 		padding-block: 1.3rem 1.1rem;
 	}
-
 	.home-story-body {
 		gap: 4%;
 	}
-
 	.home-scene {
 		height: 18rem;
 	}
-
 	.home-story-copy p {
 		margin-bottom: 0.75rem;
 	}
-
 	.home-story-copy p.home-deliverable {
 		padding-top: 0.75rem;
 	}
@@ -3119,56 +1752,44 @@ html.lenis:has(.home-page) {
 		gap: 0.6rem;
 		padding-block: 0.9rem 0.75rem;
 	}
-
 	.home-story-header h2 {
 		font-size: 1.25rem;
 	}
-
 	.home-story-body {
 		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 		gap: 4%;
 	}
-
 	.home-scene {
 		height: 11rem;
 	}
-
 	.home-story-copy {
 		padding-bottom: 0;
 	}
-
 	.home-story-copy h3 {
 		margin-block: 0.35rem 0.3rem;
 		font-size: clamp(1.4rem, 1.15rem + 1.2vw, 2rem);
 	}
-
 	.home-story-copy p,
 	.home-story-copy p.home-deliverable {
 		font-size: 0.875rem;
 		line-height: 1.45;
 	}
-
 	.home-story-copy p {
 		margin-bottom: 0.5rem;
 	}
-
 	.home-story-copy p.home-deliverable {
 		padding-top: 0.5rem;
 	}
-
 	.home-story-nav button {
 		min-height: 2.5rem;
 		padding-block: 0.6rem;
 	}
 }
 
-/* Below 40rem tall the pinned stage cannot hold a step and its controls.
-   Flow the story normally and leave every step reachable by its tab. */
 @media (max-height: 40rem) {
 	.home-story-runway {
 		height: auto !important;
 	}
-
 	.home-story-stage {
 		position: relative;
 		top: auto;
@@ -3176,11 +1797,9 @@ html.lenis:has(.home-page) {
 		max-height: none;
 		overflow: visible;
 	}
-
 	.home-story-nav {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
-
 	.home-story-nav button:not([aria-current="step"]) {
 		display: block;
 	}
@@ -3192,13 +1811,10 @@ html.lenis:has(.home-page) {
 	}
 }
 
-/* Reduced motion also removes the scroll runway; keep the step controls
-   visible so the four steps do not depend on scrolling to advance. */
 @media (prefers-reduced-motion: reduce) {
 	.home-story-nav {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
-
 	.home-story-nav button:not([aria-current="step"]) {
 		display: block;
 	}
@@ -3210,7 +1826,6 @@ html.lenis:has(.home-page) {
 	}
 }
 
-/* Wide screens show both peer cards in full; their names should not truncate. */
 @media (min-width: 64rem) {
 	.home-client-track {
 		--client-peer-width: 9.5rem;

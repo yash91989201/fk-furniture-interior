@@ -48,6 +48,7 @@ export function ServiceOfferings() {
 									<img
 										alt={offering.image.alt}
 										decoding="async"
+										fetchPriority="low"
 										height={1333}
 										loading="lazy"
 										sizes="(max-width: 63.99rem) 100vw, 40vw"

@@ -3,7 +3,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { useEffect, useState } from "react";
-
 import { About } from "@/components/home/about";
 import { Craft } from "@/components/home/craft";
 import { Enquiry } from "@/components/home/enquiry";
@@ -15,6 +14,7 @@ import { Services } from "@/components/home/services";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteNav } from "@/components/home/site-nav";
 import { usePrefersReducedMotion } from "@/hooks/use-media";
+import homeCss from "@/styles/home.css?url";
 
 const SCROLL_OPTIONS = {
 	allowNestedScroll: true,
@@ -28,6 +28,7 @@ const SCROLL_OPTIONS = {
 export const Route = createFileRoute("/")({
 	component: HomeComponent,
 	head: () => ({
+		links: [{ rel: "stylesheet", href: homeCss }],
 		meta: [
 			{ title: "FK Furniture & Interior · Furniture and interiors" },
 			{

@@ -1,8 +1,6 @@
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 import { Link } from "@tanstack/react-router";
 
-import { bandSrcSet } from "@/components/home/content";
-
 import { photos } from "./content";
 
 export function AboutHero() {
@@ -44,15 +42,16 @@ export function AboutHero() {
 				</p>
 			</div>
 			<figure className="group relative m-0 min-w-0 overflow-hidden bg-muted max-lg:aspect-[16/11]">
+				{/* 94vw selects the 1024w candidate on phones; it still exceeds 2x at 412px. */}
 				<img
 					alt={photos.foyer.alt}
 					className="block size-full object-cover object-[55%_55%] transition-transform duration-[0.8s] ease-[var(--home-ease)] [animation:about-hero-settle_1.1s_var(--home-ease)_backwards] group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:[animation:none]"
 					decoding="async"
 					fetchPriority="high"
 					height={1333}
-					sizes="(max-width: 63.99rem) 100vw, 50vw"
+					sizes="(max-width: 63.99rem) 94vw, 50vw"
 					src={photos.foyer.src}
-					srcSet={bandSrcSet(photos.foyer.src)}
+					srcSet="/home/lobby-720.webp 720w, /home/lobby-1024.webp 1024w, /home/lobby-1280.webp 1280w, /home/lobby.webp 2000w"
 					width={2000}
 				/>
 				<figcaption className="absolute bottom-4 left-4 max-w-[calc(100%-2rem)] bg-[color-mix(in_oklch,var(--card)_92%,transparent)] px-[0.7rem] py-[0.45rem] text-[length:var(--hero-meta)] text-foreground leading-[1.4] tracking-[0.01em] backdrop-blur-[6px]">

@@ -25,6 +25,7 @@ export function Manufacturing() {
 						alt={photos.fitted.alt}
 						className="block aspect-[4/5] w-full object-cover transition-transform duration-[0.8s] ease-[var(--home-ease)] group-hover:scale-[1.025] motion-reduce:transition-none"
 						decoding="async"
+						fetchPriority="low"
 						height={1333}
 						loading="lazy"
 						sizes="(max-width: 47.99rem) 100vw, (max-width: 80rem) 57vw, 46vw"
@@ -41,6 +42,7 @@ export function Manufacturing() {
 						alt={photos.restaurant.alt}
 						className="block aspect-[3/4] w-full object-cover transition-transform duration-[0.8s] ease-[var(--home-ease)] group-hover:scale-[1.025] motion-reduce:transition-none max-[47.99rem]:aspect-[16/10]"
 						decoding="async"
+						fetchPriority="low"
 						height={1333}
 						loading="lazy"
 						sizes="(max-width: 47.99rem) 100vw, (max-width: 80rem) 42vw, 30vw"

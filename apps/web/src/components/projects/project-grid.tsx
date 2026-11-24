@@ -45,6 +45,7 @@ export function ProjectGrid() {
 								<img
 									alt={project.image.alt}
 									decoding="async"
+									fetchPriority="low"
 									height={project.image.height}
 									loading="lazy"
 									sizes="(max-width: 63.99rem) 100vw, 58vw"

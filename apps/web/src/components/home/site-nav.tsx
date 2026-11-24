@@ -158,16 +158,20 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 						<img
 							alt=""
 							className="home-brand-mark"
-							height={694}
-							src="/brand/logo-mark.webp"
-							width={729}
+							fetchPriority="low"
+							height={84}
+							loading="lazy"
+							src="/brand/logo-mark-88.webp"
+							width={88}
 						/>
 						<img
 							alt=""
 							className="home-brand-name"
-							height={138}
-							src="/brand/logo-wordmark.png"
-							width={1441}
+							fetchPriority="low"
+							height={37}
+							loading="lazy"
+							src="/brand/logo-wordmark-384.webp"
+							width={384}
 						/>
 					</Link>
 					<Link className="home-nav-cta" to="/contact">

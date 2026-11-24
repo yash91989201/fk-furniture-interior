@@ -1,8 +1,6 @@
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 import { Link } from "@tanstack/react-router";
 
-import { bandSrcSet } from "@/components/home/content";
-
 import { photos } from "./content";
 
 export function ServicesHero() {
@@ -43,15 +41,16 @@ export function ServicesHero() {
 				</div>
 			</div>
 			<figure className="group m-0 mt-[clamp(2.25rem,5vw,4rem)]">
+				{/* 94vw selects the 1024w candidate on phones; it still exceeds 2x at 412px. */}
 				<img
 					alt={photos.hero.alt}
 					className="block aspect-[16/10] w-full object-cover object-[center_58%] transition-transform duration-[0.8s] ease-[var(--home-ease)] group-hover:scale-[1.015] motion-reduce:transition-none sm:aspect-[16/7]"
 					decoding="async"
 					fetchPriority="high"
 					height={1333}
-					sizes="(max-width: 63.99rem) 100vw, 92vw"
+					sizes="(max-width: 63.99rem) 94vw, 92vw"
 					src={photos.hero.src}
-					srcSet={bandSrcSet(photos.hero.src)}
+					srcSet="/home/guest-room-720.webp 720w, /home/guest-room-1024.webp 1024w, /home/guest-room-1280.webp 1280w, /home/guest-room.webp 2000w"
 					width={2000}
 				/>
 				<figcaption className="pt-[0.6rem] text-[0.75rem] text-muted-foreground leading-[1.45]">

@@ -1,5 +1,6 @@
+@import "./fonts.css";
 @import "@fk-furniture-interior/ui/globals.css";
-@import "./styles/home.css";
+@import "./styles/site.css";
 
 /* About page motion: one load reveal and one scroll-drawn rule. */
 @keyframes about-hero-settle {

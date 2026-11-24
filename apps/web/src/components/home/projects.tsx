@@ -1,7 +1,7 @@
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 import { Link } from "@tanstack/react-router";
 
-import { projects } from "./content";
+import { bandSrcSet, projects } from "./content";
 
 export function Projects() {
 	const [project] = projects;
@@ -12,10 +12,13 @@ export function Projects() {
 				<img
 					alt={`${project.name}, ${project.location}`}
 					className="home-cinema-img"
-					height={1000}
+					fetchPriority="low"
+					height={1333}
 					loading="lazy"
+					sizes="100vw"
 					src={project.image.src}
-					width={1500}
+					srcSet={bandSrcSet(project.image.src)}
+					width={2000}
 				/>
 				<div className="home-cinema-caption">
 					<h2>Selected project</h2>

@@ -49,7 +49,7 @@ export function ProjectsHero() {
 							decoding="async"
 							fetchPriority="high"
 							height={image.height}
-							sizes="(max-width: 63.99rem) 100vw, 55vw"
+							sizes="(max-width: 63.99rem) 94vw, 55vw"
 							src={image.src}
 							srcSet={image.srcSet}
 							width={image.width}

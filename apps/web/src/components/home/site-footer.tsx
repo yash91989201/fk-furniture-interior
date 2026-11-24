@@ -206,10 +206,11 @@ export function SiteFooter() {
 					>
 						<img
 							alt="FK Furniture & Interior — Designing Spaces, Creating Life"
-							height={963}
+							fetchPriority="low"
+							height={508}
 							loading="lazy"
-							src="/brand/logo-full.webp"
-							width={1457}
+							src="/brand/logo-full-768.webp"
+							width={768}
 						/>
 					</Link>
 					<p className="home-footer-blurb">

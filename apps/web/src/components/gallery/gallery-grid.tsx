@@ -76,6 +76,7 @@ export function GalleryGrid({
 									alt={work.image.alt}
 									className={`block w-full object-cover transition-transform duration-[0.7s] ease-[var(--home-ease)] group-hover:scale-[1.02] motion-reduce:transition-none ${aspects[work.emphasis ?? "standard"]}`}
 									decoding="async"
+									fetchPriority="low"
 									height={work.image.height}
 									loading="lazy"
 									sizes={work.image.sizes}

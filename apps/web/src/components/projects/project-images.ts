@@ -5,7 +5,7 @@ export interface ProjectImage {
 	caption?: string;
 	height: number;
 	src: string;
-	srcSet?: string;
+	srcSet: string;
 	width: number;
 }
 
@@ -13,15 +13,15 @@ function photo(
 	src: string,
 	alt: string,
 	caption: string,
-	options: { height?: number; variants?: boolean; width?: number } = {}
+	options: { height?: number; width?: number } = {}
 ): ProjectImage {
-	const { height = 1333, variants = true, width = 2000 } = options;
+	const { height = 1333, width = 2000 } = options;
 	return {
 		alt,
 		caption,
 		height,
 		src,
-		srcSet: variants ? bandSrcSet(src) : undefined,
+		srcSet: bandSrcSet(src),
 		width,
 	};
 }
@@ -31,12 +31,15 @@ function photo(
  * components reference this registry rather than file paths.
  */
 export const projectImages = {
-	lobbyLounge: photo(
-		"/home/guest-bath.webp",
-		"Hotel lobby with green armchairs, a sofa, brass tables and a staircase",
-		"Lobby and reception at Resort De Coracao",
-		{ variants: false }
-	),
+	lobbyLounge: {
+		...photo(
+			"/home/guest-bath.webp",
+			"Hotel lobby with green armchairs, a sofa, brass tables and a staircase",
+			"Lobby and reception at Resort De Coracao"
+		),
+		srcSet:
+			"/home/guest-bath-720.webp 720w, /home/guest-bath-1024.webp 1024w, /home/guest-bath-1280.webp 1280w, /home/guest-bath.webp 2000w",
+	},
 	guestRoomBed: photo(
 		"/home/lounge.webp",
 		"Hotel guest room with a bed, timber desk, artwork and sheer curtains",
@@ -50,13 +53,12 @@ export const projectImages = {
 	dining: photo(
 		"/home/corridor.webp",
 		"Restaurant dining room with laid tables and upholstered chairs",
-		"Dining room at Resort De Coracao",
-		{ variants: false }
+		"Dining room at Resort De Coracao"
 	),
 	exterior: photo(
 		"/home/office-building.webp",
 		"Hotel exterior against a mountain backdrop",
 		"Exterior of Resort De Coracao",
-		{ height: 1120, variants: false }
+		{ height: 1120 }
 	),
 } as const;

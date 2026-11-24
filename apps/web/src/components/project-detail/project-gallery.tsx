@@ -40,6 +40,7 @@ export function ProjectGallery({ project }: { project: Project }) {
 									index === 0 ? "aspect-[16/9]" : "aspect-[4/3]"
 								}`}
 								decoding="async"
+								fetchPriority="low"
 								height={image.height}
 								loading="lazy"
 								sizes={

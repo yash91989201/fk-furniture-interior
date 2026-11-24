@@ -1,6 +1,6 @@
 import { buttonVariants } from "@fk-furniture-interior/ui/components/button";
 
-import { photos } from "./content";
+import { bandSrcSet, photos } from "./content";
 
 export function Hero() {
 	return (
@@ -16,16 +16,21 @@ export function Hero() {
 					decoding="async"
 					fetchPriority="high"
 					height={1333}
+					sizes="100vw"
 					src={photos.lobbyLounge.src}
+					srcSet={bandSrcSet(photos.lobbyLounge.src)}
 					width={2000}
 				/>
 				<div className="home-hero-glass">
 					<img
 						alt=""
 						decoding="async"
+						fetchPriority="low"
 						height={1333}
 						loading="lazy"
+						sizes="100vw"
 						src={photos.lobbyLounge.src}
+						srcSet={bandSrcSet(photos.lobbyLounge.src)}
 						width={2000}
 					/>
 				</div>
