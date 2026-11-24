@@ -27,7 +27,7 @@ export function ServicesHero() {
 					<div className="mt-[1.5rem] flex flex-wrap items-center gap-x-5 gap-y-3">
 						<Link
 							className={buttonVariants({ className: "min-h-11" })}
-							to="/contact"
+							to="/contact/"
 						>
 							Send a brief or BOQ
 						</Link>

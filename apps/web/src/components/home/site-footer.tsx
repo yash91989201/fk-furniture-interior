@@ -15,13 +15,13 @@ const contactLink =
 
 const exploreLinks = [
 	{ hash: undefined, label: "Home", to: "/" },
-	{ hash: undefined, label: "About", to: "/about" },
-	{ hash: undefined, label: "Services", to: "/services" },
-	{ hash: undefined, label: "Projects", to: "/projects" },
-	{ hash: undefined, label: "Gallery", to: "/gallery" },
+	{ hash: undefined, label: "About", to: "/about/" },
+	{ hash: undefined, label: "Services", to: "/services/" },
+	{ hash: undefined, label: "Projects", to: "/projects/" },
+	{ hash: undefined, label: "Gallery", to: "/gallery/" },
 	{ hash: "fk-craft", label: "Craft", to: "/" },
-	{ hash: undefined, label: "FAQ", to: "/faq" },
-	{ hash: undefined, label: "Contact", to: "/contact" },
+	{ hash: undefined, label: "FAQ", to: "/faq/" },
+	{ hash: undefined, label: "Contact", to: "/contact/" },
 ] as const;
 
 // Drafting reveals nudge within these bounds; anything larger stops reading as a plan on a table.
@@ -244,12 +244,12 @@ export function SiteFooter() {
 					</p>
 					<ul aria-labelledby="footer-contact" className="home-footer-facts">
 						<li>
-							<Link className={contactLink} to="/contact">
+							<Link className={contactLink} to="/contact/">
 								Gurugram office
 							</Link>
 						</li>
 						<li>
-							<Link className={contactLink} to="/contact">
+							<Link className={contactLink} to="/contact/">
 								Goa office
 							</Link>
 						</li>
@@ -264,7 +264,7 @@ export function SiteFooter() {
 							</a>
 						</li>
 					</ul>
-					<Link className="home-footer-action" to="/contact">
+					<Link className="home-footer-action" to="/contact/">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={18} />
 					</Link>
@@ -285,10 +285,10 @@ export function SiteFooter() {
 					</span>
 				</span>
 				<nav aria-label="Legal" className="home-legal-links">
-					<Link className={contactLink} to="/privacy-policy">
+					<Link className={contactLink} to="/privacy-policy/">
 						Privacy Policy
 					</Link>
-					<Link className={contactLink} to="/terms-and-conditions">
+					<Link className={contactLink} to="/terms-and-conditions/">
 						Terms &amp; Conditions
 					</Link>
 				</nav>

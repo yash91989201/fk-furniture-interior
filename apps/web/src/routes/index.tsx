@@ -25,19 +25,34 @@ const SCROLL_OPTIONS = {
 	wheelMultiplier: 0.75,
 };
 
+import { contactEmail, gurgaonOffice } from "@/components/contact/content";
+import { jsonLd, pageHead, siteName } from "@/lib/seo";
+import { siteUrl } from "@/lib/site-urls";
+
 export const Route = createFileRoute("/")({
 	component: HomeComponent,
-	head: () => ({
-		links: [{ rel: "stylesheet", href: homeCss }],
-		meta: [
-			{ title: "FK Furniture & Interior · Furniture and interiors" },
-			{
-				name: "description",
-				content:
-					"FK Furniture & Interior designs and manufactures bespoke furniture and interiors for hotels, resorts, homes and workplaces. Family craft since 1986; own factory; installation across India.",
-			},
-		],
-	}),
+	head: () => {
+		const head = pageHead({
+			title: "Custom Furniture & Interiors",
+			description:
+				"Bespoke furniture, architectural woodwork and interiors for hotels, resorts, homes and workplaces, made in our own factory.",
+			path: "/",
+		});
+		return {
+			...head,
+			links: [...head.links, { rel: "stylesheet", href: homeCss }],
+			scripts: [
+				jsonLd({
+					"@type": "Organization",
+					name: siteName,
+					url: siteUrl("/"),
+					logo: siteUrl("/brand/logo-full-768.webp"),
+					email: contactEmail,
+					telephone: gurgaonOffice.phones[0].display,
+				}),
+			],
+		};
+	},
 });
 
 function HomeComponent() {

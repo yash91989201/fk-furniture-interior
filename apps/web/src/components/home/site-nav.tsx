@@ -3,12 +3,12 @@ import { ArrowUpRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const links = [
-	{ hash: undefined, label: "About", to: "/about" },
-	{ hash: undefined, label: "Services", to: "/services" },
-	{ hash: undefined, label: "Projects", to: "/projects" },
-	{ hash: undefined, label: "Gallery", to: "/gallery" },
-	{ hash: undefined, label: "FAQ", to: "/faq" },
-	{ hash: undefined, label: "Contact", to: "/contact" },
+	{ hash: undefined, label: "About", to: "/about/" },
+	{ hash: undefined, label: "Services", to: "/services/" },
+	{ hash: undefined, label: "Projects", to: "/projects/" },
+	{ hash: undefined, label: "Gallery", to: "/gallery/" },
+	{ hash: undefined, label: "FAQ", to: "/faq/" },
+	{ hash: undefined, label: "Contact", to: "/contact/" },
 ] as const;
 
 // Ticker lines stay inside the company profile's record: the 1986 family craft
@@ -186,7 +186,7 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 							width={384}
 						/>
 					</Link>
-					<Link className="home-nav-cta" to="/contact">
+					<Link className="home-nav-cta" to="/contact/">
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={15} />
 					</Link>
@@ -215,7 +215,7 @@ export function SiteNav({ compactStart = false }: { compactStart?: boolean }) {
 							<Link
 								className="home-nav-cta home-menu-cta"
 								onClick={closeMenu}
-								to="/contact"
+								to="/contact/"
 							>
 								Discuss your project
 								<ArrowUpRight aria-hidden="true" size={15} />

@@ -3,8 +3,11 @@ import {
 	HeadContent,
 	Outlet,
 	Scripts,
+	useLocation,
 } from "@tanstack/react-router";
 
+import { siteName } from "@/lib/seo";
+import { errorRenderPath } from "@/lib/site-urls";
 import appCss from "../index.css?url";
 
 export const Route = createRootRoute({
@@ -18,7 +21,7 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1, viewport-fit=cover",
 			},
 			{
-				title: "FK Furniture & Interior",
+				title: siteName,
 			},
 		],
 		links: [
@@ -53,6 +56,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
+	const pathname = useLocation({ select: (location) => location.pathname });
 	return (
 		<html lang="en">
 			<head>
@@ -60,7 +64,8 @@ function RootDocument() {
 			</head>
 			<body>
 				<Outlet />
-				<Scripts />
+				{/* Hosts serve this document at unknown URLs. Its links work without hydration. */}
+				{pathname === errorRenderPath ? null : <Scripts />}
 			</body>
 		</html>
 	);

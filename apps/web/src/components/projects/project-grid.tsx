@@ -21,7 +21,7 @@ export function ProjectGrid() {
 						<Link
 							className="project-list-link"
 							params={{ slug: project.slug }}
-							to="/projects/$slug"
+							to="/projects/$slug/"
 						>
 							<div className="project-list-copy">
 								<h3 className="project-list-name">{project.name}</h3>

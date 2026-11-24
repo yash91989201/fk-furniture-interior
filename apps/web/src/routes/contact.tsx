@@ -6,19 +6,17 @@ import { ContactInvitation } from "@/components/contact/contact-invitation";
 import { OfficeDetails } from "@/components/contact/office-details";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteNav } from "@/components/home/site-nav";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
 	component: ContactComponent,
-	head: () => ({
-		meta: [
-			{ title: "Contact · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Send FK Furniture & Interior a brief, drawings or a BOQ. Offices in Gurugram and Goa, with direct phone and email contact.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Contact Our Gurugram & Goa Offices",
+			description:
+				"Discuss a furniture or interiors project with our Gurugram or Goa office. Send your brief, drawings or bill of quantities.",
+			path: "/contact/",
+		}),
 });
 
 function ContactComponent() {

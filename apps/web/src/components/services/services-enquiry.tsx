@@ -31,7 +31,7 @@ export function ServicesEnquiry() {
 				<div className="enquiry-actions">
 					<Link
 						className={buttonVariants({ className: "min-h-11" })}
-						to="/contact"
+						to="/contact/"
 					>
 						Start a project enquiry
 					</Link>

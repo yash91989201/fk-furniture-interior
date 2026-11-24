@@ -13,7 +13,7 @@ export function ProjectHeader({ project }: { project: Project }) {
 					<li>
 						<Link
 							className="inline-flex min-h-11 items-center underline decoration-1 underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-							to="/projects"
+							to="/projects/"
 						>
 							Projects
 						</Link>

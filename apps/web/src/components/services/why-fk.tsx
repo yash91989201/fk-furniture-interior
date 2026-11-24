@@ -19,7 +19,7 @@ export function WhyFk() {
 					Forty years in hospitality interiors, and one team from specification
 					to installation.
 				</p>
-				<Link className="why-fk-link" to="/about">
+				<Link className="why-fk-link" to="/about/">
 					Read the company story
 				</Link>
 			</div>

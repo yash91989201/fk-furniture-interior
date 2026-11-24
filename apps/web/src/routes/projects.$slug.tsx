@@ -9,6 +9,8 @@ import { ProjectNavigation } from "@/components/project-detail/project-navigatio
 import { ProjectOverview } from "@/components/project-detail/project-overview";
 import { ProjectScope } from "@/components/project-detail/project-scope";
 import { getProject } from "@/components/projects/content";
+import { jsonLd, pageHead, siteName } from "@/lib/seo";
+import { siteUrl } from "@/lib/site-urls";
 
 export const Route = createFileRoute("/projects/$slug")({
 	loader: ({ params }) => {
@@ -18,21 +20,44 @@ export const Route = createFileRoute("/projects/$slug")({
 		}
 		return { project };
 	},
-	head: ({ loaderData }) => ({
-		meta: [
-			{
-				title: loaderData
-					? `${loaderData.project.name} · FK Furniture & Interior`
-					: "Project not found · FK Furniture & Interior",
-			},
-			{
-				name: "description",
-				content: loaderData
-					? loaderData.project.intro
-					: "The requested project could not be found.",
-			},
-		],
-	}),
+	head: ({ loaderData }) => {
+		if (!loaderData) {
+			return {
+				meta: [
+					{ title: `Project not found | ${siteName}` },
+					{ name: "robots", content: "noindex" },
+				],
+			};
+		}
+
+		const { project } = loaderData;
+		return {
+			...pageHead({
+				title: project.name,
+				description: project.intro,
+				path: `/projects/${project.slug}/`,
+				image: project.image,
+			}),
+			scripts: [
+				jsonLd({
+					"@type": "BreadcrumbList",
+					itemListElement: [
+						{
+							"@type": "ListItem",
+							position: 1,
+							name: "Projects",
+							item: siteUrl("/projects/"),
+						},
+						{
+							"@type": "ListItem",
+							position: 2,
+							name: project.name,
+						},
+					],
+				}),
+			],
+		};
+	},
 	component: ProjectDetailComponent,
 	notFoundComponent: ProjectNotFound,
 });
@@ -79,7 +104,7 @@ function ProjectNotFound() {
 				<div className="mt-[clamp(1.75rem,3vw,2.5rem)]">
 					<Link
 						className={buttonVariants({ className: "min-h-11" })}
-						to="/projects"
+						to="/projects/"
 					>
 						View all projects
 					</Link>

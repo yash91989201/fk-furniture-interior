@@ -16,19 +16,19 @@ import {
 	TermsHero,
 } from "@/components/terms-and-conditions/terms-header";
 import { WarrantyAndQuality } from "@/components/terms-and-conditions/warranty-and-quality";
+import { pageHead } from "@/lib/seo";
+import { draftLegalPaths } from "@/lib/site-urls";
 
 export const Route = createFileRoute("/terms-and-conditions")({
 	component: TermsAndConditionsComponent,
-	head: () => ({
-		meta: [
-			{ title: "Terms & Conditions · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Draft terms for quotations, orders, mock-up approval, payment, delivery, installation, warranty, intellectual property and liability on custom furniture and interior fit-out work.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Terms & Conditions",
+			description:
+				"Draft terms for custom furniture and interior work, covering quotations, mock-ups, payment, delivery, installation and warranty.",
+			path: draftLegalPaths.terms,
+			noindex: true,
+		}),
 });
 
 function TermsAndConditionsComponent() {

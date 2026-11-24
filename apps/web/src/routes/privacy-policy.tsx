@@ -12,19 +12,19 @@ import { PolicyHero } from "@/components/privacy-policy/policy-hero";
 import { PolicyUpdates } from "@/components/privacy-policy/policy-updates";
 import { PrivacyContact } from "@/components/privacy-policy/privacy-contact";
 import { ThirdPartySharing } from "@/components/privacy-policy/third-party-sharing";
+import { pageHead } from "@/lib/seo";
+import { draftLegalPaths } from "@/lib/site-urls";
 
 export const Route = createFileRoute("/privacy-policy")({
 	component: PrivacyPolicyComponent,
-	head: () => ({
-		meta: [
-			{ title: "Privacy Policy · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Draft privacy policy for FK Furniture & Interior: what the website collects when you ask about a project, how details are used and shared, and how to contact us.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Privacy Policy",
+			description:
+				"Draft privacy policy for furniture and interior project enquiries, including how FK handles and shares the contact details you provide.",
+			path: draftLegalPaths.privacy,
+			noindex: true,
+		}),
 });
 
 function PrivacyPolicyComponent() {

@@ -13,18 +13,17 @@ const faqEnquiryCopy = {
 	title: "Your project, in your words.",
 };
 
+import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/faq")({
 	component: FaqComponent,
-	head: () => ({
-		meta: [
-			{ title: "FAQ · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Answers on minimum order, manufacturing from drawings and BOQ, materials, mock-ups, finishes, lead times, delivery across India and the 5-year manufacturing warranty.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Furniture & Interiors FAQ",
+			description:
+				"Find answers about furniture orders, drawings, materials, mock-ups, finishes, lead times, delivery and the manufacturing warranty.",
+			path: "/faq/",
+		}),
 });
 
 function FaqComponent() {

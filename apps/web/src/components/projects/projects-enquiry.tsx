@@ -33,7 +33,7 @@ export function ProjectsEnquiry() {
 				<div className="projects-enquiry-actions">
 					<Link
 						className={buttonVariants({ className: "min-h-11" })}
-						to="/contact"
+						to="/contact/"
 					>
 						Discuss your project
 						<ArrowUpRight aria-hidden="true" size={16} />

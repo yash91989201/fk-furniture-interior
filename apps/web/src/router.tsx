@@ -1,4 +1,7 @@
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import {
+	createRouter as createTanStackRouter,
+	lazyRouteComponent,
+} from "@tanstack/react-router";
 
 import Loader from "./components/loader";
 import { routeTree } from "./routeTree.gen";
@@ -7,9 +10,13 @@ export const getRouter = () =>
 	createTanStackRouter({
 		routeTree,
 		scrollRestoration: true,
+		trailingSlash: "always",
 		defaultPreloadStaleTime: 0,
 		defaultPendingComponent: () => <Loader />,
-		defaultNotFoundComponent: () => <div>Not Found</div>,
+		defaultNotFoundComponent: lazyRouteComponent(
+			() => import("./components/page-not-found"),
+			"PageNotFound"
+		),
 	});
 
 declare module "@tanstack/react-router" {

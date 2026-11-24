@@ -11,13 +11,13 @@ bun install --frozen-lockfile
 bun run --cwd apps/web build
 ```
 
-The public artifact is `apps/web/.output/public/`. It includes the homepage, route directories such as `about/index.html`, project detail pages, and assets.
+The public artifact is `apps/web/.output/public/`. It includes the homepage, route directories such as `about/index.html`, project detail pages, assets, and generated `sitemap.xml`, `robots.txt`, and `404.html` files. The SEO metadata and sitemap use the approved production origin `https://fkfurnitureinterior.com`.
 
 ## Publish to the domain
 
 1. Open **Domains** in cPanel and verify the document root for the target hostname. The primary domain often uses `public_html`. A preview hostname can have a different path.
-2. Back up any existing site files. Upload the contents of `apps/web/.output/public/` to the document root so `index.html` is at its top level. Leave host-managed files and other sites in place.
-3. Enable HTTPS for the hostname. Verify the homepage, a direct project detail URL, and the gallery. Check that missing pages return HTTP 404 and that the contact form opens an email draft.
+2. Back up any existing site files. Upload the contents of `apps/web/.output/public/` to the document root so `index.html` is at its top level. Enable **Show Hidden Files** in File Manager to include `.htaccess`. If the document root already has an `.htaccess`, merge the generated error rules into it and keep the host’s existing rules. Leave other host-managed files and sites in place.
+3. Enable HTTPS for the hostname. Verify the homepage, a direct project detail URL, and the gallery. Check that missing pages return HTTP 404 with the branded error page, that `robots.txt` links to the sitemap, and that the contact form opens an email draft. The draft legal pages carry `noindex` and stay out of the sitemap until approval.
 
 ## cPanel/Apache caching (preview first)
 

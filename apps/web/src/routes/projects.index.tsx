@@ -7,19 +7,17 @@ import { ExecutionHighlights } from "@/components/projects/execution-highlights"
 import { ProjectGrid } from "@/components/projects/project-grid";
 import { ProjectsEnquiry } from "@/components/projects/projects-enquiry";
 import { ProjectsHero } from "@/components/projects/projects-hero";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects/")({
 	component: ProjectsComponent,
-	head: () => ({
-		meta: [
-			{ title: "Projects · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Resort De Coracao in Tapovan, Rishikesh, and the client list behind FK Furniture & Interior's hospitality furniture and interiors.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Furniture & Interiors Projects",
+			description:
+				"Explore the Resort De Coracao hospitality interiors project in Rishikesh, from lobby and guest room furniture to dining and finishes.",
+			path: "/projects/",
+		}),
 });
 
 function ProjectsComponent() {

@@ -9,19 +9,17 @@ import { ServicesEnquiry } from "@/components/services/services-enquiry";
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesOverview } from "@/components/services/services-overview";
 import { WhyFk } from "@/components/services/why-fk";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
 	component: ServicesComponent,
-	head: () => ({
-		meta: [
-			{ title: "Services · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Custom furniture, architectural woodwork, modular storage and contract manufacturing for hospitality, residential and workplace projects, from drawings, renders or a BOQ. Made in our own factory, installed across India.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Custom Furniture & Fit-Out Services",
+			description:
+				"Custom furniture, architectural woodwork, modular storage and contract manufacturing for hospitality, residential and workplace projects.",
+			path: "/services/",
+		}),
 });
 
 function ServicesComponent() {

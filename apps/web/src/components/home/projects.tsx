@@ -34,7 +34,7 @@ export function Projects() {
 					<Link
 						className={buttonVariants()}
 						params={{ slug: project.slug }}
-						to="/projects/$slug"
+						to="/projects/$slug/"
 					>
 						View project
 					</Link>

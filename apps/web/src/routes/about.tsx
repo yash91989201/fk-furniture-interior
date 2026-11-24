@@ -9,19 +9,17 @@ import { Team } from "@/components/about/team";
 import { Enquiry } from "@/components/home/enquiry";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteNav } from "@/components/home/site-nav";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
 	component: AboutComponent,
-	head: () => ({
-		meta: [
-			{ title: "About · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"A family craft that began in Gurugram in 1986. FK Furniture & Interior makes furniture and interiors in a 4,500 sq ft factory with a 22-person team.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "About Our Furniture Workshop",
+			description:
+				"Explore FK’s family craft roots in Gurugram, its furniture workshop and the people behind its furniture and interior projects.",
+			path: "/about/",
+		}),
 });
 
 function AboutComponent() {

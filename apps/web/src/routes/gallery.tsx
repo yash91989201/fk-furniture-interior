@@ -12,20 +12,20 @@ import { GalleryHero } from "@/components/gallery/gallery-hero";
 import { GalleryLightbox } from "@/components/gallery/gallery-lightbox";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteNav } from "@/components/home/site-nav";
+import { projectImages } from "@/components/projects/project-images";
 import { usePrefersReducedMotion } from "@/hooks/use-media";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/gallery")({
 	component: GalleryComponent,
-	head: () => ({
-		meta: [
-			{ title: "Gallery · FK Furniture & Interior" },
-			{
-				name: "description",
-				content:
-					"Photographs of Resort De Coracao in Tapovan, Rishikesh: lobby and reception, guest room, reception lounge and dining room.",
-			},
-		],
-	}),
+	head: () =>
+		pageHead({
+			title: "Hospitality Interiors Gallery",
+			description:
+				"See the lobby, guest room, reception lounge and dining room at Resort De Coracao in Tapovan, Rishikesh.",
+			path: "/gallery/",
+			image: projectImages.lounge,
+		}),
 });
 
 function GalleryComponent() {
