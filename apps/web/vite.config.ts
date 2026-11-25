@@ -6,7 +6,11 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
-import { draftLegalPaths, errorRenderPath, siteUrl } from "./src/lib/site-urls";
+import {
+	draftLegalPaths,
+	errorRenderPath,
+	siteUrl,
+} from "./src/lib/site-urls.ts";
 
 const nonIndexablePaths = new Set<string>(Object.values(draftLegalPaths));
 const directoryIndex = /\/index\.html$/;
