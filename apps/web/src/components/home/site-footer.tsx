@@ -19,6 +19,7 @@ const exploreLinks = [
 	{ hash: undefined, label: "Services", to: "/services/" },
 	{ hash: undefined, label: "Projects", to: "/projects/" },
 	{ hash: undefined, label: "Gallery", to: "/gallery/" },
+	{ hash: undefined, label: "Blog", to: "/blog/" },
 	{ hash: "fk-craft", label: "Craft", to: "/" },
 	{ hash: undefined, label: "FAQ", to: "/faq/" },
 	{ hash: undefined, label: "Contact", to: "/contact/" },

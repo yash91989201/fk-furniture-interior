@@ -926,7 +926,9 @@ html.lenis:has(.home-page) {
 	}
 }
 
-@media (max-width: 60rem) {
+/* Full nav row needs ~1248px: seven links (403px) plus brand, CTA, gutters
+   and one gap of slack per side; below that the menu carries the links. */
+@media (max-width: 78rem) {
 	.home-nav-links,
 	.home-nav-row > .home-nav-cta {
 		display: none;
@@ -1340,3 +1342,174 @@ html.lenis:has(.home-page) {
    visible so the four steps do not depend on scrolling to advance. */
 
 /* Wide screens show both peer cards in full; their names should not truncate. */
+
+/* Blog hero: aubergine band with ice-silver copy, shared by the blog index
+   and single post pages. */
+.blog-hero {
+	padding: calc(var(--home-nav-compact) + clamp(3rem, 7vw, 5.5rem))
+		max(var(--home-gutter), env(safe-area-inset-right)) clamp(3rem, 6vw, 5rem)
+		max(var(--home-gutter), env(safe-area-inset-left));
+	color: var(--background);
+	background: color-mix(in oklab, var(--secondary), var(--primary) 4%);
+	border-bottom: 1px solid var(--secondary);
+}
+
+.blog-hero-title {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(3.25rem, 8vw, 6rem);
+	font-style: italic;
+	font-weight: 500;
+	line-height: 1;
+	color: var(--card);
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+	animation: blog-hero-rise 0.7s var(--home-ease) backwards;
+}
+
+.blog-hero-lede {
+	max-width: 40ch;
+	margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+	font-size: var(--hero-body);
+	line-height: 1.75;
+	color: color-mix(in oklab, var(--background) 88%, var(--primary));
+	letter-spacing: 0.01em;
+	text-wrap: pretty;
+}
+
+@keyframes blog-hero-rise {
+	from {
+		opacity: 0;
+		transform: translateY(0.75rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.blog-hero-title {
+		animation: none;
+	}
+}
+
+/* Blog empty state: three skeleton article cards under a centered ice plate. */
+.blog-empty {
+	position: relative;
+	padding: clamp(4rem, 12vw, 9rem)
+		max(var(--home-gutter), env(safe-area-inset-right)) clamp(4rem, 12vw, 9rem)
+		max(var(--home-gutter), env(safe-area-inset-left));
+}
+
+.blog-empty-row {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(0.75rem, 2vw, 1.5rem);
+	max-width: 90rem;
+	margin-inline: auto;
+}
+
+.blog-empty-card {
+	overflow: hidden;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+}
+
+/* One ghost card on narrow screens: three shrink to slivers under the plate. */
+@media (max-width: 40rem) {
+	.blog-empty-row {
+		grid-template-columns: minmax(0, 24rem);
+		justify-content: center;
+	}
+	.blog-empty-card:nth-child(n + 2) {
+		display: none;
+	}
+	.blog-empty .blog-empty-plate {
+		max-width: min(100%, 24rem);
+	}
+}
+
+.blog-empty-media {
+	aspect-ratio: 4 / 3;
+	background: var(--muted);
+}
+
+.blog-empty-body {
+	display: grid;
+	gap: 0.55rem;
+	padding: clamp(0.75rem, 1.5vw, 1.1rem);
+}
+
+.blog-empty-line {
+	height: 0.6rem;
+	background: color-mix(in oklab, var(--muted-foreground) 18%, var(--card));
+	border-radius: 999px;
+}
+
+.blog-empty-line--title {
+	width: 82%;
+	height: 0.8rem;
+	background: color-mix(in oklab, var(--secondary) 26%, var(--card));
+}
+
+.blog-empty-line--short {
+	width: 56%;
+}
+
+.blog-empty-line--meta {
+	width: 34%;
+	height: 0.5rem;
+}
+
+.blog-empty-overlay {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: 1rem max(var(--home-gutter), env(safe-area-inset-right)) 1rem
+		max(var(--home-gutter), env(safe-area-inset-left));
+	pointer-events: none;
+}
+
+.blog-empty-plate {
+	max-width: min(100%, 46ch);
+	padding: clamp(1.25rem, 3vw, 2rem);
+	text-align: center;
+	pointer-events: auto;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	box-shadow: 0 0.5rem 1.5rem -0.75rem
+		color-mix(in oklab, var(--secondary) 45%, transparent);
+	animation: blog-empty-rise 0.7s var(--home-ease) backwards;
+}
+
+.blog-empty-title {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+	font-weight: 500;
+	line-height: 1.12;
+	color: var(--foreground);
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+}
+
+.blog-empty-copy {
+	margin: 0.9rem 0 0;
+	font-size: clamp(1rem, 0.96rem + 0.14vw, 1.0625rem);
+	line-height: 1.7;
+	color: var(--muted-foreground);
+	text-wrap: pretty;
+}
+
+@keyframes blog-empty-rise {
+	from {
+		opacity: 0;
+		transform: translateY(0.75rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.blog-empty-plate {
+		animation: none;
+	}
+}
