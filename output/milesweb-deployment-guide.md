@@ -36,6 +36,14 @@ Push to `main` or select **Run workflow** on `main` in GitHub Actions. After the
 
 For a local ZIP, run `bash scripts/deploy-milesweb.sh package`. It writes `apps/web/.output/fk-furniture-interior-milesweb.zip` with `index.html` and `.htaccess` at the archive root.
 
+## Staging and branch promotion
+
+1. Develop on `dev`. Pushes to `dev` have no deployment trigger.
+2. Merge `dev` into `staging` when changes are ready for preview. The [staging workflow](../.github/workflows/deploy-staging.yml) deploys each push to `staging` to [the MilesWeb preview site](https://fkfurniture-preview.herositepro.com).
+3. Verify the preview, then merge `staging` into `main` to deploy to production.
+
+The `staging` GitHub environment allows deployments from the `staging` branch. It uses a dedicated SSH key for the preview account and the same deployment script as production. Configure the variables and secrets listed above under the `staging` environment with a `STAGING_` prefix, for example `STAGING_DEPLOY_HOST` and `STAGING_DEPLOY_SSH_KEY`. The preview account uses SSH port `22` and `$HOME/public_html`.
+
 ## Publish to the domain
 
 1. Open **Domains** in cPanel and verify the document root for the target hostname. The primary domain often uses `public_html`. A preview hostname can have a different path.
